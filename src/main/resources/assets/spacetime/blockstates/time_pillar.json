@@ -1,0 +1,7 @@
+{
+	"variants": {
+		"normal": {
+			"model": "spacetime:time_pillar_model"
+		}
+	}
+}

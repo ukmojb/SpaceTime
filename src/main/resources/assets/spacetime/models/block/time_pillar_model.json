@@ -1,0 +1,11 @@
+{
+	"parent": "block/cube",
+	"textures": {
+		"down": "spacetime:blocks/time_pillar_1",
+		"up": "spacetime:blocks/time_pillar_1",
+		"north": "spacetime:blocks/time_pillar_0",
+		"south": "spacetime:blocks/time_pillar_0",
+		"west": "spacetime:blocks/time_pillar_0",
+		"east": "spacetime:blocks/time_pillar_0"
+	}
+}
