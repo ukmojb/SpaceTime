@@ -26,7 +26,7 @@ public class ItemSkillFireBlast extends ItemSkillBase {
         ItemStack stack = playerIn.getHeldItem(handIn);
         if (isStackReady(playerIn, stack))//mostly always ready
         {
-            //SpaceTime.Log("Trigg'd:" + worldIn.getWorldTime());
+            //IdlFramework.Log("Trigg'd:" + worldIn.getWorldTime());
             if (!worldIn.isRemote)
             {
                 ItemSkillFireBlast skillThunderFall = ((ItemSkillFireBlast)stack.getItem());
@@ -53,10 +53,10 @@ public class ItemSkillFireBlast extends ItemSkillBase {
 //            if (playerIn instanceof EntityPlayerMP)
 //            {
 //                notifyCoolingDown((EntityPlayerMP)playerIn);
-//                SpaceTime.Log("notified");
+//                IdlFramework.Log("notified");
 //            }
 //            else {
-//                SpaceTime.Log("wrong type");
+//                IdlFramework.Log("wrong type");
 //            }
 //            return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
 //        }

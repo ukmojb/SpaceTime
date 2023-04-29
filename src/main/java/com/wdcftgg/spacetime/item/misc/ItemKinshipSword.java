@@ -33,7 +33,7 @@ public class ItemKinshipSword extends ItemSwordBase implements IGuaEnhance {
     }
 
 //    @SubscribeEvent
-//    public static void onCreatureHurt(LivingHurtEvent evt) {
+//    public static void onCreatureHurt(HeterospaceLivingEvent evt) {
 //        if (evt.isCanceled())
 //        {
 //            return;

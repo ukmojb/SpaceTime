@@ -85,7 +85,7 @@ public class EntityMorBlindingAssassin extends EntityMoroonUnitBase {
     }
 
 //    @SubscribeEvent
-//    public void onHit(LivingHurtEvent evt)
+//    public void onHit(HeterospaceLivingEvent evt)
 //    {
 //        Entity attacker = evt.getSource().getTrueSource();
 //        if (attacker == this)

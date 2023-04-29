@@ -2,7 +2,7 @@ package com.wdcftgg.spacetime.item.skills;
 
 import java.util.List;
 
-import com.wdcftgg.spacetime.SpaceTime;
+
 import com.wdcftgg.spacetime.init.ModCreativeTab;
 import com.wdcftgg.spacetime.item.ItemBase;
 import com.wdcftgg.spacetime.util.CommonDef;
@@ -167,7 +167,7 @@ public class ItemSkillBase extends ItemBase {
 
     public static void notifyCoolingDown(EntityPlayerMP player)
     {
-        CommonFunctions.SendMsgToPlayer(player, "spacetime.skill.msg.cool_down");
+        CommonFunctions.SendMsgToPlayer(player, "idlframewok.skill.msg.cool_down");
     }
 
     public static boolean isStackReady(EntityPlayer player, ItemStack stack)
@@ -243,7 +243,7 @@ public class ItemSkillBase extends ItemBase {
                             CommonFunctions.SafeSendMsgToPlayer(TextFormatting.RED, (EntityPlayer) caster, MessageDef.NOT_CASTABLE_MAINHAND);
                         }
                         else {
-                            SpaceTime.LogWarning("Trying to do invalid cast from a creature: %s", caster.getName());
+
                         }
                     }
                 } else if (hand == EnumHand.OFF_HAND)
@@ -255,7 +255,7 @@ public class ItemSkillBase extends ItemBase {
                             CommonFunctions.SafeSendMsgToPlayer(TextFormatting.RED, (EntityPlayer) caster, MessageDef.NOT_CASTABLE_OFFHAND);
                         }
                         else {
-                            SpaceTime.LogWarning("Trying to do invalid cast from a creature: %s", caster.getName());
+
                         }
                     }
             }
@@ -284,17 +284,17 @@ public class ItemSkillBase extends ItemBase {
         if (shiftPressed)
         {
             if (showCDDesc)
-                tooltip.add(I18n.format("spacetime.skill.shared.cool_down_desc", getCoolDown(stack)));
+                tooltip.add(I18n.format("idlframewok.skill.shared.cool_down_desc", getCoolDown(stack)));
             if (showDamageDesc && getVal(stack) > 0)
-                tooltip.add(I18n.format("spacetime.skill.shared.power_desc", getVal(stack)));
+                tooltip.add(I18n.format("idlframewok.skill.shared.power_desc", getVal(stack)));
             if (showRangeDesc)
-                tooltip.add(I18n.format("spacetime.skill.shared.range_desc", getRange(stack)));
+                tooltip.add(I18n.format("idlframewok.skill.shared.range_desc", getRange(stack)));
             if (showDuraDesc)
                 tooltip.add(GetDuraDescString(getDura(stack)));
 
             if (maxLevel != 1)
             {
-                tooltip.add(I18n.format("spacetime.skill.shared.level_desc", IDLSkillNBT.getLevel(stack), maxLevel));
+                tooltip.add(I18n.format("idlframewok.skill.shared.level_desc", IDLSkillNBT.getLevel(stack), maxLevel));
             }
         }
     }
@@ -320,14 +320,14 @@ public class ItemSkillBase extends ItemBase {
 
         String strMain = super.getItemStackDisplayName(stack);
         int lv = IDLSkillNBT.getLevel(stack);
-        String strMaxLv = lv == maxLevel ? I18n.format("spacetime.skill.shared.lv_max") : "";
+        String strMaxLv = lv == maxLevel ? I18n.format("idlframewok.skill.shared.lv_max") : "";
 
-        return I18n.format("spacetime.skill.shared.name_format_with_lv",strMain, IDLSkillNBT.getLevel(stack), strMaxLv);
+        return I18n.format("idlframewok.skill.shared.name_format_with_lv",strMain, IDLSkillNBT.getLevel(stack), strMaxLv);
     }
 
     public String GetDuraDescString(float val)
     {
-        return I18n.format("spacetime.skill.shared.duration_desc", val);
+        return I18n.format("idlframewok.skill.shared.duration_desc", val);
     }
 
     public void trySayDialogue(EntityLivingBase livingBase, ItemStack stack)

@@ -97,6 +97,6 @@ public class ItemSkillExperienceDamageAbsorption extends ItemSkillBase {
     public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag flag) {
         String mainDesc = I18n.format(stack.getUnlocalizedName() + ".desc", getVal(stack));
         tooltip.add(mainDesc);
-        tooltip.add(I18n.format("spacetime.skill.shared.cool_down_desc", getCoolDown(stack)));
+        tooltip.add(I18n.format("idlframewok.skill.shared.cool_down_desc", getCoolDown(stack)));
     }
 }

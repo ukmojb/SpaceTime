@@ -25,7 +25,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemHateDetector extends ItemSkillBase {
 
     private Class<? extends EntityLiving> targetCategory = EntityLiving.class;
-    private String msgKey = "spacetime.msg.being_targeted";
+    private String msgKey = "idlframewok.msg.being_targeted";
     private SoundEvent alarm = SoundEvents.BLOCK_NOTE_BELL;
 
     public ItemHateDetector(String name, Class<? extends EntityLiving> targetCategory, String msgKey, SoundEvent alarm) {
@@ -56,7 +56,7 @@ public class ItemHateDetector extends ItemSkillBase {
 //                        worldIn = entityIn.world;
 //                    }
 //                    int state = GetInt(stack, STATE);
-                    //SpaceTime.Log("State = " + state);
+                    //IdlFramework.Log("State = " + state);
                     return (float) IDLNBTUtil.GetInt(stack, IDLNBTDef.STATE);
                 }
             }
@@ -79,11 +79,11 @@ public class ItemHateDetector extends ItemSkillBase {
                     IDLGeneral.ServerAABB(pos.addVector(-XZRangeRadius, -YRangeRadius, -XZRangeRadius), pos.addVector(XZRangeRadius, YRangeRadius, XZRangeRadius)));
             for (EntityLiving entity : entities)
             {
-                //SpaceTime.Log(String.format("[Active]Nearby %s -> %s" , entity.getName() ,entity.getAttackTarget()));
+                //IdlFramework.Log(String.format("[Active]Nearby %s -> %s" , entity.getName() ,entity.getAttackTarget()));
                 if (entity.getAttackTarget() == entityIn)
                 {
                     detection++;
-                    //SpaceTime.Log("[Active]Detected!");
+                    //IdlFramework.Log("[Active]Detected!");
                 }
             }
 

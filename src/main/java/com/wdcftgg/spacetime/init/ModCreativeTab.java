@@ -1,5 +1,6 @@
 package com.wdcftgg.spacetime.init;
 
+import com.wdcftgg.spacetime.blocks.ModBlocks;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -12,7 +13,7 @@ public class ModCreativeTab {
         @SideOnly(Side.CLIENT)
         public ItemStack getTabIconItem()
         {
-            return new ItemStack(Items.TOTEM_OF_UNDYING);
+            return new ItemStack(ModBlocks.TIMEPILLAR);
         }
     };
 }

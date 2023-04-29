@@ -153,7 +153,7 @@ public class EntityMoroonGhostArcher extends EntityMoroonUnitBase implements IRa
 //    }
 
 //    @SubscribeEvent
-//    public void onHurt(LivingHurtEvent evt)
+//    public void onHurt(HeterospaceLivingEvent evt)
 //    {
 //        if (evt.getEntity() == this)
 //        {

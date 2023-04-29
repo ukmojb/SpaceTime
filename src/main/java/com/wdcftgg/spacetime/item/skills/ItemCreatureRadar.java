@@ -2,7 +2,7 @@ package com.wdcftgg.spacetime.item.skills;
 
 import java.util.List;
 
-import com.wdcftgg.spacetime.SpaceTime;
+
 import com.wdcftgg.spacetime.util.CommonFunctions;
 import com.wdcftgg.spacetime.util.IDLGeneral;
 import com.wdcftgg.spacetime.util.NBTStrDef.IDLNBTDef;
@@ -28,7 +28,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemCreatureRadar extends ItemSkillBase {
 
-    private String msgKey = "spacetime.msg.radar_nearbycreatures";
+    private String msgKey = "idlframewok.msg.radar_nearbycreatures";
     private SoundEvent alarm = SoundEvents.BLOCK_NOTE_BELL;
 
 //    public ItemCreatureRadar(String name, Class<? extends EntityLiving> targetCategory, String msgKey, SoundEvent alarm) {
@@ -55,7 +55,6 @@ public class ItemCreatureRadar extends ItemSkillBase {
                     //stack.writeToNBT(tagCompound);
                     //net.minecraft.item.ItemMonsterPlacer.applyEntityIdToItemStack(stack, name);
                     CommonFunctions.SafeSendMsgToPlayer(playerIn, getUnlocalizedName() + ".msg.success");
-                    SpaceTime.LogWarning(IDLNBTUtil.getNBT(stack).toString());
                     activateCoolDown(playerIn, stack);
                 }
 
@@ -87,7 +86,7 @@ public class ItemCreatureRadar extends ItemSkillBase {
 ////                        worldIn = entityIn.world;
 ////                    }
 ////                    int state = GetInt(stack, STATE);
-//                    //SpaceTime.Log("State = " + state);
+//                    //IdlFramework.Log("State = " + state);
 //                    return (float)GetInt(stack, STATE);
 //                }
 //            }
@@ -128,7 +127,6 @@ public class ItemCreatureRadar extends ItemSkillBase {
 
             Vec3d pos = entityIn.getPositionEyes(1.0F);
 
-            SpaceTime.Log("update:", IDLNBTUtil.getNBT(stack).toString());
 
             Class s = getCreatureFromStack(stack);
             if (s == null)
@@ -140,11 +138,11 @@ public class ItemCreatureRadar extends ItemSkillBase {
                     IDLGeneral.ServerAABB(pos.addVector(-XZRangeRadius, -YRangeRadius, -XZRangeRadius), pos.addVector(XZRangeRadius, YRangeRadius, XZRangeRadius)));
             for (EntityLivingBase entity : entities)
             {
-                //SpaceTime.Log(String.format("[Active]Nearby %s -> %s" , entity.getName() ,entity.getAttackTarget()));
+                //IdlFramework.Log(String.format("[Active]Nearby %s -> %s" , entity.getName() ,entity.getAttackTarget()));
                 if (entity.getClass() == s && entity != entityIn)
                 {
                     detection++;
-                    //SpaceTime.Log("[Active]Detected!");
+                    //IdlFramework.Log("[Active]Detected!");
                 }
             }
 
@@ -152,7 +150,6 @@ public class ItemCreatureRadar extends ItemSkillBase {
             int detectionPre = IDLNBTUtil.GetInt(stack, IDLNBTDef.STATE);
             if (detectionPre != detection)//optimize
             {
-                SpaceTime.LogWarning("Changed to " + detection);
                 IDLNBTUtil.SetInt(stack, IDLNBTDef.STATE, detection);
                 CommonFunctions.SendMsgToPlayerStyled((EntityPlayerMP) entityIn, msgKey, TextFormatting.YELLOW, detection);
                 //worldIn.playSound();

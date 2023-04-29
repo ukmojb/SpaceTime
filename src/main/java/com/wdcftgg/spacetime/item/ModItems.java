@@ -3,6 +3,9 @@ package com.wdcftgg.spacetime.item;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.wdcftgg.spacetime.item.misc.ItemKinshipSword;
+import net.minecraft.block.material.Material;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.Item;
 
 public class ModItems {
@@ -24,12 +27,11 @@ public class ModItems {
 	*/
 
 	//Tool Material
-//	public static final Item BLOOD_IRON_INGOT = new ItemBase("blood_iron_ingot");
+	public static final Item TIMECONFOUNDINGCONTAINERS = new ItemTimeConfoundingContainers();
 //
 //    public static final Item.ToolMaterial TOOL_MATERIAL_BLOOD =
 //			EnumHelper.addToolMaterial("material_blood", 3, 512, 3.0F, 4F, 20).setRepairItem(new ItemStack( ModItems.BLOOD_IRON_INGOT));
-//
-//	public static final ItemKinshipSword KINSHIP_SWORD = new ItemKinshipSword("kinship_sword", TOOL_MATERIAL_BLOOD);
+
 
 	//Armor
 //    LEATHER("leather", 5, new int[]{1, 2, 3, 1}, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0.0F),

@@ -1,6 +1,7 @@
 {
 	"parent": "block/cube",
 	"textures": {
+		"particle": "spacetime:blocks/time_pillar_1",
 		"down": "spacetime:blocks/time_pillar_1",
 		"up": "spacetime:blocks/time_pillar_1",
 		"north": "spacetime:blocks/time_pillar_0",

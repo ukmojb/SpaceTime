@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "normal": {
+      "model": "spacetime:space_time_turbulence_model"
+    }
+  }
+}

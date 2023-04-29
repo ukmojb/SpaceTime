@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.util.CommonDef;
 import com.wdcftgg.spacetime.util.CommonFunctions;
 import com.wdcftgg.spacetime.util.EntityUtil;
@@ -142,7 +141,6 @@ public class ItemSkillTrueSL extends ItemArknightsSkillBase {
                         }
                     }
                     else {
-                        SpaceTime.Log("%s is not in front");
                     }
                 }
             }
