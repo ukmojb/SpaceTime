@@ -1,7 +1,8 @@
-package com.wdcftgg.spacetime.item;
+package com.wdcftgg.spacetime.item.ConfoundingContainers;
 
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.init.ModCreativeTab;
+import com.wdcftgg.spacetime.item.ModItems;
 import com.wdcftgg.spacetime.util.IHasModel;
 import com.wdcftgg.spacetime.util.ISpace;
 import com.wdcftgg.spacetime.util.SpaceHelper;
@@ -88,5 +89,10 @@ public class ItemSpaceConfoundingContainers extends Item implements ISpace, IHas
     public void registerModels()
     {
         SpaceTime.proxy.registerItemRenderer(this, 0, "inventory");
+    }
+
+    public Item getItemChangeTo()
+    {
+        return ModItems.SPACECONFOUNDINGCONTAINERS;
     }
 }

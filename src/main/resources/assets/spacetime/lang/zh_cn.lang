@@ -10,6 +10,7 @@ tile.space_time_turbulence.name=时空乱流
 
 item.time_confounding_containers.name=时间混淆体
 item.space_confounding_containers.name=空间混淆体
+item.time_and_space_confounding_containers.name=时空混淆体
 
 # Potion
 

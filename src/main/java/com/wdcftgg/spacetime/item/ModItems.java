@@ -1,5 +1,6 @@
 package com.wdcftgg.spacetime.item;
 
+import com.wdcftgg.spacetime.item.ConfoundingContainers.*;
 import net.minecraft.item.Item;
 
 import java.util.ArrayList;
@@ -10,7 +11,8 @@ public class ModItems {
 	public static final List<Item> ITEMS = new ArrayList<Item>();
 
 	public static final Item TIMECONFOUNDINGCONTAINERS = new ItemTimeConfoundingContainers();
-	public static final Item ITEMSPACECONFOUNDINGCONTAINERS = new ItemSpaceConfoundingContainers();
+	public static final Item SPACECONFOUNDINGCONTAINERS = new ItemSpaceConfoundingContainers();
+	public static final Item TIMEANDSPACECONFOUNDINGCONTAINERS = new ItemTimeAndSpaceConfoundingContainers();
 //
 //    public static final Item.ToolMaterial TOOL_MATERIAL_BLOOD =
 //			EnumHelper.addToolMaterial("material_blood", 3, 512, 3.0F, 4F, 20).setRepairItem(new ItemStack( ModItems.BLOOD_IRON_INGOT));

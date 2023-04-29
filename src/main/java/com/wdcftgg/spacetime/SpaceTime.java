@@ -39,18 +39,6 @@ public class SpaceTime {
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
 
-        if (MODID.equals("untitled"))
-        {
-            logger.error("Please change your mod id in the main class.");
-            
-        }
-
-        if (Reference.CLIENT_PROXY_CLASS.indexOf("wdcftgg.spacetime.proxy.ClientProxy") > 0)
-        {
-            logger.warn("Have you changed your package name to author and modname?");
-            
-        }
-
         RegistryHandler.preInitRegistries(event);
 
     }
@@ -66,7 +54,6 @@ public class SpaceTime {
         }
         NetworkHandler.init();
 
-		LogWarning("%s has finished its initializations", MODID);
 
 	}
 
@@ -74,8 +61,6 @@ public class SpaceTime {
     public void postInit(FMLPostInitializationEvent event) {
         // Moved Spawning registry to last since forge doesn't auto-generate sub
         // "M' biomes until late
-
-        TrashTalking();
 
         RegistryHandler.postInitReg();
     }
@@ -85,16 +70,6 @@ public class SpaceTime {
         RegistryHandler.serverRegistries(event);
     }
 
-
-    private void TrashTalking() {
-        if (MetaUtil.isIDLLoaded)
-        {
-            SpaceTime.Log("[Idealland Framework] Bow to Idealland.");
-        }
-        else {
-            SpaceTime.Log("[Idealland Framework] Made with Idealland Framework.");
-        }
-    }
 
     private static void RegisterTileEntity() {
 //        GameRegistry.registerTileEntity(TileEntityDeBoomOrb.class, new ResourceLocation(MODID, "deboom_orb_basic"));
