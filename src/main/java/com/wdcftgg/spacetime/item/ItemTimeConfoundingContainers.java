@@ -9,24 +9,17 @@ package com.wdcftgg.spacetime.item;
 
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.init.ModCreativeTab;
-import lumaceon.mods.clockworkphase.custom.IHasModel;
+import com.wdcftgg.spacetime.util.IHasModel;
 import lumaceon.mods.clockworkphase.item.construct.abstracts.ITimeSand;
-import lumaceon.mods.clockworkphase.network.MessageTemporalItemChange;
-import lumaceon.mods.clockworkphase.network.PacketHandler;
 import lumaceon.mods.clockworkphase.util.TimeSandHelper;
 import lumaceon.mods.clockworkphase.util.TimeSandParser;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -50,9 +43,10 @@ public class ItemTimeConfoundingContainers extends Item implements ITimeSand, IH
     {
         EntityPlayer player = Minecraft.getMinecraft().player;
         int timeSand = getTimeSand(is);
-        if(timeSand > 0)
-        {
-            list.add(TimeSandParser.getStringForRenderingFromTimeSand(timeSand));
+        if (timeSand <= 0){
+            list.add("Time Sand: §eNo Time");
+        } else {
+            list.add("Time Sand: §e" + TimeSandParser.getStringForRenderingFromTimeSand(timeSand));
         }
     }
 
@@ -94,16 +88,10 @@ public class ItemTimeConfoundingContainers extends Item implements ITimeSand, IH
 
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons()
+    public void registerModels()
     {
-        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
-//        this.itemIcon = registry.registerIcon(this.getTranslationKey().substring(this.getTranslationKey().indexOf(".") + 1));
+        SpaceTime.proxy.registerItemRenderer(this, 0, "inventory");
     }
-
-
-
-
 
 
     public Item getItemChangeTo()

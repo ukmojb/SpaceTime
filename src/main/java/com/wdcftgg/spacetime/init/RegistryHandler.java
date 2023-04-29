@@ -1,5 +1,6 @@
 package com.wdcftgg.spacetime.init;
 
+import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.ModBlocks;
 import com.wdcftgg.spacetime.entity.ModEntityInit;
 import com.wdcftgg.spacetime.entity.RenderHandler;
@@ -18,6 +19,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import com.wdcftgg.spacetime.item.ModItems;
 
 @EventBusSubscriber
 public class RegistryHandler {
@@ -42,6 +44,8 @@ public class RegistryHandler {
 			if (item instanceof IHasModel)
 			{
 				((IHasModel)item).registerModels();
+				SpaceTime.Log("注册物品模型");
+				SpaceTime.Log(item.toString());
 			}
 		}
 		
@@ -50,10 +54,10 @@ public class RegistryHandler {
 			if (block instanceof IHasModel)
 			{
 				((IHasModel)block).registerModels();
+				SpaceTime.Log("注册方块模型");
 			}
 		}
 
-		RenderHandler.registerEntityRenders();
 	}
 
 	public static void preInitRegistries(FMLPreInitializationEvent event)

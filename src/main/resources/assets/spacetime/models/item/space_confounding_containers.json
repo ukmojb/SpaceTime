@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "spacetime:items/space_confounding_containers"
+  }
+}
