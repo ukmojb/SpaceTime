@@ -59,7 +59,6 @@ public class SpaceTime {
     public static void Init(FMLInitializationEvent event) {
         ModRecipes.Init();
         RegisterTileEntity();
-        RegistryHandler.initRegistries(event);
         new ModGuiElementLoader();
         if (!proxy.isServer())
         {

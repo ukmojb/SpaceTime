@@ -3,12 +3,9 @@ package com.wdcftgg.spacetime.init;
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.ModBlocks;
 import com.wdcftgg.spacetime.entity.ModEntityInit;
-import com.wdcftgg.spacetime.entity.RenderHandler;
 import com.wdcftgg.spacetime.item.ModItems;
 import com.wdcftgg.spacetime.util.IHasModel;
-import com.wdcftgg.spacetime.util.ModSoundHandler;
 import net.minecraft.block.Block;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
@@ -19,7 +16,6 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import com.wdcftgg.spacetime.item.ModItems;
 
 @EventBusSubscriber
 public class RegistryHandler {
@@ -74,11 +70,6 @@ public class RegistryHandler {
 	public static void postInitReg()
 	{
 		//WorldType TYPE_ONE = new WorldTypeOne();
-	}
-
-	public static void initRegistries(FMLInitializationEvent event)
-	{
-		ModSoundHandler.soundRegister();
 	}
 
 	public static void serverRegistries(FMLServerStartingEvent event)

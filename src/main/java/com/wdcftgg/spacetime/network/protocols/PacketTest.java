@@ -1,7 +1,6 @@
 package com.wdcftgg.spacetime.network.protocols;
 
 import com.wdcftgg.spacetime.SpaceTime;
-import com.wdcftgg.spacetime.item.skills.ItemSkillBase;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -38,31 +37,4 @@ public class PacketTest implements IMessage {
 
     }
 
-    public static class Handler implements IMessageHandler<PacketTest, IMessage> {
-        public IMessage onMessage(final PacketTest msg, final MessageContext ctx) {
-            EntityPlayerMP player = ctx.getServerHandler().player;
-
-            player.getServerWorld().addScheduledTask(() -> {
-                SpaceTime.Log("Packet:%d", msg.testVal);
-
-                EnumHand hand = EnumHand.values()[msg.testVal];
-
-                ItemStack item = player.getHeldItem(hand);
-                if(item.isEmpty())
-                {
-                    SpaceTime.LogWarning("Trying to cast an empty item");
-                }
-
-                if(item.getItem() instanceof ItemSkillBase)
-                {
-                    ItemSkillBase skill = (ItemSkillBase) item.getItem();
-                    if (skill.canCast(player.world, player, hand))
-                    {
-                        skill.tryCast(player.world, player, hand);
-                    }
-                }
-            });
-            return null;
-        }
-    }
 }

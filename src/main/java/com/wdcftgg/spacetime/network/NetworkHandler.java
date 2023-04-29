@@ -17,7 +17,7 @@ public class NetworkHandler {
     public static void init()
     {
         //C2S
-        channel.registerMessage(PacketTest.Handler.class, PacketTest.class, id++, Side.SERVER);
+
         //just call SendToServer
 
 
