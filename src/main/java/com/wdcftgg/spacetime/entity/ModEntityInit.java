@@ -2,25 +2,22 @@ package com.wdcftgg.spacetime.entity;
 
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.util.Reference;
+import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.datafix.DataFixer;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModEntityInit {
     private static int ENTITY_NEXT_ID = 1;
     public static void registerEntities()
     {
-        //Examples
-//        registerEntity("moroon_orbital_beacon", EntityMoroonBombBeacon.class);
-//        registerEntity("moroon_tainter", EntityMoroonTainter.class,0xff00ff, 0x000033);
-//        registerEntity("idealland_whitetower_core", EntityIDLWhiteTowerCore.class, ENTITY_NEXT_ID, 128, 0xeeee00, 0xffffff);
 
-        //the bullet
-        //registerEntity("bullet", EntityIdlProjectile.class);
+//          registerEntity("TimeCrack", EntityTimeCrack.class,0xff00ff, 0x000033);
 
-        //Assign Dungeons
-        //DungeonHooks.addDungeonMob(EntityList.getKey(EntityMoroonTainter.class), STANDARD_DUNGEON_MOB_RARITY);
 
         DataFixer datafixer = new DataFixer(1343);
     }
@@ -47,5 +44,11 @@ public class ModEntityInit {
                 color1, color2
                 );
         ENTITY_NEXT_ID++;
+    }
+
+    @SideOnly(Side.CLIENT)
+    private static <T extends Entity> void registerEntityRender(Class<T> entityClass, Render<? extends Entity> renderer)
+    {
+        RenderingRegistry.registerEntityRenderingHandler(entityClass, new EntityRender<T>(renderer));
     }
 }

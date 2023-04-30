@@ -15,7 +15,7 @@ public class ModLootList {
         private static final Set<ResourceLocation> LOOT_TABLES = Sets.<ResourceLocation>newHashSet();
         private static final Set<ResourceLocation> READ_ONLY_LOOT_TABLES = Collections.<ResourceLocation>unmodifiableSet(LOOT_TABLES);
         public static final ResourceLocation EMPTY = register("empty");
-        //public static final ResourceLocation M_O_B = register("entities/mor_orbital_beacon");
+        //public static final ResourceLocation M_O_B = register("render/mor_orbital_beacon");
 
 
         private static ResourceLocation register(String id)
