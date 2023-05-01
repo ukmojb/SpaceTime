@@ -44,14 +44,14 @@ public class ItemUnstableTimePolymer extends Item implements ITime, IHasModel {
     public void addInformation(ItemStack is, World worldIn, List<String> list, ITooltipFlag flagIn)
     {
         int time = getTime(is);
-        int chance = 80000;
-        if (time > 0) {
-            chance = chance / time;
-            if (chance < 1) {
-                chance = 1;
-            }
-        }
-        float percentagechance = (float) 1 / chance * 100;
+        int chance = 200000;
+//        if (time > 0) {
+//            chance = time / chance  ;
+//            if (chance >= 1) {
+//                chance = 1;
+//            }
+//        }
+        float percentagechance = (float)  time / chance * 100;
         if (time <= 0){
             list.add("Contain Time: §eNo Space Energy");
         } else {
@@ -90,20 +90,14 @@ public class ItemUnstableTimePolymer extends Item implements ITime, IHasModel {
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
     {
         ItemStack item = player.getHeldItem(hand);
-        // 播放雪球被抛出去的声音——这个会在后面的章节中详细解释
         world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-        // world.isRemote 用于判断是服务端还是客户端，这里我们要做的逻辑显然应该只在服务端执行
-        // 这个字段的细节在第七章有详细阐述。
         if (!world.isRemote) {
-            //生成雪球实体——关于实体的内容在第八章会详细解释，我们现在丢雪球就好了
             EntityUnstableTimePolymer unstabletimepolymer = new EntityUnstableTimePolymer(world, player);
             unstabletimepolymer.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, 1.5F, 1.0F);
+            unstabletimepolymer.addTag(String.valueOf(TimeHelper.getTime(item)));
             world.spawnEntity(unstabletimepolymer);
         }
-        // 互动成功，返回EnumActionResult.SUCCESS，item 是互动结束以后的 item
-        // 因为这是个可以无限丢的雪球，所以这里数量没有减去 1。减去 1 的话丢出去就会少一个。
-        // item.shrink(1); // 数量 - 1
-        // 自然地，减去 2 的话丢出去就会少两个。
+         item.shrink(1);
         return new ActionResult<>(EnumActionResult.SUCCESS, item);
     }
 

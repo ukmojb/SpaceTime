@@ -1,5 +1,6 @@
 package com.wdcftgg.spacetime.entity;
 
+import com.wdcftgg.spacetime.SpaceTime;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.passive.EntityChicken;
@@ -8,6 +9,9 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import scala.Int;
+
+import java.util.Random;
 
 /**
  * Created by IntelliJ IDEA.
@@ -38,10 +42,29 @@ public class EntityUnstableTimePolymer extends EntityThrowable {
         {
             if (!this.world.isRemote)
             {
+                SpaceTime.Log(this.getTags().toString());
                 BlockPos pos = new BlockPos(result.hitVec);
                 EntityTimeCrack timecrack = new EntityTimeCrack(world);
                 timecrack.setPosition(posX, posY, posZ);
-                world.spawnEntity(timecrack);
+                for (String str : this.getTags()) {
+                    Double time = (Double) Double.parseDouble(str);
+                    Random r = new Random();
+                    Double RandomChange = r.nextDouble();
+                    Double chance = 200000.0;
+                    if (time > 0) {
+                        chance = time / chance  ;
+                        if (chance > 1D) {
+                            chance = 1D;
+                        }
+                    }
+                    Double spownchange = (Double) 1D / chance ;
+                    SpaceTime.Log(spownchange+"");
+                    SpaceTime.Log(RandomChange+"");
+                    if (chance >= RandomChange){
+                        world.spawnEntity(timecrack);
+                    }
+
+                }
                 this.world.setEntityState(this, (byte)3);
                 this.setDead();
             }

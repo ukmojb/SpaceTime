@@ -8,6 +8,7 @@ import com.wdcftgg.spacetime.network.NetworkHandler;
 import com.wdcftgg.spacetime.proxy.ProxyBase;
 import com.wdcftgg.spacetime.util.Reference;
 import net.minecraftforge.fml.common.Mod;
+import com.wdcftgg.spacetime.achievement.ModAdvancements;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -52,6 +53,7 @@ public class SpaceTime {
             KeyboardManager.init();
         }
         NetworkHandler.init();
+        ModAdvancements.init();
 
 
 	}
