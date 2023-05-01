@@ -13,6 +13,8 @@ public class ModItems {
 	public static final Item TIMECONFOUNDINGCONTAINERS = new ItemTimeConfoundingContainers();
 	public static final Item SPACECONFOUNDINGCONTAINERS = new ItemSpaceConfoundingContainers();
 	public static final Item TIMEANDSPACECONFOUNDINGCONTAINERS = new ItemTimeAndSpaceConfoundingContainers();
+	public static final Item TIMEPOLYMER = new ItemTimePolymer();
+	public static final Item UNSTABLETIMEPOLYMER = new ItemUnstableTimePolymer();
 //
 //    public static final Item.ToolMaterial TOOL_MATERIAL_BLOOD =
 //			EnumHelper.addToolMaterial("material_blood", 3, 512, 3.0F, 4F, 20).setRepairItem(new ItemStack( ModItems.BLOOD_IRON_INGOT));

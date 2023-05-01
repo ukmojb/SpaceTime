@@ -18,7 +18,7 @@ import org.lwjgl.opengl.GL11;
  */
 
 @Mod.EventBusSubscriber
-public class HeterospaceLivingEvent {
+public class EventHeterospaceLiving {
 
 //    @SubscribeEvent
 //    public static void onLivingHurt(LivingHurtEvent event) {

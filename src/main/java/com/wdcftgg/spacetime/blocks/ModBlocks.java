@@ -10,4 +10,5 @@ public class ModBlocks {
 
 	public static final Block TIMEPILLAR = new BlockTimePillar();
 	public static final Block SPACETIMETURBULENCE = new BlockSpaceTimeTurbulence();
+	public static final Block TIMECOMPRESSOR = new BlockTimeCompressor();
 }

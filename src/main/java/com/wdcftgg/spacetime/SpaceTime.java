@@ -4,7 +4,6 @@ import com.wdcftgg.spacetime.gui.ModGuiElementLoader;
 import com.wdcftgg.spacetime.init.ModRecipes;
 import com.wdcftgg.spacetime.init.RegistryHandler;
 import com.wdcftgg.spacetime.keys.KeyboardManager;
-import com.wdcftgg.spacetime.meta.MetaUtil;
 import com.wdcftgg.spacetime.network.NetworkHandler;
 import com.wdcftgg.spacetime.proxy.ProxyBase;
 import com.wdcftgg.spacetime.util.Reference;
@@ -17,9 +16,9 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import org.apache.logging.log4j.Logger;
 
-//To let the player be a traveling god who plays yin-yang magic.
 
-@Mod(modid = SpaceTime.MODID, name = SpaceTime.NAME, version = SpaceTime.VERSION)//dependencies = "required-after:Forge@[14.23.5.2705,)"
+
+@Mod(modid = SpaceTime.MODID, name = SpaceTime.NAME, version = SpaceTime.VERSION)
 public class SpaceTime {
     public static final String MODID = "spacetime";
     public static final String NAME = "SpaceTime";
@@ -74,7 +73,8 @@ public class SpaceTime {
     private static void RegisterTileEntity() {
 //        GameRegistry.registerTileEntity(TileEntityDeBoomOrb.class, new ResourceLocation(MODID, "deboom_orb_basic"));
 
-        //GameRegistry.registerTileEntity(TileEntityBuilderFarm.class, new ResourceLocation(MODID, "builder_farm_basic"));
+        //GameRegistry.registerTileEntity(TimeCompressorEntity.class, "CompressorEntity");
+        //GameRegistry.registerTileEntity(SpaceTimeTurbulenceEntity.class, "TimeTurbulenceEntity");
         //GameRegistry.registerTileEntity(TileEntityBuilderOne.class, new ResourceLocation(MODID, "builder.builder_one"));
     }
 

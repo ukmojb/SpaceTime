@@ -1,4 +1,4 @@
-package com.wdcftgg.spacetime.rander;
+package com.wdcftgg.spacetime.event;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.EntityLivingBase;
@@ -19,7 +19,7 @@ import org.lwjgl.opengl.GL11;
  * @create 2023/4/29 14:07
  */
 @Mod.EventBusSubscriber
-public class RenderLiving {
+public class EventRenderLiving {
     @SubscribeEvent
     public static void onPreRenderLiving(RenderLivingEvent.Pre event) {
         if (event.getEntity() instanceof EntityLivingBase) {

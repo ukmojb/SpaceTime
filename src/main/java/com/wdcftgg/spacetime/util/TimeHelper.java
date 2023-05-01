@@ -58,6 +58,6 @@ public class TimeHelper {
      */
     public static int getTime(ItemStack is)
     {
-        return NBTHelper.getInt(is, "internal_Time");
+        return NBTHelper.getInt(is, "internal_time");
     }
 }

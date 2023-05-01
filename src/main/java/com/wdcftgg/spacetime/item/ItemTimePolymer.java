@@ -3,10 +3,8 @@ package com.wdcftgg.spacetime.item;
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.init.ModCreativeTab;
 import com.wdcftgg.spacetime.util.IHasModel;
-import com.wdcftgg.spacetime.util.ISpace;
 import com.wdcftgg.spacetime.util.ITime;
-import lumaceon.mods.clockworkphase.item.construct.abstracts.ITimeSand;
-import lumaceon.mods.clockworkphase.util.TimeSandHelper;
+import com.wdcftgg.spacetime.util.TimeHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -56,20 +54,31 @@ public class ItemTimePolymer extends Item implements ITime, IHasModel {
     }
 
     @Override
+    public int addTime(ItemStack is, int time)
+    {
+        return TimeHelper.addTime(is, time, getMaxTime());
+    }
+
+    @Override
     public int getTime(ItemStack is)
     {
-        return TimeSandHelper.getTimeSand(is);
+        return TimeHelper.getTime(is);
     }
 
     @Override
     public int getTimeFromInventory(IInventory inventory)
     {
-        return TimeSandHelper.getTimeSandFromInventory(inventory);
+        return TimeHelper.getTimeFromInventory(inventory);
     }
 
     @Override
     public void registerModels()
     {
         SpaceTime.proxy.registerItemRenderer(this, 0, "inventory");
+    }
+
+    public Item getItemChangeTo()
+    {
+        return ModItems.TIMEPOLYMER;
     }
 }

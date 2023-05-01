@@ -46,9 +46,4 @@ public class ModEntityInit {
         ENTITY_NEXT_ID++;
     }
 
-    @SideOnly(Side.CLIENT)
-    private static <T extends Entity> void registerEntityRender(Class<T> entityClass, Render<? extends Entity> renderer)
-    {
-        RenderingRegistry.registerEntityRenderingHandler(entityClass, new EntityRender<T>(renderer));
-    }
 }

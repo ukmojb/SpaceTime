@@ -15,4 +15,6 @@ public interface ITime {
     public int getTime(ItemStack is);
 
     public int getTimeFromInventory(IInventory inventory);
+
+    public int addTime(ItemStack is, int time);
 }
