@@ -37,10 +37,10 @@ public class SpaceTime {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
-
         RegistryHandler.preInitRegistries(event);
 
     }
+
 
     @EventHandler
     public static void Init(FMLInitializationEvent event) {

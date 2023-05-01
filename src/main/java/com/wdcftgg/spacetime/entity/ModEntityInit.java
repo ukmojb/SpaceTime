@@ -1,22 +1,31 @@
 package com.wdcftgg.spacetime.entity;
 
 import com.wdcftgg.spacetime.SpaceTime;
+import com.wdcftgg.spacetime.client.render.RenderUnstableTimePolymer;
 import com.wdcftgg.spacetime.util.Reference;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.datafix.DataFixer;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import com.wdcftgg.spacetime.item.ModItems;
 
 public class ModEntityInit {
     private static int ENTITY_NEXT_ID = 1;
     public static void registerEntities()
     {
 
-//          registerEntity("TimeCrack", EntityTimeCrack.class,0xff00ff, 0x000033);
+          registerEntity("TimeCrack", EntityTimeCrack.class);
+          registerEntity("UnstableTimePolymer", EntityUnstableTimePolymer.class);
 
 
         DataFixer datafixer = new DataFixer(1343);
@@ -45,5 +54,9 @@ public class ModEntityInit {
                 );
         ENTITY_NEXT_ID++;
     }
+
+
+
+
 
 }

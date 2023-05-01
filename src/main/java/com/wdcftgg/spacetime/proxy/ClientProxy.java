@@ -3,10 +3,13 @@ package com.wdcftgg.spacetime.proxy;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.wdcftgg.spacetime.client.render.RenderUnstableTimePolymer;
+import com.wdcftgg.spacetime.entity.EntityUnstableTimePolymer;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -25,4 +28,7 @@ public class ClientProxy extends ProxyBase {
 	{
 		ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(item.getRegistryName(), id));
 	}
+
+
+
 }

@@ -20,16 +20,6 @@ import org.lwjgl.opengl.GL11;
 @Mod.EventBusSubscriber
 public class EventHeterospaceLiving {
 
-//    @SubscribeEvent
-//    public static void onLivingHurt(LivingHurtEvent event) {
-//        if (event.getEntity() instanceof EntityLivingBase) {
-//            EntityLivingBase entity = (EntityLivingBase) event.getEntity();
-//            if (entity.getActivePotionEffect(ModPotions.heterospace) != null) {
-//                event.setCanceled(true);
-//            }
-//        }
-//    }
-
     @SubscribeEvent
     public static void onLivingAttack(LivingAttackEvent event) {
         if (event.getEntity() instanceof EntityLivingBase) {
@@ -78,6 +68,7 @@ public class EventHeterospaceLiving {
                 if (entity.isBurning()) {
                     entity.extinguish();
                 }
+                entity.setHealth(entity.getMaxHealth());
             }
         }
         if (event.getEntity() instanceof EntityPlayer) {

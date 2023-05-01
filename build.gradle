@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '${version}'
+version = "${version}"
 group = 'com.wdcftgg.space_time' 
 archivesBaseName = 'Space-Time'
 

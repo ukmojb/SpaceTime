@@ -3,6 +3,10 @@ package com.wdcftgg.spacetime.init;
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.ModBlocks;
 import com.wdcftgg.spacetime.blocks.tileEntity.*;
+import com.wdcftgg.spacetime.client.render.RenderTimeCrack;
+import com.wdcftgg.spacetime.client.render.RenderUnstableTimePolymer;
+import com.wdcftgg.spacetime.entity.EntityTimeCrack;
+import com.wdcftgg.spacetime.entity.EntityUnstableTimePolymer;
 import com.wdcftgg.spacetime.entity.ModEntityInit;
 import com.wdcftgg.spacetime.item.ModItems;
 import com.wdcftgg.spacetime.util.IHasModel;
@@ -11,6 +15,7 @@ import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
@@ -67,12 +72,17 @@ public class RegistryHandler {
 		InitDimension.registerDimensions();
 
 		ModEntityInit.registerEntities();
+
+		RenderingRegistry.registerEntityRenderingHandler(EntityUnstableTimePolymer.class, RenderUnstableTimePolymer::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityTimeCrack.class, RenderTimeCrack::new);
 	}
 
 	public static void postInitReg()
 	{
 		//WorldType TYPE_ONE = new WorldTypeOne();
 	}
+
+
 
 	public static void serverRegistries(FMLServerStartingEvent event)
     {
