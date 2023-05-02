@@ -1,4 +1,4 @@
-package com.wdcftgg.spacetime.blocks.tileEntity.builder;
+package com.wdcftgg.spacetime.blocks.tileEntity;
 
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.item.ModItems;
@@ -36,7 +36,6 @@ public class TimeCompressorEntity  extends TileEntity implements ITickable {
 
                 int Containtemporal = temporalNumber(this.pos, this.world);
                 int ContainTime = 0;
-                SpaceTime.Log("adsda" + Containtemporal);
                 ContainTime = Containtemporal * 7000;
                 if (Containtemporal == 26){
                     ContainTime = 200000;

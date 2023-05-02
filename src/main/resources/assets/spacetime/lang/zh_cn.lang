@@ -6,6 +6,7 @@ itemGroup.spacetimetab=空之翼
 tile.time_pillar.name=时间之柱
 tile.space_time_turbulence.name=时空乱流
 tile.time_compressor.name=时间压缩器
+tile.hourglass.name=时空沙漏
 
 # Items
 
@@ -14,7 +15,17 @@ item.space_confounding_containers.name=空间混淆体
 item.time_and_space_confounding_containers.name=时空混淆体
 item.time_polymer.name=时间拟态聚合物
 item.unstable_time_polymer.name=不稳定时间聚合物
+item.one_punch.name=一拳
+
+
+item.one_punch.desc=别看了，就是一个装饰品
 
 # Potion
 
 spacetime.potion.heterospace=时宗抹杀
+
+
+# Achievement
+
+advancement.spacetime.hardworking=大力出奇迹
+advancement.spacetime.hardworking.desc=我靠！两亿血呀大哥！

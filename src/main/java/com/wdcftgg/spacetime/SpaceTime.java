@@ -1,5 +1,8 @@
 package com.wdcftgg.spacetime;
 
+import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.HourGlassEntity;
+import com.wdcftgg.spacetime.blocks.tileEntity.SpaceTimeTurbulenceEntity;
+import com.wdcftgg.spacetime.blocks.tileEntity.TimeCompressorEntity;
 import com.wdcftgg.spacetime.gui.ModGuiElementLoader;
 import com.wdcftgg.spacetime.init.ModRecipes;
 import com.wdcftgg.spacetime.init.RegistryHandler;
@@ -7,6 +10,7 @@ import com.wdcftgg.spacetime.keys.KeyboardManager;
 import com.wdcftgg.spacetime.network.NetworkHandler;
 import com.wdcftgg.spacetime.proxy.ProxyBase;
 import com.wdcftgg.spacetime.util.Reference;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
 import com.wdcftgg.spacetime.achievement.ModAdvancements;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -15,8 +19,10 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.logging.log4j.Logger;
-
+import software.bernie.example.registry.TileRegistry;
 
 
 @Mod(modid = SpaceTime.MODID, name = SpaceTime.NAME, version = SpaceTime.VERSION)
@@ -75,9 +81,9 @@ public class SpaceTime {
     private static void RegisterTileEntity() {
 //        GameRegistry.registerTileEntity(TileEntityDeBoomOrb.class, new ResourceLocation(MODID, "deboom_orb_basic"));
 
-        //GameRegistry.registerTileEntity(TimeCompressorEntity.class, "CompressorEntity");
-        //GameRegistry.registerTileEntity(SpaceTimeTurbulenceEntity.class, "TimeTurbulenceEntity");
-        //GameRegistry.registerTileEntity(TileEntityBuilderOne.class, new ResourceLocation(MODID, "builder.builder_one"));
+        GameRegistry.registerTileEntity(TimeCompressorEntity.class, new ResourceLocation(MODID, "CompressorEntity"));
+        GameRegistry.registerTileEntity(SpaceTimeTurbulenceEntity.class, new ResourceLocation(MODID, "TimeTurbulenceEntity"));
+        GameRegistry.registerTileEntity(HourGlassEntity.class, new ResourceLocation(MODID, "hourglass"));
     }
 
     public static void LogWarning(String str, Object... args) {

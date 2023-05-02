@@ -45,7 +45,12 @@ minecraft {
 
 repositories {
 
-  maven { url = 'https://www.cursemaven.com/'}
+    maven {
+        url = 'https://www.cursemaven.com/'
+    }
+    maven {
+        url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+    }
 
 }
 
@@ -53,6 +58,8 @@ dependencies {
 
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
     compile 'curse.maven:ClockworkPhase-227388:3016789'
+//    compile 'curse.maven:TickrateChanger-230233:2483406'
+    compile 'software.bernie.geckolib:forge-1.12.2-geckolib:3.0.21'
 
 }
 

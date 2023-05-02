@@ -2,9 +2,10 @@ package com.wdcftgg.spacetime.init;
 
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.ModBlocks;
-import com.wdcftgg.spacetime.blocks.tileEntity.*;
+import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.HourGlassEntity;
 import com.wdcftgg.spacetime.client.render.RenderTimeCrack;
 import com.wdcftgg.spacetime.client.render.RenderUnstableTimePolymer;
+import com.wdcftgg.spacetime.client.renderer.HourGrassRenderer;
 import com.wdcftgg.spacetime.entity.EntityTimeCrack;
 import com.wdcftgg.spacetime.entity.EntityUnstableTimePolymer;
 import com.wdcftgg.spacetime.entity.ModEntityInit;
@@ -12,15 +13,14 @@ import com.wdcftgg.spacetime.item.ModItems;
 import com.wdcftgg.spacetime.util.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -73,8 +73,12 @@ public class RegistryHandler {
 
 		ModEntityInit.registerEntities();
 
+
 		RenderingRegistry.registerEntityRenderingHandler(EntityUnstableTimePolymer.class, RenderUnstableTimePolymer::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityTimeCrack.class, RenderTimeCrack::new);
+
+		ClientRegistry.bindTileEntitySpecialRenderer(HourGlassEntity.class, new HourGrassRenderer());
+
 	}
 
 	public static void postInitReg()

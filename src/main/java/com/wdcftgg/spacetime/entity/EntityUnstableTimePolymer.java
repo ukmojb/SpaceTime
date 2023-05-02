@@ -45,7 +45,7 @@ public class EntityUnstableTimePolymer extends EntityThrowable {
                 SpaceTime.Log(this.getTags().toString());
                 BlockPos pos = new BlockPos(result.hitVec);
                 EntityTimeCrack timecrack = new EntityTimeCrack(world);
-                timecrack.setPosition(posX, posY, posZ);
+                timecrack.setPosition(posX, posY , posZ);
                 for (String str : this.getTags()) {
                     Double time = (Double) Double.parseDouble(str);
                     Random r = new Random();

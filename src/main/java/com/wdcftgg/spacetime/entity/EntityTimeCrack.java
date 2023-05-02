@@ -15,6 +15,7 @@ public class EntityTimeCrack extends EntityLiving {
     {
         super(worldIn);
         this.setSize(1.2F, 1.8F);
+        this.setNoAI(true);
     }
 
     @Override

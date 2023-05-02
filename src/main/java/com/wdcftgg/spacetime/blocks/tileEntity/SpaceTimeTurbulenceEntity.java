@@ -1,4 +1,4 @@
-package com.wdcftgg.spacetime.blocks.tileEntity.builder;
+package com.wdcftgg.spacetime.blocks.tileEntity;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.MobEffects;

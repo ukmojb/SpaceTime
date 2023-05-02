@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube_all",
+
+  "textures": {
+    "particle": "clockworkphase:blocks/brass_block",
+    "down": "spacetime:blocks/blank",
+    "up": "spacetime:blocks/blank",
+    "north": "spacetime:blocks/blank",
+    "south": "spacetime:blocks/blank",
+    "west": "spacetime:blocks/blank",
+    "east": "spacetime:blocks/blank"
+  }
+}

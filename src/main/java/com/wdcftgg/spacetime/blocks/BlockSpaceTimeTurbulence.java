@@ -1,7 +1,7 @@
 package com.wdcftgg.spacetime.blocks;
 
 import com.wdcftgg.spacetime.SpaceTime;
-import com.wdcftgg.spacetime.blocks.tileEntity.builder.SpaceTimeTurbulenceEntity;
+import com.wdcftgg.spacetime.blocks.tileEntity.SpaceTimeTurbulenceEntity;
 import com.wdcftgg.spacetime.init.ModCreativeTab;
 import com.wdcftgg.spacetime.item.ModItems;
 import com.wdcftgg.spacetime.util.IHasModel;
