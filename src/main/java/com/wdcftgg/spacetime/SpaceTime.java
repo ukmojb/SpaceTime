@@ -1,28 +1,49 @@
 package com.wdcftgg.spacetime;
 
+
+import com.wdcftgg.spacetime.achievement.ModAdvancements;
 import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.HourGlassEntity;
 import com.wdcftgg.spacetime.blocks.tileEntity.SpaceTimeTurbulenceEntity;
 import com.wdcftgg.spacetime.blocks.tileEntity.TimeCompressorEntity;
+import com.wdcftgg.spacetime.client.handler.HeldItemHandler;
+import com.wdcftgg.spacetime.client.handler.RenderBlockingHandler;
+import com.wdcftgg.spacetime.config.config;
+import com.wdcftgg.spacetime.event.EventSword;
 import com.wdcftgg.spacetime.gui.ModGuiElementLoader;
 import com.wdcftgg.spacetime.init.ModRecipes;
 import com.wdcftgg.spacetime.init.RegistryHandler;
-import com.wdcftgg.spacetime.keys.KeyboardManager;
-import com.wdcftgg.spacetime.network.NetworkHandler;
 import com.wdcftgg.spacetime.proxy.ProxyBase;
 import com.wdcftgg.spacetime.util.Reference;
+import net.minecraft.client.renderer.entity.RenderLivingBase;
+import net.minecraft.client.renderer.entity.RenderPlayer;
+import net.minecraft.client.renderer.entity.layers.LayerRenderer;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.common.Mod;
-import com.wdcftgg.spacetime.achievement.ModAdvancements;
 import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.logging.log4j.Logger;
-import software.bernie.example.registry.TileRegistry;
+
+import java.io.File;
+import java.util.List;
+import java.util.Set;
 
 
 @Mod(modid = SpaceTime.MODID, name = SpaceTime.NAME, version = SpaceTime.VERSION)
@@ -30,10 +51,12 @@ public class SpaceTime {
     public static final String MODID = "spacetime";
     public static final String NAME = "SpaceTime";
     public static final String VERSION = "1.0.0";
+    public static File modConfigDir;
 
     public static Logger logger;
 
     public static final boolean SHOW_WARN = true;
+
 
     @Mod.Instance
     public static SpaceTime instance;
@@ -46,21 +69,25 @@ public class SpaceTime {
         logger = event.getModLog();
         RegistryHandler.preInitRegistries(event);
 
+        config.init(event.getSuggestedConfigurationFile());
+
     }
 
 
     @EventHandler
     public static void Init(FMLInitializationEvent event) {
+
         ModRecipes.Init();
         RegisterTileEntity();
         new ModGuiElementLoader();
         if (!proxy.isServer())
         {
-            KeyboardManager.init();
+
         }
-        NetworkHandler.init();
         ModAdvancements.init();
 
+        MinecraftForge.EVENT_BUS.register(new RenderBlockingHandler());
+        MinecraftForge.EVENT_BUS.register(new EventSword());
 
 	}
 
@@ -68,9 +95,10 @@ public class SpaceTime {
     public void postInit(FMLPostInitializationEvent event) {
         // Moved Spawning registry to last since forge doesn't auto-generate sub
         // "M' biomes until late
-
         RegistryHandler.postInitReg();
+        HeldItemHandler.replaceHeldItemLayer();
     }
+
 
     @EventHandler
     public static void serverInit(FMLServerStartingEvent event) {
@@ -110,5 +138,58 @@ public class SpaceTime {
 //        {
         logger.info(String.format(str, args));
 //        }
+    }
+
+    public static List<LayerRenderer<EntityLivingBase>> getLayerRenderers(RenderPlayer instance) {
+        return (List)getPrivateValue(RenderLivingBase.class, instance, "field_177097_h");
+    }
+
+    private static Set<Item> exclude;
+    private static Set<Item> include;
+
+    public static boolean getCanStackBlock(ItemStack stack) {
+        Item item = stack.getItem();
+        if (exclude != null && exclude.contains(item)) {
+            return false;
+        } else if (item instanceof ItemSword) {
+            return true;
+        } else {
+            return include != null && include.contains(item);
+        }
+    }
+
+    public void damageSword(EntityPlayer player, float damage) {
+        if (damage >= 3.0F) {
+            ItemStack stack = player.getActiveItemStack();
+            ItemStack copy = stack.copy();
+            int i = 1 + MathHelper.floor(damage);
+            stack.damageItem(i, player);
+            if (stack.isEmpty()) {
+                EnumHand enumhand = player.getActiveHand();
+                ForgeEventFactory.onPlayerDestroyItem(player, copy, enumhand);
+                if (enumhand == EnumHand.MAIN_HAND) {
+                    player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
+                } else {
+                    player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, ItemStack.EMPTY);
+                }
+
+                player.resetActiveHand();
+                player.playSound(SoundEvents.ITEM_SHIELD_BREAK, 0.8F, 0.8F + player.world.rand.nextFloat() * 0.4F);
+            }
+        }
+    }
+
+    public boolean getIsBlocking(EntityPlayer player) {
+        this.getClass();
+        boolean ready = 72000 - player.getItemInUseCount() >= 0;
+        return ready && getCanStackBlock(player.getActiveItemStack());
+    }
+
+    private static <T> Object getPrivateValue(Class<T> clazz, T instance, String name) {
+        try {
+            return ObfuscationReflectionHelper.getPrivateValue(clazz, instance, name);
+        } catch (Exception var4) {
+            return null;
+        }
     }
 }

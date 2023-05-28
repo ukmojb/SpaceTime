@@ -1,14 +1,32 @@
 {
-  "entity.moroon.ambient":
+  "swordcore_1":
   {
-    "category": "entity",
-    "subtitle": "entity.moroon.ambient",
-    "sounds": [{"name":  "idlframework:entity/moroon/ambient", "stream":  true}]
+    "category": "record",
+    "sounds": [
+      {
+        "name" : "spacetime:swordcore_1",
+        "stream" : true
+      }
+    ]
   },
-  "entity.moroon.hurt":
+  "swordcore_2":
   {
-    "category": "entity",
-    "subtitle": "entity.moroon.hurt",
-    "sounds": [{"name":  "idlframework:entity/moroon/hurt", "stream":  true}]
+    "category": "record",
+    "sounds": [
+      {
+        "name" : "spacetime:swordcore_2",
+        "stream" : true
+      }
+    ]
+  },
+  "swordblocking":
+  {
+    "category": "record",
+    "sounds": [
+      {
+        "name" : "spacetime:swordblocking",
+        "stream" : true
+      }
+    ]
   }
 }

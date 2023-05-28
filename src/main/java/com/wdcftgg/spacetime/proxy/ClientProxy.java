@@ -1,5 +1,7 @@
 package com.wdcftgg.spacetime.proxy;
 
+import com.wdcftgg.spacetime.client.handler.HeldItemHandler;
+import com.wdcftgg.spacetime.init.RegistryHandler;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.Item;
@@ -22,7 +24,5 @@ public class ClientProxy extends ProxyBase {
 	{
 		ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(item.getRegistryName(), id));
 	}
-
-
 
 }

@@ -20,7 +20,7 @@ archivesBaseName = 'Space-Time'
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
 minecraft {
-    mappings channel: 'snapshot', version: '20171003-1.12'
+    mappings channel: 'snapshot', version: '20171103-1.12'
     runs {
         client {
             workingDirectory project.file('run')
@@ -30,6 +30,8 @@ minecraft {
 
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
+
+            args '--username', 'wdcftgg'
         }
 
         server {
@@ -42,6 +44,8 @@ minecraft {
         }
     }
 }
+
+
 
 repositories {
 
@@ -58,6 +62,7 @@ dependencies {
 
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
     compile 'curse.maven:ClockworkPhase-227388:3016789'
+//    compile 'curse.maven:GoldenAgeCombat-352074:3061050'
 //    compile 'curse.maven:TickrateChanger-230233:2483406'
     compile 'software.bernie.geckolib:forge-1.12.2-geckolib:3.0.21'
 

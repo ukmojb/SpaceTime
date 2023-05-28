@@ -1,13 +1,9 @@
-package com.wdcftgg.spacetime.client.renderer;
+package com.wdcftgg.spacetime.client.renderer.HourGlass;
 
 import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.HourGlassEntity;
-import com.wdcftgg.spacetime.client.model.ModelHourGrass;
-import net.minecraft.block.BlockDirectional;
-import net.minecraft.block.BlockHorizontal;
-import net.minecraft.block.state.IBlockState;
+import com.wdcftgg.spacetime.client.model.HourGlass.ModelHourGrass;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.EnumFacing;
-import software.bernie.example.block.tile.BotariumTileEntity;
-import software.bernie.example.client.model.tile.BotariumModel;
 import software.bernie.geckolib3.renderers.geo.GeoBlockRenderer;
 
 /**

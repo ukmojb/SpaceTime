@@ -5,7 +5,7 @@ import com.wdcftgg.spacetime.blocks.ModBlocks;
 import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.HourGlassEntity;
 import com.wdcftgg.spacetime.client.render.RenderTimeCrack;
 import com.wdcftgg.spacetime.client.render.RenderUnstableTimePolymer;
-import com.wdcftgg.spacetime.client.renderer.HourGrassRenderer;
+import com.wdcftgg.spacetime.client.renderer.HourGlass.HourGrassRenderer;
 import com.wdcftgg.spacetime.entity.EntityTimeCrack;
 import com.wdcftgg.spacetime.entity.EntityUnstableTimePolymer;
 import com.wdcftgg.spacetime.entity.ModEntityInit;
@@ -13,6 +13,8 @@ import com.wdcftgg.spacetime.item.ModItems;
 import com.wdcftgg.spacetime.util.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -23,6 +25,8 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import software.bernie.example.registry.SoundRegistry;
+import software.bernie.geckolib3.GeckoLib;
 
 @EventBusSubscriber
 public class RegistryHandler {
@@ -47,7 +51,6 @@ public class RegistryHandler {
 			if (item instanceof IHasModel)
 			{
 				((IHasModel)item).registerModels();
-				SpaceTime.Log("注册物品模型");
 				SpaceTime.Log(item.toString());
 			}
 		}
@@ -57,7 +60,6 @@ public class RegistryHandler {
 			if (block instanceof IHasModel)
 			{
 				((IHasModel)block).registerModels();
-				SpaceTime.Log("注册方块模型");
 			}
 		}
 
@@ -93,5 +95,19 @@ public class RegistryHandler {
         //event.registerServerCommand(new CommandDimTeleport());
     }
 
+	@SubscribeEvent
+	public static void onRegisterSoundEvents(RegistryEvent.Register<SoundEvent> event)
+	{
+		ResourceLocation location = new ResourceLocation(SpaceTime.MODID, "swordcore_1");
+		ResourceLocation location1 = new ResourceLocation(SpaceTime.MODID, "swordcore_2");
+		ResourceLocation location2 = new ResourceLocation(SpaceTime.MODID, "swordblocking");
 
+		ModSounds.SWORDCORE_1 = new SoundEvent(location).setRegistryName(location);
+		ModSounds.SWORDCORE_2 = new SoundEvent(location1).setRegistryName(location1);
+		ModSounds.SWORDBLOCKING = new SoundEvent(location2).setRegistryName(location2);
+
+		event.getRegistry().register(ModSounds.SWORDCORE_1);
+		event.getRegistry().register(ModSounds.SWORDCORE_2);
+		event.getRegistry().register(ModSounds.SWORDBLOCKING);
+	}
 }

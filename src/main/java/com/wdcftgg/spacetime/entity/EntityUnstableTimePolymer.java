@@ -42,7 +42,6 @@ public class EntityUnstableTimePolymer extends EntityThrowable {
         {
             if (!this.world.isRemote)
             {
-                SpaceTime.Log(this.getTags().toString());
                 BlockPos pos = new BlockPos(result.hitVec);
                 EntityTimeCrack timecrack = new EntityTimeCrack(world);
                 timecrack.setPosition(posX, posY , posZ);
@@ -58,8 +57,6 @@ public class EntityUnstableTimePolymer extends EntityThrowable {
                         }
                     }
                     Double spownchange = (Double) 1D / chance ;
-                    SpaceTime.Log(spownchange+"");
-                    SpaceTime.Log(RandomChange+"");
                     if (chance >= RandomChange){
                         world.spawnEntity(timecrack);
                     }

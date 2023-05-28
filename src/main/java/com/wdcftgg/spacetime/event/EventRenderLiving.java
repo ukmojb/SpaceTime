@@ -25,9 +25,9 @@ public class EventRenderLiving {
         if (event.getEntity() instanceof EntityLivingBase) {
             EntityLivingBase entity = (EntityLivingBase) event.getEntity();
             if (entity.getActivePotionEffect(ModPotions.heterospace) != null) {
-                GlStateManager.color(1.0f, 1.0f, 1.0f, 0.6f); // 设置透明度
+                GlStateManager.color(0f, 0f, 0f, 0.6f); // 设置透明度
                 GlStateManager.enableBlend(); // 启用混合模式
-                GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA); // 设置混合模式为半透明
+                GlStateManager.blendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE_MINUS_SRC_ALPHA); // 设置混合模式为半透明
             }
         }
     }
@@ -43,19 +43,19 @@ public class EventRenderLiving {
     }
 
 
-    @SubscribeEvent
-    public static void onRenderPlayer(RenderPlayerEvent event) {
-        if (event.getEntityPlayer() instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) event.getEntityPlayer();
-            if (player.getActivePotionEffect(ModPotions.heterospace) != null) {
-                GlStateManager.color(1.0f, 1.0f, 1.0f, 0.6f); // 设置透明度
-                GlStateManager.enableBlend(); // 启用混合模式
-                GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA); // 设置混合模式为半透明
-            } else {
-                GlStateManager.disableBlend(); // 关闭混合模式
-
-            }
-        }
-    }
+//    @SubscribeEvent
+//    public static void onRenderPlayer(RenderPlayerEvent event) {
+//        if (event.getEntityPlayer() instanceof EntityPlayer) {
+//            EntityPlayer player = (EntityPlayer) event.getEntityPlayer();
+//            if (player.getActivePotionEffect(ModPotions.heterospace) != null) {
+//                GlStateManager.color(0f, 0f, 0f, 0.6f); // 设置透明度
+//                GlStateManager.enableBlend(); // 启用混合模式
+//                GlStateManager.blendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE_MINUS_SRC_ALPHA); // 设置混合模式为半透明
+//            } else {
+//                GlStateManager.disableBlend(); // 关闭混合模式
+//
+//            }
+//        }
+//    }
 
 }

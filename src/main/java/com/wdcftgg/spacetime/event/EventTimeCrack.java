@@ -27,11 +27,8 @@ public class EventTimeCrack {
     @SubscribeEvent
     public static void onAttackEntityEvent(AttackEntityEvent event) {
         if (!event.getTarget().world.isRemote){
-            SpaceTime.Log("1");
             if (event.getTarget() instanceof EntityLivingBase) {
-                SpaceTime.Log("2");
                 if (event.getTarget() instanceof EntityTimeCrack){
-                    SpaceTime.Log("3");
                     EntityLivingBase living = (EntityLivingBase) event.getTarget();
     //                if (living.getMaxHealth() >= 200000000 && living.getHealth() <= 100000000) {
                         EntityPlayerMP playermp = (EntityPlayerMP) event.getEntityPlayer();
