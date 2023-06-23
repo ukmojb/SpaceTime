@@ -32,10 +32,4 @@ public class ClientProxy extends ProxyBase {
 		ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(item.getRegistryName(), id));
 	}
 
-	public void onModelRegister(ModelRegistryEvent event)
-	{
-
-		OBJLoader.addDomain(SpaceTime.MODID);
-	}
-
 }
