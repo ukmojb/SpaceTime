@@ -1,5 +1,9 @@
 package com.wdcftgg.spacetime.blocks.HourGlass;
 
+import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.LightHourGlassEntity;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+
 /**
  * Created by IntelliJ IDEA.
  *
@@ -8,7 +12,12 @@ package com.wdcftgg.spacetime.blocks.HourGlass;
  */
 public class BlockLightHourGlass extends HourGlassBase {
     public BlockLightHourGlass() {
-        super("light_hourglass");
+        super("lighthourglass");
+    }
 
+    @Override
+    public TileEntity createNewTileEntity(World worldIn, int meta)
+    {
+        return new LightHourGlassEntity();
     }
 }

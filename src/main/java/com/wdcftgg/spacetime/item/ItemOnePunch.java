@@ -43,10 +43,4 @@ public class ItemOnePunch extends Item implements  IHasModel {
         SpaceTime.proxy.registerItemRenderer(this, 0, "inventory");
     }
 
-//    @Override
-//    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
-//    {
-//        ItemStack item = player.getHeldItem(hand);
-//        return new ActionResult<>(EnumActionResult.SUCCESS, item);
-//    }
 }

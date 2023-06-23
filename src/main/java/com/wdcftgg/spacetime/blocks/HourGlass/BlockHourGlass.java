@@ -9,6 +9,5 @@ package com.wdcftgg.spacetime.blocks.HourGlass;
 public class BlockHourGlass extends HourGlassBase{
     public BlockHourGlass() {
         super("hourglass");
-
     }
 }

@@ -1,0 +1,9 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"concretizationhourglass.animation.deploy.1": {
+			"loop": true,
+			"animation_length": 0.29167
+		}
+	}
+}

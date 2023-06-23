@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "facing=north": {
+      "y": 0,
+      "model": "spacetime:concretization_hourglass_model"
+    },
+    "facing=south": {
+      "y": 0,
+      "model": "spacetime:concretization_hourglass_model"
+    },
+    "facing=east": {
+      "y": 0,
+      "model": "spacetime:concretization_hourglass_model"
+    },
+    "facing=west": {
+      "y": 0,
+      "model": "spacetime:concretization_hourglass_model"
+    },
+    "facing=up": {
+      "y": 0,
+      "model": "spacetime:concretization_hourglass_model"
+    },
+    "facing=down": {
+      "z": 0,
+      "model": "spacetime:concretization_hourglass_model"
+    }
+  }
+}

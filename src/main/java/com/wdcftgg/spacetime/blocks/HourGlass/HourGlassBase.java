@@ -35,12 +35,12 @@ public class HourGlassBase extends BlockDirectional implements ITileEntityProvid
 
         ModBlocks.BLOCKS.add(this);
         this.setCreativeTab(ModCreativeTab.SpaceTimeTab);
-        setHarvestLevel("pickaxe", 2);
+        setBlockUnbreakable();
         setHardness(5.0F);
         setResistance(5.0F);
     }
 
-    @Nullable
+
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta)
     {

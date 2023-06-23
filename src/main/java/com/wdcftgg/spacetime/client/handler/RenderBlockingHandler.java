@@ -2,6 +2,7 @@ package com.wdcftgg.spacetime.client.handler;
 
 
 import com.wdcftgg.spacetime.SpaceTime;
+import com.wdcftgg.spacetime.item.ModItems;
 import com.wdcftgg.spacetime.potion.ModPotions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
@@ -60,7 +61,7 @@ public class RenderBlockingHandler {
             if (SpaceTime.getCanStackBlock(stack) && player.getActivePotionEffect(ModPotions.swordcore) != null) {
                 GlStateManager.pushMatrix();
                 boolean rightHanded = (evt.getHand() == EnumHand.MAIN_HAND ? player.getPrimaryHand() : player.getPrimaryHand().opposite()) == EnumHandSide.RIGHT;
-                this.transformSideFirstPerson(rightHanded ? 1.0F : -1.0F, evt.getEquipProgress());
+                this.transformSideFirstPerson(rightHanded ? 1.0F : -1.0F, evt.getEquipProgress(), stack);
                 this.mc.getItemRenderer().renderItemSide(player, stack, rightHanded ? ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND : ItemCameraTransforms.TransformType.FIRST_PERSON_LEFT_HAND, !rightHanded);
                 GlStateManager.popMatrix();
                 evt.setCanceled(true);
@@ -69,7 +70,7 @@ public class RenderBlockingHandler {
 
     }
 
-    private void transformSideFirstPerson(float side, float equippedProg) {
+    private void transformSideFirstPerson(float side, float equippedProg, ItemStack stack) {
         GlStateManager.translate(side * 0.56F, -0.52F + equippedProg * -0.6F, -0.72F);
         GlStateManager.translate(side * -0.14142136F, 0.08F, 0.14142136F);
         GlStateManager.rotate(-102.25F, 1.0F, 0.0F, 0.0F);

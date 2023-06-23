@@ -96,6 +96,4 @@ public class BlockSpaceTimeTurbulence extends Block implements IHasModel {
     public TileEntity createTileEntity(World world, IBlockState state) {
         return new SpaceTimeTurbulenceEntity();
     }
-
-
 }

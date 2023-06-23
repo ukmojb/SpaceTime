@@ -2,10 +2,13 @@ package com.wdcftgg.spacetime.init;
 
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.ModBlocks;
-import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.HourGlassEntity;
+import com.wdcftgg.spacetime.blocks.tileEntity.ConcretizationHourGlassEntity;
+import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.*;
+import com.wdcftgg.spacetime.client.render.HourGlass.*;
+import com.wdcftgg.spacetime.client.render.RenderConcretizationHourGlass;
 import com.wdcftgg.spacetime.client.render.RenderTimeCrack;
 import com.wdcftgg.spacetime.client.render.RenderUnstableTimePolymer;
-import com.wdcftgg.spacetime.client.renderer.HourGlass.HourGrassRenderer;
+import com.wdcftgg.spacetime.client.render.HourGlass.HourGrassRender;
 import com.wdcftgg.spacetime.entity.EntityTimeCrack;
 import com.wdcftgg.spacetime.entity.EntityUnstableTimePolymer;
 import com.wdcftgg.spacetime.entity.ModEntityInit;
@@ -16,6 +19,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -25,8 +29,6 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import software.bernie.example.registry.SoundRegistry;
-import software.bernie.geckolib3.GeckoLib;
 
 @EventBusSubscriber
 public class RegistryHandler {
@@ -63,15 +65,13 @@ public class RegistryHandler {
 			}
 		}
 
+
 	}
 
 	public static void preInitRegistries(FMLPreInitializationEvent event)
 	{
-		//GameRegistry.registerWorldGenerator(new ModWorldGenOld(), 100);
-		//GameRegistry.registerWorldGenerator(new ModWorldGenNew(), 120);
 
-		InitBiome.registerBiomes();
-		InitDimension.registerDimensions();
+
 
 		ModEntityInit.registerEntities();
 
@@ -79,7 +79,16 @@ public class RegistryHandler {
 		RenderingRegistry.registerEntityRenderingHandler(EntityUnstableTimePolymer.class, RenderUnstableTimePolymer::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityTimeCrack.class, RenderTimeCrack::new);
 
-		ClientRegistry.bindTileEntitySpecialRenderer(HourGlassEntity.class, new HourGrassRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(HourGlassEntity.class, new HourGrassRender());
+		ClientRegistry.bindTileEntitySpecialRenderer(AirHourGlassEntity.class, new AirHourGrassRender());
+		ClientRegistry.bindTileEntitySpecialRenderer(DeathHourGlassEntity.class, new DeathHourGrassRender());
+		ClientRegistry.bindTileEntitySpecialRenderer(EarthHourGlassEntity.class, new EarthHourGrassRender());
+		ClientRegistry.bindTileEntitySpecialRenderer(FireHourGlassEntity.class, new FireHourGrassRender());
+		ClientRegistry.bindTileEntitySpecialRenderer(LifeHourGlassEntity.class, new LifeHourGrassRender());
+		ClientRegistry.bindTileEntitySpecialRenderer(LightHourGlassEntity.class, new LightHourGrassRender());
+		ClientRegistry.bindTileEntitySpecialRenderer(MoonHourGlassEntity.class, new MoonHourGrassRender());
+		ClientRegistry.bindTileEntitySpecialRenderer(WaterHourGlassEntity.class, new WaterHourGrassRender());
+		ClientRegistry.bindTileEntitySpecialRenderer(ConcretizationHourGlassEntity.class, new RenderConcretizationHourGlass());
 
 	}
 

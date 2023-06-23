@@ -1,11 +1,18 @@
 package com.wdcftgg.spacetime.proxy;
 
+import com.wdcftgg.spacetime.SpaceTime;
+import com.wdcftgg.spacetime.blocks.ModBlocks;
 import com.wdcftgg.spacetime.client.handler.HeldItemHandler;
 import com.wdcftgg.spacetime.init.RegistryHandler;
+import com.wdcftgg.spacetime.item.ModItems;
+import com.wdcftgg.spacetime.util.IHasModel;
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.client.model.obj.OBJLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +30,12 @@ public class ClientProxy extends ProxyBase {
 	public void registerItemRenderer(Item item, int meta, String id)
 	{
 		ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(item.getRegistryName(), id));
+	}
+
+	public void onModelRegister(ModelRegistryEvent event)
+	{
+
+		OBJLoader.addDomain(SpaceTime.MODID);
 	}
 
 }
