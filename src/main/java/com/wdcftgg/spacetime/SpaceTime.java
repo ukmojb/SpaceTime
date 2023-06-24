@@ -1,10 +1,12 @@
 package com.wdcftgg.spacetime;
 
 
+import com.wdcftgg.spacetime.Network.NetworkHandler;
 import com.wdcftgg.spacetime.achievement.ModAdvancements;
 import com.wdcftgg.spacetime.blocks.tileEntity.ConcretizationHourGlassEntity;
 import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.*;
 import com.wdcftgg.spacetime.blocks.tileEntity.SpaceTimeTurbulenceEntity;
+import com.wdcftgg.spacetime.blocks.tileEntity.TimeAltarCoreEntity;
 import com.wdcftgg.spacetime.blocks.tileEntity.TimeCompressorEntity;
 import com.wdcftgg.spacetime.client.handler.HeldItemHandler;
 import com.wdcftgg.spacetime.client.handler.RenderBlockingHandler;
@@ -87,6 +89,8 @@ public class SpaceTime {
         MinecraftForge.EVENT_BUS.register(new RenderBlockingHandler());
         MinecraftForge.EVENT_BUS.register(new EventSword());
 
+        NetworkHandler.init();
+
 
 	}
 
@@ -122,6 +126,7 @@ public class SpaceTime {
         GameRegistry.registerTileEntity(WaterHourGlassEntity.class, new ResourceLocation(MODID, "waterhourglass"));
 
         GameRegistry.registerTileEntity(ConcretizationHourGlassEntity.class, new ResourceLocation(MODID, "concretizationhourglass"));
+        GameRegistry.registerTileEntity(TimeAltarCoreEntity.class, new ResourceLocation(MODID, "timealtarcore"));
     }
 
     public static void LogWarning(String str, Object... args) {

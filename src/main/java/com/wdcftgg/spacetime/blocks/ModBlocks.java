@@ -13,6 +13,7 @@ public class ModBlocks {
 	public static final Block SPACETIMETURBULENCE = new BlockSpaceTimeTurbulence();
 	public static final Block TIMECOMPRESSOR = new BlockTimeCompressor();
 	public static final Block CONCRETIZATIONHOURGLASS = new BlockConcretizationHourGlass();
+	public static final Block TIMEALTARCORE = new BlockTimeAltarCore();
 
 	public static final Block HOURGLASS = new BlockHourGlass();
 	public static final Block AIRHOURGLASS = new BlockAirHourGlass();

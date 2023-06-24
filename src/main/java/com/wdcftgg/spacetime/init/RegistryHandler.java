@@ -4,11 +4,12 @@ import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.ModBlocks;
 import com.wdcftgg.spacetime.blocks.tileEntity.ConcretizationHourGlassEntity;
 import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.*;
+import com.wdcftgg.spacetime.blocks.tileEntity.TimeAltarCoreEntity;
 import com.wdcftgg.spacetime.client.render.HourGlass.*;
 import com.wdcftgg.spacetime.client.render.RenderConcretizationHourGlass;
+import com.wdcftgg.spacetime.client.render.RenderTimeAltarCore;
 import com.wdcftgg.spacetime.client.render.RenderTimeCrack;
 import com.wdcftgg.spacetime.client.render.RenderUnstableTimePolymer;
-import com.wdcftgg.spacetime.client.render.HourGlass.HourGrassRender;
 import com.wdcftgg.spacetime.entity.EntityTimeCrack;
 import com.wdcftgg.spacetime.entity.EntityUnstableTimePolymer;
 import com.wdcftgg.spacetime.entity.ModEntityInit;
@@ -19,7 +20,6 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -89,6 +89,9 @@ public class RegistryHandler {
 		ClientRegistry.bindTileEntitySpecialRenderer(MoonHourGlassEntity.class, new MoonHourGrassRender());
 		ClientRegistry.bindTileEntitySpecialRenderer(WaterHourGlassEntity.class, new WaterHourGrassRender());
 		ClientRegistry.bindTileEntitySpecialRenderer(ConcretizationHourGlassEntity.class, new RenderConcretizationHourGlass());
+		ClientRegistry.bindTileEntitySpecialRenderer(TimeAltarCoreEntity.class, new RenderTimeAltarCore());
+
+
 
 	}
 
