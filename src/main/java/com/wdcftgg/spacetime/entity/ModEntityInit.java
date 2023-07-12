@@ -26,9 +26,9 @@ public class ModEntityInit {
 
           registerEntity("TimeCrack", EntityTimeCrack.class);
           registerEntity("UnstableTimePolymer", EntityUnstableTimePolymer.class);
+          registerEntity("Time", EntityTime.class);
 
 
-        DataFixer datafixer = new DataFixer(1343);
     }
 
     private  static  void registerEntity(String name, Class<? extends Entity> entity)
@@ -54,6 +54,7 @@ public class ModEntityInit {
                 );
         ENTITY_NEXT_ID++;
     }
+
 
 
 

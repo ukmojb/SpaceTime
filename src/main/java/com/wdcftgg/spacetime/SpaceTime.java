@@ -47,7 +47,7 @@ import java.util.List;
 import java.util.Set;
 
 
-@Mod(modid = SpaceTime.MODID, name = SpaceTime.NAME, version = SpaceTime.VERSION)
+@Mod(modid = SpaceTime.MODID, name = SpaceTime.NAME, version = SpaceTime.VERSION, dependencies="required-after:tickratechanger")
 public class SpaceTime {
     public static final String MODID = "spacetime";
     public static final String NAME = "SpaceTime";

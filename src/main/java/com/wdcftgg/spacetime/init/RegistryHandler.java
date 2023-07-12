@@ -5,11 +5,9 @@ import com.wdcftgg.spacetime.blocks.ModBlocks;
 import com.wdcftgg.spacetime.blocks.tileEntity.ConcretizationHourGlassEntity;
 import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.*;
 import com.wdcftgg.spacetime.blocks.tileEntity.TimeAltarCoreEntity;
+import com.wdcftgg.spacetime.client.render.*;
 import com.wdcftgg.spacetime.client.render.HourGlass.*;
-import com.wdcftgg.spacetime.client.render.RenderConcretizationHourGlass;
-import com.wdcftgg.spacetime.client.render.RenderTimeAltarCore;
-import com.wdcftgg.spacetime.client.render.RenderTimeCrack;
-import com.wdcftgg.spacetime.client.render.RenderUnstableTimePolymer;
+import com.wdcftgg.spacetime.entity.EntityTime;
 import com.wdcftgg.spacetime.entity.EntityTimeCrack;
 import com.wdcftgg.spacetime.entity.EntityUnstableTimePolymer;
 import com.wdcftgg.spacetime.entity.ModEntityInit;
@@ -78,6 +76,7 @@ public class RegistryHandler {
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityUnstableTimePolymer.class, RenderUnstableTimePolymer::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityTimeCrack.class, RenderTimeCrack::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityTime.class, RenderTime::new);
 
 		ClientRegistry.bindTileEntitySpecialRenderer(HourGlassEntity.class, new HourGrassRender());
 		ClientRegistry.bindTileEntitySpecialRenderer(AirHourGlassEntity.class, new AirHourGrassRender());
