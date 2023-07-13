@@ -62,8 +62,6 @@ dependencies {
 
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
     compile 'curse.maven:ClockworkPhase-227388:3016789'
- //   compile files("./libs/TickrateChanger-1.0.14.jar")
-    compile 'curse.maven:TickrateChanger-230233:2482684'
     compile 'software.bernie.geckolib:forge-1.12.2-geckolib:3.0.21'
 
 }

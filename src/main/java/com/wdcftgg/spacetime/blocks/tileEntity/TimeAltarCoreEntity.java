@@ -1,9 +1,7 @@
 package com.wdcftgg.spacetime.blocks.tileEntity;
 
 import com.wdcftgg.spacetime.Network.MessageTimeAltarCore;
-import com.wdcftgg.spacetime.Network.NetworkHandler;
 import com.wdcftgg.spacetime.blocks.HourGlass.HourGlassBase;
-import lumaceon.mods.clockworkphase.network.PacketHandler;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
@@ -15,7 +13,6 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 import javax.annotation.Nonnull;

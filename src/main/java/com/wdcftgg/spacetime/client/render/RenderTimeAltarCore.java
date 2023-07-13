@@ -1,8 +1,6 @@
 package com.wdcftgg.spacetime.client.render;
 
 
-import com.wdcftgg.spacetime.Network.MessageTimeAltarCore;
-import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.tileEntity.TimeAltarCoreEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -10,7 +8,6 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 /**

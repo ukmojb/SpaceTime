@@ -1,7 +1,7 @@
 package com.wdcftgg.spacetime;
 
 
-import com.wdcftgg.spacetime.Network.NetworkHandler;
+import com.wdcftgg.spacetime.Network.PacketHandler;
 import com.wdcftgg.spacetime.achievement.ModAdvancements;
 import com.wdcftgg.spacetime.blocks.tileEntity.ConcretizationHourGlassEntity;
 import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.*;
@@ -41,13 +41,12 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.logging.log4j.Logger;
-
 import java.io.File;
 import java.util.List;
 import java.util.Set;
 
 
-@Mod(modid = SpaceTime.MODID, name = SpaceTime.NAME, version = SpaceTime.VERSION, dependencies="required-after:tickratechanger")
+@Mod(modid = SpaceTime.MODID, name = SpaceTime.NAME, version = SpaceTime.VERSION, dependencies="required-after:clockworkphase;required-after:geckolib3")
 public class SpaceTime {
     public static final String MODID = "spacetime";
     public static final String NAME = "SpaceTime";
@@ -85,12 +84,10 @@ public class SpaceTime {
 
         }
         ModAdvancements.init();
+        PacketHandler.init();
 
         MinecraftForge.EVENT_BUS.register(new RenderBlockingHandler());
         MinecraftForge.EVENT_BUS.register(new EventSword());
-
-        NetworkHandler.init();
-
 
 	}
 

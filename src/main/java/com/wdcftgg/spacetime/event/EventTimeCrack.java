@@ -1,18 +1,10 @@
 package com.wdcftgg.spacetime.event;
 
-import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.achievement.ModAdvancements;
 import com.wdcftgg.spacetime.entity.EntityTimeCrack;
-import com.wdcftgg.spacetime.item.ModItems;
-import com.wdcftgg.spacetime.util.TimeHelper;
-import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import net.minecraftforge.event.world.ExplosionEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 

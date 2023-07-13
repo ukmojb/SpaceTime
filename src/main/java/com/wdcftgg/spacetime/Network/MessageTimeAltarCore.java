@@ -3,7 +3,6 @@ package com.wdcftgg.spacetime.Network;
 import com.wdcftgg.spacetime.blocks.tileEntity.TimeAltarCoreEntity;
 import io.netty.buffer.ByteBuf;
 import lumaceon.mods.clockworkphase.ClockworkPhase;
-import lumaceon.mods.clockworkphase.block.tileentity.TileEntityTimeSandCapacitor;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;

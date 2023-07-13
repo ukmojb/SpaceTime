@@ -1,6 +1,5 @@
 {
   "parent": "block/cube_all",
-
   "textures": {
     "particle": "spacetime:items/concretization_hourglass",
     "down": "spacetime:blocks/blank",

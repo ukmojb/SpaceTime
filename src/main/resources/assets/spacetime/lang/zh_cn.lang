@@ -8,6 +8,7 @@ tile.space_time_turbulence.name=时空乱流
 tile.time_compressor.name=时间压缩器
 tile.hourglass.name=时空沙漏
 tile.concretization_hourglass.name=时空沙漏具象器
+tile.time_altarcore.name=时空沙漏具象器
 
 # Items
 
