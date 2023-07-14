@@ -1,8 +1,12 @@
 package com.wdcftgg.spacetime.blocks.tileEntity;
 
 import com.wdcftgg.spacetime.Network.MessageTimeAltarCore;
+import com.wdcftgg.spacetime.Network.PacketHandler;
+import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.HourGlass.HourGlassBase;
+import com.wdcftgg.spacetime.blocks.ModBlocks;
 import net.minecraft.block.Block;
+import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -13,6 +17,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 import javax.annotation.Nonnull;
@@ -35,6 +40,7 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
     {
         return new MessageTimeAltarCore(this);
     }
+    public static final PropertyInteger OUTPUT = PropertyInteger.create("timecore_output", 0, 1);
 
     @Override
     public void update() {
@@ -43,11 +49,14 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
                 List<EntityItem> items = getItems();
                 if(areItemsValid(items)) {
                     world.getTileEntity(pos).getTileData().setInteger("output", Item.getIdFromItem(outPutItem(items)));
+                    world.setBlockState(pos.up(), ModBlocks.AIR.getDefaultState());
                 }else{
                     world.getTileEntity(pos).getTileData().setInteger("output", 0);
+                    world.setBlockToAir(pos.up());
                 }
             }
         }
+        super.updateContainingBlockInfo();
     }
 
     @Nonnull
@@ -149,7 +158,7 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
             Input.add(item.getItem().getItem());
             for(Item[] recipes : TimeAltarRecipesin) {
                 ArrayList<Item> list = new ArrayList<Item>(Arrays.asList(recipes));
-                if (Input.containsAll(list) && Input.size() == 4){
+                if (Input.containsAll(list) && Input.size() == 4 && fouritems(items)){
                     return true;
                 }
 
@@ -168,7 +177,7 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
             Input.add(item.getItem().getItem());
             for(int i=0;i<TimeAltarRecipesin.length;i++) {
                 ArrayList<Item> list = new ArrayList<Item>(Arrays.asList(TimeAltarRecipesin[i]));
-                if (Input.containsAll(list) && Input.size() == 4){
+                if (Input.containsAll(list) && Input.size() == 4 && fouritems(items)){
 
                     return TimeAltarRecipesout[i][0];
                 }
@@ -176,6 +185,18 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
         }
 
         return null;
+    }
+
+    boolean fouritems(List<EntityItem> items) {
+        if(items.size() != 4)
+            return false;
+
+        int num = 0;
+        for(EntityItem item : items) {
+            num += item.getItem().getCount();
+        }
+
+        return num == 4;
     }
 
     int needtimeenergy(List<EntityItem> items) {
@@ -188,7 +209,7 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
             for(int i=0;i<TimeAltarRecipesin.length;i++) {
 //            for(Item[] recipes : TimeAltarRecipesin) {
                 ArrayList<Item> list = new ArrayList<Item>(Arrays.asList(TimeAltarRecipesin[i]));
-                if (Input.containsAll(list) && Input.size() == 4){
+                if (Input.containsAll(list) && Input.size() == 4 && fouritems(items)){
                     return TimeAltarRecipesEnergy[i][0];
                 }
             }

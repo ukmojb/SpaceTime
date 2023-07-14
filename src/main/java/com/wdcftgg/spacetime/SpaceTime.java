@@ -3,11 +3,8 @@ package com.wdcftgg.spacetime;
 
 import com.wdcftgg.spacetime.Network.PacketHandler;
 import com.wdcftgg.spacetime.achievement.ModAdvancements;
-import com.wdcftgg.spacetime.blocks.tileEntity.ConcretizationHourGlassEntity;
+import com.wdcftgg.spacetime.blocks.tileEntity.*;
 import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.*;
-import com.wdcftgg.spacetime.blocks.tileEntity.SpaceTimeTurbulenceEntity;
-import com.wdcftgg.spacetime.blocks.tileEntity.TimeAltarCoreEntity;
-import com.wdcftgg.spacetime.blocks.tileEntity.TimeCompressorEntity;
 import com.wdcftgg.spacetime.client.handler.HeldItemHandler;
 import com.wdcftgg.spacetime.client.handler.RenderBlockingHandler;
 import com.wdcftgg.spacetime.config.config;
@@ -124,6 +121,7 @@ public class SpaceTime {
 
         GameRegistry.registerTileEntity(ConcretizationHourGlassEntity.class, new ResourceLocation(MODID, "concretizationhourglass"));
         GameRegistry.registerTileEntity(TimeAltarCoreEntity.class, new ResourceLocation(MODID, "timealtarcore"));
+        GameRegistry.registerTileEntity(SpaceTimeAirEntity.class, new ResourceLocation(MODID, "spacetimeair"));
     }
 
     public static void LogWarning(String str, Object... args) {

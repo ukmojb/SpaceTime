@@ -3,6 +3,9 @@ package com.wdcftgg.spacetime.entity;
 import com.wdcftgg.spacetime.Network.MessageTimeParticle;
 import com.wdcftgg.spacetime.Network.PacketHandler;
 import com.wdcftgg.spacetime.SpaceTime;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.ai.attributes.IAttribute;
@@ -11,6 +14,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -54,9 +58,9 @@ public class EntityTime extends EntityMob {
     {
         super.applyEntityAttributes();
 
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(120.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(150.0D);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.8D);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
         this.getAttributeMap().registerAttribute(LIFE_POWER);
@@ -97,7 +101,6 @@ public class EntityTime extends EntityMob {
     }
 
 
-
     @Override
     protected void initEntityAI()
     {
@@ -110,7 +113,4 @@ public class EntityTime extends EntityMob {
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, new Class[0]));
     }
-
-
-
 }

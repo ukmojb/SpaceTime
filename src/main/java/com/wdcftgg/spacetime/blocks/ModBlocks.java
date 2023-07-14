@@ -24,4 +24,5 @@ public class ModBlocks {
 	public static final Block LIGHTHOURGLASS = new BlockLightHourGlass();
 	public static final Block MOONHOURGLASS = new BlockMoonHourGlass();
 	public static final Block WATERHOURGLASS = new BlockWaterHourGlass();
+	public static final Block AIR = new BlockAir();
 }
