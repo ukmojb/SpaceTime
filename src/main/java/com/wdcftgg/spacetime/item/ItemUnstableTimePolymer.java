@@ -6,6 +6,7 @@ import com.wdcftgg.spacetime.init.ModCreativeTab;
 import com.wdcftgg.spacetime.util.IHasModel;
 import com.wdcftgg.spacetime.util.ITime;
 import com.wdcftgg.spacetime.util.TimeHelper;
+import lumaceon.mods.clockworkphase.util.TimeSandHelper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -45,12 +46,6 @@ public class ItemUnstableTimePolymer extends Item implements ITime, IHasModel {
     {
         int time = getTime(is);
         int chance = 200000;
-//        if (time > 0) {
-//            chance = time / chance  ;
-//            if (chance >= 1) {
-//                chance = 1;
-//            }
-//        }
         float percentagechance = (float)  time / chance * 100;
         if (time <= 0){
             list.add("Contain Time: §eNo Space Energy");
@@ -97,7 +92,7 @@ public class ItemUnstableTimePolymer extends Item implements ITime, IHasModel {
             unstabletimepolymer.addTag(String.valueOf(TimeHelper.getTime(item)));
             world.spawnEntity(unstabletimepolymer);
         }
-         item.shrink(1);
+        item.shrink(1);
         return new ActionResult<>(EnumActionResult.SUCCESS, item);
     }
 

@@ -35,7 +35,7 @@ public class ModEntityInit {
 
     private  static  void registerEntityAndEgg(String name, Class<? extends Entity> entity)
     {
-        registerEntityAndEgg(name, entity, ENTITY_NEXT_ID, 50, 0xff00ff, 0x000000);
+        registerEntityAndEgg(name, entity, ENTITY_NEXT_ID, 50, 0x3786e7, 0x660000);
     }
 
     private  static  void registerEntityAndEgg(String name, Class<? extends Entity> entity, int color1, int color2)

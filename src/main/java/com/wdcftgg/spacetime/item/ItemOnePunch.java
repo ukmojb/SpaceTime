@@ -6,13 +6,11 @@ import com.wdcftgg.spacetime.util.IHasModel;
 import com.wdcftgg.spacetime.util.ITime;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumHandSide;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -41,6 +39,13 @@ public class ItemOnePunch extends Item implements  IHasModel {
     public void registerModels()
     {
         SpaceTime.proxy.registerItemRenderer(this, 0, "inventory");
+    }
+
+    @Override
+    public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
+    {
+        entity.attackEntityFrom(DamageSource.OUT_OF_WORLD, 9999);
+        return false;
     }
 
 }

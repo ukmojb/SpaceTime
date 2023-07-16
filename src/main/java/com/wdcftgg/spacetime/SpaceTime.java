@@ -12,6 +12,7 @@ import com.wdcftgg.spacetime.event.EventSword;
 import com.wdcftgg.spacetime.gui.ModGuiElementLoader;
 import com.wdcftgg.spacetime.init.RegistryHandler;
 import com.wdcftgg.spacetime.proxy.ProxyBase;
+import com.wdcftgg.spacetime.recipe.CraftingLoader;
 import com.wdcftgg.spacetime.util.Reference;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderPlayer;
@@ -75,6 +76,7 @@ public class SpaceTime {
     public static void Init(FMLInitializationEvent event) {
 
         RegisterTileEntity();
+        CraftingLoader.init();
         new ModGuiElementLoader();
         if (!proxy.isServer())
         {
