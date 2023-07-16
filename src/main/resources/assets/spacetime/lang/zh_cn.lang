@@ -1,6 +1,10 @@
 # PARSE_ESCAPES
 itemGroup.spacetimetab=空之翼
 
+# ENTITY
+entity.Time.name=时
+entity.TimeCrack.name=时间裂缝
+
 # Blocks
 
 tile.time_pillar.name=时间之柱

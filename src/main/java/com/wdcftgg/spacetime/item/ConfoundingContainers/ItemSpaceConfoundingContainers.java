@@ -27,6 +27,7 @@ import java.util.List;
 public class ItemSpaceConfoundingContainers extends Item implements ISpace, IHasModel {
     public ItemSpaceConfoundingContainers()
     {
+        setMaxStackSize(1);
         setUnlocalizedName("space_confounding_containers");
         setRegistryName("space_confounding_containers");
         setCreativeTab(ModCreativeTab.SpaceTimeTab);

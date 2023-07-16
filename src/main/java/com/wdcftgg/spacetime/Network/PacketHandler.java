@@ -18,7 +18,6 @@ public class PacketHandler {
 
     public static void init() {
         INSTANCE.registerMessage(MessageTimeParticle.class, MessageTimeParticle.class, 0, Side.CLIENT);
-        INSTANCE.registerMessage(MessageTimeAltarCore.class, MessageTimeAltarCore.class, 0, Side.CLIENT);
     }
 
     static {

@@ -34,7 +34,7 @@ public class BlockAir extends Block implements IHasModel {
         super(Material.AIR);
         setUnlocalizedName("spacetime_air");
         setRegistryName("spacetime_air");
-        setCreativeTab(ModCreativeTab.SpaceTimeTab);;
+        setCreativeTab(null);;
         setLightLevel(1.0f);
 
         ModBlocks.BLOCKS.add(this);

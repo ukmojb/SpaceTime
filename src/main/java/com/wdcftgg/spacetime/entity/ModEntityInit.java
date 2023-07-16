@@ -24,24 +24,31 @@ public class ModEntityInit {
     public static void registerEntities()
     {
 
-          registerEntity("TimeCrack", EntityTimeCrack.class);
-          registerEntity("UnstableTimePolymer", EntityUnstableTimePolymer.class);
-          registerEntity("Time", EntityTime.class);
+        registerEntity("UnstableTimePolymer", EntityUnstableTimePolymer.class);
 
 
+        registerEntityAndEgg("TimeCrack", EntityTimeCrack.class);
+        registerEntityAndEgg("Time", EntityTime.class,0x0009c8, 0x660000);
+
+
+    }
+
+    private  static  void registerEntityAndEgg(String name, Class<? extends Entity> entity)
+    {
+        registerEntityAndEgg(name, entity, ENTITY_NEXT_ID, 50, 0xff00ff, 0x000000);
+    }
+
+    private  static  void registerEntityAndEgg(String name, Class<? extends Entity> entity, int color1, int color2)
+    {
+        registerEntityAndEgg(name, entity, ENTITY_NEXT_ID, 50, color1, color2);
     }
 
     private  static  void registerEntity(String name, Class<? extends Entity> entity)
     {
-        registerEntity(name, entity, ENTITY_NEXT_ID, 50, 0xff00ff, 0x000000);
+        registerEntityNoEgg(name, entity, ENTITY_NEXT_ID, 50);
     }
 
-    private  static  void registerEntity(String name, Class<? extends Entity> entity, int color1, int color2)
-    {
-        registerEntity(name, entity, ENTITY_NEXT_ID, 50, color1, color2);
-    }
-
-    private  static  void registerEntity(String name, Class<? extends Entity> entity, int id, int range, int color1, int color2){
+    private  static  void registerEntityAndEgg(String name, Class<? extends Entity> entity, int id, int range, int color1, int color2){
         EntityRegistry.registerModEntity(new ResourceLocation(Reference.MOD_ID + ":" + name),
                 entity,
                 name,
@@ -52,6 +59,19 @@ public class ModEntityInit {
                 true,
                 color1, color2
                 );
+        ENTITY_NEXT_ID++;
+    }
+
+    private  static  void registerEntityNoEgg(String name, Class<? extends Entity> entity, int id, int range){
+        EntityRegistry.registerModEntity(new ResourceLocation(Reference.MOD_ID + ":" + name),
+                entity,
+                name,
+                id,
+                SpaceTime.instance,
+                range,
+                1,
+                true
+        );
         ENTITY_NEXT_ID++;
     }
 

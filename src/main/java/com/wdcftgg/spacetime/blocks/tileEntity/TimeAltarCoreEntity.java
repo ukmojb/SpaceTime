@@ -1,8 +1,6 @@
 package com.wdcftgg.spacetime.blocks.tileEntity;
 
-import com.wdcftgg.spacetime.Network.MessageTimeAltarCore;
-import com.wdcftgg.spacetime.Network.PacketHandler;
-import com.wdcftgg.spacetime.SpaceTime;
+
 import com.wdcftgg.spacetime.blocks.HourGlass.HourGlassBase;
 import com.wdcftgg.spacetime.blocks.ModBlocks;
 import net.minecraft.block.Block;
@@ -17,8 +15,6 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -36,10 +32,7 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
 
     int timeenergy;
 
-    public IMessage getCustomMessage()
-    {
-        return new MessageTimeAltarCore(this);
-    }
+
     public static final PropertyInteger OUTPUT = PropertyInteger.create("timecore_output", 0, 1);
 
     @Override

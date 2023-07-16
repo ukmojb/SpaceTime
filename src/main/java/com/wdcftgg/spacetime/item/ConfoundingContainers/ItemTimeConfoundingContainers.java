@@ -12,6 +12,7 @@ import com.wdcftgg.spacetime.init.ModCreativeTab;
 import com.wdcftgg.spacetime.item.ModItems;
 import com.wdcftgg.spacetime.util.IHasModel;
 import lumaceon.mods.clockworkphase.item.construct.abstracts.ITimeSand;
+import lumaceon.mods.clockworkphase.item.construct.abstracts.ITimeSandSupplier;
 import lumaceon.mods.clockworkphase.util.TimeSandHelper;
 import lumaceon.mods.clockworkphase.util.TimeSandParser;
 import net.minecraft.client.Minecraft;
@@ -26,10 +27,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class ItemTimeConfoundingContainers extends Item implements ITimeSand, IHasModel {
+public class ItemTimeConfoundingContainers extends Item implements ITimeSand, IHasModel, ITimeSandSupplier {
 
     public ItemTimeConfoundingContainers()
     {
+        setMaxStackSize(1);
         setUnlocalizedName("time_confounding_containers");
         setRegistryName("time_confounding_containers");
         setCreativeTab(ModCreativeTab.SpaceTimeTab);
@@ -73,6 +75,11 @@ public class ItemTimeConfoundingContainers extends Item implements ITimeSand, IH
     public int removeTimeSand(ItemStack is, int timeSand)
     {
         return TimeSandHelper.removeTimeSand(is, timeSand);
+    }
+
+    @Override
+    public int getTimeSandAvailable(ItemStack is) {
+        return TimeSandHelper.getTimeSand(is);
     }
 
     @Override
