@@ -6,7 +6,6 @@ import com.wdcftgg.spacetime.init.ModCreativeTab;
 import com.wdcftgg.spacetime.util.IHasModel;
 import com.wdcftgg.spacetime.util.ITime;
 import com.wdcftgg.spacetime.util.TimeHelper;
-import lumaceon.mods.clockworkphase.util.TimeSandHelper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;

@@ -1,16 +1,16 @@
 package com.wdcftgg.spacetime;
 
 
-import com.wdcftgg.spacetime.Network.PacketHandler;
-import com.wdcftgg.spacetime.achievement.ModAdvancements;
+
 import com.wdcftgg.spacetime.blocks.tileEntity.*;
 import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.*;
 import com.wdcftgg.spacetime.client.handler.HeldItemHandler;
-import com.wdcftgg.spacetime.client.handler.RenderBlockingHandler;
 import com.wdcftgg.spacetime.config.config;
+import com.wdcftgg.spacetime.event.EventRender;
 import com.wdcftgg.spacetime.event.EventSword;
 import com.wdcftgg.spacetime.gui.ModGuiElementLoader;
 import com.wdcftgg.spacetime.init.RegistryHandler;
+import com.wdcftgg.spacetime.network.PacketHandler;
 import com.wdcftgg.spacetime.proxy.ProxyBase;
 import com.wdcftgg.spacetime.recipe.CraftingLoader;
 import com.wdcftgg.spacetime.util.Reference;
@@ -39,21 +39,23 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.logging.log4j.Logger;
+import software.bernie.geckolib3.GeckoLib;
+
 import java.io.File;
 import java.util.List;
 import java.util.Set;
-
 
 @Mod(modid = SpaceTime.MODID, name = SpaceTime.NAME, version = SpaceTime.VERSION, dependencies="required-after:clockworkphase;required-after:geckolib3")
 public class SpaceTime {
     public static final String MODID = "spacetime";
     public static final String NAME = "SpaceTime";
     public static final String VERSION = "1.0.0";
-    public static File modConfigDir;
+    public static File mp4 = new File("spacetime", "textures\\v\\aaa.mp4");
 
     public static Logger logger;
 
     public static final boolean SHOW_WARN = true;
+
 
 
     @Mod.Instance
@@ -75,18 +77,16 @@ public class SpaceTime {
     @EventHandler
     public static void Init(FMLInitializationEvent event) {
 
+        GeckoLib.initialize();
         RegisterTileEntity();
         CraftingLoader.init();
         new ModGuiElementLoader();
-        if (!proxy.isServer())
-        {
 
-        }
-        ModAdvancements.init();
-        PacketHandler.init();
-
-        MinecraftForge.EVENT_BUS.register(new RenderBlockingHandler());
         MinecraftForge.EVENT_BUS.register(new EventSword());
+        MinecraftForge.EVENT_BUS.register(new EventRender());
+
+        PacketHandler.init();
+//        ModAdvancements.init();
 
 	}
 
@@ -153,7 +153,7 @@ public class SpaceTime {
     }
 
     public static List<LayerRenderer<EntityLivingBase>> getLayerRenderers(RenderPlayer instance) {
-        return (List)getPrivateValue(RenderLivingBase.class, instance, "field_177097_h");
+        return (List)getPrivateValue(RenderLivingBase.class, instance, "layerRenderers");
     }
 
     private static Set<Item> exclude;

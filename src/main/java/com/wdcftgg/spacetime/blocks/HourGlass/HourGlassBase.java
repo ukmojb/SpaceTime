@@ -4,6 +4,7 @@ import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.ModBlocks;
 import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.HourGlassEntity;
 import com.wdcftgg.spacetime.init.ModCreativeTab;
+import com.wdcftgg.spacetime.item.ModItems;
 import com.wdcftgg.spacetime.util.IHasModel;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.ITileEntityProvider;
@@ -13,6 +14,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
@@ -34,8 +36,9 @@ public class HourGlassBase extends BlockDirectional implements ITileEntityProvid
         setRegistryName(name);
 
         ModBlocks.BLOCKS.add(this);
-        this.setCreativeTab(ModCreativeTab.SpaceTimeTab);
-        setBlockUnbreakable();
+//        this.setCreativeTab(ModCreativeTab.SpaceTimeTab);
+        ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+        setHarvestLevel("", -1);
         setHardness(5.0F);
         setResistance(5.0F);
     }
@@ -63,12 +66,6 @@ public class HourGlassBase extends BlockDirectional implements ITileEntityProvid
     public int getMetaFromState(IBlockState state)
     {
         return (state.getValue(FACING)).getIndex();
-    }
-
-    @Override
-    public IBlockState getStateFromMeta(int meta)
-    {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.getFront(meta));
     }
 
     @Override

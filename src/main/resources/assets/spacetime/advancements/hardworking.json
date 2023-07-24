@@ -1,15 +1,19 @@
+
 {
   "display": {
-    "icon": { "item": "spacetime:one_punch"},
-    "title": {"translate": "advancement.spacetime.hardworking"},
-    "frame": "goal",
-    "description": {"translate": "advancement.spacetime.hardworking.desc"},
-    "show_toast": true,
-    "announce_to_chat": true
+    "icon": {
+      "item": "spacetime:one_punch"
+    },
+    "title": {
+      "translate": "advancement.spacetime.hardworking"
+    },
+    "description": {
+      "translate": "advancement.spacetime.hardworking.desc"
+    }
   },
   "parent": "minecraft:adventure/kill_a_mob",
   "criteria": {
-    "killed": {
+    "adherent": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
         "entity": {
@@ -17,8 +21,5 @@
         }
       }
     }
-  },
-  "rewards": {
-
   }
 }

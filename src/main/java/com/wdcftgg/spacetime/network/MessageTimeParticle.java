@@ -1,4 +1,4 @@
-package com.wdcftgg.spacetime.Network;
+package com.wdcftgg.spacetime.network;
 
 import io.netty.buffer.ByteBuf;
 import lumaceon.mods.clockworkphase.ClockworkPhase;

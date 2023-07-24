@@ -1,5 +1,7 @@
 package com.wdcftgg.spacetime.entity.ai;
 
+import com.wdcftgg.spacetime.SpaceTime;
+import com.wdcftgg.spacetime.entity.EntitySword;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -9,6 +11,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 /**
  * Created by IntelliJ IDEA.
  *
@@ -17,12 +21,12 @@ import net.minecraft.world.World;
  */
 public class TimeAIAttackMelee  extends EntityAIBase
 {
-    World world;
+    private World world;
     protected EntityCreature attacker;
     protected int attackTick;
-    double speedTowardsTarget;
-    boolean longMemory;
-    Path path;
+    private double speedTowardsTarget;
+    private boolean longMemory;
+    private Path path;
     private int delayCounter;
     private double targetX;
     private double targetY;
@@ -177,7 +181,14 @@ public class TimeAIAttackMelee  extends EntityAIBase
         }
 
         this.attackTick = Math.max(this.attackTick - 1, 0);
-        this.checkAndPerformAttack(entitylivingbase, d0);
+        Random r = new Random();
+        if (r.nextFloat() <= 0.0075) {
+            EntitySword entitySword = new EntitySword(world);
+            entitySword.setPosition(targetX, targetY + 7, targetZ);
+            world.spawnEntity(entitySword);
+        } else {
+            this.checkAndPerformAttack(entitylivingbase, d0);
+        }
     }
 
     protected void checkAndPerformAttack(EntityLivingBase enemy, double distToEnemySqr)

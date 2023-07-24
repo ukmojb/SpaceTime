@@ -7,10 +7,7 @@ import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.*;
 import com.wdcftgg.spacetime.blocks.tileEntity.TimeAltarCoreEntity;
 import com.wdcftgg.spacetime.client.render.*;
 import com.wdcftgg.spacetime.client.render.HourGlass.*;
-import com.wdcftgg.spacetime.entity.EntityTime;
-import com.wdcftgg.spacetime.entity.EntityTimeCrack;
-import com.wdcftgg.spacetime.entity.EntityUnstableTimePolymer;
-import com.wdcftgg.spacetime.entity.ModEntityInit;
+import com.wdcftgg.spacetime.entity.*;
 import com.wdcftgg.spacetime.item.ModItems;
 import com.wdcftgg.spacetime.util.IHasModel;
 import net.minecraft.block.Block;
@@ -77,6 +74,7 @@ public class RegistryHandler {
 		RenderingRegistry.registerEntityRenderingHandler(EntityUnstableTimePolymer.class, RenderUnstableTimePolymer::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityTimeCrack.class, RenderTimeCrack::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityTime.class, RenderTime::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntitySword.class, RenderSword::new);
 
 		ClientRegistry.bindTileEntitySpecialRenderer(HourGlassEntity.class, new HourGrassRender());
 		ClientRegistry.bindTileEntitySpecialRenderer(AirHourGlassEntity.class, new AirHourGrassRender());

@@ -1,17 +1,10 @@
 package com.wdcftgg.spacetime.entity;
 
-import com.wdcftgg.spacetime.SpaceTime;
-import com.wdcftgg.spacetime.util.TimeHelper;
-import lumaceon.mods.clockworkphase.util.TimeSandHelper;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityBlaze;
-import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.projectile.EntityThrowable;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-import scala.Int;
 
 import java.util.Random;
 
@@ -46,7 +39,7 @@ public class EntityUnstableTimePolymer extends EntityThrowable {
             {
                 BlockPos pos = new BlockPos(result.hitVec);
                 EntityTimeCrack timecrack = new EntityTimeCrack(world);
-                timecrack.setPosition(posX, posY , posZ);
+                timecrack.setPosition(posX, posY + 0.7 , posZ);
 
                 int time = 0;
                 Random r = new Random();

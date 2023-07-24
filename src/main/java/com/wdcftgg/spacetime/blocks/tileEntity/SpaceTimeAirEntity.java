@@ -1,12 +1,8 @@
 package com.wdcftgg.spacetime.blocks.tileEntity;
 
 import com.wdcftgg.spacetime.blocks.ModBlocks;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.MobEffects;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.math.AxisAlignedBB;
 
 /**
  * Created by IntelliJ IDEA.

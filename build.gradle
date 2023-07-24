@@ -14,8 +14,8 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 version = "${version}"
-group = 'com.wdcftgg.space_time' 
-archivesBaseName = 'Space-Time'
+group = 'com.wdcftgg.spacetime' 
+archivesBaseName = 'SpaceTime'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
@@ -31,7 +31,7 @@ minecraft {
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
 
-            args '--username', 'wdcftgg'
+            args ["-Dfml.coreMods.load=me.guichaguri.tickratechanger.TickrateChanger"]
         }
 
         server {
@@ -55,6 +55,14 @@ repositories {
     maven {
         url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
     }
+    maven {
+        name = "Progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
+    maven {
+        name = "ModMaven"
+        url = "https://modmaven.dev"
+    }
 
 }
 
@@ -63,14 +71,14 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
     compile 'curse.maven:ClockworkPhase-227388:3016789'
     compile 'software.bernie.geckolib:forge-1.12.2-geckolib:3.0.21'
-
+    compile "mezz.jei:jei_1.12.2:4.15.+:api"
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
 jar {
     manifest {
         attributes([
-            "Specification-Title": "space_time",
+            "Specification-Title": "spacetime",
             "Specification-Vendor": "wdcftgg",
             "Specification-Version": "1", // We are version 1 of ourselves
             "Implementation-Title": project.name,

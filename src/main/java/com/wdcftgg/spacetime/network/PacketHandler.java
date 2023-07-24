@@ -1,4 +1,4 @@
-package com.wdcftgg.spacetime.Network;
+package com.wdcftgg.spacetime.network;
 
 /**
  * Created by IntelliJ IDEA.
@@ -17,7 +17,7 @@ public class PacketHandler {
     }
 
     public static void init() {
-        INSTANCE.registerMessage(MessageTimeParticle.class, MessageTimeParticle.class, 0, Side.CLIENT);
+        INSTANCE.registerMessage(MessageTimeParticle.class, MessageTimeParticle.class, 10, Side.CLIENT);
     }
 
     static {

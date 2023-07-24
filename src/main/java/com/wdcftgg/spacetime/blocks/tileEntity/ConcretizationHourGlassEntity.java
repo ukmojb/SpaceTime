@@ -1,6 +1,5 @@
 package com.wdcftgg.spacetime.blocks.tileEntity;
 
-import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.HourGlass.HourGlassBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -32,7 +31,7 @@ public class ConcretizationHourGlassEntity extends TileEntity implements IAnimat
         }
         return PlayState.STOP;
     }
-    
+
 
     @Override
     public void registerControllers(AnimationData data)

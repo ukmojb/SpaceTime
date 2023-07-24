@@ -14,8 +14,8 @@ import net.minecraft.item.Item;
 public class ItemSpaceTimeNugget extends Item implements IHasModel {
     public ItemSpaceTimeNugget()
     {
-        setUnlocalizedName("spacetime_nugget");
         setRegistryName("spacetime_nugget");
+        setUnlocalizedName("spacetime_nugget");
         setCreativeTab(ModCreativeTab.SpaceTimeTab);
 
         ModItems.ITEMS.add(this);

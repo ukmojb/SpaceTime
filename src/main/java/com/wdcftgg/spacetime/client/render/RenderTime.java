@@ -2,12 +2,19 @@ package com.wdcftgg.spacetime.client.render;
 
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.entity.EntityTime;
-import net.minecraft.client.model.ModelChicken;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelPlayer;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
+
+import static org.lwjgl.opengl.GL12.GL_LIGHT_MODEL_COLOR_CONTROL;
+import static org.lwjgl.opengl.GL12.GL_SEPARATE_SPECULAR_COLOR;
 
 /**
  * Created by IntelliJ IDEA.

@@ -1,23 +1,14 @@
 package com.wdcftgg.spacetime.blocks.tileEntity;
 
-import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.item.ModItems;
-import com.wdcftgg.spacetime.util.ITime;
-import com.wdcftgg.spacetime.util.NBTHelper;
 import com.wdcftgg.spacetime.util.TimeHelper;
-import net.minecraft.client.renderer.block.statemap.BlockStateMapper;
-import net.minecraft.entity.EntityLivingBase;
+import lumaceon.mods.clockworkphase.init.ModBlocks;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import lumaceon.mods.clockworkphase.init.ModBlocks;
 import net.minecraft.world.World;
 
 import java.util.Timer;

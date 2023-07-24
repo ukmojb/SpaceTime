@@ -1,6 +1,5 @@
 package com.wdcftgg.spacetime.blocks.tileEntity.HourGlass;
 
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -18,8 +17,6 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
  */
 public class LifeHourGlassEntity extends TileEntity implements IAnimatable {
     private final AnimationFactory factory = new AnimationFactory(this);
-    private int maxTension = 0;
-    private int life = 0;
 
     private <E extends TileEntity & IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
@@ -40,18 +37,5 @@ public class LifeHourGlassEntity extends TileEntity implements IAnimatable {
         return factory;
     }
 
-    @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        data.setInteger("maxTension", maxTension);
-        data.setInteger("life", life);
-        return super.writeToNBT(data);
-    }
-
-    @Override
-    public void readFromNBT(NBTTagCompound data) {
-        super.readFromNBT(data);
-        this.maxTension = data.getInteger("maxTension");
-        this.life = data.getInteger("life");
-    }
 }
 

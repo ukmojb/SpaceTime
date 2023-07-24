@@ -1,13 +1,14 @@
 package com.wdcftgg.spacetime.entity;
 
 
-import com.wdcftgg.spacetime.Network.MessageTimeParticle;
-import com.wdcftgg.spacetime.Network.PacketHandler;
-import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.entity.ai.TimeAIAttackMelee;
 import com.wdcftgg.spacetime.entity.ai.TimeAIHurtByTarget;
 import com.wdcftgg.spacetime.entity.ai.TimeAIMoveTowardsRestriction;
+import com.wdcftgg.spacetime.network.MessageTimeParticle;
+import com.wdcftgg.spacetime.network.PacketHandler;
 import lumaceon.mods.clockworkphase.util.TimeSandHelper;
+import net.minecraft.command.CommandSenderWrapper;
+import net.minecraft.command.CommandTitle;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -18,13 +19,19 @@ import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.play.server.SPacketTitle;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentUtils;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.server.permission.IPermissionHandler;
 
+import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -42,9 +49,6 @@ public class EntityTime extends EntityMob {
 
     private static final IAttribute LIFE_POWER = new RangedAttribute(null, "spacetime.attribute.life", 6.0, 0.0, 6.0).setShouldWatch(false);
 
-    private String[] Challengefailure = new String[] {
-            "Challenge failure"
-    };
     private String playeruuid;
     private int challengetime = 3600;
     private int time = 1;
@@ -55,15 +59,11 @@ public class EntityTime extends EntityMob {
     private float[] timenum = new float[]{
             2.0f,
             6.0f,
-            18.0f,
-            24.0f,
+            10.0f,
+            30.0f,
             50.0f,
             60.0f
     };
-
-    public IMessage getCustomMessage() {
-        return new MessageTimeParticle(this.getPosition());
-    }
 
     @Override
     protected void applyEntityAttributes()
@@ -87,11 +87,23 @@ public class EntityTime extends EntityMob {
         y = this.getPosition().getY();
         z = this.getPosition().getZ();
         if (!this.world.isRemote){
+            if (this.ticksExisted == 5) {
+                Random r = new Random();
+                CommandSenderWrapper commandSenderWrapper = CommandSenderWrapper.create(this).withSendCommandFeedback(false);
+                this.getServer().commandManager.executeCommand(commandSenderWrapper, "/tickratechanger " + timenum[r.nextInt(6)]);
+            }
             if (this.getEntityAttribute(LIFE_POWER).getBaseValue() != 1.0D && this.getHealth() <= 0){
+                Random r = new Random();
                 challengetime += 1200;
                 this.setHealth(this.getMaxHealth());
                 this.getEntityAttribute(LIFE_POWER).setBaseValue(this.getEntityAttribute(LIFE_POWER).getBaseValue()-1.0D);
-                PacketHandler.INSTANCE.sendToAllAround(this.getCustomMessage(), new NetworkRegistry.TargetPoint(this.world.provider.getDimension(), (double)this.getPosition().getX(), (double)this.getPosition().getY(), (double)this.getPosition().getZ(), 256.0D));
+                PacketHandler.INSTANCE.sendToAllAround(new MessageTimeParticle(this.getPosition()), new NetworkRegistry.TargetPoint(this.world.provider.getDimension(), (double)this.getPosition().getX(), (double)this.getPosition().getY(), (double)this.getPosition().getZ(), 256.0D));
+                CommandSenderWrapper commandSenderWrapper = CommandSenderWrapper.create(this).withSendCommandFeedback(false);
+                this.getServer().commandManager.executeCommand(commandSenderWrapper, "/tickratechanger " + timenum[r.nextInt(6)]);
+            }
+            if (this.getEntityAttribute(LIFE_POWER).getBaseValue() == 1.0D && this.getHealth() <= 0){
+                CommandSenderWrapper commandSenderWrapper = CommandSenderWrapper.create(this).withSendCommandFeedback(false);
+                this.getServer().commandManager.executeCommand(commandSenderWrapper, "/tickratechanger 20");
             }
             for (EntityLivingBase livingbase : this.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(this.getPosition().east().north().down(2), this.getPosition().west().south().up(2)))) {
                 if (!(livingbase instanceof EntityTime)) {
@@ -114,7 +126,7 @@ public class EntityTime extends EntityMob {
                 if (livingbase instanceof EntityPlayer) {
                     EntityPlayer player = (EntityPlayer) livingbase;
                     if (TimeSandHelper.getTimeSandFromInventory(player.inventory) >= 0) {
-                        TimeSandHelper.removeTimeSandFromInventory(player.inventory, 9);
+                        TimeSandHelper.removeTimeSandFromInventory(player.inventory, 90);
                     } else {
                         world.addWeatherEffect(new EntityLightningBolt(world, livingbase.getPosition().getX(), livingbase.getPosition().getY(), livingbase.getPosition().getZ(), true));
                         livingbase.attackEntityFrom(DamageSource.GENERIC, 50);
@@ -204,7 +216,8 @@ public class EntityTime extends EntityMob {
         if (living instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) living;
             if (player.getServer() != null) {
-                player.getServer().commandManager.executeCommand(player, "/title " + player.getName() + " title [{\"text\":\"Challenge failure\",\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false}]");
+                CommandSenderWrapper commandSenderWrapper = CommandSenderWrapper.create(player).withSendCommandFeedback(false);
+                player.getServer().commandManager.executeCommand(commandSenderWrapper, "/title " + player.getName() + " title [{\"text\":\"Challenge failure\",\"bold\":false,\"italic\":false,\"underlined\":false,\"strikethrough\":false,\"obfuscated\":false}]");
             }
         }
     }

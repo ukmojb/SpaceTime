@@ -30,6 +30,13 @@ public class PotionBase extends Potion {
         this.iconIndex = iconIndex;
     }
 
+    public PotionBase(String name, int iconIndex) {
+        super(false, 0X0036a6);
+        setRegistryName(new ResourceLocation(SpaceTime.MODID, name));
+        setPotionName("spacetime.potion." + name);
+        this.iconIndex = iconIndex;
+    }
+
     public boolean hasEffect(EntityLivingBase entity) {
         return hasEffect(entity, this);
     }

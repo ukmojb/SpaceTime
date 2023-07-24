@@ -1,6 +1,8 @@
 package com.wdcftgg.spacetime.item;
 
-import com.wdcftgg.spacetime.item.ConfoundingContainers.*;
+import com.wdcftgg.spacetime.item.ConfoundingContainers.ItemSpaceConfoundingContainers;
+import com.wdcftgg.spacetime.item.ConfoundingContainers.ItemTimeAndSpaceConfoundingContainers;
+import com.wdcftgg.spacetime.item.ConfoundingContainers.ItemTimeConfoundingContainers;
 import net.minecraft.item.Item;
 
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ public class ModItems {
 	public static final Item SPACETIMEINGOT = new ItemSpaceTimeIngot();
 	public static final Item SPACETIMENUGGET = new ItemSpaceTimeNugget();
 	public static final Item SPACETIMEDUST = new ItemSpaceTimeDust();
+	public static final Item TEMPORALBRASSINGOT = new ItemTemporalBrassIngot();
 
 
 }

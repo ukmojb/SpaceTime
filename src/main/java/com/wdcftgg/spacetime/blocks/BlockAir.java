@@ -2,16 +2,12 @@ package com.wdcftgg.spacetime.blocks;
 
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.tileEntity.SpaceTimeAirEntity;
-import com.wdcftgg.spacetime.blocks.tileEntity.SpaceTimeTurbulenceEntity;
-import com.wdcftgg.spacetime.init.ModCreativeTab;
-import com.wdcftgg.spacetime.item.ModItems;
 import com.wdcftgg.spacetime.util.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
@@ -38,7 +34,6 @@ public class BlockAir extends Block implements IHasModel {
         setLightLevel(1.0f);
 
         ModBlocks.BLOCKS.add(this);
-        ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 
         setHarvestLevel("pickaxe", -1);
     }

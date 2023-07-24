@@ -1,7 +1,7 @@
 {
   "variants": {
     "normal": {
-      "model": "spacetime:spacetime_air_model"
+      "model": "spacetime:hourglass_model"
     }
   }
 }

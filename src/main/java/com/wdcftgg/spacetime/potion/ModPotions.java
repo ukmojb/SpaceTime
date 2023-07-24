@@ -14,7 +14,6 @@ public class ModPotions {
 
     public static final Potion heterospace = new PotionsHeterospace();
     public static final Potion swordcore = new PotionsSwordcore();
-//    public static final PotionZenHeart ZEN_HEART = new PotionZenHeart(false, 0xcccc00, "zen_heart", 1);
 
 
 
