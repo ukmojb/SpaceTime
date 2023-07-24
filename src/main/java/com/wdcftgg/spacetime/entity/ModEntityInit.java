@@ -12,7 +12,7 @@ public class ModEntityInit {
     {
 
         registerEntity("UnstableTimePolymer", EntityUnstableTimePolymer.class);
-        registerEntityAndEgg("Sword", EntitySword.class);
+        registerEntity("Sword", EntitySword.class);
 
 
         registerEntityAndEgg("TimeCrack", EntityTimeCrack.class);
