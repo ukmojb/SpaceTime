@@ -1,6 +1,7 @@
 package com.wdcftgg.spacetime.entity;
 
 import com.wdcftgg.spacetime.SpaceTime;
+import com.wdcftgg.spacetime.init.ModSounds;
 import lumaceon.mods.clockworkphase.util.TimeSandHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -29,6 +30,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.DifficultyInstance;
@@ -49,6 +51,7 @@ public class EntitySword extends EntityLiving {
 
     private static final DataParameter<Integer> SWORD_TYPE = EntityDataManager.<Integer>createKey(EntitySword.class, DataSerializers.VARINT);
     private int sword = 0;
+    private boolean fallsound = false;
     private int swordlength = 0;
     private List<Item> swordList = new ArrayList<Item>();
 
@@ -77,7 +80,7 @@ public class EntitySword extends EntityLiving {
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(32627.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(6.0D);
     }
 
     @Override
@@ -85,8 +88,21 @@ public class EntitySword extends EntityLiving {
     {
         super.onLivingUpdate();
         if (!this.world.isRemote) {
-            if (world.getBlockState(this.getPosition().up()).getBlock() == Blocks.AIR) {
+            if (this.ticksExisted == 1) {
+                this.setSwordType(randomSwordId());
+            }
+            if (world.getBlockState(this.getPosition()).getBlock() == Blocks.AIR) {
                 this.setPosition(this.posX, this.posY * 0.985, this.posZ);
+                fallsound = false;
+            } else {
+                if (!fallsound) {
+                    world.playSound(null, this.posX, this.posY, this.posZ, ModSounds.FALLSWORD,SoundCategory.NEUTRAL, 10F, 1f);
+                    for (EntityLivingBase livingbase : this.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(this.getPosition().east().north().down(), this.getPosition().west().south().up(4)))) {
+                        if (livingbase instanceof EntityMob) continue;
+                        livingbase.attackEntityFrom(new DamageSource("Sword"), 7);
+                    }
+                }
+                fallsound = true;
             }
             if (this.ticksExisted >= 100) {
                 world.removeEntity(this);

@@ -28,5 +28,15 @@
         "stream" : true
       }
     ]
+  },
+  "fallsword":
+  {
+    "category": "record",
+    "sounds": [
+      {
+        "name" : "spacetime:fallsword",
+        "stream" : true
+      }
+    ]
   }
 }

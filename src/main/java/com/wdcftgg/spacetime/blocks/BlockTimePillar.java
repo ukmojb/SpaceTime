@@ -2,7 +2,7 @@ package com.wdcftgg.spacetime.blocks;
 
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.init.ModCreativeTab;
-import com.wdcftgg.spacetime.item.ModItems;
+import com.wdcftgg.spacetime.item.STItems;
 import com.wdcftgg.spacetime.util.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -26,8 +26,8 @@ public class BlockTimePillar extends Block implements IHasModel {
         setRegistryName("time_pillar");
         setCreativeTab(ModCreativeTab.SpaceTimeTab);;
 
-        ModBlocks.BLOCKS.add(this);
-        ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+        STBlocks.BLOCKS.add(this);
+        STItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 
         setHardness(5.0F);
         setResistance(1000.0F);

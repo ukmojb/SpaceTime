@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "normal": {
+      "model": "spacetime:moon_stextractor_model"
+    }
+  }
+}

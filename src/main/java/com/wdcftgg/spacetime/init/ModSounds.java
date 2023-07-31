@@ -12,4 +12,5 @@ public class ModSounds {
     public static SoundEvent SWORDCORE_1;
     public static SoundEvent SWORDCORE_2;
     public static SoundEvent SWORDBLOCKING;
+    public static SoundEvent FALLSWORD;
 }

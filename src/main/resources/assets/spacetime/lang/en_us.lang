@@ -1,0 +1,74 @@
+# PARSE_ESCAPES
+itemGroup.spacetimetab=Space Wings
+
+# ENTITY
+entity.Time.name=time
+entity.TimeCrack.name=TimeCrack
+
+# Blocks
+
+tile.time_pillar.name=Pillar of time
+tile.space_time_turbulence.name=space-time turbulence
+tile.time_compressor.name=Time compressor
+tile.concretization_hourglass.name=time-space hourglass figurative
+tile.time_altarcore.name=Time altar
+tile.hourglass.name=space-time hourglass
+tile.airhourglass.name=Space-time hourglass - Air
+tile.firehourglass.name=Space-time hourglass - Flame
+tile.deathhourglass.name=Space-time hourglass - Death
+tile.earthhourglass.name=space-time hourglass - Earth
+tile.lifehourglass.name=Space-time hourglass - Life
+tile.lighthourglass.name=Space-time hourglass - Light
+tile.moonhourglass.name=Space-time hourglass - Moon
+tile.waterhourglass.name=time-space hourglass - water
+tile.air_stextractor.name=High wind extractor
+tile.fire_stextractor.name=Flame extractor
+tile.death_stextractor.name=Death extractor
+tile.earth_stextractor.name=earth extractor
+tile.life_stextractor.name=Life extractor
+tile.moon_stextractor.name=Moon extractor
+tile.light_stextractor.name=Light extractor
+tile.water_stextractor.name=water extractor
+
+# Items
+
+item.time_confounding_containers.name=time obfuscation body
+item.space_confounding_containers.name=space obfuscation body
+item.time_and_space_confounding_containers.name=space-time obfuscation body
+item.time_polymer.name=time mimicry polymer
+item.unstable_time_polymer.name=Unstable time polymer
+item.one_punch.name=one punch
+item.temporal_brass_ingot.name=Brass tainted with the forces of time
+item.spacetime_dust.name=Space-time dust
+item.spacetime_nugget.name=a particle of space-time
+item.spacetime_ingot.name=Ingot of spacetime
+
+
+# Potion
+
+spacetime.potion.heterospace=Heterospace
+
+
+# Achievement
+
+advancement.spacetime.hardworking=strongly the miracle
+advancement.spacetime.hardworking.desc=I depend! Two hundred million blood, brother!
+
+
+# Categories and Key
+
+key.categories.spacetime=Airwings
+spacetime.key.swordblocking=jian block
+
+
+# DamageSource
+death.attack.TimeAttack=%s baptized by time to death
+death.attack.Sword=%s crushed by the Great Sword
+
+# Tooltips
+spacetime.extractor.tooltip.1=Great bug-free time extractor!
+spacetime.extractor.tooltip.2=§m No 998,no 888,synthesize and take home immediately!
+spacetime.one_punch.tooltip=Don't look at it, it's just an ornament.
+spacetime.spacetime_dust.tooltip=Faint as dust!
+spacetime.spacetime_nugget.tooltip=small §m, soft, fragrant...
+spacetime.spacetime_ingot.tooltip=A three-dimensional representation of spacetime!

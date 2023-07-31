@@ -33,7 +33,7 @@ public class BlockAir extends Block implements IHasModel {
         setCreativeTab(null);;
         setLightLevel(1.0f);
 
-        ModBlocks.BLOCKS.add(this);
+        STBlocks.BLOCKS.add(this);
 
         setHarvestLevel("pickaxe", -1);
     }

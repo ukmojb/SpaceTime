@@ -2,6 +2,10 @@ package com.wdcftgg.spacetime.event;
 
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.potion.ModPotions;
+import lumaceon.mods.clockworkphase.init.ModItems;
+import lumaceon.mods.clockworkphase.item.construct.pocketwatch.ItemPocketWatch;
+import lumaceon.mods.clockworkphase.util.InventorySearchHelper;
+import lumaceon.mods.clockworkphase.util.NBTHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -79,6 +83,52 @@ public class EventRender {
             
             GlStateManager.disableBlend();
             GlStateManager.popMatrix();
+        }
+        EntityPlayer player = Minecraft.getMinecraft().player;
+        ItemStack[] pocketWatches = InventorySearchHelper.getPocketWatches(player.inventory);
+        if (pocketWatches != null && ItemPocketWatch.doesActiveItemModuleExist(pocketWatches, ModItems.moduleLifeWalk)) {
+            ItemStack lifeWalk = ItemPocketWatch.getItemModuleFromMultiple(pocketWatches, ModItems.moduleLifeWalk);
+            int lifeModulePower = (int) NBTHelper.getInt(lifeWalk, "module_power");
+            for (int i=0;i< lifeModulePower/50;i++) {
+                GlStateManager.pushMatrix();
+
+                res = new ResourceLocation(SpaceTime.MODID, "textures/gui/life.png");
+                double y1 = mc.displayHeight * 0.02 + i * mc.displayHeight * 0.01 + (!player.getActivePotionMap().isEmpty() ? mc.displayHeight * 0.047 : 0);
+                double y0 = mc.displayHeight * 0.001 + i * mc.displayHeight * 0.01 + (!player.getActivePotionMap().isEmpty() ? mc.displayHeight * 0.047 : 0);
+
+
+                mc.getTextureManager().bindTexture(res);
+                buffer.begin(7, DefaultVertexFormats.POSITION_TEX);
+                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.48 : mc.displayWidth * 0.24), (!mc.isFullScreen() ? y1 : y1/2), -90).tex(0, 1).endVertex();
+                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.49 : mc.displayWidth * 0.245), (!mc.isFullScreen() ? y1 : y1/2), -90).tex(1, 1).endVertex();
+                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.49 : mc.displayWidth * 0.245), (!mc.isFullScreen() ? y0 : y0/2), -90).tex(1, 0).endVertex();
+                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.48 : mc.displayWidth * 0.24), (!mc.isFullScreen() ? y0 : y0/2), -90).tex(0, 0).endVertex();
+                tessellator.draw();
+
+                GlStateManager.popMatrix();
+            }
+        }
+        if (pocketWatches != null && ItemPocketWatch.doesActiveItemModuleExist(pocketWatches, ModItems.moduleDeathWalk)) {
+            ItemStack deathWalk = ItemPocketWatch.getItemModuleFromMultiple(pocketWatches, ModItems.moduleDeathWalk);
+            int deathModulePower = (int) NBTHelper.getInt(deathWalk, "module_power");
+            for (int i=0;i< deathModulePower/50;i++) {
+                GlStateManager.pushMatrix();
+
+                res = new ResourceLocation(SpaceTime.MODID, "textures/gui/death.png");
+                double y1 = mc.displayHeight * 0.02 + i * mc.displayHeight * 0.01 + (!player.getActivePotionMap().isEmpty() ? mc.displayHeight * 0.047 : 0);
+                double y0 = mc.displayHeight * 0.001 + i * mc.displayHeight * 0.01 + (!player.getActivePotionMap().isEmpty() ? mc.displayHeight * 0.047 : 0);
+
+
+                mc.getTextureManager().bindTexture(res);
+                buffer.begin(7, DefaultVertexFormats.POSITION_TEX);
+                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.49 : mc.displayWidth * 0.245), (!mc.isFullScreen() ? y1 : y1/2), -90).tex(0, 1).endVertex();
+                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.5 : mc.displayWidth * 0.25), (!mc.isFullScreen() ? y1 : y1/2), -90).tex(1, 1).endVertex();
+                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.5 : mc.displayWidth * 0.25), (!mc.isFullScreen() ? y0 : y0/2), -90).tex(1, 0).endVertex();
+                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.49 : mc.displayWidth * 0.245), (!mc.isFullScreen() ? y0 : y0/2), -90).tex(0, 0).endVertex();
+                tessellator.draw();
+
+                GlStateManager.popMatrix();
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 package com.wdcftgg.spacetime.entity;
 
+import com.wdcftgg.spacetime.item.STItems;
 import lumaceon.mods.clockworkphase.init.ModItems;
 import lumaceon.mods.clockworkphase.item.construct.abstracts.ITimeSandSupplier;
 import lumaceon.mods.clockworkphase.util.TimeSandHelper;
@@ -138,7 +139,7 @@ public class EntityTimeCrack extends EntityLiving {
     }
 
     private void initTimeCrackRecipe(){
-        addTimeCrackRecipe(newArray(ModItems.ingotTemporal.getDefaultInstance(), ModItems.brassIngot.getDefaultInstance()), com.wdcftgg.spacetime.item.ModItems.TEMPORALBRASSINGOT.getDefaultInstance());
+        addTimeCrackRecipe(newArray(ModItems.ingotTemporal.getDefaultInstance(), ModItems.brassIngot.getDefaultInstance()), STItems.TEMPORALBRASSINGOT.getDefaultInstance());
     }
 
     private List<ItemStack> newArray(ItemStack item){

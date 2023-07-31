@@ -1,6 +1,6 @@
 package com.wdcftgg.spacetime.event;
 
-import com.wdcftgg.spacetime.item.ModItems;
+import com.wdcftgg.spacetime.item.STItems;
 import com.wdcftgg.spacetime.util.TimeHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -22,8 +22,8 @@ public class EventExplosion {
         for (Entity entity : event.getAffectedEntities()){
             if (entity instanceof EntityItem) {
                 EntityItem item = (EntityItem) entity;
-                if (item.getItem().getItem() == ModItems.TIMEPOLYMER) {
-                    ItemStack spownstack = new ItemStack(ModItems.UNSTABLETIMEPOLYMER, item.getItem().getCount());
+                if (item.getItem().getItem() == STItems.TIMEPOLYMER) {
+                    ItemStack spownstack = new ItemStack(STItems.UNSTABLETIMEPOLYMER, item.getItem().getCount());
                     TimeHelper.addTime(spownstack, TimeHelper.getTime(item.getItem()), 200000);
                     EntityItem spawnitem = new EntityItem(item.world, item.posX, item.posY, item.posZ, spownstack);
                     item.world.spawnEntity(spawnitem);

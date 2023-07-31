@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "normal": {
+      "model": "spacetime:life_stextractor_model"
+    }
+  }
+}

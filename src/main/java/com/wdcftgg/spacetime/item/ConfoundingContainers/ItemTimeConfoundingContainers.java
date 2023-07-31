@@ -9,7 +9,7 @@ package com.wdcftgg.spacetime.item.ConfoundingContainers;
 
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.init.ModCreativeTab;
-import com.wdcftgg.spacetime.item.ModItems;
+import com.wdcftgg.spacetime.item.STItems;
 import com.wdcftgg.spacetime.util.IHasModel;
 import lumaceon.mods.clockworkphase.item.construct.abstracts.ITimeSand;
 import lumaceon.mods.clockworkphase.item.construct.abstracts.ITimeSandSupplier;
@@ -36,7 +36,7 @@ public class ItemTimeConfoundingContainers extends Item implements ITimeSand, IH
         setRegistryName("time_confounding_containers");
         setCreativeTab(ModCreativeTab.SpaceTimeTab);
 
-        ModItems.ITEMS.add(this);
+        STItems.ITEMS.add(this);
 
     }
 
@@ -104,6 +104,6 @@ public class ItemTimeConfoundingContainers extends Item implements ITimeSand, IH
 
     public Item getItemChangeTo()
     {
-        return ModItems.TIMECONFOUNDINGCONTAINERS;
+        return STItems.TIMECONFOUNDINGCONTAINERS;
     }
 }

@@ -35,7 +35,7 @@ public class ItemUnstableTimePolymer extends Item implements ITime, IHasModel {
         setRegistryName("unstable_time_polymer");
         setCreativeTab(ModCreativeTab.SpaceTimeTab);
 
-        ModItems.ITEMS.add(this);
+        STItems.ITEMS.add(this);
 
     }
 
@@ -104,6 +104,6 @@ public class ItemUnstableTimePolymer extends Item implements ITime, IHasModel {
 
     public Item getItemChangeTo()
     {
-        return ModItems.UNSTABLETIMEPOLYMER;
+        return STItems.UNSTABLETIMEPOLYMER;
     }
 }

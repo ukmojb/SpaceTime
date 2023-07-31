@@ -1,17 +1,19 @@
 package com.wdcftgg.spacetime.init;
 
 import com.wdcftgg.spacetime.SpaceTime;
-import com.wdcftgg.spacetime.blocks.ModBlocks;
+import com.wdcftgg.spacetime.blocks.STBlocks;
 import com.wdcftgg.spacetime.blocks.tileEntity.ConcretizationHourGlassEntity;
 import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.*;
 import com.wdcftgg.spacetime.blocks.tileEntity.TimeAltarCoreEntity;
 import com.wdcftgg.spacetime.client.render.*;
 import com.wdcftgg.spacetime.client.render.HourGlass.*;
 import com.wdcftgg.spacetime.entity.*;
-import com.wdcftgg.spacetime.item.ModItems;
+import com.wdcftgg.spacetime.item.STItems;
 import com.wdcftgg.spacetime.util.IHasModel;
 import net.minecraft.block.Block;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -30,12 +32,12 @@ public class RegistryHandler {
 	@SubscribeEvent
 	public static void onItemRegister(RegistryEvent.Register<Item> event)
 	{
-		event.getRegistry().registerAll(ModItems.ITEMS.toArray(new Item[0]));
+		event.getRegistry().registerAll(STItems.ITEMS.toArray(new Item[0]));
 	}
 	
 	@SubscribeEvent
 	public static void onBlockRegister(RegistryEvent.Register<Block> event) {
-		event.getRegistry().registerAll(ModBlocks.BLOCKS.toArray(new Block[0]));
+		event.getRegistry().registerAll(STBlocks.BLOCKS.toArray(new Block[0]));
 	}
 
 
@@ -43,16 +45,15 @@ public class RegistryHandler {
 	@SubscribeEvent
 	public static void onModelRegister(ModelRegistryEvent event)
 	{
-		for(Item item : ModItems.ITEMS)
+		for(Item item : STItems.ITEMS)
 		{
 			if (item instanceof IHasModel)
 			{
 				((IHasModel)item).registerModels();
-				SpaceTime.Log(item.toString());
 			}
 		}
 		
-		for(Block block : ModBlocks.BLOCKS)
+		for(Block block : STBlocks.BLOCKS)
 		{
 			if (block instanceof IHasModel)
 			{
@@ -110,13 +111,16 @@ public class RegistryHandler {
 		ResourceLocation location = new ResourceLocation(SpaceTime.MODID, "swordcore_1");
 		ResourceLocation location1 = new ResourceLocation(SpaceTime.MODID, "swordcore_2");
 		ResourceLocation location2 = new ResourceLocation(SpaceTime.MODID, "swordblocking");
+		ResourceLocation location3 = new ResourceLocation(SpaceTime.MODID, "fallsword");
 
 		ModSounds.SWORDCORE_1 = new SoundEvent(location).setRegistryName(location);
 		ModSounds.SWORDCORE_2 = new SoundEvent(location1).setRegistryName(location1);
 		ModSounds.SWORDBLOCKING = new SoundEvent(location2).setRegistryName(location2);
+		ModSounds.FALLSWORD = new SoundEvent(location3).setRegistryName(location3);
 
 		event.getRegistry().register(ModSounds.SWORDCORE_1);
 		event.getRegistry().register(ModSounds.SWORDCORE_2);
 		event.getRegistry().register(ModSounds.SWORDBLOCKING);
+		event.getRegistry().register(ModSounds.FALLSWORD);
 	}
 }

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "normal": {
+      "model": "spacetime:fire_stextractor_model"
+    }
+  }
+}

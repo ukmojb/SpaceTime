@@ -2,7 +2,7 @@ package com.wdcftgg.spacetime.blocks.tileEntity;
 
 
 import com.wdcftgg.spacetime.blocks.HourGlass.HourGlassBase;
-import com.wdcftgg.spacetime.blocks.ModBlocks;
+import com.wdcftgg.spacetime.blocks.STBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.entity.item.EntityItem;
@@ -42,7 +42,7 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
                 List<EntityItem> items = getItems();
                 if(areItemsValid(items)) {
                     world.getTileEntity(pos).getTileData().setInteger("output", Item.getIdFromItem(outPutItem(items)));
-                    world.setBlockState(pos.up(), ModBlocks.AIR.getDefaultState());
+                    world.setBlockState(pos.up(), STBlocks.AIR.getDefaultState());
                 }else{
                     world.getTileEntity(pos).getTileData().setInteger("output", 0);
                     world.setBlockToAir(pos.up());
@@ -130,7 +130,7 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
             Blocks.DIAMOND_BLOCK,
             Blocks.WOOL,
             lumaceon.mods.clockworkphase.init.ModBlocks.brassBlock,
-            com.wdcftgg.spacetime.blocks.ModBlocks.CONCRETIZATIONHOURGLASS
+            STBlocks.CONCRETIZATIONHOURGLASS
     };
 
     List<EntityItem> getItems() {

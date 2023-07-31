@@ -1,7 +1,7 @@
 package com.wdcftgg.spacetime.client.render;
 
 import com.wdcftgg.spacetime.entity.EntityUnstableTimePolymer;
-import com.wdcftgg.spacetime.item.ModItems;
+import com.wdcftgg.spacetime.item.STItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderSnowball;
@@ -15,6 +15,6 @@ import net.minecraft.client.renderer.entity.RenderSnowball;
 public class RenderUnstableTimePolymer extends RenderSnowball<EntityUnstableTimePolymer> {
     public RenderUnstableTimePolymer(RenderManager renderManagerIn)
     {
-        super(renderManagerIn, ModItems.UNSTABLETIMEPOLYMER, Minecraft.getMinecraft().getRenderItem());
+        super(renderManagerIn, STItems.UNSTABLETIMEPOLYMER, Minecraft.getMinecraft().getRenderItem());
     }
 }

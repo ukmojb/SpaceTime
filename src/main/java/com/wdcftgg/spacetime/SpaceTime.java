@@ -4,11 +4,13 @@ package com.wdcftgg.spacetime;
 
 import com.wdcftgg.spacetime.blocks.tileEntity.*;
 import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.*;
+import com.wdcftgg.spacetime.blocks.tileEntity.stextractor.STExtractorEntity;
 import com.wdcftgg.spacetime.client.handler.HeldItemHandler;
 import com.wdcftgg.spacetime.config.config;
 import com.wdcftgg.spacetime.event.EventRender;
 import com.wdcftgg.spacetime.event.EventSword;
-import com.wdcftgg.spacetime.gui.ModGuiElementLoader;
+import com.wdcftgg.spacetime.event.EventToolTip;
+import com.wdcftgg.spacetime.gui.GuiElementLoader;
 import com.wdcftgg.spacetime.init.RegistryHandler;
 import com.wdcftgg.spacetime.network.PacketHandler;
 import com.wdcftgg.spacetime.proxy.ProxyBase;
@@ -80,10 +82,11 @@ public class SpaceTime {
         GeckoLib.initialize();
         RegisterTileEntity();
         CraftingLoader.init();
-        new ModGuiElementLoader();
+        new GuiElementLoader();
 
         MinecraftForge.EVENT_BUS.register(new EventSword());
         MinecraftForge.EVENT_BUS.register(new EventRender());
+        MinecraftForge.EVENT_BUS.register(new EventToolTip());
 
         PacketHandler.init();
 //        ModAdvancements.init();
@@ -124,6 +127,7 @@ public class SpaceTime {
         GameRegistry.registerTileEntity(ConcretizationHourGlassEntity.class, new ResourceLocation(MODID, "concretizationhourglass"));
         GameRegistry.registerTileEntity(TimeAltarCoreEntity.class, new ResourceLocation(MODID, "timealtarcore"));
         GameRegistry.registerTileEntity(SpaceTimeAirEntity.class, new ResourceLocation(MODID, "spacetimeair"));
+        GameRegistry.registerTileEntity(STExtractorEntity.class, new ResourceLocation(MODID, "spacetime_extractor"));
     }
 
     public static void LogWarning(String str, Object... args) {

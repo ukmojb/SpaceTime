@@ -1,6 +1,6 @@
 package com.wdcftgg.spacetime.event;
 
-import com.wdcftgg.spacetime.blocks.ModBlocks;
+import com.wdcftgg.spacetime.blocks.STBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,7 +28,7 @@ public class EventWool {
 
             IBlockState worldBlock = event.getWorld().getBlockState(event.getPos());
             if (worldBlock.getBlock().getMetaFromState(worldBlock) == 10){
-                if (event.getWorld().getBlockState(event.getPos().up().east()).getBlock() == ModBlocks.TIMEALTARCORE || event.getWorld().getBlockState(event.getPos().up().south()).getBlock() == ModBlocks.TIMEALTARCORE || event.getWorld().getBlockState(event.getPos().up().north()).getBlock() == ModBlocks.TIMEALTARCORE || event.getWorld().getBlockState(event.getPos().up().west()).getBlock() == ModBlocks.TIMEALTARCORE){
+                if (event.getWorld().getBlockState(event.getPos().up().east()).getBlock() == STBlocks.TIMEALTARCORE || event.getWorld().getBlockState(event.getPos().up().south()).getBlock() == STBlocks.TIMEALTARCORE || event.getWorld().getBlockState(event.getPos().up().north()).getBlock() == STBlocks.TIMEALTARCORE || event.getWorld().getBlockState(event.getPos().up().west()).getBlock() == STBlocks.TIMEALTARCORE){
                     ItemStack stack = player.getHeldItem(event.getHand());
                     if(!stack.isEmpty()) {
                         ItemStack target = stack.splitStack(1);

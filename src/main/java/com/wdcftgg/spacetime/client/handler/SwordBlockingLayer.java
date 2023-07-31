@@ -2,7 +2,7 @@ package com.wdcftgg.spacetime.client.handler;
 
 
 import com.wdcftgg.spacetime.SpaceTime;
-import com.wdcftgg.spacetime.item.ModItems;
+import com.wdcftgg.spacetime.item.STItems;
 import com.wdcftgg.spacetime.potion.ModPotions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -78,7 +78,7 @@ public class SwordBlockingLayer extends LayerHeldItem {
                 GlStateManager.translate(0.0F, 0.0F, 0.28125F);
                 HeldItemHandler.applyTransformReverse(new ItemTransformVec3f(new Vector3f(0.0F, (float)(leftHand ? 1 : -1) * 90.0F, (float)(leftHand ? -1 : 1) * 55.0F), new Vector3f(0.0F, 0.25F, 0.03125F), new Vector3f(0.85F, 0.85F, 0.85F)), leftHand);
             } else {
-                if (stack.getItem() == ModItems.SPACETIMEINGOT) {
+                if (stack.getItem() == STItems.SPACETIMEINGOT) {
                     GlStateManager.scale(2F, 2F, 2F);
                     GlStateManager.translate(0.04F, -0.27F, 0.16F);
                 }

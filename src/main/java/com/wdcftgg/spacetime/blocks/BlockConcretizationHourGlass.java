@@ -4,7 +4,7 @@ import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.HourGlass.*;
 import com.wdcftgg.spacetime.blocks.tileEntity.ConcretizationHourGlassEntity;
 import com.wdcftgg.spacetime.init.ModCreativeTab;
-import com.wdcftgg.spacetime.item.ModItems;
+import com.wdcftgg.spacetime.item.STItems;
 import com.wdcftgg.spacetime.util.IHasModel;
 import lumaceon.mods.clockworkphase.item.construct.hourglass.*;
 import lumaceon.mods.clockworkphase.util.NBTHelper;
@@ -48,8 +48,8 @@ public class BlockConcretizationHourGlass extends Block implements ITileEntityPr
         setUnlocalizedName("concretization_hourglass");
         setRegistryName("concretization_hourglass");
 
-        ModBlocks.BLOCKS.add(this);
-        ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+        STBlocks.BLOCKS.add(this);
+        STItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
         this.setCreativeTab(ModCreativeTab.SpaceTimeTab);
         setHarvestLevel("pickaxe", 2);
         setHardness(5.0F);
@@ -118,45 +118,45 @@ public class BlockConcretizationHourGlass extends Block implements ITileEntityPr
                     int quality = player.getHeldItemMainhand().getTagCompound().getInteger("cp_quality");
                     int speed = player.getHeldItemMainhand().getTagCompound().getInteger("cp_speed");
                     if (player.getHeldItemMainhand().getItem().getClass() == ItemHourglassAir.class) {
-                        world.setBlockState(pos.up(), ModBlocks.AIRHOURGLASS.getDefaultState());
+                        world.setBlockState(pos.up(), STBlocks.AIRHOURGLASS.getDefaultState());
                         setHourglassNBT("air", max_tension, tension_energy, memory, quality, speed, pos, world);
                     }
                     if (player.getHeldItemMainhand().getItem().getClass() == ItemHourglassDeath.class) {
-                        world.setBlockState(pos.up(), ModBlocks.DEATHHOURGLASS.getDefaultState());
+                        world.setBlockState(pos.up(), STBlocks.DEATHHOURGLASS.getDefaultState());
                         setHourglassNBT("death", max_tension, tension_energy, memory, quality, speed, pos, world);
 
                     }
                     if (player.getHeldItemMainhand().getItem().getClass() == ItemHourglassEarth.class) {
-                        world.setBlockState(pos.up(), ModBlocks.EARTHHOURGLASS.getDefaultState());
+                        world.setBlockState(pos.up(), STBlocks.EARTHHOURGLASS.getDefaultState());
                         setHourglassNBT("earth", max_tension, tension_energy, memory, quality, speed, pos, world);
 
                     }
                     if (player.getHeldItemMainhand().getItem().getClass() == ItemHourglassFire.class) {
-                        world.setBlockState(pos.up(), ModBlocks.FIREHOURGLASS.getDefaultState());
+                        world.setBlockState(pos.up(), STBlocks.FIREHOURGLASS.getDefaultState());
                         setHourglassNBT("fire", max_tension, tension_energy, memory, quality, speed, pos, world);
 
                     }
                     if (player.getHeldItemMainhand().getItem().getClass() == ItemHourglassLife.class) {
-                        world.setBlockState(pos.up(), ModBlocks.LIFEHOURGLASS.getDefaultState());
+                        world.setBlockState(pos.up(), STBlocks.LIFEHOURGLASS.getDefaultState());
                         setHourglassNBT("life", max_tension, tension_energy, memory, quality, speed, pos, world);
 
                     }
                     if (player.getHeldItemMainhand().getItem().getClass() == ItemHourglassLight.class) {
-                        world.setBlockState(pos.up(), ModBlocks.LIGHTHOURGLASS.getDefaultState());
+                        world.setBlockState(pos.up(), STBlocks.LIGHTHOURGLASS.getDefaultState());
                         setHourglassNBT("light", max_tension, tension_energy, memory, quality, speed, pos, world);
 
                     }
                     if (player.getHeldItemMainhand().getItem().getClass() == ItemHourglassLunar.class) {
-                        world.setBlockState(pos.up(), ModBlocks.MOONHOURGLASS.getDefaultState());
+                        world.setBlockState(pos.up(), STBlocks.MOONHOURGLASS.getDefaultState());
                         setHourglassNBT("moon", max_tension, tension_energy, memory, quality, speed, pos, world);
 
                     }
                     if (player.getHeldItemMainhand().getItem().getClass() == ItemHourglassWater.class) {
-                        world.setBlockState(pos.up(), ModBlocks.WATERHOURGLASS.getDefaultState());
+                        world.setBlockState(pos.up(), STBlocks.WATERHOURGLASS.getDefaultState());
                         setHourglassNBT("water", max_tension, tension_energy, memory, quality, speed, pos, world);
                     }
                     if (player.getHeldItemMainhand().getItem().getClass() == ItemHourglass.class) {
-                        world.setBlockState(pos.up(), ModBlocks.HOURGLASS.getDefaultState());
+                        world.setBlockState(pos.up(), STBlocks.HOURGLASS.getDefaultState());
                     }
                     player.getHeldItemMainhand().shrink(1);
                 }

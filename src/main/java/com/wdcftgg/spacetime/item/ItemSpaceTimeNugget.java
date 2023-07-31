@@ -3,7 +3,15 @@ package com.wdcftgg.spacetime.item;
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.init.ModCreativeTab;
 import com.wdcftgg.spacetime.util.IHasModel;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -18,7 +26,7 @@ public class ItemSpaceTimeNugget extends Item implements IHasModel {
         setUnlocalizedName("spacetime_nugget");
         setCreativeTab(ModCreativeTab.SpaceTimeTab);
 
-        ModItems.ITEMS.add(this);
+        STItems.ITEMS.add(this);
 
     }
 
@@ -27,6 +35,13 @@ public class ItemSpaceTimeNugget extends Item implements IHasModel {
     public void registerModels()
     {
         SpaceTime.proxy.registerItemRenderer(this, 0, "inventory");
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack is, World worldIn, List<String> list, ITooltipFlag flagIn)
+    {
+        list.add(I18n.format("spacetime.spacetime_nugget.tooltip"));
     }
 
 }

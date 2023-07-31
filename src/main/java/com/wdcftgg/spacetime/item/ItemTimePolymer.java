@@ -30,7 +30,7 @@ public class ItemTimePolymer extends Item implements ITime, IHasModel {
         setRegistryName("time_polymer");
         setCreativeTab(ModCreativeTab.SpaceTimeTab);
 
-        ModItems.ITEMS.add(this);
+        STItems.ITEMS.add(this);
 
     }
 
@@ -79,6 +79,6 @@ public class ItemTimePolymer extends Item implements ITime, IHasModel {
 
     public Item getItemChangeTo()
     {
-        return ModItems.TIMEPOLYMER;
+        return STItems.TIMEPOLYMER;
     }
 }

@@ -2,7 +2,7 @@ package com.wdcftgg.spacetime.item.ConfoundingContainers;
 
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.init.ModCreativeTab;
-import com.wdcftgg.spacetime.item.ModItems;
+import com.wdcftgg.spacetime.item.STItems;
 import com.wdcftgg.spacetime.util.IHasModel;
 import com.wdcftgg.spacetime.util.ISpace;
 import com.wdcftgg.spacetime.util.SpaceHelper;
@@ -32,7 +32,7 @@ public class ItemSpaceConfoundingContainers extends Item implements ISpace, IHas
         setRegistryName("space_confounding_containers");
         setCreativeTab(ModCreativeTab.SpaceTimeTab);
 
-        ModItems.ITEMS.add(this);
+        STItems.ITEMS.add(this);
 
     }
 
@@ -93,6 +93,6 @@ public class ItemSpaceConfoundingContainers extends Item implements ISpace, IHas
 
     public Item getItemChangeTo()
     {
-        return ModItems.SPACECONFOUNDINGCONTAINERS;
+        return STItems.SPACECONFOUNDINGCONTAINERS;
     }
 }

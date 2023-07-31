@@ -91,7 +91,6 @@ public class EventSword {
                     for (int i = 0; i <= config.SWORDBLOCKINGPARTICLE; i++) {
                         player.world.spawnParticle(EnumParticleTypes.END_ROD,hitVec.x,hitVec.y,hitVec.z,r.nextDouble() - 0.5,r.nextDouble()- 0.5,r.nextDouble()- 0.5, 10);
                     }
-
                 }
                 player.playSound(ModSounds.SWORDBLOCKING, 10, 1);
             }

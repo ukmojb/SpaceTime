@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "normal": {
+      "model": "spacetime:water_stextractor_model"
+    }
+  }
+}

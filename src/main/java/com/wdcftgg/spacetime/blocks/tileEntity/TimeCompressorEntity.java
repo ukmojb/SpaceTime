@@ -1,6 +1,6 @@
 package com.wdcftgg.spacetime.blocks.tileEntity;
 
-import com.wdcftgg.spacetime.item.ModItems;
+import com.wdcftgg.spacetime.item.STItems;
 import com.wdcftgg.spacetime.util.TimeHelper;
 import lumaceon.mods.clockworkphase.init.ModBlocks;
 import net.minecraft.entity.item.EntityItem;
@@ -31,7 +31,7 @@ public class TimeCompressorEntity  extends TileEntity implements ITickable {
                 if (Containtemporal == 26){
                     ContainTime = 200000;
                 }
-                ItemStack spownstack = new ItemStack(ModItems.TIMEPOLYMER, 1);
+                ItemStack spownstack = new ItemStack(STItems.TIMEPOLYMER, 1);
                 TimeHelper.addTime(spownstack, ContainTime, 200000);
                 EntityItem spownitem = new EntityItem(world, this.pos.getX(), (this.pos.getY() + 1), this.pos.getZ(), spownstack);
                 this.world.spawnEntity(spownitem);

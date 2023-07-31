@@ -18,7 +18,7 @@ public class ItemTemporalBrassIngot extends Item implements IHasModel {
         setRegistryName("temporal_brass_ingot");
         setCreativeTab(ModCreativeTab.SpaceTimeTab);
 
-        ModItems.ITEMS.add(this);
+        STItems.ITEMS.add(this);
 
     }
 
