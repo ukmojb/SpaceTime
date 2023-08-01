@@ -45,14 +45,14 @@ public class CraftingLoader extends Recipes
         initMachineRecipes();
     }
 
-    private static final ResourceLocation EMPTY = new ResourceLocation("");
-
     public static void initMachineRecipes() {
         addShapedRecipe(new ItemStack(STItems.SPACETIMEINGOT), new Object[]{"AA", "AA", 'A', STItems.SPACETIMENUGGET});
         addShapedRecipe(new ItemStack(STItems.SPACETIMENUGGET), new Object[]{"AA", "AA", 'A', STItems.SPACETIMEDUST});
+        addShapedRecipe(new ItemStack(STItems.MODULEXP), new Object[]{"ADA", "BCB", "ADA", 'C', new ItemStack(ModItems.temporalCoreSedate), 'B', new ItemStack(ModItems.ingotTemporal), 'A', new ItemStack(Blocks.BOOKSHELF), 'D', new ItemStack(Blocks.EMERALD_BLOCK)});
 
         addShapedRecipe(new ItemStack(STBlocks.TIMEALTARCORE), new Object[]{"BAB", "ACA","BAB", 'C', new ItemStack(ModBlocks.celestialCompass), 'B', new ItemStack(ModItems.chipTemporal), 'A', STItems.TEMPORALBRASSINGOT});
         addShapedRecipe(new ItemStack(STBlocks.CONCRETIZATIONHOURGLASS), new Object[]{" A ", "DCD","BBB", 'C', new ItemStack(ModItems.hourglass), 'B', Items.GOLD_INGOT, 'A', new ItemStack(Blocks.END_ROD),'D', new ItemStack(Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE)});
+        addShapedRecipe(new ItemStack(STBlocks.TIMECOMPRESSOR), new Object[]{"BAB", "ACA","BAB", 'C', new ItemStack(ModItems.gearChronosphere), 'B', new ItemStack(ModBlocks.brassBlock), 'A', new ItemStack(ModItems.ingotTemporal)});
 
         for (int i=0;i<8;i++) {
             addShapedRecipe(new ItemStack(STExtractor[i]), new Object[]{"BAB", "DCD","BBB", 'C', new ItemStack(Extractor[i]), 'B', Items.PAPER, 'A', new ItemStack(ModItems.temporalCoreActive),'D', new ItemStack(Items.LEATHER)});

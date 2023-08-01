@@ -14,7 +14,7 @@ import net.minecraft.item.Item;
 public class ItemTemporalBrassIngot extends Item implements IHasModel {
     public ItemTemporalBrassIngot()
     {
-        setUnlocalizedName("temporal_brass_ingot");
+        setTranslationKey("temporal_brass_ingot");
         setRegistryName("temporal_brass_ingot");
         setCreativeTab(ModCreativeTab.SpaceTimeTab);
 

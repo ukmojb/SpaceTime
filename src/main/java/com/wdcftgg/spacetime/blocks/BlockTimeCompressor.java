@@ -25,7 +25,7 @@ public class BlockTimeCompressor extends Block implements IHasModel {
     public BlockTimeCompressor()
     {
         super(Material.ROCK);
-        setUnlocalizedName("time_compressor");
+        setTranslationKey("time_compressor");
         setRegistryName("time_compressor");
         setCreativeTab(ModCreativeTab.SpaceTimeTab);;
 

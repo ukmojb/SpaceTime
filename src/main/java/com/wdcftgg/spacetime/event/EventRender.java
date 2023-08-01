@@ -25,6 +25,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderSpecificHandEvent;
@@ -97,12 +98,14 @@ public class EventRender {
                 double y0 = mc.displayHeight * 0.001 + i * mc.displayHeight * 0.01 + (!player.getActivePotionMap().isEmpty() ? mc.displayHeight * 0.047 : 0);
 
 
+                int scale = (mc.gameSettings.guiScale != 0  ? ((int) mc.displayWidth / mc.gameSettings.guiScale) : 0);
+                if (mc.gameSettings.guiScale == 3) scale = mc.displayWidth / 2;
                 mc.getTextureManager().bindTexture(res);
                 buffer.begin(7, DefaultVertexFormats.POSITION_TEX);
-                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.48 : mc.displayWidth * 0.24), (!mc.isFullScreen() ? y1 : y1/2), -90).tex(0, 1).endVertex();
-                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.49 : mc.displayWidth * 0.245), (!mc.isFullScreen() ? y1 : y1/2), -90).tex(1, 1).endVertex();
-                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.49 : mc.displayWidth * 0.245), (!mc.isFullScreen() ? y0 : y0/2), -90).tex(1, 0).endVertex();
-                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.48 : mc.displayWidth * 0.24), (!mc.isFullScreen() ? y0 : y0/2), -90).tex(0, 0).endVertex();
+                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.49 : (mc.displayWidth * 0.49 + scale)/2), (!mc.isFullScreen() ? y1 : y1/2), -90).tex(0, 1).endVertex();
+                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.5 : (mc.displayWidth * 0.5 + scale)/2), (!mc.isFullScreen() ? y1 : y1/2), -90).tex(1, 1).endVertex();
+                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.5 : (mc.displayWidth * 0.5 + scale)/2), (!mc.isFullScreen() ? y0 : y0/2), -90).tex(1, 0).endVertex();
+                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.49 : (mc.displayWidth * 0.49 + scale)/2), (!mc.isFullScreen() ? y0 : y0/2), -90).tex(0, 0).endVertex();
                 tessellator.draw();
 
                 GlStateManager.popMatrix();
@@ -118,13 +121,15 @@ public class EventRender {
                 double y1 = mc.displayHeight * 0.02 + i * mc.displayHeight * 0.01 + (!player.getActivePotionMap().isEmpty() ? mc.displayHeight * 0.047 : 0);
                 double y0 = mc.displayHeight * 0.001 + i * mc.displayHeight * 0.01 + (!player.getActivePotionMap().isEmpty() ? mc.displayHeight * 0.047 : 0);
 
-
+//                SpaceTime.Log(mc.);
+                int scale = (mc.gameSettings.guiScale != 0  ? ((int) mc.displayWidth / mc.gameSettings.guiScale) : 0);
+                if (mc.gameSettings.guiScale == 3) scale = mc.displayWidth / 2;
                 mc.getTextureManager().bindTexture(res);
                 buffer.begin(7, DefaultVertexFormats.POSITION_TEX);
-                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.49 : mc.displayWidth * 0.245), (!mc.isFullScreen() ? y1 : y1/2), -90).tex(0, 1).endVertex();
-                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.5 : mc.displayWidth * 0.25), (!mc.isFullScreen() ? y1 : y1/2), -90).tex(1, 1).endVertex();
-                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.5 : mc.displayWidth * 0.25), (!mc.isFullScreen() ? y0 : y0/2), -90).tex(1, 0).endVertex();
-                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.49 : mc.displayWidth * 0.245), (!mc.isFullScreen() ? y0 : y0/2), -90).tex(0, 0).endVertex();
+                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.49 : (mc.displayWidth * 0.49 + scale)/2), (!mc.isFullScreen() ? y1 : y1/2), -90).tex(0, 1).endVertex();
+                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.5 : (mc.displayWidth * 0.5 + scale)/2), (!mc.isFullScreen() ? y1 : y1/2), -90).tex(1, 1).endVertex();
+                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.5 : (mc.displayWidth * 0.5 + scale)/2), (!mc.isFullScreen() ? y0 : y0/2), -90).tex(1, 0).endVertex();
+                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.49 : (mc.displayWidth * 0.49 + scale)/2), (!mc.isFullScreen() ? y0 : y0/2), -90).tex(0, 0).endVertex();
                 tessellator.draw();
 
                 GlStateManager.popMatrix();

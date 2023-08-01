@@ -3,6 +3,9 @@ package com.wdcftgg.spacetime.item;
 import com.wdcftgg.spacetime.item.ConfoundingContainers.ItemSpaceConfoundingContainers;
 import com.wdcftgg.spacetime.item.ConfoundingContainers.ItemTimeAndSpaceConfoundingContainers;
 import com.wdcftgg.spacetime.item.ConfoundingContainers.ItemTimeConfoundingContainers;
+import lumaceon.mods.clockworkphase.custom.IHasModel;
+import lumaceon.mods.clockworkphase.item.construct.pocketwatch.module.ItemModule;
+import lumaceon.mods.clockworkphase.item.construct.pocketwatch.module.ItemModuleFurnace;
 import net.minecraft.item.Item;
 
 import java.util.ArrayList;
@@ -22,6 +25,7 @@ public class STItems {
 	public static final Item SPACETIMENUGGET = new ItemSpaceTimeNugget();
 	public static final Item SPACETIMEDUST = new ItemSpaceTimeDust();
 	public static final Item TEMPORALBRASSINGOT = new ItemTemporalBrassIngot();
-
+	public static final Item MODULEXP = new ItemModuleXP();
+	public static final Item SUPERGOLDENAPPLE = new ItemSuperGoldApple();
 
 }

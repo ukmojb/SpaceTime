@@ -29,6 +29,7 @@ tile.life_stextractor.name=生命萃取器
 tile.light_stextractor.name=光明萃取器
 tile.moon_stextractor.name=月光萃取器
 tile.water_stextractor.name=水源萃取器
+tile.clockworkphase.time_sand.name=时之沙
 
 # Items
 
@@ -42,6 +43,8 @@ item.temporal_brass_ingot.name=沾染上了时间之力的黄铜
 item.spacetime_dust.name=时空之尘
 item.spacetime_nugget.name=时空之粒
 item.spacetime_ingot.name=时空之锭
+item.module_xp.name=经验模块
+item.supergoldapple.name=超级附魔金苹果
 
 
 
@@ -54,6 +57,8 @@ spacetime.potion.heterospace=时宗抹杀
 
 advancement.spacetime.hardworking=大力出奇迹
 advancement.spacetime.hardworking.desc=我靠！两亿血呀大哥！
+advancement.spacetime.worldsking=天上地下，为朕独尊！
+advancement.spacetime.worldsking.desc=力量渐渐回来了...
 
 
 # Categories and Key
@@ -73,3 +78,7 @@ spacetime.one_punch.tooltip=别看了，就是一个装饰品。
 spacetime.spacetime_dust.tooltip=微弱如尘埃！
 spacetime.spacetime_nugget.tooltip=小小的§m，软软的，香香的...
 spacetime.spacetime_ingot.tooltip=时空的三维具象态！
+
+# jei
+spacetime.jei.timecrack=注意按顺序投入!
+spacetime.category=时间裂缝

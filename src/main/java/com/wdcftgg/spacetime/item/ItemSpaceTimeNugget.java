@@ -23,7 +23,7 @@ public class ItemSpaceTimeNugget extends Item implements IHasModel {
     public ItemSpaceTimeNugget()
     {
         setRegistryName("spacetime_nugget");
-        setUnlocalizedName("spacetime_nugget");
+        setTranslationKey("spacetime_nugget");
         setCreativeTab(ModCreativeTab.SpaceTimeTab);
 
         STItems.ITEMS.add(this);

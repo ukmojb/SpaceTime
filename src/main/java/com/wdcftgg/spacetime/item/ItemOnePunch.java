@@ -26,7 +26,7 @@ import java.util.List;
 public class ItemOnePunch extends Item implements  IHasModel {
     public ItemOnePunch()
     {
-        setUnlocalizedName("one_punch");
+        setTranslationKey("one_punch");
         setRegistryName("one_punch");
         setCreativeTab(ModCreativeTab.SpaceTimeTab);
 

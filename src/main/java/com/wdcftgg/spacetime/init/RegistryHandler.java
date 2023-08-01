@@ -8,6 +8,7 @@ import com.wdcftgg.spacetime.blocks.tileEntity.TimeAltarCoreEntity;
 import com.wdcftgg.spacetime.client.render.*;
 import com.wdcftgg.spacetime.client.render.HourGlass.*;
 import com.wdcftgg.spacetime.entity.*;
+import com.wdcftgg.spacetime.item.ItemModuleXP;
 import com.wdcftgg.spacetime.item.STItems;
 import com.wdcftgg.spacetime.util.IHasModel;
 import net.minecraft.block.Block;
@@ -32,7 +33,9 @@ public class RegistryHandler {
 	@SubscribeEvent
 	public static void onItemRegister(RegistryEvent.Register<Item> event)
 	{
+//		STItems.ITEMS.add(STItems.MODULEXP);
 		event.getRegistry().registerAll(STItems.ITEMS.toArray(new Item[0]));
+
 	}
 	
 	@SubscribeEvent

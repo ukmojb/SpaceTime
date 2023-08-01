@@ -45,7 +45,7 @@ public class BlockConcretizationHourGlass extends Block implements ITileEntityPr
 
     public BlockConcretizationHourGlass(){
         super(Material.ROCK);
-        setUnlocalizedName("concretization_hourglass");
+        setTranslationKey("concretization_hourglass");
         setRegistryName("concretization_hourglass");
 
         STBlocks.BLOCKS.add(this);

@@ -28,7 +28,7 @@ public class ItemSpaceConfoundingContainers extends Item implements ISpace, IHas
     public ItemSpaceConfoundingContainers()
     {
         setMaxStackSize(1);
-        setUnlocalizedName("space_confounding_containers");
+        setTranslationKey("space_confounding_containers");
         setRegistryName("space_confounding_containers");
         setCreativeTab(ModCreativeTab.SpaceTimeTab);
 

@@ -10,6 +10,8 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -31,14 +33,15 @@ import java.util.Map;
 public class EntityTimeCrack extends EntityLiving {
 
     private int neededtime = 604800;
-    private Map<List<ItemStack>, ItemStack> recipe = new HashMap<List<ItemStack>, ItemStack>();
-    private List<List<ItemStack>> inputList = new ArrayList<List<ItemStack>>();
+    public static Map<List<ItemStack>, ItemStack> recipe = new HashMap<List<ItemStack>, ItemStack>();
+    public static List<List<ItemStack>> inputList = new ArrayList<List<ItemStack>>();
 
     public  EntityTimeCrack(World worldIn)
     {
         super(worldIn);
         this.setSize(1.2F, 1.8F);
         this.setNoAI(true);
+        initTimeCrackRecipe();
     }
 
     @Override
@@ -68,9 +71,6 @@ public class EntityTimeCrack extends EntityLiving {
     {
         super.onLivingUpdate();
         if (!this.world.isRemote) {
-            if (this.ticksExisted == 1) {
-                initTimeCrackRecipe();
-            }
             if (this.ticksExisted >= 35000) {
                 world.addWeatherEffect(new EntityLightningBolt(world, this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), true));
                 this.world.removeEntity(this);
@@ -140,6 +140,16 @@ public class EntityTimeCrack extends EntityLiving {
 
     private void initTimeCrackRecipe(){
         addTimeCrackRecipe(newArray(ModItems.ingotTemporal.getDefaultInstance(), ModItems.brassIngot.getDefaultInstance()), STItems.TEMPORALBRASSINGOT.getDefaultInstance());
+        addTimeCrackRecipe(newArray(new ItemStack(Items.GOLD_INGOT, 64, 0) , Items.ENCHANTED_BOOK.getDefaultInstance(), Items.GOLDEN_APPLE.getDefaultInstance()), new ItemStack(Items.GOLDEN_APPLE, 1, 1));
+        addTimeCrackRecipe(newArray(new ItemStack(Blocks.GOLD_BLOCK, 64, 0) , Items.ENCHANTED_BOOK.getDefaultInstance(), new ItemStack(Items.GOLDEN_APPLE, 1, 1)), STItems.SUPERGOLDENAPPLE.getDefaultInstance());
+    }
+
+    public static Map<List<ItemStack>, ItemStack> getRecipe(){
+        return recipe;
+    }
+
+    public static List<List<ItemStack>> getinputList(){
+        return inputList;
     }
 
     private List<ItemStack> newArray(ItemStack item){

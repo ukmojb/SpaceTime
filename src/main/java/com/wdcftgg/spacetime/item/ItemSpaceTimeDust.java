@@ -22,7 +22,7 @@ import java.util.List;
 public class ItemSpaceTimeDust extends Item implements IHasModel {
     public ItemSpaceTimeDust()
     {
-        setUnlocalizedName("spacetime_dust");
+        setTranslationKey("spacetime_dust");
         setRegistryName("spacetime_dust");
         setCreativeTab(ModCreativeTab.SpaceTimeTab);
 

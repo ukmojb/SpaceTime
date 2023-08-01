@@ -22,7 +22,7 @@ import java.util.List;
 public class ItemSpaceTimeIngot extends Item implements IHasModel {
     public ItemSpaceTimeIngot()
     {
-        setUnlocalizedName("spacetime_ingot");
+        setTranslationKey("spacetime_ingot");
         setRegistryName("spacetime_ingot");
         setCreativeTab(ModCreativeTab.SpaceTimeTab);
 

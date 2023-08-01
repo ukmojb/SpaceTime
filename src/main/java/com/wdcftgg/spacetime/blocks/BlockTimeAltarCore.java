@@ -28,7 +28,7 @@ public class BlockTimeAltarCore extends Block implements IHasModel {
     public BlockTimeAltarCore()
     {
         super(Material.ROCK);
-        setUnlocalizedName("time_altarcore");
+        setTranslationKey("time_altarcore");
         setRegistryName("time_altarcore");
         setCreativeTab(ModCreativeTab.SpaceTimeTab);;
 

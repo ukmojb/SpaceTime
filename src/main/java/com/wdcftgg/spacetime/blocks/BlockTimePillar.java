@@ -22,7 +22,7 @@ public class BlockTimePillar extends Block implements IHasModel {
     public BlockTimePillar()
     {
         super(Material.ROCK);
-        setUnlocalizedName("time_pillar");
+        setTranslationKey("time_pillar");
         setRegistryName("time_pillar");
         setCreativeTab(ModCreativeTab.SpaceTimeTab);;
 

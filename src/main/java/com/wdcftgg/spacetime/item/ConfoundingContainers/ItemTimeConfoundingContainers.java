@@ -32,7 +32,7 @@ public class ItemTimeConfoundingContainers extends Item implements ITimeSand, IH
     public ItemTimeConfoundingContainers()
     {
         setMaxStackSize(1);
-        setUnlocalizedName("time_confounding_containers");
+        setTranslationKey("time_confounding_containers");
         setRegistryName("time_confounding_containers");
         setCreativeTab(ModCreativeTab.SpaceTimeTab);
 

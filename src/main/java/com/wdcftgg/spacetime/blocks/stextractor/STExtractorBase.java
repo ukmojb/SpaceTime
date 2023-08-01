@@ -38,7 +38,7 @@ import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 public class STExtractorBase extends Block implements ITileEntityProvider, IHasModel {
     public STExtractorBase(String name){
         super(Material.ROCK);
-        setUnlocalizedName(name + "_stextractor");
+        setTranslationKey(name + "_stextractor");
         setRegistryName(name + "_stextractor");
 
         STBlocks.BLOCKS.add(this);

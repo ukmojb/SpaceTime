@@ -26,7 +26,7 @@ import java.util.List;
 public class ItemTimePolymer extends Item implements ITime, IHasModel {
     public ItemTimePolymer()
     {
-        setUnlocalizedName("time_polymer");
+        setTranslationKey("time_polymer");
         setRegistryName("time_polymer");
         setCreativeTab(ModCreativeTab.SpaceTimeTab);
 
@@ -41,7 +41,7 @@ public class ItemTimePolymer extends Item implements ITime, IHasModel {
         EntityPlayer player = Minecraft.getMinecraft().player;
         int time = getTime(is);
         if (time <= 0){
-            list.add("Contain Time: §eNo Space Energy");
+            list.add("Contain Time: §eNo Time Energy");
         } else {
             list.add("Contain Time: §e" + time);
         }

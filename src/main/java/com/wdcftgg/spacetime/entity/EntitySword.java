@@ -156,7 +156,7 @@ public class EntitySword extends EntityLiving {
         List<Item> swordList1 = new ArrayList<Item>();
         while (i <= 32627) {
             if (Item.REGISTRY.getObjectById(i) != null) {
-                if (Item.REGISTRY.getObjectById(i).getUnlocalizedName().contains("sword")){
+                if (Item.REGISTRY.getObjectById(i).getTranslationKey().contains("sword")){
                     swordlength += 1;
                     swordList1.add(Item.REGISTRY.getObjectById(i));
                 }

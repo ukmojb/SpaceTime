@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "spacetime:supergoldapple"
+    },
+    "title": {
+      "translate": "advancement.spacetime.worldsking"
+    },
+    "description": {
+      "translate": "advancement.spacetime.worldsking.desc"
+    },
+    "hidden": true,
+    "frame": "challenge"
+  },
+  "parent": "minecraft:husbandry/root",
+  "criteria": {
+    "supergoldapple": {
+      "trigger": "consume_item",
+      "conditions": {
+        "item": {
+          "item": "spacetime:supergoldapple"
+        }
+      }
+    }
+  }
+}

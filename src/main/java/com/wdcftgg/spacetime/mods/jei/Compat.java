@@ -1,0 +1,53 @@
+package com.wdcftgg.spacetime.mods.jei;
+
+/**
+ * Created by IntelliJ IDEA.
+ *
+ * @Author : wdcftgg
+ * @create 2023/7/19 16:29
+ */
+
+import java.util.List;
+
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
+
+public abstract class Compat implements Comparable<Compat> {
+    protected String modid;
+
+    public Compat(String modid) {
+        this.modid = modid;
+    }
+
+    public String getModID() {
+        return modid;
+    }
+
+    public abstract void addRecipes(List<Wrapper> list);
+
+    public final boolean shouldLoad() {
+        return Loader.isModLoaded(modid);
+    }
+
+    @Override
+    public int compareTo(Compat o) {
+        return modid.compareTo(o.modid);
+    }
+
+    public static ItemStack getModdedItem(String name) {
+        return getModdedItem(name, 1, 0);
+    }
+
+    public static ItemStack getModdedItem(String name, int count) {
+        return getModdedItem(name, count, 0);
+    }
+
+    public static ItemStack getModdedItem(String name, int count, int meta) {
+        Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(name));
+        if (item == null) return ItemStack.EMPTY;
+        else return new ItemStack(item, count, meta);
+    }
+}

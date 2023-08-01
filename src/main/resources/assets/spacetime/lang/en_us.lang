@@ -29,6 +29,7 @@ tile.life_stextractor.name=Life extractor
 tile.moon_stextractor.name=Moon extractor
 tile.light_stextractor.name=Light extractor
 tile.water_stextractor.name=water extractor
+tile.clockworkphase.time_sand.name=Time Sand
 
 # Items
 
@@ -42,7 +43,8 @@ item.temporal_brass_ingot.name=Brass tainted with the forces of time
 item.spacetime_dust.name=Space-time dust
 item.spacetime_nugget.name=a particle of space-time
 item.spacetime_ingot.name=Ingot of spacetime
-
+item.module_xp.name=Module XP
+item.supergoldapple.name=Super Golden Apple
 
 # Potion
 
@@ -53,7 +55,8 @@ spacetime.potion.heterospace=Heterospace
 
 advancement.spacetime.hardworking=strongly the miracle
 advancement.spacetime.hardworking.desc=I depend! Two hundred million blood, brother!
-
+advancement.spacetime.worldsking=Heaven and earth, for me alone!
+advancement.spacetime.worldsking.desc=The power is coming back...
 
 # Categories and Key
 
@@ -72,3 +75,7 @@ spacetime.one_punch.tooltip=Don't look at it, it's just an ornament.
 spacetime.spacetime_dust.tooltip=Faint as dust!
 spacetime.spacetime_nugget.tooltip=small §m, soft, fragrant...
 spacetime.spacetime_ingot.tooltip=A three-dimensional representation of spacetime!
+
+# jei
+spacetime.jei.timecrack=Pay attention to put in order!
+spacetime.category=Time Crack

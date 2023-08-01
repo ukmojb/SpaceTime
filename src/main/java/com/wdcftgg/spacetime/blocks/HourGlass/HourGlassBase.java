@@ -31,7 +31,7 @@ import net.minecraft.world.World;
 public class HourGlassBase extends BlockDirectional implements ITileEntityProvider, IHasModel {
     public HourGlassBase(String name){
         super(Material.ROCK);
-        setUnlocalizedName(name);
+        setTranslationKey(name);
         setRegistryName(name);
 
         STBlocks.BLOCKS.add(this);

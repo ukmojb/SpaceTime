@@ -31,7 +31,7 @@ import java.util.List;
 public class ItemUnstableTimePolymer extends Item implements ITime, IHasModel {
     public ItemUnstableTimePolymer()
     {
-        setUnlocalizedName("unstable_time_polymer");
+        setTranslationKey("unstable_time_polymer");
         setRegistryName("unstable_time_polymer");
         setCreativeTab(ModCreativeTab.SpaceTimeTab);
 
@@ -47,7 +47,7 @@ public class ItemUnstableTimePolymer extends Item implements ITime, IHasModel {
         int chance = 200000;
         float percentagechance = (float)  time / chance * 100;
         if (time <= 0){
-            list.add("Contain Time: §eNo Space Energy");
+            list.add("Contain Time: §eNo Time Energy");
         } else {
             list.add("Contain Time: §e" + time);
         }

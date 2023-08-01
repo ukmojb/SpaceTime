@@ -9,7 +9,8 @@
     },
     "description": {
       "translate": "advancement.spacetime.hardworking.desc"
-    }
+    },
+    "frame": "challenge"
   },
   "parent": "minecraft:adventure/kill_a_mob",
   "criteria": {

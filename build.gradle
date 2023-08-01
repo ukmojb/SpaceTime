@@ -1,56 +1,31 @@
 buildscript {
     repositories {
-        maven { url = 'https://maven.minecraftforge.net/' }
-        mavenCentral()
+        maven {
+            url = "https://maven.minecraftforge.net/"
+        }
+        maven {
+            url "https://files.minecraftforge.net/maven"
+        }
+        maven {
+            url = 'https://maven.cleanroommc.com/'
+        }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
-    }
-}
-        
-apply plugin: 'net.minecraftforge.gradle'
-// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
-
-version = "${version}"
-group = 'com.wdcftgg.spacetime' 
-archivesBaseName = 'SpaceTime'
-
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
-
-minecraft {
-    mappings channel: 'snapshot', version: '20171103-1.12'
-    runs {
-        client {
-            workingDirectory project.file('run')
-
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
-
-            args ["-Dfml.coreMods.load=me.guichaguri.tickratechanger.TickrateChanger"]
-        }
-
-        server {
-
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
-        }
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
     }
 }
 
-
+apply plugin: 'net.minecraftforge.gradle.forge'
 
 repositories {
-
     maven {
         url = 'https://www.cursemaven.com/'
+    }
+    maven {
+        url = 'https://maven.minecraftforge.net'
+    }
+    maven {
+        url = 'https://maven.cleanroommc.com/'
     }
     maven {
         url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
@@ -59,47 +34,57 @@ repositories {
         name = "Progwml6 maven"
         url = "https://dvs1.progwml6.com/files/maven/"
     }
-    maven {
-        name = "ModMaven"
-        url = "https://modmaven.dev"
-    }
+}
 
+version = "${version}"
+group = 'com.wdcftgg.spacetime' 
+archivesBaseName = 'SpaceTime'
+
+sourceCompatibility = targetCompatibility = '1.8'
+
+compileJava {
+    sourceCompatibility = targetCompatibility = '1.8'
+}
+
+minecraft {
+    version = '1.12.2-14.23.5.2847'
+    runDir = "run"
+    mappings = 'stable_39'
+    useDepAts = true
+
+}
+
+runClient {
+    args '--username', 'wdcftgg'
+    jvmArgs '-Xms4G', '-Xmx8G'
 }
 
 dependencies {
 
-    minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
-    compile 'curse.maven:ClockworkPhase-227388:3016789'
-    compile 'software.bernie.geckolib:forge-1.12.2-geckolib:3.0.21'
-    compile "mezz.jei:jei_1.12.2:4.15.+:api"
+    deobfCompile 'curse.maven:ClockworkPhase-227388:3016789'
+    deobfCompile 'software.bernie.geckolib:forge-1.12.2-geckolib:3.0.21'
+    deobfCompile "mezz.jei:jei_${jei_mc_version}:${jei_version}:api"
+    // at runtime, use the full JEI jar
+    runtime "mezz.jei:jei_${jei_mc_version}:${jei_version}"
 }
 
-// Example for how to get properties into the manifest for reading by the runtime..
 jar {
     manifest {
-        attributes([
-            "Specification-Title": "spacetime",
-            "Specification-Vendor": "wdcftgg",
-            "Specification-Version": "1", // We are version 1 of ourselves
-            "Implementation-Title": project.name,
-            "Implementation-Version": "${version}",
-            "Implementation-Vendor" :"wdcftgg",
-            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
+        attributes 'FMLAT': 'spacetime.cfg'
     }
 }
 
 processResources{
     // this will ensure that this task is redone when the versions change.
-    inputs.property "version", "${version}"
-    inputs.property "mcversion", "1.12.2"
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
 
     // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
 
         // replace version and mcversion
-        expand 'version':"${version}", 'mcversion':"1.12.2"
+        expand 'version':project.version, 'mcversion':project.minecraft.version
     }
 
     // copy everything else, thats not the mcmod.info
@@ -108,27 +93,7 @@ processResources{
     }
 }
 
-// Example configuration to allow publishing using the maven-publish task
-// This is the preferred method to reobfuscate your jar file
-jar.finalizedBy('reobfJar') 
-// However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
-//publish.dependsOn('reobfJar')
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact jar
-        }
-    }
-    repositories {
-        maven {
-            url "file:///${project.projectDir}/mcmodsrepo"
-        }
-    }
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
 }
 
-sourceSets {
-    main {
-        output.resourcesDir = output.classesDir 
-        } 
-    }

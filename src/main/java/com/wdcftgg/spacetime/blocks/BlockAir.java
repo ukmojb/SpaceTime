@@ -28,7 +28,7 @@ public class BlockAir extends Block implements IHasModel {
     public BlockAir()
     {
         super(Material.AIR);
-        setUnlocalizedName("spacetime_air");
+        setTranslationKey("spacetime_air");
         setRegistryName("spacetime_air");
         setCreativeTab(null);;
         setLightLevel(1.0f);

@@ -9,7 +9,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ModCreativeTab {
     public static final CreativeTabs SpaceTimeTab = new CreativeTabs(CreativeTabs.getNextID(), "spacetimetab") {
         @SideOnly(Side.CLIENT)
-        public ItemStack getTabIconItem() {
+        public ItemStack createIcon() {
             return new ItemStack(STBlocks.TIMEPILLAR);
         }
     };

@@ -33,7 +33,7 @@ public class ItemTimeAndSpaceConfoundingContainers extends Item implements ITime
     public ItemTimeAndSpaceConfoundingContainers()
     {
         setMaxStackSize(1);
-        setUnlocalizedName("time_and_space_confounding_containers");
+        setTranslationKey("time_and_space_confounding_containers");
         setRegistryName("time_and_space_confounding_containers");
         setCreativeTab(ModCreativeTab.SpaceTimeTab);
 

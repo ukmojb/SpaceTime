@@ -31,7 +31,7 @@ public class BlockSpaceTimeTurbulence extends Block implements IHasModel {
     public BlockSpaceTimeTurbulence()
     {
         super(Material.AIR);
-        setUnlocalizedName("space_time_turbulence");
+        setTranslationKey("space_time_turbulence");
         setRegistryName("space_time_turbulence");
         setCreativeTab(ModCreativeTab.SpaceTimeTab);
 
