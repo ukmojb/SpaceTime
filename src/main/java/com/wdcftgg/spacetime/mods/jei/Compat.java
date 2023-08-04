@@ -7,13 +7,13 @@ package com.wdcftgg.spacetime.mods.jei;
  * @create 2023/7/19 16:29
  */
 
-import java.util.List;
-
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+
+import java.util.List;
 
 public abstract class Compat implements Comparable<Compat> {
     protected String modid;

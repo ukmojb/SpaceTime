@@ -1,6 +1,7 @@
 package com.wdcftgg.spacetime.event;
 
 import com.wdcftgg.spacetime.SpaceTime;
+import com.wdcftgg.spacetime.entity.EntityTimePhantom;
 import com.wdcftgg.spacetime.potion.ModPotions;
 import lumaceon.mods.clockworkphase.init.ModItems;
 import lumaceon.mods.clockworkphase.item.construct.pocketwatch.ItemPocketWatch;
@@ -9,7 +10,6 @@ import lumaceon.mods.clockworkphase.util.NBTHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -19,25 +19,16 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderSpecificHandEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.lwjgl.opengl.GL11;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by IntelliJ IDEA.
@@ -102,10 +93,10 @@ public class EventRender {
                 if (mc.gameSettings.guiScale == 3) scale = mc.displayWidth / 2;
                 mc.getTextureManager().bindTexture(res);
                 buffer.begin(7, DefaultVertexFormats.POSITION_TEX);
-                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.49 : (mc.displayWidth * 0.49 + scale)/2), (!mc.isFullScreen() ? y1 : y1/2), -90).tex(0, 1).endVertex();
-                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.5 : (mc.displayWidth * 0.5 + scale)/2), (!mc.isFullScreen() ? y1 : y1/2), -90).tex(1, 1).endVertex();
-                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.5 : (mc.displayWidth * 0.5 + scale)/2), (!mc.isFullScreen() ? y0 : y0/2), -90).tex(1, 0).endVertex();
-                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.49 : (mc.displayWidth * 0.49 + scale)/2), (!mc.isFullScreen() ? y0 : y0/2), -90).tex(0, 0).endVertex();
+                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.48 : (mc.displayWidth * 0.48 + scale)/2), (!mc.isFullScreen() ? y1 : y1/2), -90).tex(0, 1).endVertex();
+                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.49 : (mc.displayWidth * 0.49 + scale)/2), (!mc.isFullScreen() ? y1 : y1/2), -90).tex(1, 1).endVertex();
+                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.49 : (mc.displayWidth * 0.49 + scale)/2), (!mc.isFullScreen() ? y0 : y0/2), -90).tex(1, 0).endVertex();
+                buffer.pos((!mc.isFullScreen() ? mc.displayWidth * 0.48 : (mc.displayWidth * 0.48 + scale)/2), (!mc.isFullScreen() ? y0 : y0/2), -90).tex(0, 0).endVertex();
                 tessellator.draw();
 
                 GlStateManager.popMatrix();
@@ -142,10 +133,15 @@ public class EventRender {
         if (event.getEntity() instanceof EntityLivingBase) {
             EntityLivingBase entity = (EntityLivingBase) event.getEntity();
             if (entity.getActivePotionEffect(ModPotions.heterospace) != null) {
-                GlStateManager.color(148/255f, 22/255f, 232/255f, 0.5f); // 设置透明度
+                GlStateManager.color(148/255f, 22/255f, 232/255f, 0.5f);
                 GlStateManager.enableBlend(); // 启用混合模式
-                GlStateManager.blendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE_MINUS_SRC_ALPHA); // 设置混合模式为半透明
+                GlStateManager.blendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE_MINUS_SRC_ALPHA);
             }
+        }
+        if (event.getEntity() instanceof EntityTimePhantom) {
+            GlStateManager.color(1f, 1f, 1f, 0.4f);
+            GlStateManager.enableBlend(); // 启用混合模式
+            GlStateManager.blendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE_MINUS_SRC_ALPHA);
         }
     }
 
@@ -156,6 +152,9 @@ public class EventRender {
             if (entity.getActivePotionEffect(ModPotions.heterospace) != null) {
                 GlStateManager.disableBlend();
             }
+        }
+        if (event.getEntity() instanceof EntityTimePhantom) {
+            GlStateManager.disableBlend();
         }
     }
 

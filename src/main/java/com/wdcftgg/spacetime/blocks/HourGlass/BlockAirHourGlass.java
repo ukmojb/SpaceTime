@@ -1,8 +1,6 @@
 package com.wdcftgg.spacetime.blocks.HourGlass;
 
 import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.AirHourGlassEntity;
-import com.wdcftgg.spacetime.item.STItems;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 

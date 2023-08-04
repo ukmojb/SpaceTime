@@ -1,6 +1,5 @@
 package com.wdcftgg.spacetime.mods.jei.recipes;
 
-import com.wdcftgg.spacetime.entity.EntityTimeCrack;
 import com.wdcftgg.spacetime.item.STItems;
 import com.wdcftgg.spacetime.mods.jei.Compat;
 import com.wdcftgg.spacetime.mods.jei.Wrapper;
@@ -9,7 +8,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

@@ -1,6 +1,5 @@
 package com.wdcftgg.spacetime.entity.ai;
 
-import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.entity.EntitySword;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;

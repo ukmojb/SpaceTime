@@ -1,14 +1,14 @@
 package com.wdcftgg.spacetime.init;
 
-import java.io.File;
-import java.util.Collections;
-import java.util.Set;
-
 import com.google.common.collect.Sets;
 import com.wdcftgg.spacetime.util.Reference;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootTable;
 import net.minecraft.world.storage.loot.LootTableManager;
+
+import java.io.File;
+import java.util.Collections;
+import java.util.Set;
 
 public class ModLootList {
 

@@ -7,7 +7,6 @@ package com.wdcftgg.spacetime.blocks.tileEntity.stextractor;
  * @create 2023/7/27 9:37
  */
 
-import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.stextractor.*;
 import lumaceon.mods.clockworkphase.block.extractor.ExtractorAreas;
 import lumaceon.mods.clockworkphase.block.tileentity.TileEntityTimeSandCapacitor;
@@ -17,11 +16,11 @@ import lumaceon.mods.clockworkphase.init.ModItems;
 import lumaceon.mods.clockworkphase.item.ItemCatalyst;
 import lumaceon.mods.clockworkphase.lib.MechanicTweaker;
 import lumaceon.mods.clockworkphase.lib.NBTTags;
+import lumaceon.mods.clockworkphase.lib.Phases;
 import lumaceon.mods.clockworkphase.network.MessageDoublePositionParticleSpawn;
 import lumaceon.mods.clockworkphase.network.PacketHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -30,7 +29,6 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-import lumaceon.mods.clockworkphase.lib.Phases;
 
 public class STExtractorEntity extends TileEntityTimeSandCapacitor implements IInventoryHelper, ITickable
 {

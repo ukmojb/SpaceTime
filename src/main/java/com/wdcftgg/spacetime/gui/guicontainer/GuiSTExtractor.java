@@ -7,11 +7,8 @@ package com.wdcftgg.spacetime.gui.guicontainer;
  * @create 2023/7/27 10:15
  */
 
-import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.tileEntity.stextractor.STExtractorEntity;
 import com.wdcftgg.spacetime.gui.container.ContainerSTExtractor;
-import lumaceon.mods.clockworkphase.block.tileentity.TileEntityExtractor;
-import lumaceon.mods.clockworkphase.client.gui.container.ContainerExtractor;
 import lumaceon.mods.clockworkphase.init.ModItems;
 import lumaceon.mods.clockworkphase.lib.Textures;
 import lumaceon.mods.clockworkphase.util.TimeSandParser;

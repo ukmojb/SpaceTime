@@ -4,11 +4,12 @@ package com.wdcftgg.spacetime.entity;
 import com.wdcftgg.spacetime.entity.ai.TimeAIAttackMelee;
 import com.wdcftgg.spacetime.entity.ai.TimeAIHurtByTarget;
 import com.wdcftgg.spacetime.entity.ai.TimeAIMoveTowardsRestriction;
+import com.wdcftgg.spacetime.event.EventTimeBack;
+import com.wdcftgg.spacetime.network.MessageTimeBack;
 import com.wdcftgg.spacetime.network.MessageTimeParticle;
 import com.wdcftgg.spacetime.network.PacketHandler;
 import lumaceon.mods.clockworkphase.util.TimeSandHelper;
 import net.minecraft.command.CommandSenderWrapper;
-import net.minecraft.command.CommandTitle;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -19,17 +20,14 @@ import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.play.server.SPacketTitle;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentUtils;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.BossInfo;
+import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.server.permission.IPermissionHandler;
 
 import java.util.Random;
 import java.util.UUID;
@@ -44,6 +42,7 @@ public class EntityTime extends EntityMob {
     public EntityTime(World worldIn)
     {
         super(worldIn);
+        this.bossInfo = (BossInfoServer)(new BossInfoServer(this.getDisplayName(), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
         this.setSize(1F, 1.8F);
     }
 
@@ -51,10 +50,13 @@ public class EntityTime extends EntityMob {
 
     private String playeruuid;
     private int challengetime = 3600;
+    private int timeback;
     private int time = 1;
     private int x;
     private int y;
     private int z;
+
+    private final BossInfoServer bossInfo;
 
     private float[] timenum = new float[]{
             2.0f,
@@ -64,6 +66,11 @@ public class EntityTime extends EntityMob {
             50.0f,
             60.0f
     };
+
+    public void setCustomNameTag(String p_setCustomNameTag_1_) {
+        super.setCustomNameTag(p_setCustomNameTag_1_);
+        this.bossInfo.setName(this.getDisplayName());
+    }
 
     @Override
     protected void applyEntityAttributes()
@@ -91,22 +98,32 @@ public class EntityTime extends EntityMob {
                 Random r = new Random();
                 CommandSenderWrapper commandSenderWrapper = CommandSenderWrapper.create(this).withSendCommandFeedback(false);
                 this.getServer().commandManager.executeCommand(commandSenderWrapper, "/tickratechanger " + timenum[r.nextInt(6)]);
+                EventTimeBack.isBack = true;
             }
             if (this.getEntityAttribute(LIFE_POWER).getBaseValue() != 1.0D && this.getHealth() <= 0){
                 Random r = new Random();
                 challengetime += 1200;
+
                 this.setHealth(this.getMaxHealth());
-                this.getEntityAttribute(LIFE_POWER).setBaseValue(this.getEntityAttribute(LIFE_POWER).getBaseValue()-1.0D);
-                PacketHandler.INSTANCE.sendToAllAround(new MessageTimeParticle(this.getPosition()), new NetworkRegistry.TargetPoint(this.world.provider.getDimension(), (double)this.getPosition().getX(), (double)this.getPosition().getY(), (double)this.getPosition().getZ(), 256.0D));
+                if (r.nextBoolean()) {
+                    this.getEntityAttribute(LIFE_POWER).setBaseValue(this.getEntityAttribute(LIFE_POWER).getBaseValue()-1.0D);
+                    PacketHandler.INSTANCE.sendToAllAround(new MessageTimeParticle(this.getPosition(), true, false), new NetworkRegistry.TargetPoint(this.world.provider.getDimension(), (double)this.getPosition().getX(), (double)this.getPosition().getY(), (double)this.getPosition().getZ(), 256.0D));
+                } else {
+                    PacketHandler.INSTANCE.sendToAllAround(new MessageTimeBack(false, false), new NetworkRegistry.TargetPoint(this.world.provider.getDimension(), (double)this.getPosition().getX(), (double)this.getPosition().getY(), (double)this.getPosition().getZ(), 256.0D));
+                }
+
                 CommandSenderWrapper commandSenderWrapper = CommandSenderWrapper.create(this).withSendCommandFeedback(false);
                 this.getServer().commandManager.executeCommand(commandSenderWrapper, "/tickratechanger " + timenum[r.nextInt(6)]);
+
             }
             if (this.getEntityAttribute(LIFE_POWER).getBaseValue() == 1.0D && this.getHealth() <= 0){
                 CommandSenderWrapper commandSenderWrapper = CommandSenderWrapper.create(this).withSendCommandFeedback(false);
                 this.getServer().commandManager.executeCommand(commandSenderWrapper, "/tickratechanger 20");
+                PacketHandler.INSTANCE.sendToAllAround(new MessageTimeParticle(this.getPosition(), false, false), new NetworkRegistry.TargetPoint(this.world.provider.getDimension(), (double)this.getPosition().getX(), (double)this.getPosition().getY(), (double)this.getPosition().getZ(), 256.0D));
+                PacketHandler.INSTANCE.sendToAllAround(new MessageTimeBack(false, true), new NetworkRegistry.TargetPoint(this.world.provider.getDimension(), (double)this.getPosition().getX(), (double)this.getPosition().getY(), (double)this.getPosition().getZ(), 256.0D));
             }
             for (EntityLivingBase livingbase : this.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(this.getPosition().east().north().down(2), this.getPosition().west().south().up(2)))) {
-                if (!(livingbase instanceof EntityTime)) {
+                if (!(livingbase instanceof EntityTime) && !(livingbase instanceof EntityTimePhantom)) {
                     livingbase.attackEntityFrom(DamageSource.GENERIC, 3);
                 }
             }
@@ -114,7 +131,7 @@ public class EntityTime extends EntityMob {
                 time += 1;
             } else {
                 for (EntityLivingBase livingbase : this.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(this.getPosition().east(5).north(5).down(5), this.getPosition().west(5).south(5).up(5)))) {
-                    if (!(livingbase instanceof EntityTime)) {
+                    if (!(livingbase instanceof EntityTime) && !(livingbase instanceof EntityTimePhantom)) {
                         world.addWeatherEffect(new EntityLightningBolt(world, livingbase.getPosition().getX(), livingbase.getPosition().getY(), livingbase.getPosition().getZ(), true));
                         livingbase.attackEntityFrom(DamageSource.OUT_OF_WORLD, 100);
                     }
@@ -146,7 +163,6 @@ public class EntityTime extends EntityMob {
                     }
                 }
             }
-
         }
     }
 
@@ -175,6 +191,7 @@ public class EntityTime extends EntityMob {
             compound.setString("playeruuid", playeruuid);
         }
         compound.setInteger("challengetime", challengetime);
+        compound.setInteger("timeback", timeback);
         compound.setInteger("time", time);
         compound.setInteger("x", x);
         compound.setInteger("y", y);
@@ -186,6 +203,7 @@ public class EntityTime extends EntityMob {
         super.readEntityFromNBT(compound);
         playeruuid = compound.getString("playeruuid");
         challengetime = compound.getInteger("challengetime");
+        timeback = compound.getInteger("timeback");
         time = compound.getInteger("time");
         x = compound.getInteger("x");
         y = compound.getInteger("y");
@@ -204,6 +222,11 @@ public class EntityTime extends EntityMob {
         this.tasks.addTask(6, new EntityAILookIdle(this));
         this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
         this.targetTasks.addTask(1, new TimeAIHurtByTarget(this, true, new Class[0]));
+    }
+
+    @Override
+    public boolean isNonBoss() {
+        return false;
     }
 
     private void challengefailure(BlockPos pos1, BlockPos pos2, Entity ent) {

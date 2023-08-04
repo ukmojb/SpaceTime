@@ -2,13 +2,11 @@ package com.wdcftgg.spacetime.blocks.stextractor;
 
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.STBlocks;
-import com.wdcftgg.spacetime.blocks.tileEntity.ConcretizationHourGlassEntity;
 import com.wdcftgg.spacetime.blocks.tileEntity.stextractor.STExtractorEntity;
 import com.wdcftgg.spacetime.gui.GuiElementLoader;
 import com.wdcftgg.spacetime.init.ModCreativeTab;
 import com.wdcftgg.spacetime.item.STItems;
 import com.wdcftgg.spacetime.util.IHasModel;
-import lumaceon.mods.clockworkphase.ClockworkPhase;
 import lumaceon.mods.clockworkphase.init.ModItems;
 import lumaceon.mods.clockworkphase.lib.NBTTags;
 import lumaceon.mods.clockworkphase.util.NBTHelper;
@@ -27,7 +25,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 
 /**
  * Created by IntelliJ IDEA.

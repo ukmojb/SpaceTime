@@ -1,11 +1,6 @@
 package com.wdcftgg.spacetime.config;
 
-import com.wdcftgg.spacetime.SpaceTime;
-import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 

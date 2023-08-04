@@ -2,7 +2,6 @@ package com.wdcftgg.spacetime.util;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import com.wdcftgg.spacetime.util.ISpaceSupplier;
 
 /**
  * Created by IntelliJ IDEA.

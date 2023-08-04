@@ -1,6 +1,5 @@
 package com.wdcftgg.spacetime.gui.container;
 
-import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.tileEntity.stextractor.STExtractorEntity;
 import lumaceon.mods.clockworkphase.client.gui.components.SlotItemSpecific;
 import lumaceon.mods.clockworkphase.init.ModItems;
@@ -9,8 +8,6 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.SlotItemHandler;
 
 /**
  * Created by IntelliJ IDEA.

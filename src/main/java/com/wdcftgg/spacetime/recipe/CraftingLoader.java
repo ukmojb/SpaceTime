@@ -6,6 +6,7 @@ package com.wdcftgg.spacetime.recipe;
  * @Author : wdcftgg
  * @create 2023/7/16 21:50
  */
+
 import com.wdcftgg.spacetime.blocks.STBlocks;
 import com.wdcftgg.spacetime.item.STItems;
 import lumaceon.mods.clockworkphase.init.ModBlocks;
@@ -15,7 +16,6 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
 public class CraftingLoader extends Recipes
 {

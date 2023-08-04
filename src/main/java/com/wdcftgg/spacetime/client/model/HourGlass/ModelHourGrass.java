@@ -2,7 +2,6 @@ package com.wdcftgg.spacetime.client.model.HourGlass;
 
 import com.wdcftgg.spacetime.SpaceTime;
 import net.minecraft.util.ResourceLocation;
-import software.bernie.geckolib3.GeckoLib;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 /**

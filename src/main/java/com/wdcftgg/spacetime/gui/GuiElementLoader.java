@@ -4,8 +4,6 @@ import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.tileEntity.stextractor.STExtractorEntity;
 import com.wdcftgg.spacetime.gui.container.ContainerSTExtractor;
 import com.wdcftgg.spacetime.gui.guicontainer.GuiSTExtractor;
-import lumaceon.mods.clockworkphase.ClockworkPhase;
-import lumaceon.mods.clockworkphase.block.tileentity.TileEntityExtractor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;

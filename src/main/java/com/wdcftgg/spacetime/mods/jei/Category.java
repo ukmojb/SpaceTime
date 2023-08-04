@@ -7,12 +7,9 @@ package com.wdcftgg.spacetime.mods.jei;
  * @create 2023/7/19 16:19
  */
 
-import java.util.List;
-
 import com.wdcftgg.spacetime.SpaceTime;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
-import mezz.jei.api.gui.IGuiFluidStackGroup;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
@@ -21,7 +18,8 @@ import mezz.jei.api.recipe.IRecipeCategory;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fluids.FluidStack;
+
+import java.util.List;
 
 public class Category implements IRecipeCategory<Wrapper> {
     public static final ResourceLocation BACKGROUND = new ResourceLocation(SpaceTime.MODID, "textures/gui/jei.png");

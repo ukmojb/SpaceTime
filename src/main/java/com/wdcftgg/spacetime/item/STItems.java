@@ -3,9 +3,6 @@ package com.wdcftgg.spacetime.item;
 import com.wdcftgg.spacetime.item.ConfoundingContainers.ItemSpaceConfoundingContainers;
 import com.wdcftgg.spacetime.item.ConfoundingContainers.ItemTimeAndSpaceConfoundingContainers;
 import com.wdcftgg.spacetime.item.ConfoundingContainers.ItemTimeConfoundingContainers;
-import lumaceon.mods.clockworkphase.custom.IHasModel;
-import lumaceon.mods.clockworkphase.item.construct.pocketwatch.module.ItemModule;
-import lumaceon.mods.clockworkphase.item.construct.pocketwatch.module.ItemModuleFurnace;
 import net.minecraft.item.Item;
 
 import java.util.ArrayList;

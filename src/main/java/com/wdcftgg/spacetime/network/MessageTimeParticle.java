@@ -1,5 +1,6 @@
 package com.wdcftgg.spacetime.network;
 
+import com.wdcftgg.spacetime.event.EventTimeBack;
 import io.netty.buffer.ByteBuf;
 import lumaceon.mods.clockworkphase.ClockworkPhase;
 import net.minecraft.util.EnumParticleTypes;
@@ -20,34 +21,50 @@ public class MessageTimeParticle implements IMessageHandler<MessageTimeParticle,
     int x;
     int y;
     int z;
+    boolean life;
+    boolean isPhantom;
 
     public MessageTimeParticle() {
     }
 
 
 
-    public MessageTimeParticle(BlockPos capacitor) {
+    public MessageTimeParticle(BlockPos capacitor, boolean life, boolean isPhantom) {
         this.x = capacitor.getX();
         this.y = capacitor.getY();
         this.z = capacitor.getZ();
+        this.life = life;
+        this.isPhantom = isPhantom;
     }
 
     public void toBytes(ByteBuf buf) {
         buf.writeInt(this.x);
         buf.writeInt(this.y);
         buf.writeInt(this.z);
+        buf.writeBoolean(this.life);
+        buf.writeBoolean(this.isPhantom);
     }
 
     public void fromBytes(ByteBuf buf) {
         this.x = buf.readInt();
         this.y = buf.readInt();
         this.z = buf.readInt();
+        this.life = buf.readBoolean();
+        this.isPhantom = buf.readBoolean();
     }
 
     public IMessage onMessage(MessageTimeParticle message, MessageContext ctx) {
         Random r = new Random();
-        for (int i = 0; i <= 25; i++) {
-            ClockworkPhase.proxy.getStaticWorld().spawnParticle(EnumParticleTypes.TOTEM, message.x, message.y + 1, message.z, r.nextDouble() - 0.5, r.nextDouble() - 0.5, r.nextDouble() - 0.5, 1);
+        if (message.isPhantom) {
+            ClockworkPhase.proxy.getStaticWorld().spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, message.x, message.y + 1, message.z, r.nextDouble() - 0.5, r.nextDouble() - 0.5, r.nextDouble() - 0.5, 1);
+            return null;
+        }
+        if (message.life) {
+            for (int i = 0; i <= 25; i++) {
+                ClockworkPhase.proxy.getStaticWorld().spawnParticle(EnumParticleTypes.TOTEM, message.x, message.y + 1, message.z, r.nextDouble() - 0.5, r.nextDouble() - 0.5, r.nextDouble() - 0.5, 1);
+            }
+        } else {
+            ClockworkPhase.proxy.getStaticWorld().spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, message.x, message.y + 1, message.z, r.nextDouble() - 0.5, r.nextDouble() - 0.5, r.nextDouble() - 0.5, 1);
         }
         return null;
     }

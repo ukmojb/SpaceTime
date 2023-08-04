@@ -1,26 +1,18 @@
 package com.wdcftgg.spacetime;
 
 
-
 import com.wdcftgg.spacetime.blocks.tileEntity.*;
 import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.*;
 import com.wdcftgg.spacetime.blocks.tileEntity.stextractor.STExtractorEntity;
 import com.wdcftgg.spacetime.client.handler.HeldItemHandler;
 import com.wdcftgg.spacetime.config.config;
-import com.wdcftgg.spacetime.event.EventModuleXP;
-import com.wdcftgg.spacetime.event.EventRender;
-import com.wdcftgg.spacetime.event.EventSword;
-import com.wdcftgg.spacetime.event.EventToolTip;
+import com.wdcftgg.spacetime.event.*;
 import com.wdcftgg.spacetime.gui.GuiElementLoader;
 import com.wdcftgg.spacetime.init.RegistryHandler;
-import com.wdcftgg.spacetime.mods.jei.Plugin;
 import com.wdcftgg.spacetime.network.PacketHandler;
 import com.wdcftgg.spacetime.proxy.ProxyBase;
 import com.wdcftgg.spacetime.recipe.CraftingLoader;
 import com.wdcftgg.spacetime.util.Reference;
-import mezz.jei.api.IRecipeRegistry;
-import mezz.jei.api.IRecipesGui;
-import mezz.jei.api.recipe.IFocus;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
@@ -45,8 +37,6 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
 
@@ -95,6 +85,7 @@ public class SpaceTime {
         MinecraftForge.EVENT_BUS.register(new EventRender());
         MinecraftForge.EVENT_BUS.register(new EventToolTip());
         MinecraftForge.EVENT_BUS.register(new EventModuleXP());
+        MinecraftForge.EVENT_BUS.register(new EventTimeBack());
 
         PacketHandler.init();
 
