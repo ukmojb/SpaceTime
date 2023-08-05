@@ -45,6 +45,7 @@ item.spacetime_nugget.name=时空之粒
 item.spacetime_ingot.name=时空之锭
 item.module_xp.name=经验模块
 item.supergoldapple.name=超级附魔金苹果
+item.timeticket.name=时的挑战券
 
 
 
@@ -78,6 +79,7 @@ spacetime.one_punch.tooltip=别看了，就是一个装饰品。
 spacetime.spacetime_dust.tooltip=微弱如尘埃！
 spacetime.spacetime_nugget.tooltip=小小的§m，软软的，香香的...
 spacetime.spacetime_ingot.tooltip=时空的三维具象态！
+spacetime.timeticket.tooltip=右键召唤boss[时]
 
 # jei
 spacetime.jei.timecrack=注意按顺序投入!

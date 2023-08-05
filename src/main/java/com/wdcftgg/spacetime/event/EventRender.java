@@ -1,6 +1,7 @@
 package com.wdcftgg.spacetime.event;
 
 import com.wdcftgg.spacetime.SpaceTime;
+import com.wdcftgg.spacetime.blocks.tileEntity.TimeAltarCoreEntity;
 import com.wdcftgg.spacetime.entity.EntityTimePhantom;
 import com.wdcftgg.spacetime.potion.ModPotions;
 import lumaceon.mods.clockworkphase.init.ModItems;
@@ -10,6 +11,7 @@ import lumaceon.mods.clockworkphase.util.NBTHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -29,6 +31,8 @@ import net.minecraftforge.client.event.RenderSpecificHandEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.lwjgl.opengl.GL11;
+
+import static java.awt.SystemColor.text;
 
 /**
  * Created by IntelliJ IDEA.
@@ -57,6 +61,33 @@ public class EventRender {
 
 
         ResourceLocation res;
+        if (Minecraft.getMinecraft().player != null) {
+            EntityPlayer player = Minecraft.getMinecraft().player;
+            if (TimeAltarCoreEntity.TIMESAND < 0) return;
+            String text = String.valueOf(TimeAltarCoreEntity.TIMESAND);
+            FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+            int strLenHalved = fontRenderer.getStringWidth(text) / 2;
+
+            GlStateManager.pushMatrix();
+//            GlStateManager.translate(0, 0, 0);
+            GlStateManager.scale(-0.01F, -0.01F, 0.01F);
+            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F); //将画笔置为黑色, 便于进行绘画(这里没有进行绘画)
+
+            GlStateManager.disableLighting();
+            GlStateManager.enablePolygonOffset();
+            GlStateManager.depthMask(false);
+            GlStateManager.enableBlend(); //开启混合器(使GL支持Alpha透明通道)
+            GlStateManager.doPolygonOffset(-1, -20);
+
+            fontRenderer.drawString(text, -strLenHalved, 0, 0xFFFFFFFF);
+
+            GlStateManager.disableBlend();
+            GlStateManager.depthMask(true);
+            GlStateManager.disablePolygonOffset();
+            GlStateManager.enableLighting();
+
+            GlStateManager.popMatrix();
+        }
         if (Minecraft.getMinecraft().player != null && Minecraft.getMinecraft().player.getActivePotionEffect(ModPotions.heterospace) != null){
 
             GlStateManager.pushMatrix();

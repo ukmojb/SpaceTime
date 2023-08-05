@@ -1,6 +1,7 @@
 package com.wdcftgg.spacetime.entity;
 
 
+import com.wdcftgg.spacetime.config.config;
 import com.wdcftgg.spacetime.entity.ai.TimeAIAttackMelee;
 import com.wdcftgg.spacetime.entity.ai.TimeAIHurtByTarget;
 import com.wdcftgg.spacetime.entity.ai.TimeAIMoveTowardsRestriction;
@@ -77,7 +78,7 @@ public class EntityTime extends EntityMob {
     {
         super.applyEntityAttributes();
 
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(150.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(config.TIMEMAXHEALTH);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.8D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);

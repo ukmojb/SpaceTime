@@ -1,6 +1,7 @@
 package com.wdcftgg.spacetime.blocks.tileEntity;
 
 
+import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.HourGlass.HourGlassBase;
 import com.wdcftgg.spacetime.blocks.STBlocks;
 import net.minecraft.block.Block;
@@ -33,7 +34,8 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
     int timeenergy;
 
 
-    public static final PropertyInteger OUTPUT = PropertyInteger.create("timecore_output", 0, 1);
+    public static int OUTPUT = -1;
+    public static int TIMESAND = -1;
 
     @Override
     public void update() {
@@ -41,9 +43,16 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
             if (isstructure(pos, world)){
                 List<EntityItem> items = getItems();
                 if(areItemsValid(items)) {
+                    int num = Item.getIdFromItem(outPutItem(items));
+                    int timesand = needtimeenergy(items);
+                    OUTPUT = num;
+                    TIMESAND = timesand;
+                    SpaceTime.Log(num+"");
                     world.getTileEntity(pos).getTileData().setInteger("output", Item.getIdFromItem(outPutItem(items)));
                     world.setBlockState(pos.up(), STBlocks.AIR.getDefaultState());
                 }else{
+                    OUTPUT = -1;
+                    TIMESAND = -1;
                     world.getTileEntity(pos).getTileData().setInteger("output", 0);
                     world.setBlockToAir(pos.up());
                 }

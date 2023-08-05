@@ -30,7 +30,7 @@ public class RegistryHandler {
 	@SubscribeEvent
 	public static void onItemRegister(RegistryEvent.Register<Item> event)
 	{
-//		STItems.ITEMS.add(STItems.MODULEXP);
+		STItems.ITEMS.add(STItems.TIMETICKET);
 		event.getRegistry().registerAll(STItems.ITEMS.toArray(new Item[0]));
 
 	}

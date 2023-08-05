@@ -45,6 +45,7 @@ item.spacetime_nugget.name=a particle of space-time
 item.spacetime_ingot.name=Ingot of spacetime
 item.module_xp.name=Module XP
 item.supergoldapple.name=Super Golden Apple
+item.timeticket.name=Time Challenge Ticket
 
 # Potion
 
@@ -75,6 +76,7 @@ spacetime.one_punch.tooltip=Don't look at it, it's just an ornament.
 spacetime.spacetime_dust.tooltip=Faint as dust!
 spacetime.spacetime_nugget.tooltip=small §m, soft, fragrant...
 spacetime.spacetime_ingot.tooltip=A three-dimensional representation of spacetime!
+spacetime.timeticket.tooltip=Right-click to summon boss[Time]
 
 # jei
 spacetime.jei.timecrack=Pay attention to put in order!

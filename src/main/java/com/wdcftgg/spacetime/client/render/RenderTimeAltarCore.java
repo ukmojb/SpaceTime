@@ -1,6 +1,7 @@
 package com.wdcftgg.spacetime.client.render;
 
 
+import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.tileEntity.TimeAltarCoreEntity;
 import com.wdcftgg.spacetime.config.config;
 import net.minecraft.client.Minecraft;
@@ -30,7 +31,6 @@ public class RenderTimeAltarCore extends TileEntitySpecialRenderer<TimeAltarCore
     float p = 0.0f;
     float a = 0.0f;
     float g = 0.0f;
-    ItemStack item = Items.AIR.getDefaultInstance();
 
     @Override
     public void render(TimeAltarCoreEntity AltarCore, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
@@ -38,15 +38,14 @@ public class RenderTimeAltarCore extends TileEntitySpecialRenderer<TimeAltarCore
         ItemStack output = Item.getItemById(num).getDefaultInstance();
         EntityItem entityItem = new EntityItem(AltarCore.getWorld(), 0D, 0D, 0D);
         entityItem.setItem(output);
-
         if (num != 0){
+
             renderItem(entityItem, x, y, z);
             renderTextures("textures/gui/normalmatrix.png", x, y, z);
         } else {
             p = 0;
             a = 0;
             g = 0;
-            item = output;
         }
     }
 

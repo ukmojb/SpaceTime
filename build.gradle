@@ -37,8 +37,8 @@ repositories {
 }
 
 version = "${version}"
-group = 'com.wdcftgg.spacetime' 
-archivesBaseName = 'SpaceTime'
+group = 'com.wdcftgg'
+archivesBaseName = 'spacetime'
 
 sourceCompatibility = targetCompatibility = '1.8'
 
