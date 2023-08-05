@@ -16,6 +16,8 @@ public class config {
 
     public static int SWORDBLOCKINGPARTICLE = 20;
     public static double ROTATIONALSPEED = 1d;
+    public static int GUIPOSX = 0;
+    public static int GUIPOSY = 50;
     public static double TIMEMAXHEALTH = 150d;
     public static double TIMELASTLIFEMAXHEALTH = 300d;
     public static boolean ALTARAUTOMATE = true;
@@ -33,6 +35,8 @@ public class config {
             config.load();
             SWORDBLOCKINGPARTICLE = config.get(CATEGORY_SWORDCORE, "SwordBlockingParticle", SWORDBLOCKINGPARTICLE, "The number of particles in a successful block").getInt();
             ROTATIONALSPEED = config.get(CATEGORY_TIMECORE, "RotationVelocityOfANormalMatrix", ROTATIONALSPEED, "Rotation velocity of a normal matrix(The Angle of rotation per tick)").getDouble();
+            GUIPOSX = config.get(CATEGORY_TIMECORE, "GuiPosX", ROTATIONALSPEED, "The altar shows the gui orientation of the energy requirements on the x axis").getInt();
+            GUIPOSY = config.get(CATEGORY_TIMECORE, "GuiPosY", ROTATIONALSPEED, "The altar shows the gui orientation of the energy requirements on the y axis").getInt();
             ALTARAUTOMATE = config.get(CATEGORY_TIMECORE, "AltarAutomate", ALTARAUTOMATE, "Whether the altar can be automated").getBoolean();
             TIMEMAXHEALTH = config.get(CATEGORY_BOSS, "TimeMaxHealth", TIMEMAXHEALTH, "Boss[time] every life health").getDouble();
             TIMELASTLIFEMAXHEALTH = config.get(CATEGORY_BOSS, "TimeLastLifeMaxHealth", TIMELASTLIFEMAXHEALTH, "Boss[time] Last life health").getDouble();

@@ -17,9 +17,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -89,14 +92,29 @@ public class BlockTimeAltarCore extends Block implements IHasModel {
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
         ItemStack itemStack = player.getHeldItem(hand);
-        if (TimeAltarCoreEntity.TIMESAND >= 0 && TimeAltarCoreEntity.OUTPUT >= 0) {
-            if (TimeSandHelper.getTimeSand(itemStack) >= TimeAltarCoreEntity.TIMESAND) {
-                TimeSandHelper.removeTimeSand(itemStack, TimeAltarCoreEntity.TIMESAND);
-                EntityItem item = new EntityItem(world, pos.getX(), pos.getY() + 1, pos.getZ(), Item.getItemById(TimeAltarCoreEntity.OUTPUT).getDefaultInstance());
-                world.spawnEntity(item);
+        if (!world.isRemote) {
+            if (TimeAltarCoreEntity.TIMESAND >= 0 && TimeAltarCoreEntity.OUTPUT >= 0) {
+                if (TimeSandHelper.getTimeSand(itemStack) >= TimeAltarCoreEntity.TIMESAND) {
+                    killItems(world, pos);
+                    TimeSandHelper.removeTimeSand(itemStack, TimeAltarCoreEntity.TIMESAND);
+                    EntityItem item = new EntityItem(world, pos.getX(), pos.getY() + 1, pos.getZ(), Item.getItemById(TimeAltarCoreEntity.OUTPUT).getDefaultInstance());
+                    world.spawnEntity(item);
+                }
             }
         }
         return true;
+    }
+
+    private void killItems(World world, BlockPos pos) {
+        List<EntityItem> list = new ArrayList<EntityItem>();
+        list.addAll(world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos, pos.add(-1, 1, 1))));
+        list.addAll(world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos, pos.add(2, 1, 1))));
+        list.addAll(world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos, pos.add(1, 1, -1))));
+        list.addAll(world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos, pos.add(1, 1, 2))));
+
+        for (EntityItem i : list) {
+            world.removeEntity(i);
+        }
     }
 
 }

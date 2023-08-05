@@ -1,4 +1,4 @@
-package com.wdcftgg.spacetime.mods.jei;
+package com.wdcftgg.spacetime.mods.jei.timealtar;
 
 /**
  * Created by IntelliJ IDEA.
@@ -8,7 +8,6 @@ package com.wdcftgg.spacetime.mods.jei;
  */
 
 import com.wdcftgg.spacetime.SpaceTime;
-import com.wdcftgg.spacetime.mods.jei.recipes.CompatTimeCrack;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
@@ -25,13 +24,13 @@ public class Plugin implements IModPlugin {
         List<Wrapper> list = new ArrayList<>();
         List<Compat> compats = new ArrayList<>();
 
-        compats.add(new CompatTimeCrack());
+        compats.add(new CompatTimeAltar());
 
         //Sort them alphabetically by modid
         Collections.sort(compats);
 
-        for (Compat com : compats) if (com.shouldLoad()) com.addRecipes(list);
-        registry.addRecipes(list, SpaceTime.MODID);
+        for (Compat com : compats) com.addRecipes(list);
+        registry.addRecipes(list, SpaceTime.MODID + "timealtar");
     }
 
     @Override

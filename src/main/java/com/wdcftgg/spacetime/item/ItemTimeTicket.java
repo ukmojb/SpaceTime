@@ -56,7 +56,8 @@ public class ItemTimeTicket extends Item implements IHasModel {
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack is, World worldIn, List<String> list, ITooltipFlag flagIn)
     {
-        list.add(I18n.format("spacetime.timeticket.tooltip"));
+        list.add(I18n.format("spacetime.timeticket.tooltip.0"));
+        list.add(I18n.format("spacetime.timeticket.tooltip.1"));
     }
 
     @Override

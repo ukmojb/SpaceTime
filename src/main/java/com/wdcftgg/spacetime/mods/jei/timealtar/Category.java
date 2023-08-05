@@ -1,4 +1,4 @@
-package com.wdcftgg.spacetime.mods.jei;
+package com.wdcftgg.spacetime.mods.jei.timealtar;
 
 /**
  * Created by IntelliJ IDEA.
@@ -8,6 +8,7 @@ package com.wdcftgg.spacetime.mods.jei;
  */
 
 import com.wdcftgg.spacetime.SpaceTime;
+import com.wdcftgg.spacetime.blocks.STBlocks;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiItemStackGroup;
@@ -22,23 +23,23 @@ import net.minecraft.util.ResourceLocation;
 import java.util.List;
 
 public class Category implements IRecipeCategory<Wrapper> {
-    public static final ResourceLocation BACKGROUND = new ResourceLocation(SpaceTime.MODID, "textures/gui/jei.png");
-    public static final ResourceLocation ICON = new ResourceLocation(SpaceTime.MODID, "textures/gui/icon.png");
+    public static final ResourceLocation BACKGROUND = new ResourceLocation(SpaceTime.MODID, "textures/gui/timealtarjei.png");
+    public static final ResourceLocation ICON = new ResourceLocation(SpaceTime.MODID, "textures/gui/timealtaricon.png");
     private IDrawable background, icon;
 
     public Category(IGuiHelper guiHelper) {
-        background = guiHelper.drawableBuilder(BACKGROUND, 0, 0, 140, 32).addPadding(0, 12, 0, 0).build();
+        background = guiHelper.drawableBuilder(BACKGROUND, 0, 0, 160, 32).addPadding(0, 12, 0, 0).build();
         icon = guiHelper.drawableBuilder(ICON, 0, 0, 16, 16).setTextureSize(16, 16).build();
     }
 
     @Override
     public String getUid() {
-        return SpaceTime.MODID;
+        return SpaceTime.MODID + "timealtar";
     }
 
     @Override
     public String getTitle() {
-        return I18n.format(SpaceTime.MODID + ".category");
+        return I18n.format(SpaceTime.MODID + ".timealtar.category");
     }
 
     @Override
@@ -63,10 +64,10 @@ public class Category implements IRecipeCategory<Wrapper> {
         IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
         //Output
         int offset1 = outputs.size() - 1;
-        for (int i = 0; i <= offset1; i++) guiItemStacks.init(i, false, 82 + (offset1 - i) * 18, 9);
+        for (int i = 0; i <= offset1; i++) guiItemStacks.init(i, false, 102 + (offset1 - i) * 17, 9);
         //Input
         int offset0 = inputs.size() - 1;
-        for (int i = 0; i <= offset0; i++) guiItemStacks.init(i + 5, true, 36 - (offset0 - i) * 18, 9);
+        for (int i = 0; i <= offset0; i++) guiItemStacks.init(i + 5, true, 56 - (offset0 - i) * 17, 9);
 
         guiItemStacks.set(ingredients);
     }

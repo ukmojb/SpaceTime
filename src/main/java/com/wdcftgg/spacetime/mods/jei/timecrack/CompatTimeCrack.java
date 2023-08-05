@@ -1,8 +1,6 @@
-package com.wdcftgg.spacetime.mods.jei.recipes;
+package com.wdcftgg.spacetime.mods.jei.timecrack;
 
 import com.wdcftgg.spacetime.item.STItems;
-import com.wdcftgg.spacetime.mods.jei.Compat;
-import com.wdcftgg.spacetime.mods.jei.Wrapper;
 import lumaceon.mods.clockworkphase.init.ModItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -17,10 +15,6 @@ import java.util.List;
  * @create 2023/7/19 16:33
  */
 public class CompatTimeCrack extends Compat {
-
-    public CompatTimeCrack() {
-        super("spacetime");
-    }
 
     @Override
     public void addRecipes(List<Wrapper> list) {

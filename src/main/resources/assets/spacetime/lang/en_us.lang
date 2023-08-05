@@ -76,8 +76,11 @@ spacetime.one_punch.tooltip=Don't look at it, it's just an ornament.
 spacetime.spacetime_dust.tooltip=Faint as dust!
 spacetime.spacetime_nugget.tooltip=small §m, soft, fragrant...
 spacetime.spacetime_ingot.tooltip=A three-dimensional representation of spacetime!
-spacetime.timeticket.tooltip=Right-click to summon boss[Time]
+spacetime.timeticket.tooltip.0=Right-click to summon boss[Time]
+spacetime.timeticket.tooltip.1=Try to turn into a small window to play the boss, otherwise it will obviously drop frame!
 
 # jei
 spacetime.jei.timecrack=Pay attention to put in order!
-spacetime.category=Time Crack
+spacetime.jei.altar=Energy required:
+spacetime.timecrack.category=Time Crack
+spacetime.timealtar.category=Time Altar

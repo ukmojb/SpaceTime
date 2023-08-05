@@ -79,8 +79,12 @@ spacetime.one_punch.tooltip=别看了，就是一个装饰品。
 spacetime.spacetime_dust.tooltip=微弱如尘埃！
 spacetime.spacetime_nugget.tooltip=小小的§m，软软的，香香的...
 spacetime.spacetime_ingot.tooltip=时空的三维具象态！
-spacetime.timeticket.tooltip=右键召唤boss[时]
+spacetime.timeticket.tooltip.0=右键召唤boss[时]
+spacetime.timeticket.tooltip.1=尽量转为小窗口来打boss，否则将明显掉帧！
 
 # jei
 spacetime.jei.timecrack=注意按顺序投入!
-spacetime.category=时间裂缝
+spacetime.jei.altar=所需能量:
+spacetime.timecrack.category=时间裂缝
+spacetime.timealtar.category=时间祭坛
+

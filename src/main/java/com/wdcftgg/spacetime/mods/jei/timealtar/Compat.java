@@ -1,4 +1,4 @@
-package com.wdcftgg.spacetime.mods.jei;
+package com.wdcftgg.spacetime.mods.jei.timealtar;
 
 /**
  * Created by IntelliJ IDEA.
@@ -16,26 +16,17 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import java.util.List;
 
 public abstract class Compat implements Comparable<Compat> {
-    protected String modid;
 
-    public Compat(String modid) {
-        this.modid = modid;
+
+    public Compat() {
     }
-
-    public String getModID() {
-        return modid;
-    }
-
     public abstract void addRecipes(List<Wrapper> list);
-
-    public final boolean shouldLoad() {
-        return Loader.isModLoaded(modid);
-    }
 
     @Override
     public int compareTo(Compat o) {
-        return modid.compareTo(o.modid);
+        return 0;
     }
+
 
     public static ItemStack getModdedItem(String name) {
         return getModdedItem(name, 1, 0);

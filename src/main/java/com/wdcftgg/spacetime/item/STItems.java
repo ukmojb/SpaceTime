@@ -26,7 +26,7 @@ public class STItems {
 	public static final Item TEMPORALBRASSINGOT = new ItemTemporalBrassIngot();
 	public static final Item MODULEXP = new ItemModuleXP();
 	public static final Item SUPERGOLDENAPPLE = new ItemSuperGoldApple();
-	public static final Item TIMETICKET = new Item().setTranslationKey("timeticket").setRegistryName("timeticket").setCreativeTab(ModCreativeTab.SpaceTimeTab).setMaxStackSize(1);
+	public static final Item TIMETICKET = new ItemTimeTicket();
 
 
 }

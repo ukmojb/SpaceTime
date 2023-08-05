@@ -2,12 +2,14 @@ package com.wdcftgg.spacetime.event;
 
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.tileEntity.TimeAltarCoreEntity;
+import com.wdcftgg.spacetime.config.config;
 import com.wdcftgg.spacetime.entity.EntityTimePhantom;
 import com.wdcftgg.spacetime.potion.ModPotions;
 import lumaceon.mods.clockworkphase.init.ModItems;
 import lumaceon.mods.clockworkphase.item.construct.pocketwatch.ItemPocketWatch;
 import lumaceon.mods.clockworkphase.util.InventorySearchHelper;
 import lumaceon.mods.clockworkphase.util.NBTHelper;
+import lumaceon.mods.clockworkphase.util.TimeSandParser;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -64,28 +66,19 @@ public class EventRender {
         if (Minecraft.getMinecraft().player != null) {
             EntityPlayer player = Minecraft.getMinecraft().player;
             if (TimeAltarCoreEntity.TIMESAND < 0) return;
-            String text = String.valueOf(TimeAltarCoreEntity.TIMESAND);
+            String text = TimeSandParser.getStringForRenderingFromTimeSand(TimeAltarCoreEntity.TIMESAND);
             FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
-            int strLenHalved = fontRenderer.getStringWidth(text) / 2;
 
             GlStateManager.pushMatrix();
-//            GlStateManager.translate(0, 0, 0);
-            GlStateManager.scale(-0.01F, -0.01F, 0.01F);
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F); //将画笔置为黑色, 便于进行绘画(这里没有进行绘画)
 
             GlStateManager.disableLighting();
             GlStateManager.enablePolygonOffset();
-            GlStateManager.depthMask(false);
             GlStateManager.enableBlend(); //开启混合器(使GL支持Alpha透明通道)
-            GlStateManager.doPolygonOffset(-1, -20);
 
-            fontRenderer.drawString(text, -strLenHalved, 0, 0xFFFFFFFF);
+            fontRenderer.drawString(text, config.GUIPOSX, config.GUIPOSY, 0xFFFFFFFF);
 
             GlStateManager.disableBlend();
-            GlStateManager.depthMask(true);
-            GlStateManager.disablePolygonOffset();
             GlStateManager.enableLighting();
-
             GlStateManager.popMatrix();
         }
         if (Minecraft.getMinecraft().player != null && Minecraft.getMinecraft().player.getActivePotionEffect(ModPotions.heterospace) != null){

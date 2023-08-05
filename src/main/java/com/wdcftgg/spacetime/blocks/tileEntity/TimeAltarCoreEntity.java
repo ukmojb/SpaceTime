@@ -1,15 +1,19 @@
 package com.wdcftgg.spacetime.blocks.tileEntity;
 
 
+
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.HourGlass.HourGlassBase;
 import com.wdcftgg.spacetime.blocks.STBlocks;
+import com.wdcftgg.spacetime.item.STItems;
+import lumaceon.mods.clockworkphase.init.ModBlocks;
+import lumaceon.mods.clockworkphase.init.ModItems;
 import net.minecraft.block.Block;
-import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
@@ -18,9 +22,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -37,18 +39,29 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
     public static int OUTPUT = -1;
     public static int TIMESAND = -1;
 
+    public static boolean init = false;
+
+    public List<List<ItemStack>> TimeAltarRecipesin = new ArrayList<List<ItemStack>>();
+    public List<List<Item>> ItemTimeAltarRecipesin = new ArrayList<List<Item>>();
+    public List<ItemStack> TimeAltarRecipesout = new ArrayList<ItemStack>();
+    public List<Integer> TimeAltarRecipesEnergy = new ArrayList<Integer>();
+
     @Override
     public void update() {
         if (!world.isRemote) {
+            if (!init) {
+                initRecipes();
+                init = true;
+            }
             if (isstructure(pos, world)){
                 List<EntityItem> items = getItems();
-                if(areItemsValid(items)) {
-                    int num = Item.getIdFromItem(outPutItem(items));
+                    SpaceTime.Log("true");
+                if(areItemsValid(items) && outPutItem(items) != null) {
+                    int num = Item.getIdFromItem(outPutItem(items).getItem());
                     int timesand = needtimeenergy(items);
                     OUTPUT = num;
                     TIMESAND = timesand;
-                    SpaceTime.Log(num+"");
-                    world.getTileEntity(pos).getTileData().setInteger("output", Item.getIdFromItem(outPutItem(items)));
+                    world.getTileEntity(pos).getTileData().setInteger("output", num);
                     world.setBlockState(pos.up(), STBlocks.AIR.getDefaultState());
                 }else{
                     OUTPUT = -1;
@@ -158,8 +171,8 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
         List<Item> Input = new ArrayList<Item>();
         for(EntityItem item : items) {
             Input.add(item.getItem().getItem());
-            for(Item[] recipes : TimeAltarRecipesin) {
-                ArrayList<Item> list = new ArrayList<Item>(Arrays.asList(recipes));
+            for(List<Item> recipes : ItemTimeAltarRecipesin) {
+                ArrayList<Item> list = new ArrayList<Item>(recipes);
                 if (Input.containsAll(list) && Input.size() == 4 && fouritems(items)){
                     return true;
                 }
@@ -170,18 +183,17 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
         return false;
     }
 
-    Item outPutItem(List<EntityItem> items) {
+    ItemStack outPutItem(List<EntityItem> items) {
         if(items.size() != 4)
             return null;
 
         List<Item> Input = new ArrayList<Item>();
         for(EntityItem item : items) {
             Input.add(item.getItem().getItem());
-            for(int i=0;i<TimeAltarRecipesin.length;i++) {
-                ArrayList<Item> list = new ArrayList<Item>(Arrays.asList(TimeAltarRecipesin[i]));
+            for(int i=0;i<=(TimeAltarRecipesin.size()-1);i++) {
+                ArrayList<Item> list = new ArrayList<Item>(ItemTimeAltarRecipesin.get(i));
                 if (Input.containsAll(list) && Input.size() == 4 && fouritems(items)){
-
-                    return TimeAltarRecipesout[i][0];
+                    return TimeAltarRecipesout.get(i);
                 }
             }
         }
@@ -208,11 +220,11 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
         List<Item> Input = new ArrayList<Item>();
         for(EntityItem item : items) {
             Input.add(item.getItem().getItem());
-            for(int i=0;i<TimeAltarRecipesin.length;i++) {
+            for(int i=0;i<TimeAltarRecipesin.size();i++) {
 //            for(Item[] recipes : TimeAltarRecipesin) {
-                ArrayList<Item> list = new ArrayList<Item>(Arrays.asList(TimeAltarRecipesin[i]));
+                ArrayList<Item> list = new ArrayList<Item>(ItemTimeAltarRecipesin.get(i));
                 if (Input.containsAll(list) && Input.size() == 4 && fouritems(items)){
-                    return TimeAltarRecipesEnergy[i][0];
+                    return TimeAltarRecipesEnergy.get(i);
                 }
             }
         }
@@ -220,16 +232,30 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
         return 0;
     }
 
-    public Item[][] TimeAltarRecipesin = new Item[][]{
-            {Items.DIAMOND, Items.DIAMOND, Items.DIAMOND, Items.DIAMOND},
-            {Items.GOLD_INGOT, Items.GOLD_INGOT, Items.GOLD_INGOT, Items.GOLD_INGOT}
-    };
-    public  Item[][] TimeAltarRecipesout = new Item[][]{
-            {Items.APPLE},
-            {Items.GOLDEN_APPLE}
-    };
-    public  int[][] TimeAltarRecipesEnergy = new int[][]{
-            {100},
-            {666}
-    };
+    public void initRecipes() {
+        addAltarRecipes(newArray(Items.DIAMOND.getDefaultInstance(), Items.DIAMOND.getDefaultInstance(), Items.DIAMOND.getDefaultInstance(), Items.DIAMOND.getDefaultInstance()), new ItemStack(Blocks.DIAMOND_BLOCK), 1000);
+        addAltarRecipes(newArray(ModItems.temporalCoreActive.getDefaultInstance(), new ItemStack(ModBlocks.blockTemporal), ModItems.preciousCharm.getDefaultInstance(), ModItems.gearChronosphere.getDefaultInstance()), new ItemStack(STItems.TIMETICKET), 66666);
+    }
+
+    private void addAltarRecipes(List<ItemStack> input, ItemStack output, int energy) {
+        TimeAltarRecipesin.add(input);
+        TimeAltarRecipesout.add(output);
+        TimeAltarRecipesEnergy.add(energy);
+        List<Item> list = new ArrayList<Item>();
+        for (ItemStack itemStack : input) {
+            list.add(itemStack.getItem());
+        }
+        ItemTimeAltarRecipesin.add(list);
+    }
+
+    private List<ItemStack> newArray(ItemStack item, ItemStack item1, ItemStack item2, ItemStack item3){
+        List<ItemStack> input = new ArrayList<ItemStack>();
+        input.add(item);
+        input.add(item1);
+        input.add(item2);
+        input.add(item3);
+        return input;
+    }
+
+
 }
