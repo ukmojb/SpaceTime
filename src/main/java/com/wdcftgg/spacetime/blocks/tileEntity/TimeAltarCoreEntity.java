@@ -55,7 +55,6 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
             }
             if (isstructure(pos, world)){
                 List<EntityItem> items = getItems();
-                    SpaceTime.Log("true");
                 if(areItemsValid(items) && outPutItem(items) != null) {
                     int num = Item.getIdFromItem(outPutItem(items).getItem());
                     int timesand = needtimeenergy(items);

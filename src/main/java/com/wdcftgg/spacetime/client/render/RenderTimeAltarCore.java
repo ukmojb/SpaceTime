@@ -28,9 +28,9 @@ import static org.lwjgl.opengl.GL12.GL_SEPARATE_SPECULAR_COLOR;
  */
 public class RenderTimeAltarCore extends TileEntitySpecialRenderer<TimeAltarCoreEntity> {
 
-    float p = 0.0f;
-    float a = 0.0f;
-    float g = 0.0f;
+    private float p = -1f;
+    private float a = -1f;
+    private float g = -1f;
 
     @Override
     public void render(TimeAltarCoreEntity AltarCore, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
@@ -38,8 +38,12 @@ public class RenderTimeAltarCore extends TileEntitySpecialRenderer<TimeAltarCore
         ItemStack output = Item.getItemById(num).getDefaultInstance();
         EntityItem entityItem = new EntityItem(AltarCore.getWorld(), 0D, 0D, 0D);
         entityItem.setItem(output);
+        if (p == -1 || a == -1 || g == -1) {
+            p = 0;
+            a = 0;
+            g = 0;
+        }
         if (num != 0){
-
             renderItem(entityItem, x, y, z);
             renderTextures("textures/gui/normalmatrix.png", x, y, z);
         } else {
@@ -47,6 +51,7 @@ public class RenderTimeAltarCore extends TileEntitySpecialRenderer<TimeAltarCore
             a = 0;
             g = 0;
         }
+        SpaceTime.Log(partialTicks+"");
     }
 
 
