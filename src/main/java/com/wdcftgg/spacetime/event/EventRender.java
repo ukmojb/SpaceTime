@@ -136,7 +136,6 @@ public class EventRender {
                 double y1 = mc.displayHeight * 0.02 + i * mc.displayHeight * 0.01 + (!player.getActivePotionMap().isEmpty() ? mc.displayHeight * 0.047 : 0);
                 double y0 = mc.displayHeight * 0.001 + i * mc.displayHeight * 0.01 + (!player.getActivePotionMap().isEmpty() ? mc.displayHeight * 0.047 : 0);
 
-//                SpaceTime.Log(mc.);
                 int scale = (mc.gameSettings.guiScale != 0  ? ((int) mc.displayWidth / mc.gameSettings.guiScale) : 0);
                 if (mc.gameSettings.guiScale == 3) scale = mc.displayWidth / 2;
                 mc.getTextureManager().bindTexture(res);

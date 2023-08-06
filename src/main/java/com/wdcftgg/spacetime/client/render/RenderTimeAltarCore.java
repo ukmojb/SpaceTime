@@ -51,7 +51,7 @@ public class RenderTimeAltarCore extends TileEntitySpecialRenderer<TimeAltarCore
             a = 0;
             g = 0;
         }
-        SpaceTime.Log(partialTicks+"");
+
     }
 
 
