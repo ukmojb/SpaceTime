@@ -5,7 +5,10 @@ package com.wdcftgg.spacetime.blocks.tileEntity;
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.HourGlass.HourGlassBase;
 import com.wdcftgg.spacetime.blocks.STBlocks;
+import com.wdcftgg.spacetime.client.render.RenderTimeAltarCore;
 import com.wdcftgg.spacetime.item.STItems;
+import com.wdcftgg.spacetime.network.MessageTimeAltarCore;
+import com.wdcftgg.spacetime.network.PacketHandler;
 import lumaceon.mods.clockworkphase.init.ModBlocks;
 import lumaceon.mods.clockworkphase.init.ModItems;
 import net.minecraft.block.Block;
@@ -20,6 +23,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 import javax.annotation.Nonnull;
 import java.util.*;
@@ -62,11 +66,13 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
                     TIMESAND = timesand;
                     world.getTileEntity(pos).getTileData().setInteger("output", num);
                     world.setBlockState(pos.up(), STBlocks.AIR.getDefaultState());
+//                    PacketHandler.INSTANCE.sendToAllAround(new MessageTimeAltarCore(RenderTimeAltarCore.p, RenderTimeAltarCore.a, RenderTimeAltarCore.g), new NetworkRegistry.TargetPoint(this.getWorld().provider.getDimension(), (double)this.getPos().getX(), (double)this.getPos().getY(), (double)this.getPos().getZ(), 256.0D));
                 }else{
                     OUTPUT = -1;
                     TIMESAND = -1;
                     world.getTileEntity(pos).getTileData().setInteger("output", 0);
                     world.setBlockToAir(pos.up());
+                    PacketHandler.INSTANCE.sendToAllAround(new MessageTimeAltarCore(0, 0, 0), new NetworkRegistry.TargetPoint(this.getWorld().provider.getDimension(), (double)this.getPos().getX(), (double)this.getPos().getY(), (double)this.getPos().getZ(), 256.0D));
                 }
             }
         }

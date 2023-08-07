@@ -15,7 +15,7 @@ import java.io.File;
 public class config {
 
     public static int SWORDBLOCKINGPARTICLE = 20;
-    public static double ROTATIONALSPEED = 1d;
+    public static double ROTATIONALSPEED = 30d;
     public static int GUIPOSX = 0;
     public static int GUIPOSY = 50;
     public static double TIMEMAXHEALTH = 150d;

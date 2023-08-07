@@ -4,6 +4,9 @@ package com.wdcftgg.spacetime.client.render;
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.tileEntity.TimeAltarCoreEntity;
 import com.wdcftgg.spacetime.config.config;
+import com.wdcftgg.spacetime.network.MessageTimeAltarCore;
+import com.wdcftgg.spacetime.network.MessageTimeParticle;
+import com.wdcftgg.spacetime.network.PacketHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -15,6 +18,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import org.lwjgl.opengl.GL11;
 
 import static org.lwjgl.opengl.GL12.GL_LIGHT_MODEL_COLOR_CONTROL;
@@ -28,9 +32,10 @@ import static org.lwjgl.opengl.GL12.GL_SEPARATE_SPECULAR_COLOR;
  */
 public class RenderTimeAltarCore extends TileEntitySpecialRenderer<TimeAltarCoreEntity> {
 
-    private float p = -1f;
-    private float a = -1f;
-    private float g = -1f;
+    public static float p = -1f;
+    public static float a = -1f;
+    public static float g = -1f;
+    public float x = 0f;
 
     @Override
     public void render(TimeAltarCoreEntity AltarCore, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
@@ -38,20 +43,11 @@ public class RenderTimeAltarCore extends TileEntitySpecialRenderer<TimeAltarCore
         ItemStack output = Item.getItemById(num).getDefaultInstance();
         EntityItem entityItem = new EntityItem(AltarCore.getWorld(), 0D, 0D, 0D);
         entityItem.setItem(output);
-        if (p == -1 || a == -1 || g == -1) {
-            p = 0;
-            a = 0;
-            g = 0;
-        }
         if (num != 0){
+            PacketHandler.INSTANCE.sendToAllAround(new MessageTimeAltarCore(RenderTimeAltarCore.p, RenderTimeAltarCore.a, RenderTimeAltarCore.g), new NetworkRegistry.TargetPoint(AltarCore.getWorld().provider.getDimension(), (double)AltarCore.getPos().getX(), (double)AltarCore.getPos().getY(), (double)AltarCore.getPos().getZ(), 256.0D));
             renderItem(entityItem, x, y, z);
             renderTextures("textures/gui/normalmatrix.png", x, y, z);
-        } else {
-            p = 0;
-            a = 0;
-            g = 0;
         }
-
     }
 
 
@@ -64,8 +60,8 @@ public class RenderTimeAltarCore extends TileEntitySpecialRenderer<TimeAltarCore
         GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glTranslatef((float) x + 4.5f,(float) y + 1,(float) z - 2.5f);
         GlStateManager.translate(-4f, -1f, +3f);
-        GlStateManager.rotate(angle(), 0F, 1F, 0F);
-        GlStateManager.color(53/255f, 254/255f, 255/255f, alpha());
+        GlStateManager.rotate(g, 0F, 1F, 0F);
+        GlStateManager.color(53/255f, 254/255f, 255/255f, a);
         GlStateManager.doPolygonOffset(-1, -0);
         GL11.glLightModeli(GL_LIGHT_MODEL_COLOR_CONTROL, GL_SEPARATE_SPECULAR_COLOR);
 
@@ -89,10 +85,10 @@ public class RenderTimeAltarCore extends TileEntitySpecialRenderer<TimeAltarCore
         GlStateManager.pushMatrix();
         GlStateManager.enableBlend();
         GlStateManager.disableLighting();
-        entityItem.hoverStart = 0.0F;
+        entityItem.hoverStart = 3.0F;
         GL11.glTranslatef((float) x + 0.5F, (float) y + 1.05F, (float) z + 0.5F);
         GlStateManager.scale(0.9F, 0.9F, 0.9F);
-        GlStateManager.color(1.0f, 1.0f, 1.0f, alpha());
+        GlStateManager.color(1.0f, 1.0f, 1.0f, 0);
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 0.15f);
         Minecraft.getMinecraft().getRenderManager().renderEntity(entityItem, 0.0D, 0.0D, 0.0D, 180F, partial(), true);
         GlStateManager.enableLighting();
@@ -101,28 +97,7 @@ public class RenderTimeAltarCore extends TileEntitySpecialRenderer<TimeAltarCore
     }
 
     float partial(){
-        p += 0.5f;
-        return p;
-    }
-
-    float alpha(){
-        a += 0.001f;
-        if (a >= 0.9f){
-            return  0.9f;
-        }
-        return a;
-    }
-
-    float angle(){
-        if (alpha() == 0.9f){
-            g += (float) config.ROTATIONALSPEED;
-            if (g > 360.0f){
-                g = 0;
-                return  0.1f;
-            }
-            return g;
-        } else {
-            return 0f;
-        }
+        x += 0.25f;
+        return x;
     }
 }
