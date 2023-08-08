@@ -46,6 +46,7 @@ item.spacetime_ingot.name=时空之锭
 item.module_xp.name=经验模块
 item.supergoldapple.name=超级附魔金苹果
 item.timeticket.name=时的挑战券
+item.magnifying_glass.name=放大镜
 
 
 
@@ -79,6 +80,7 @@ spacetime.one_punch.tooltip=别看了，就是一个装饰品。
 spacetime.spacetime_dust.tooltip=微弱如尘埃！
 spacetime.spacetime_nugget.tooltip=小小的§m，软软的，香香的...
 spacetime.spacetime_ingot.tooltip=时空的三维具象态！
+spacetime.magnifying_glass.tooltip=右键时空沙漏以查看内部能量.
 spacetime.timeticket.tooltip.0=右键召唤boss[时]
 spacetime.timeticket.tooltip.1=尽量转为小窗口来打boss，否则将明显掉帧！
 
@@ -88,3 +90,18 @@ spacetime.jei.altar=所需能量:
 spacetime.timecrack.category=时间裂缝
 spacetime.timealtar.category=时间祭坛
 
+# sendMessage
+spacetime.energy.0=能量:
+spacetime.energy.1=内无能量
+
+# altar energy
+spacetime.altar.air=疾风
+spacetime.altar.death=死亡
+spacetime.altar.earth=大地
+spacetime.altar.fire=火焰
+spacetime.altar.life=生命
+spacetime.altar.light=光明
+spacetime.altar.moon=月亮
+spacetime.altar.water=水源
+spacetime.altar.hourglass.noenergy=时空沙漏的能量不足请自行检查。
+spacetime.altar.time.noenergy=手中时间不足。

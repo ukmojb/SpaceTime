@@ -7,6 +7,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +20,15 @@ public class CompatTimeAltar extends Compat {
 
     @Override
     public void addRecipes(List<Wrapper> list) {
-        list.add(new Wrapper(66666, "spacetime.jei.altar", new ItemStack(STItems.TIMETICKET), ModItems.temporalCoreActive.getDefaultInstance(), new ItemStack(ModBlocks.blockTemporal), ModItems.preciousCharm.getDefaultInstance(), ModItems.gearChronosphere.getDefaultInstance()));
+        list.add(new Wrapper(66666, newArray(500000, 500000, 500000, 500000, 500000, 500000, 500000, 500000), "spacetime.jei.altar", new ItemStack(STItems.TIMETICKET), ModItems.temporalCoreActive.getDefaultInstance(), new ItemStack(ModBlocks.blockTemporal), ModItems.preciousCharm.getDefaultInstance(), ModItems.gearChronosphere.getDefaultInstance()));
         list.add(new Wrapper(1000, "spacetime.jei.altar", new ItemStack(Blocks.DIAMOND_BLOCK), Items.DIAMOND.getDefaultInstance(), Items.DIAMOND.getDefaultInstance(), Items.DIAMOND.getDefaultInstance(), Items.DIAMOND.getDefaultInstance()));
+    }
+
+    private List<Integer> newArray(int... num1){
+        List<Integer> numList = new ArrayList<Integer>();
+        for (int i : num1) {
+            numList.add(i);
+        }
+        return numList;
     }
 }

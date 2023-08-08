@@ -34,8 +34,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.lwjgl.opengl.GL11;
 
-import static java.awt.SystemColor.text;
-
 /**
  * Created by IntelliJ IDEA.
  *

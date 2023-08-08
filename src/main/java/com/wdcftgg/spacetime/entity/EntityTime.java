@@ -24,7 +24,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
@@ -156,6 +155,7 @@ public class EntityTime extends EntityMob {
             if (playeruuid != null && playeruuid.length() == 36) {
                 if (world.getPlayerEntityByUUID(UUID.fromString(playeruuid)) != null) {
                     EntityPlayer player = (EntityPlayer) world.getPlayerEntityByUUID(UUID.fromString(playeruuid));
+
                     if (player != null) {
                         if (player.isDead) {
                             world.removeEntity(this);

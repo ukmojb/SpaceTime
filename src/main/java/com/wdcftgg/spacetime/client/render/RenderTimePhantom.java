@@ -1,7 +1,6 @@
 package com.wdcftgg.spacetime.client.render;
 
 import com.wdcftgg.spacetime.SpaceTime;
-import com.wdcftgg.spacetime.entity.EntityTime;
 import com.wdcftgg.spacetime.entity.EntityTimePhantom;
 import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.GlStateManager;

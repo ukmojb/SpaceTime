@@ -6,6 +6,7 @@ import com.wdcftgg.spacetime.blocks.tileEntity.ConcretizationHourGlassEntity;
 import com.wdcftgg.spacetime.init.ModCreativeTab;
 import com.wdcftgg.spacetime.item.STItems;
 import com.wdcftgg.spacetime.util.IHasModel;
+import lumaceon.mods.clockworkphase.init.ModItems;
 import lumaceon.mods.clockworkphase.item.construct.hourglass.*;
 import lumaceon.mods.clockworkphase.util.NBTHelper;
 import net.minecraft.block.Block;
@@ -193,7 +194,7 @@ public class BlockConcretizationHourGlass extends Block implements ITileEntityPr
             }
             return true;
         }
-        return false;
+        return true;
     }
 
     private void setHourglassNBT(String hourglass_energy, int maxtension, int tension_energy, int memory, int quality, int speed, BlockPos pos, World world){
@@ -212,6 +213,10 @@ public class BlockConcretizationHourGlass extends Block implements ITileEntityPr
         int quality = world.getTileEntity(pos).getTileData().getInteger("cp_quality");
         int speed = world.getTileEntity(pos).getTileData().getInteger("cp_speed");
         ItemStack item = Item.getByNameOrId(hourglass.get(hourglass_energy)).getDefaultInstance();
+
+        if (tension_energy <= 0) {
+            item = ModItems.hourglass.getDefaultInstance();
+        }
 
         NBTHelper.setInteger(item, "tension_energy", tension_energy);
         NBTHelper.setInteger(item, "max_tension", max_tension);

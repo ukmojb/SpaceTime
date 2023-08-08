@@ -46,7 +46,7 @@ item.spacetime_ingot.name=Ingot of spacetime
 item.module_xp.name=Module XP
 item.supergoldapple.name=Super Golden Apple
 item.timeticket.name=Time Challenge Ticket
-
+item.magnifying_glass.name=Magnifying glass
 # Potion
 
 spacetime.potion.heterospace=Heterospace
@@ -76,11 +76,28 @@ spacetime.one_punch.tooltip=Don't look at it, it's just an ornament.
 spacetime.spacetime_dust.tooltip=Faint as dust!
 spacetime.spacetime_nugget.tooltip=small §m, soft, fragrant...
 spacetime.spacetime_ingot.tooltip=A three-dimensional representation of spacetime!
+spacetime.magnifying_glass.tooltip=Right click the hourglass to view the internal energy.
 spacetime.timeticket.tooltip.0=Right-click to summon boss[Time]
 spacetime.timeticket.tooltip.1=Try to turn into a small window to play the boss, otherwise it will obviously drop frame!
 
 # jei
 spacetime.jei.timecrack=Pay attention to put in order!
-spacetime.jei.altar=Energy required:
+spacetime.jei.altar=Energy:
 spacetime.timecrack.category=Time Crack
 spacetime.timealtar.category=Time Altar
+
+# sendMessage
+spacetime.energy.0=Energy:
+spacetime.energy.1=No energy
+
+# altar energy
+spacetime.altar.air=Air
+spacetime.altar.death=Death
+spacetime.altar.earth=Earth
+spacetime.altar.fire=Fire
+spacetime.altar.life=Life
+spacetime.altar.light=Light
+spacetime.altar.moon=Moon
+spacetime.altar.water=Water
+spacetime.altar.hourglass.noenergy=Hourglass energy is insufficient, please check yourself.
+spacetime.altar.time.noenergy=Deficiency of time.

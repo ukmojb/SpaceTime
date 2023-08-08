@@ -1,11 +1,8 @@
 package com.wdcftgg.spacetime.client.render;
 
 
-import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.tileEntity.TimeAltarCoreEntity;
-import com.wdcftgg.spacetime.config.config;
 import com.wdcftgg.spacetime.network.MessageTimeAltarCore;
-import com.wdcftgg.spacetime.network.MessageTimeParticle;
 import com.wdcftgg.spacetime.network.PacketHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -14,7 +11,6 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;

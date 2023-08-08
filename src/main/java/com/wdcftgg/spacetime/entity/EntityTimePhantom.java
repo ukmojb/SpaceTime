@@ -5,23 +5,16 @@ import com.wdcftgg.spacetime.entity.ai.TimeAIHurtByTarget;
 import com.wdcftgg.spacetime.entity.ai.TimeAIMoveTowardsRestriction;
 import com.wdcftgg.spacetime.network.MessageTimeParticle;
 import com.wdcftgg.spacetime.network.PacketHandler;
-import net.minecraft.command.CommandSenderWrapper;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.ai.attributes.IAttribute;
-import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-
-import java.util.Random;
 
 /**
  * Created by IntelliJ IDEA.

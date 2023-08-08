@@ -1,17 +1,15 @@
 package com.wdcftgg.spacetime.blocks.tileEntity;
 
 
-
-import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.HourGlass.HourGlassBase;
 import com.wdcftgg.spacetime.blocks.STBlocks;
-import com.wdcftgg.spacetime.client.render.RenderTimeAltarCore;
 import com.wdcftgg.spacetime.item.STItems;
 import com.wdcftgg.spacetime.network.MessageTimeAltarCore;
 import com.wdcftgg.spacetime.network.PacketHandler;
 import lumaceon.mods.clockworkphase.init.ModBlocks;
 import lumaceon.mods.clockworkphase.init.ModItems;
 import net.minecraft.block.Block;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -22,6 +20,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
@@ -44,11 +43,14 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
     public static int TIMESAND = -1;
 
     public static boolean init = false;
+    public static ItemStack itemStackout = ItemStack.EMPTY;
 
     public List<List<ItemStack>> TimeAltarRecipesin = new ArrayList<List<ItemStack>>();
     public List<List<Item>> ItemTimeAltarRecipesin = new ArrayList<List<Item>>();
     public List<ItemStack> TimeAltarRecipesout = new ArrayList<ItemStack>();
-    public List<Integer> TimeAltarRecipesEnergy = new ArrayList<Integer>();
+    public List<Integer> TimeAltarRecipesTimeEnergy = new ArrayList<Integer>();
+    public static Map<ItemStack, List<Integer>> TimeAltarRecipesEnergy = new HashMap<ItemStack, List<Integer>>();
+    private List<Integer> in;
 
     @Override
     public void update() {
@@ -65,13 +67,16 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
                     OUTPUT = num;
                     TIMESAND = timesand;
                     world.getTileEntity(pos).getTileData().setInteger("output", num);
-                    world.setBlockState(pos.up(), STBlocks.AIR.getDefaultState());
-//                    PacketHandler.INSTANCE.sendToAllAround(new MessageTimeAltarCore(RenderTimeAltarCore.p, RenderTimeAltarCore.a, RenderTimeAltarCore.g), new NetworkRegistry.TargetPoint(this.getWorld().provider.getDimension(), (double)this.getPos().getX(), (double)this.getPos().getY(), (double)this.getPos().getZ(), 256.0D));
-                }else{
+                    if (world.getBlockState(pos.up()).getBlock() == Blocks.AIR) {
+                        world.setBlockState(pos.up(), STBlocks.AIR.getDefaultState());
+                    }
+              }else{
                     OUTPUT = -1;
                     TIMESAND = -1;
                     world.getTileEntity(pos).getTileData().setInteger("output", 0);
-                    world.setBlockToAir(pos.up());
+                    if (world.getBlockState(pos.up()).getBlock() == STBlocks.AIR) {
+                        world.setBlockToAir(pos.up());
+                    }
                     PacketHandler.INSTANCE.sendToAllAround(new MessageTimeAltarCore(0, 0, 0), new NetworkRegistry.TargetPoint(this.getWorld().provider.getDimension(), (double)this.getPos().getX(), (double)this.getPos().getY(), (double)this.getPos().getZ(), 256.0D));
                 }
             }
@@ -198,6 +203,7 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
             for(int i=0;i<=(TimeAltarRecipesin.size()-1);i++) {
                 ArrayList<Item> list = new ArrayList<Item>(ItemTimeAltarRecipesin.get(i));
                 if (Input.containsAll(list) && Input.size() == 4 && fouritems(items)){
+                    itemStackout = TimeAltarRecipesout.get(i);
                     return TimeAltarRecipesout.get(i);
                 }
             }
@@ -229,7 +235,7 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
 //            for(Item[] recipes : TimeAltarRecipesin) {
                 ArrayList<Item> list = new ArrayList<Item>(ItemTimeAltarRecipesin.get(i));
                 if (Input.containsAll(list) && Input.size() == 4 && fouritems(items)){
-                    return TimeAltarRecipesEnergy.get(i);
+                    return TimeAltarRecipesTimeEnergy.get(i);
                 }
             }
         }
@@ -238,19 +244,24 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
     }
 
     public void initRecipes() {
-        addAltarRecipes(newArray(Items.DIAMOND.getDefaultInstance(), Items.DIAMOND.getDefaultInstance(), Items.DIAMOND.getDefaultInstance(), Items.DIAMOND.getDefaultInstance()), new ItemStack(Blocks.DIAMOND_BLOCK), 1000);
-        addAltarRecipes(newArray(ModItems.temporalCoreActive.getDefaultInstance(), new ItemStack(ModBlocks.blockTemporal), ModItems.preciousCharm.getDefaultInstance(), ModItems.gearChronosphere.getDefaultInstance()), new ItemStack(STItems.TIMETICKET), 66666);
+        addAltarRecipes(newArray(Items.DIAMOND.getDefaultInstance(), Items.DIAMOND.getDefaultInstance(), Items.DIAMOND.getDefaultInstance(), Items.DIAMOND.getDefaultInstance()), new ItemStack(Blocks.DIAMOND_BLOCK), 1000, 0, 0, 0, 0, 0, 0, 0, 0);
+        addAltarRecipes(newArray(ModItems.temporalCoreActive.getDefaultInstance(), new ItemStack(ModBlocks.blockTemporal), ModItems.preciousCharm.getDefaultInstance(), ModItems.gearChronosphere.getDefaultInstance()), new ItemStack(STItems.TIMETICKET), 66666, 500000, 500000, 500000, 500000, 500000, 500000, 500000, 500000);
     }
 
-    private void addAltarRecipes(List<ItemStack> input, ItemStack output, int energy) {
+    private void addAltarRecipes(List<ItemStack> input, ItemStack output, int timeenergy, int... energy) {
         TimeAltarRecipesin.add(input);
         TimeAltarRecipesout.add(output);
-        TimeAltarRecipesEnergy.add(energy);
+        TimeAltarRecipesTimeEnergy.add(timeenergy);
         List<Item> list = new ArrayList<Item>();
         for (ItemStack itemStack : input) {
             list.add(itemStack.getItem());
         }
         ItemTimeAltarRecipesin.add(list);
+        in = new ArrayList<Integer>();
+        for (int num : energy) {
+            in.add(num);
+        }
+        TimeAltarRecipesEnergy.put(output, in);
     }
 
     private List<ItemStack> newArray(ItemStack item, ItemStack item1, ItemStack item2, ItemStack item3){
@@ -261,6 +272,4 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
         input.add(item3);
         return input;
     }
-
-
 }

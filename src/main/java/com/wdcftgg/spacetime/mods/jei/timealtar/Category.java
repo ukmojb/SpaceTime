@@ -8,7 +8,6 @@ package com.wdcftgg.spacetime.mods.jei.timealtar;
  */
 
 import com.wdcftgg.spacetime.SpaceTime;
-import com.wdcftgg.spacetime.blocks.STBlocks;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiItemStackGroup;
@@ -28,7 +27,7 @@ public class Category implements IRecipeCategory<Wrapper> {
     private IDrawable background, icon;
 
     public Category(IGuiHelper guiHelper) {
-        background = guiHelper.drawableBuilder(BACKGROUND, 0, 0, 160, 32).addPadding(0, 12, 0, 0).build();
+        background = guiHelper.drawableBuilder(BACKGROUND, 0, 0, 160, 120).addPadding(0, 12, 0, 0).build();
         icon = guiHelper.drawableBuilder(ICON, 0, 0, 16, 16).setTextureSize(16, 16).build();
     }
 

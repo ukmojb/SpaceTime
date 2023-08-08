@@ -36,6 +36,7 @@ public class EventWool {
                         item.setPickupDelay(40);
                         item.motionX = item.motionY = item.motionZ = 0;
                         event.getWorld().spawnEntity(item);
+                        event.setCanceled(true);
                     }
                 }
             }

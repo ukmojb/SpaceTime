@@ -1,8 +1,6 @@
 package com.wdcftgg.spacetime.network;
 
 import com.wdcftgg.spacetime.client.render.RenderTimeAltarCore;
-import com.wdcftgg.spacetime.config.config;
-import com.wdcftgg.spacetime.event.EventTimeBack;
 import io.netty.buffer.ByteBuf;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;

@@ -1,10 +1,8 @@
 package com.wdcftgg.spacetime.item;
 
-import com.wdcftgg.spacetime.init.ModCreativeTab;
 import com.wdcftgg.spacetime.item.ConfoundingContainers.ItemSpaceConfoundingContainers;
 import com.wdcftgg.spacetime.item.ConfoundingContainers.ItemTimeAndSpaceConfoundingContainers;
 import com.wdcftgg.spacetime.item.ConfoundingContainers.ItemTimeConfoundingContainers;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
 import java.util.ArrayList;
@@ -27,6 +25,7 @@ public class STItems {
 	public static final Item MODULEXP = new ItemModuleXP();
 	public static final Item SUPERGOLDENAPPLE = new ItemSuperGoldApple();
 	public static final Item TIMETICKET = new ItemTimeTicket();
+	public static final Item MAGNIFYINGGLASS = new ItemMagnifyingGlass();
 
 
 }
