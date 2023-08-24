@@ -20,7 +20,7 @@ public class CompatTimeAltar extends Compat {
 
     @Override
     public void addRecipes(List<Wrapper> list) {
-        list.add(new Wrapper(66666, newArray(500000, 500000, 500000, 500000, 500000, 500000, 500000, 500000), "spacetime.jei.altar", new ItemStack(STItems.TIMETICKET), ModItems.temporalCoreActive.getDefaultInstance(), new ItemStack(ModBlocks.blockTemporal), ModItems.preciousCharm.getDefaultInstance(), ModItems.gearChronosphere.getDefaultInstance()));
+        list.add(new Wrapper(666666, newArray(500000, 500000, 500000, 500000, 500000, 500000, 500000, 500000), "spacetime.jei.altar", new ItemStack(STItems.TIMETICKET), ModItems.temporalCoreActive.getDefaultInstance(), new ItemStack(ModBlocks.blockTemporal), ModItems.preciousCharm.getDefaultInstance(), ModItems.gearChronosphere.getDefaultInstance()));
         list.add(new Wrapper(1000, "spacetime.jei.altar", new ItemStack(Blocks.DIAMOND_BLOCK), Items.DIAMOND.getDefaultInstance(), Items.DIAMOND.getDefaultInstance(), Items.DIAMOND.getDefaultInstance(), Items.DIAMOND.getDefaultInstance()));
     }
 
@@ -31,4 +31,6 @@ public class CompatTimeAltar extends Compat {
         }
         return numList;
     }
+
+
 }

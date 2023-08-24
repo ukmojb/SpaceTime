@@ -149,6 +149,8 @@ public class EventRender {
         }
     }
 
+
+
     @SubscribeEvent
     public void onPreRenderLiving(RenderLivingEvent.Pre event) {
         if (event.getEntity() instanceof EntityLivingBase) {

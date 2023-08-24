@@ -9,7 +9,6 @@ import com.wdcftgg.spacetime.network.PacketHandler;
 import lumaceon.mods.clockworkphase.init.ModBlocks;
 import lumaceon.mods.clockworkphase.init.ModItems;
 import net.minecraft.block.Block;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -20,12 +19,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 import javax.annotation.Nonnull;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -245,7 +246,7 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
 
     public void initRecipes() {
         addAltarRecipes(newArray(Items.DIAMOND.getDefaultInstance(), Items.DIAMOND.getDefaultInstance(), Items.DIAMOND.getDefaultInstance(), Items.DIAMOND.getDefaultInstance()), new ItemStack(Blocks.DIAMOND_BLOCK), 1000, 0, 0, 0, 0, 0, 0, 0, 0);
-        addAltarRecipes(newArray(ModItems.temporalCoreActive.getDefaultInstance(), new ItemStack(ModBlocks.blockTemporal), ModItems.preciousCharm.getDefaultInstance(), ModItems.gearChronosphere.getDefaultInstance()), new ItemStack(STItems.TIMETICKET), 66666, 500000, 500000, 500000, 500000, 500000, 500000, 500000, 500000);
+        addAltarRecipes(newArray(ModItems.temporalCoreActive.getDefaultInstance(), new ItemStack(ModBlocks.blockTemporal), ModItems.preciousCharm.getDefaultInstance(), ModItems.gearChronosphere.getDefaultInstance()), new ItemStack(STItems.TIMETICKET), 666666, 500000, 500000, 500000, 500000, 500000, 500000, 500000, 500000);
     }
 
     private void addAltarRecipes(List<ItemStack> input, ItemStack output, int timeenergy, int... energy) {
@@ -272,4 +273,5 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
         input.add(item3);
         return input;
     }
+
 }

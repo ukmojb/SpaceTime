@@ -37,6 +37,7 @@ public class EntityUnstableTimePolymer extends EntityThrowable {
         {
             if (!this.world.isRemote)
             {
+
                 BlockPos pos = new BlockPos(result.hitVec);
                 EntityTimeCrack timecrack = new EntityTimeCrack(world);
                 timecrack.setPosition(posX, posY + 0.7 , posZ);

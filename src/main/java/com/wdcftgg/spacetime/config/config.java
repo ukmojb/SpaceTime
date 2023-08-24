@@ -20,7 +20,7 @@ public class config {
     public static int GUIPOSY = 50;
     public static double TIMEMAXHEALTH = 150d;
     public static double TIMELASTLIFEMAXHEALTH = 300d;
-    public static boolean ALTARAUTOMATE = true;
+    public static boolean ALTARAUTOMATE = false;
 
     public config() {
     }

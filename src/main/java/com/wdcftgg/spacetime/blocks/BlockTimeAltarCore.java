@@ -6,38 +6,29 @@ import com.wdcftgg.spacetime.blocks.tileEntity.TimeAltarCoreEntity;
 import com.wdcftgg.spacetime.config.config;
 import com.wdcftgg.spacetime.init.ModCreativeTab;
 import com.wdcftgg.spacetime.item.STItems;
-import com.wdcftgg.spacetime.network.MessageChest;
-import com.wdcftgg.spacetime.network.PacketHandler;
 import com.wdcftgg.spacetime.util.IHasModel;
 import lumaceon.mods.clockworkphase.util.TimeSandHelper;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockChest;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.IHopper;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.tileentity.TileEntityHopper;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
-import net.minecraft.world.storage.loot.conditions.LootCondition;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.*;
 
@@ -122,27 +113,12 @@ public class BlockTimeAltarCore extends Block implements IHasModel {
                         killItems(world, pos);
                         removeHourEnergy((player.isCreative() ? nulllist : energy), pos, world);
                         TimeSandHelper.removeTimeSand(itemStack, TimeAltarCoreEntity.TIMESAND);
-                        if (config.ALTARAUTOMATE) {
-//                            PacketHandler.INSTANCE.sendToAll();
-//                            PacketHandler.INSTANCE.sendToServer(new MessageChest(pos.up(), itemStack1));
-                            if (world.getTileEntity(pos.up()) != null) {
-                                SpaceTime.Log("www0");
-                                IInventory iinventory = null;
-                                TileEntity tileentity = world.getTileEntity(pos.up());
-
-                                if (tileentity instanceof IInventory) {
-                                    iinventory = (IInventory)tileentity;
-                                    iinventory.markDirty();
-                                    iinventory.setInventorySlotContents(0, itemStack1);
-                                    iinventory.markDirty();
-                                    output = false;
-                                }
-                            }
-                            if (output) {
-                                EntityItem item = new EntityItem(world, pos.getX(), pos.getY() + 1, pos.getZ(), itemStack1);
-                                world.spawnEntity(item);
-                            }
-                        }
+//                        if (config.ALTARAUTOMATE) {
+//                            EntityItem item = new EntityItem(world, pos.getX(), pos.getY() + 1, pos.getZ(), itemStack1);
+//                            world.spawnEntity(item);
+//                        } else {
+                            summonZombie(pos, world, player, itemStack1);
+//                        }
                     } else {
                         player.sendMessage(new TextComponentString(I18n.format("spacetime.altar.hourglass.noenergy")));
                     }
@@ -153,6 +129,21 @@ public class BlockTimeAltarCore extends Block implements IHasModel {
         }
         return true;
     }
+
+    private void summonZombie(BlockPos pos, World world, EntityPlayer player, ItemStack itemStack){
+        ItemStack stack = new ItemStack(Items.STICK);
+        stack.addEnchantment(Enchantment.getEnchantmentByID(19), 10);
+        EntityZombie entityZombie = new EntityZombie(world);
+        entityZombie.setPosition(pos.getX(), pos.getY() + 1, pos.getZ());
+        entityZombie.setAttackTarget(player);
+        entityZombie.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(60d);
+        entityZombie.setDropChance(EntityEquipmentSlot.OFFHAND, 100);
+//        entityZombie.entityDropItem(itemStack, 1);
+        entityZombie.setHeldItem(EnumHand.MAIN_HAND, stack);
+        entityZombie.setHeldItem(EnumHand.OFF_HAND, itemStack);
+        world.spawnEntity(entityZombie);
+    }
+
 
     private void killItems(World world, BlockPos pos) {
         List<EntityItem> list = new ArrayList<EntityItem>();
