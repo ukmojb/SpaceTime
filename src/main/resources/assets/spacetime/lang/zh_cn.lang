@@ -7,46 +7,51 @@ entity.TimeCrack.name=时间裂缝
 
 # Blocks
 
-tile.time_pillar.name=时间之柱
-tile.space_time_turbulence.name=时空乱流
-tile.time_compressor.name=时间压缩器
-tile.concretization_hourglass.name=时空沙漏具象器
-tile.time_altarcore.name=时间祭坛
-tile.hourglass.name=时空沙漏
-tile.airhourglass.name=时空沙漏-疾风
-tile.firehourglass.name=时空沙漏-火焰
-tile.deathhourglass.name=时空沙漏-死亡
-tile.earthhourglass.name=时空沙漏-大地
-tile.lifehourglass.name=时空沙漏-生命
-tile.lighthourglass.name=时空沙漏-光明
-tile.waterhourglass.name=时空沙漏-水源
-tile.moonhourglass.name=时空沙漏-月亮
-tile.air_stextractor.name=疾风萃取器
-tile.fire_stextractor.name=火焰萃取器
-tile.death_stextractor.name=死亡萃取器
-tile.earth_stextractor.name=大地萃取器
-tile.life_stextractor.name=生命萃取器
-tile.light_stextractor.name=光明萃取器
-tile.moon_stextractor.name=月光萃取器
-tile.water_stextractor.name=水源萃取器
+tile.spacetime.time_pillar.name=时间之柱
+tile.spacetime.space_time_turbulence.name=时空乱流
+tile.spacetime.time_compressor.name=时间压缩器
+tile.spacetime.concretization_hourglass.name=时空沙漏具象器
+tile.spacetime.time_altarcore.name=时间祭坛
+tile.spacetime.hourglass.name=时空沙漏
+tile.spacetime.airhourglass.name=时空沙漏-疾风
+tile.spacetime.firehourglass.name=时空沙漏-火焰
+tile.spacetime.deathhourglass.name=时空沙漏-死亡
+tile.spacetime.earthhourglass.name=时空沙漏-大地
+tile.spacetime.lifehourglass.name=时空沙漏-生命
+tile.spacetime.lighthourglass.name=时空沙漏-光明
+tile.spacetime.waterhourglass.name=时空沙漏-水源
+tile.spacetime.moonhourglass.name=时空沙漏-月亮
+tile.spacetime.air_stextractor.name=疾风萃取器
+tile.spacetime.fire_stextractor.name=火焰萃取器
+tile.spacetime.death_stextractor.name=死亡萃取器
+tile.spacetime.earth_stextractor.name=大地萃取器
+tile.spacetime.life_stextractor.name=生命萃取器
+tile.spacetime.light_stextractor.name=光明萃取器
+tile.spacetime.moon_stextractor.name=月光萃取器
+tile.spacetime.water_stextractor.name=水源萃取器
 tile.clockworkphase.time_sand.name=时之沙
+tile.spacetime.time_block.name=时间方块
 
 # Items
 
-item.time_confounding_containers.name=时间混淆体
-item.space_confounding_containers.name=空间混淆体
-item.time_and_space_confounding_containers.name=时空混淆体
-item.time_polymer.name=时间拟态聚合物
-item.unstable_time_polymer.name=不稳定时间聚合物
-item.one_punch.name=一拳
-item.temporal_brass_ingot.name=沾染上了时间之力的黄铜
-item.spacetime_dust.name=时空之尘
-item.spacetime_nugget.name=时空之粒
-item.spacetime_ingot.name=时空之锭
-item.module_xp.name=经验模块
-item.supergoldapple.name=超级附魔金苹果
-item.timeticket.name=时的挑战券
-item.magnifying_glass.name=放大镜
+item.spacetime.time_confounding_containers.name=时间混淆体
+item.spacetime.space_confounding_containers.name=空间混淆体
+item.spacetime.time_and_space_confounding_containers.name=时空混淆体
+item.spacetime.time_polymer.name=时间拟态聚合物
+item.spacetime.unstable_time_polymer.name=不稳定时间聚合物
+item.spacetime.one_punch.name=一拳
+item.spacetime.temporal_brass_ingot.name=沾染上了时间之力的黄铜
+item.spacetime.spacetime_dust.name=时空之尘
+item.spacetime.spacetime_nugget.name=时空之粒
+item.spacetime.spacetime_ingot.name=时空之锭
+item.spacetime.module_xp.name=经验模块
+item.spacetime.supergoldapple.name=超级附魔金苹果
+item.spacetime.timeticket.name=时的挑战券
+item.spacetime.magnifying_glass.name=放大镜
+item.spacetime.time_ingot.name=时间之锭
+item.spacetime.time_nugget.name=时间之粒
+item.spacetime.time_chip.name=时间碎片
+item.spacetime.time_gear.name=时间齿轮
 
 
 
@@ -105,3 +110,7 @@ spacetime.altar.moon=月亮
 spacetime.altar.water=水源
 spacetime.altar.hourglass.noenergy=时空沙漏的能量不足请自行检查。
 spacetime.altar.time.noenergy=手中时间不足。
+
+# patchouli
+spacetime.patchouli.name=时间之册
+spacetime.patchouli.landing_text=时空的奥秘...

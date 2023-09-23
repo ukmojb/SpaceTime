@@ -3,7 +3,6 @@ package com.wdcftgg.spacetime.blocks;
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.HourGlass.HourGlassBase;
 import com.wdcftgg.spacetime.blocks.tileEntity.TimeAltarCoreEntity;
-import com.wdcftgg.spacetime.config.config;
 import com.wdcftgg.spacetime.init.ModCreativeTab;
 import com.wdcftgg.spacetime.item.STItems;
 import com.wdcftgg.spacetime.util.IHasModel;
@@ -56,6 +55,11 @@ public class BlockTimeAltarCore extends Block implements IHasModel {
         setHarvestLevel("pickaxe", 2);
         setHardness(5.0F);
         setResistance(5.0F);
+
+        if (!TimeAltarCoreEntity.init) {
+            TimeAltarCoreEntity.initRecipes();
+            TimeAltarCoreEntity.init = true;
+        }
     }
 
     @Override

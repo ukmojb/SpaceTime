@@ -68,6 +68,7 @@ minecraft {
     // Example:
     // injectedTags.put('VERSION', project.version)
     // injectedTags.put('MOD_ID', project.archives_base_name)
+
 }
 
 // Generate a group.archives_base_name.Tags class
@@ -133,17 +134,14 @@ dependencies {
             transitive = false
         }
     }
-//    compileOnly("mezz.jei:jei_${jei_mc_version}:${jei_version}:api")
+
     compileOnly('curse.maven:ClockworkPhase-227388:3016789')
 
     compileOnly('software.bernie.geckolib:forge-1.12.2-geckolib:3.0.21')
-//
-////     at runtime, use the full JEI jar
-//    compileOnly "mezz.jei:jei_${jei_mc_version}:${jei_version}"
+
     compileOnly("curse.maven:jei-238222:4538010")
-//    compileOnly("mezz.jei:jei-${jei_mc_version}:${jei_version}:api")
-    // at runtime, use the full JEI jar
-//    runtimeOnly("mezz.jei:jei-${jei_mc_version}:${jei_version}")
+
+    compileOnly("curse.maven:Patchouli-306770:3162874")
 
 }
 
@@ -230,3 +228,4 @@ idea {
 tasks.named("processIdeaSettings").configure {
     dependsOn("injectTags")
 }
+

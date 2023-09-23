@@ -38,6 +38,7 @@ public class Wrapper implements IRecipeWrapper {
 
     private Wrapper(int num, String info, List<ItemStack> input) {
         this.info = info;
+        this.num = num;
         in = new ArrayList<>();
         for (ItemStack stack : input) in.add(Collections.singletonList(stack));
     }
@@ -59,6 +60,15 @@ public class Wrapper implements IRecipeWrapper {
     }
 
     public Wrapper(int num, List<Integer> energy, String info, ItemStack out, List<ItemStack> input) {
+        this(num, info, input);
+        this.info = info;
+        this.outItem = out;
+        this.energy = energy;
+        in = new ArrayList<>();
+        for (ItemStack stack : input) in.add(Collections.singletonList(stack));
+    }
+
+    public Wrapper(int num,  String info, ItemStack out, List<ItemStack> input) {
         this(num, info, input);
         this.outItem = out;
         in = new ArrayList<>();

@@ -2,6 +2,12 @@ package com.wdcftgg.spacetime.init;
 
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.STBlocks;
+import com.wdcftgg.spacetime.blocks.slab.BlockSlabBase;
+import com.wdcftgg.spacetime.blocks.slab.BlockSpaceSlab;
+import com.wdcftgg.spacetime.blocks.slab.BlockTimeSlab;
+import com.wdcftgg.spacetime.blocks.stairs.BlockBaseStairs;
+import com.wdcftgg.spacetime.blocks.stairs.BlockSpaceStairs;
+import com.wdcftgg.spacetime.blocks.stairs.BlockTimeStairs;
 import com.wdcftgg.spacetime.blocks.tileEntity.ConcretizationHourGlassEntity;
 import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.*;
 import com.wdcftgg.spacetime.blocks.tileEntity.TimeAltarCoreEntity;
@@ -11,7 +17,14 @@ import com.wdcftgg.spacetime.entity.*;
 import com.wdcftgg.spacetime.item.STItems;
 import com.wdcftgg.spacetime.util.IHasModel;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockFence;
+import net.minecraft.block.BlockStairs;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -22,20 +35,43 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @EventBusSubscriber
 public class RegistryHandler {
+
+	public static BlockSlabBase SPACE_SLAB = new BlockSpaceSlab(Material.WOOD);
+	public static BlockSlabBase TIME_SLAB = new BlockTimeSlab(Material.WOOD);
+	public static BlockBaseStairs SPACE_STAIRS = new BlockSpaceStairs();
+	public static BlockBaseStairs TIME_STAIRS = new BlockTimeStairs();
+
 	@SubscribeEvent
 	public static void onItemRegister(RegistryEvent.Register<Item> event)
 	{
-		event.getRegistry().registerAll(STItems.ITEMS.toArray(new Item[0]));
+		STItems.ITEMS.add(newItemBlock(SPACE_SLAB));
+		STItems.ITEMS.add(newItemBlock(TIME_SLAB));
+		STItems.ITEMS.add(newItemBlock(SPACE_STAIRS));
+		STItems.ITEMS.add(newItemBlock(TIME_STAIRS));
 
+
+		for (Item item : STItems.ITEMS.toArray(new Item[0])){
+			item.setTranslationKey("spacetime." + item.getTranslationKey().replace("item.", ""));
+		}
+		event.getRegistry().registerAll(STItems.ITEMS.toArray(new Item[0]));
 	}
 	
 	@SubscribeEvent
 	public static void onBlockRegister(RegistryEvent.Register<Block> event) {
+		STBlocks.BLOCKS.add(SPACE_SLAB);
+		STBlocks.BLOCKS.add(TIME_SLAB);
+		STBlocks.BLOCKS.add(TIME_STAIRS);
+		STBlocks.BLOCKS.add(SPACE_STAIRS);
+
+		for (Block block : STBlocks.BLOCKS.toArray(new Block[0])){
+			block.setTranslationKey("spacetime." + block.getTranslationKey().replace("tile.", ""));
+		}
 		event.getRegistry().registerAll(STBlocks.BLOCKS.toArray(new Block[0]));
 	}
 
@@ -59,7 +95,6 @@ public class RegistryHandler {
 				((IHasModel)block).registerModels();
 			}
 		}
-
 
 	}
 
@@ -122,5 +157,9 @@ public class RegistryHandler {
 		event.getRegistry().register(ModSounds.SWORDCORE_2);
 		event.getRegistry().register(ModSounds.SWORDBLOCKING);
 		event.getRegistry().register(ModSounds.FALLSWORD);
+	}
+
+	private static Item newItemBlock(Block block){
+		return new ItemBlock(block).setRegistryName(block.getRegistryName()).setTranslationKey(block.getTranslationKey());
 	}
 }

@@ -7,46 +7,52 @@ entity.TimeCrack.name=TimeCrack
 
 # Blocks
 
-tile.time_pillar.name=Pillar of time
-tile.space_time_turbulence.name=space-time turbulence
-tile.time_compressor.name=Time compressor
-tile.concretization_hourglass.name=time-space hourglass figurative
-tile.time_altarcore.name=Time altar
-tile.hourglass.name=space-time hourglass
-tile.airhourglass.name=Space-time hourglass - Air
-tile.firehourglass.name=Space-time hourglass - Flame
-tile.deathhourglass.name=Space-time hourglass - Death
-tile.earthhourglass.name=space-time hourglass - Earth
-tile.lifehourglass.name=Space-time hourglass - Life
-tile.lighthourglass.name=Space-time hourglass - Light
-tile.moonhourglass.name=Space-time hourglass - Moon
-tile.waterhourglass.name=time-space hourglass - water
-tile.air_stextractor.name=High wind extractor
-tile.fire_stextractor.name=Flame extractor
-tile.death_stextractor.name=Death extractor
-tile.earth_stextractor.name=earth extractor
-tile.life_stextractor.name=Life extractor
-tile.moon_stextractor.name=Moon extractor
-tile.light_stextractor.name=Light extractor
-tile.water_stextractor.name=water extractor
+tile.spacetime.time_pillar.name=Pillar of time
+tile.spacetime.space_time_turbulence.name=space-time turbulence
+tile.spacetime.time_compressor.name=Time compressor
+tile.spacetime.concretization_hourglass.name=time-space hourglass figurative
+tile.spacetime.time_altarcore.name=Time altar
+tile.spacetime.hourglass.name=space-time hourglass
+tile.spacetime.airhourglass.name=Space-time hourglass - Air
+tile.spacetime.firehourglass.name=Space-time hourglass - Flame
+tile.spacetime.deathhourglass.name=Space-time hourglass - Death
+tile.spacetime.earthhourglass.name=space-time hourglass - Earth
+tile.spacetime.lifehourglass.name=Space-time hourglass - Life
+tile.spacetime.lighthourglass.name=Space-time hourglass - Light
+tile.spacetime.moonhourglass.name=Space-time hourglass - Moon
+tile.spacetime.waterhourglass.name=time-space hourglass - water
+tile.spacetime.air_stextractor.name=High wind extractor
+tile.spacetime.fire_stextractor.name=Flame extractor
+tile.spacetime.death_stextractor.name=Death extractor
+tile.spacetime.earth_stextractor.name=earth extractor
+tile.spacetime.life_stextractor.name=Life extractor
+tile.spacetime.moon_stextractor.name=Moon extractor
+tile.spacetime.light_stextractor.name=Light extractor
+tile.spacetime.water_stextractor.name=water extractor
 tile.clockworkphase.time_sand.name=Time Sand
+tile.spacetime.time_block.name=Time Block
 
 # Items
 
-item.time_confounding_containers.name=time obfuscation body
-item.space_confounding_containers.name=space obfuscation body
-item.time_and_space_confounding_containers.name=space-time obfuscation body
-item.time_polymer.name=time mimicry polymer
-item.unstable_time_polymer.name=Unstable time polymer
-item.one_punch.name=one punch
-item.temporal_brass_ingot.name=Brass tainted with the forces of time
-item.spacetime_dust.name=Space-time dust
-item.spacetime_nugget.name=a particle of space-time
-item.spacetime_ingot.name=Ingot of spacetime
-item.module_xp.name=Module XP
-item.supergoldapple.name=Super Golden Apple
-item.timeticket.name=Time Challenge Ticket
-item.magnifying_glass.name=Magnifying glass
+item.spacetime.time_confounding_containers.name=time obfuscation body
+item.spacetime.space_confounding_containers.name=space obfuscation body
+item.spacetime.time_and_space_confounding_containers.name=space-time obfuscation body
+item.spacetime.time_polymer.name=time mimicry polymer
+item.spacetime.unstable_time_polymer.name=Unstable time polymer
+item.spacetime.one_punch.name=one punch
+item.spacetime.temporal_brass_ingot.name=Brass tainted with the forces of time
+item.spacetime.spacetime_dust.name=Space-time dust
+item.spacetime.spacetime_nugget.name=a particle of space-time
+item.spacetime.spacetime_ingot.name=Ingot of spacetime
+item.spacetime.module_xp.name=Module XP
+item.spacetime.supergoldapple.name=Super Golden Apple
+item.spacetime.timeticket.name=Time Challenge Ticket
+item.spacetime.magnifying_glass.name=Magnifying glass
+item.spacetime.time_ingot.name=Time Ingot
+item.spacetime.time_nugget.name=Time Nugget
+item.spacetime.time_chip.name=Time Chip
+item.spacetime.time_gear.name=Time Gear
+
 # Potion
 
 spacetime.potion.heterospace=Heterospace
@@ -101,3 +107,7 @@ spacetime.altar.moon=Moon
 spacetime.altar.water=Water
 spacetime.altar.hourglass.noenergy=Hourglass energy is insufficient, please check yourself.
 spacetime.altar.time.noenergy=Deficiency of time.
+
+# patchouli
+spacetime.patchouli.name=Time Book
+spacetime.patchouli.landing_text=The mystery of time and space...

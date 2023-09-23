@@ -1,0 +1,28 @@
+{
+  "name": "垃圾场",
+  "icon": "minecraft:noteblock",
+  "category": "jitan",
+  "pages": [
+    {
+      "type": "multiblock",
+      "name": "垃圾场",
+      "text": "可以将原版的东西转化为灰尘(灰尘可以在任务中抽奖)$(br2)不支持带有元数据的物品",
+      "multiblock": {
+        "mapping": {
+          "j": "minecraft:chest",
+          "0": "minecraft:brick_block"
+        },
+        "pattern": [
+          ["   "," j ","   "],
+          ["   "," 0 ","   "]
+        ],
+        "symmetrical": true
+      }
+    },
+    {
+      "type": "spotlight",
+      "item": "spacetime:time_polymer",
+      "text": "手持金苹果右击砖块启动结构$(br2)[若想要转化其他东西可以向作者提出]"
+    }
+  ]
+}

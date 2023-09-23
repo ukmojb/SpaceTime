@@ -1,0 +1,9 @@
+{
+  "name": "spacetime.patchouli.name",
+  "landing_text": "spacetime.patchouli.landing_text",
+  "book_texture": "patchouli:textures/gui/book_purple.png",
+	"model": "spacetime:guide_book",
+  "creative_tab": "spacetimetab",
+  "show_progress": false,
+  "version": 1
+}

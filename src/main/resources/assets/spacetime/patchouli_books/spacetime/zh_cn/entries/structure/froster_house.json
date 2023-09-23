@@ -1,0 +1,20 @@
+{
+  "sortnum": 3,
+  "name": "霜灵族小屋",
+  "icon": "minecraft:quartz_block",
+  "category": "structure",
+  "pages": [
+    {
+      "type": "image",
+      "images": [
+        "legendera:textures/picture/froster_house.png"
+      ],
+      "title": "霜灵族小屋",
+      "border": true
+    },
+    {
+      "type": "text",
+      "text": "霜灵族小屋会在霜域自然生成。"
+    }
+  ]
+}

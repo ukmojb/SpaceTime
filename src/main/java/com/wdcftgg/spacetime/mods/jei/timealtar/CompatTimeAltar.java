@@ -1,5 +1,6 @@
 package com.wdcftgg.spacetime.mods.jei.timealtar;
 
+import com.wdcftgg.spacetime.blocks.tileEntity.TimeAltarCoreEntity;
 import com.wdcftgg.spacetime.item.STItems;
 import lumaceon.mods.clockworkphase.init.ModBlocks;
 import lumaceon.mods.clockworkphase.init.ModItems;
@@ -20,8 +21,9 @@ public class CompatTimeAltar extends Compat {
 
     @Override
     public void addRecipes(List<Wrapper> list) {
-        list.add(new Wrapper(666666, newArray(500000, 500000, 500000, 500000, 500000, 500000, 500000, 500000), "spacetime.jei.altar", new ItemStack(STItems.TIMETICKET), ModItems.temporalCoreActive.getDefaultInstance(), new ItemStack(ModBlocks.blockTemporal), ModItems.preciousCharm.getDefaultInstance(), ModItems.gearChronosphere.getDefaultInstance()));
-        list.add(new Wrapper(1000, "spacetime.jei.altar", new ItemStack(Blocks.DIAMOND_BLOCK), Items.DIAMOND.getDefaultInstance(), Items.DIAMOND.getDefaultInstance(), Items.DIAMOND.getDefaultInstance(), Items.DIAMOND.getDefaultInstance()));
+      for (int i = 0; i < TimeAltarCoreEntity.TimeAltarRecipesin.size(); i++) {
+            list.add(new Wrapper((int) TimeAltarCoreEntity.TimeAltarRecipesTimeEnergy.get(i) + 6, TimeAltarCoreEntity.TimeAltarRecipesEnergy.get(TimeAltarCoreEntity.TimeAltarRecipesout.get(i)), "spacetime.jei.altar", TimeAltarCoreEntity.TimeAltarRecipesout.get(i), TimeAltarCoreEntity.TimeAltarRecipesin.get(i)));
+        }
     }
 
     private List<Integer> newArray(int... num1){

@@ -46,20 +46,16 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
     public static boolean init = false;
     public static ItemStack itemStackout = ItemStack.EMPTY;
 
-    public List<List<ItemStack>> TimeAltarRecipesin = new ArrayList<List<ItemStack>>();
-    public List<List<Item>> ItemTimeAltarRecipesin = new ArrayList<List<Item>>();
-    public List<ItemStack> TimeAltarRecipesout = new ArrayList<ItemStack>();
-    public List<Integer> TimeAltarRecipesTimeEnergy = new ArrayList<Integer>();
+    public static List<List<ItemStack>> TimeAltarRecipesin = new ArrayList<List<ItemStack>>();
+    public static List<List<Item>> ItemTimeAltarRecipesin = new ArrayList<List<Item>>();
+    public static List<ItemStack> TimeAltarRecipesout = new ArrayList<ItemStack>();
+    public static List<Integer> TimeAltarRecipesTimeEnergy = new ArrayList<Integer>();
     public static Map<ItemStack, List<Integer>> TimeAltarRecipesEnergy = new HashMap<ItemStack, List<Integer>>();
-    private List<Integer> in;
+    private static List<Integer> in;
 
     @Override
     public void update() {
         if (!world.isRemote) {
-            if (!init) {
-                initRecipes();
-                init = true;
-            }
             if (isstructure(pos, world)){
                 List<EntityItem> items = getItems();
                 if(areItemsValid(items) && outPutItem(items) != null) {
@@ -244,12 +240,12 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
         return 0;
     }
 
-    public void initRecipes() {
+    public static void initRecipes() {
         addAltarRecipes(newArray(Items.DIAMOND.getDefaultInstance(), Items.DIAMOND.getDefaultInstance(), Items.DIAMOND.getDefaultInstance(), Items.DIAMOND.getDefaultInstance()), new ItemStack(Blocks.DIAMOND_BLOCK), 1000, 0, 0, 0, 0, 0, 0, 0, 0);
         addAltarRecipes(newArray(ModItems.temporalCoreActive.getDefaultInstance(), new ItemStack(ModBlocks.blockTemporal), ModItems.preciousCharm.getDefaultInstance(), ModItems.gearChronosphere.getDefaultInstance()), new ItemStack(STItems.TIMETICKET), 666666, 500000, 500000, 500000, 500000, 500000, 500000, 500000, 500000);
     }
 
-    private void addAltarRecipes(List<ItemStack> input, ItemStack output, int timeenergy, int... energy) {
+    public static void addAltarRecipes(List<ItemStack> input, ItemStack output, int timeenergy, int... energy) {
         TimeAltarRecipesin.add(input);
         TimeAltarRecipesout.add(output);
         TimeAltarRecipesTimeEnergy.add(timeenergy);
@@ -265,7 +261,7 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
         TimeAltarRecipesEnergy.put(output, in);
     }
 
-    private List<ItemStack> newArray(ItemStack item, ItemStack item1, ItemStack item2, ItemStack item3){
+    private static List<ItemStack> newArray(ItemStack item, ItemStack item1, ItemStack item2, ItemStack item3){
         List<ItemStack> input = new ArrayList<ItemStack>();
         input.add(item);
         input.add(item1);

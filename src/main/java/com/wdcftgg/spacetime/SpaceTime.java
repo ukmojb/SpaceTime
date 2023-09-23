@@ -13,6 +13,7 @@ import com.wdcftgg.spacetime.network.PacketHandler;
 import com.wdcftgg.spacetime.proxy.ProxyBase;
 import com.wdcftgg.spacetime.recipe.CraftingLoader;
 import com.wdcftgg.spacetime.util.Reference;
+import com.wdcftgg.spacetime.dimension.SpaceWorldProvider;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
@@ -26,6 +27,8 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.DimensionType;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.common.Mod;
@@ -40,7 +43,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
 
-import java.io.File;
 import java.util.List;
 import java.util.Set;
 
@@ -49,11 +51,10 @@ public class SpaceTime {
     public static final String MODID = "spacetime";
     public static final String NAME = "SpaceTime";
     public static final String VERSION = "1.0.0";
-    public static File mp4 = new File("spacetime", "textures\\v\\aaa.mp4");
-
     public static Logger logger;
-
     public static final boolean SHOW_WARN = true;
+    public static int spacedimID = 253;
+    public static DimensionType myDim;
 
 
 
@@ -69,6 +70,10 @@ public class SpaceTime {
         RegistryHandler.preInitRegistries(event);
 
         config.init(event.getSuggestedConfigurationFile());
+
+        myDim = DimensionType.register("space_dimension", "_spacedim", spacedimID, SpaceWorldProvider.class, false);
+        DimensionManager.registerDimension(spacedimID, myDim);
+
 
     }
 

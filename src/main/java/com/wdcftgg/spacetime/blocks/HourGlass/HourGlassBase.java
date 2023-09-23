@@ -41,7 +41,7 @@ public class HourGlassBase extends BlockDirectional implements ITileEntityProvid
         STBlocks.BLOCKS.add(this);
         this.setCreativeTab(ModCreativeTab.SpaceTimeTab);
         STItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
-        setHarvestLevel("pickaxe", 2);
+        setHarvestLevel("pickaxe", -1);
         setHardness(5.0F);
         setResistance(5.0F);
     }

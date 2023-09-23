@@ -1,14 +1,21 @@
 package com.wdcftgg.spacetime.blocks;
 
+import com.wdcftgg.spacetime.blocks.slab.BlockSlabBase;
+import com.wdcftgg.spacetime.blocks.slab.BlockTimeSlab;
+import com.wdcftgg.spacetime.blocks.stairs.BlockSpaceStairs;
+import com.wdcftgg.spacetime.blocks.stairs.BlockTimeStairs;
 import com.wdcftgg.spacetime.blocks.HourGlass.*;
+import com.wdcftgg.spacetime.blocks.slab.BlockSpaceSlab;
 import com.wdcftgg.spacetime.blocks.stextractor.*;
+import com.wdcftgg.spacetime.init.RegistryHandler;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class STBlocks {
-	public static final List<Block> BLOCKS = new ArrayList<Block>();
+	public static List<Block> BLOCKS = new ArrayList<Block>();
 
 	public static final Block TIMEPILLAR = new BlockTimePillar();
 	public static final Block SPACETIMETURBULENCE = new BlockSpaceTimeTurbulence();
@@ -35,5 +42,11 @@ public class STBlocks {
 	public static final Block LightSTExtractor = new LightSTExtractor();
 	public static final Block MoonSTExtractor = new MoonSTExtractor();
 	public static final Block WaterSTExtractor = new WaterSTExtractor();
+	public static final Block SpaceBrick = new BlockSpaceBrick();
+	public static final Block TimeBrick = new BlockTimeBrick();
+//	public static final Block SpaceStairs = new BlockSpaceStairs();
+//	public static final Block TimeStairs = new BlockTimeStairs();
+	public static final Block SpaceSlab = RegistryHandler.SPACE_SLAB;
+	public static final Block TimeSlab = RegistryHandler.TIME_SLAB;
 
 }

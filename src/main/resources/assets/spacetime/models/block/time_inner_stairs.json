@@ -1,0 +1,8 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "bottom": "spacetime:blocks/time_brick",
+    "top": "spacetime:blocks/time_brick",
+    "side": "spacetime:blocks/time_brick"
+  }
+}

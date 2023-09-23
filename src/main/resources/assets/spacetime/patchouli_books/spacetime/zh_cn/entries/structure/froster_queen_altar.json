@@ -1,0 +1,20 @@
+{
+  "sortnum": 4,
+  "name": "霜灵皇祭坛",
+  "icon": "legendera:froster_queen_altar",
+  "category": "structure",
+  "pages": [
+    {
+      "type": "image",
+      "images": [
+        "legendera:textures/picture/froster_queen_altar.png"
+      ],
+      "title": "霜灵皇祭坛",
+      "border": true
+    },
+    {
+      "type": "text",
+      "text": "霜灵皇祭坛会在霜域中自然生成。$(br2)每座霜灵皇祭坛的中央会有一个霜灵皇祭坛方块。"
+    }
+  ]
+}
