@@ -1,5 +1,7 @@
 package com.wdcftgg.spacetime.blocks;
 
+import com.wdcftgg.spacetime.blocks.fence.BlockSpaceFence;
+import com.wdcftgg.spacetime.blocks.fence.BlockTimeFence;
 import com.wdcftgg.spacetime.blocks.slab.BlockSlabBase;
 import com.wdcftgg.spacetime.blocks.slab.BlockTimeSlab;
 import com.wdcftgg.spacetime.blocks.stairs.BlockSpaceStairs;
@@ -44,8 +46,10 @@ public class STBlocks {
 	public static final Block WaterSTExtractor = new WaterSTExtractor();
 	public static final Block SpaceBrick = new BlockSpaceBrick();
 	public static final Block TimeBrick = new BlockTimeBrick();
-//	public static final Block SpaceStairs = new BlockSpaceStairs();
-//	public static final Block TimeStairs = new BlockTimeStairs();
+	public static final Block SpaceFence = new BlockSpaceFence();
+	public static final Block TimeFence = new BlockTimeFence();
+	public static final Block SpaceStairs = RegistryHandler.SPACE_STAIRS;
+	public static final Block TimeStairs = RegistryHandler.TIME_STAIRS;
 	public static final Block SpaceSlab = RegistryHandler.SPACE_SLAB;
 	public static final Block TimeSlab = RegistryHandler.TIME_SLAB;
 

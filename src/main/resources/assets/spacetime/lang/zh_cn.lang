@@ -31,6 +31,14 @@ tile.spacetime.moon_stextractor.name=月光萃取器
 tile.spacetime.water_stextractor.name=水源萃取器
 tile.clockworkphase.time_sand.name=时之沙
 tile.spacetime.time_block.name=时间方块
+tile.spacetime.time_brick.name=时间之砖
+tile.spacetime.space_brick.name=空间之砖
+tile.spacetime.space_slab.name=空间台阶
+tile.spacetime.time_slab.name=时间台阶
+tile.spacetime.space_stairs.name=时间楼梯
+tile.spacetime.time_stairs.name=空间楼梯
+tile.spacetime.space_fence.name=时间栅栏
+tile.spacetime.time_fence.name=空间栅栏
 
 # Items
 

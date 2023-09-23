@@ -31,6 +31,14 @@ tile.spacetime.light_stextractor.name=Light extractor
 tile.spacetime.water_stextractor.name=water extractor
 tile.clockworkphase.time_sand.name=Time Sand
 tile.spacetime.time_block.name=Time Block
+tile.spacetime.time_brick.name=Time Brick
+tile.spacetime.space_brick.name=Space Brick
+tile.spacetime.space_slab.name=Space Slab
+tile.spacetime.time_slab.name=Time Slab
+tile.spacetime.space_stairs.name=Space Stairs
+tile.spacetime.time_stairs.name=Time Stairs
+tile.spacetime.space_fence.name=Space Fence
+tile.spacetime.time_fence.name=Time Fence
 
 # Items
 

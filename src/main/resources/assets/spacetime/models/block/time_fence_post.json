@@ -1,0 +1,6 @@
+{
+  "parent": "block/fence_post",
+  "textures": {
+    "texture": "spacetime:blocks/time_brick"
+  }
+}
