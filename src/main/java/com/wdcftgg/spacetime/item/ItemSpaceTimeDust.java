@@ -37,6 +37,7 @@ public class ItemSpaceTimeDust extends Item implements IHasModel {
         SpaceTime.proxy.registerItemRenderer(this, 0, "inventory");
     }
 
+    
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack is, World worldIn, List<String> list, ITooltipFlag flagIn)

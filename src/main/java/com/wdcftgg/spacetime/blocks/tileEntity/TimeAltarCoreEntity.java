@@ -241,8 +241,8 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
     }
 
     public static void initRecipes() {
-        addAltarRecipes(newArray(Items.DIAMOND.getDefaultInstance(), Items.DIAMOND.getDefaultInstance(), Items.DIAMOND.getDefaultInstance(), Items.DIAMOND.getDefaultInstance()), new ItemStack(Blocks.DIAMOND_BLOCK), 1000, 0, 0, 0, 0, 0, 0, 0, 0);
-        addAltarRecipes(newArray(ModItems.temporalCoreActive.getDefaultInstance(), new ItemStack(ModBlocks.blockTemporal), ModItems.preciousCharm.getDefaultInstance(), ModItems.gearChronosphere.getDefaultInstance()), new ItemStack(STItems.TIMETICKET), 666666, 500000, 500000, 500000, 500000, 500000, 500000, 500000, 500000);
+        addAltarRecipes(newArray(new ItemStack(Items.DIAMOND), new ItemStack(Items.DIAMOND), new ItemStack(Items.DIAMOND), new ItemStack(Items.DIAMOND)), new ItemStack(Blocks.DIAMOND_BLOCK), 1000, 0, 0, 0, 0, 0, 0, 0, 0);
+        addAltarRecipes(newArray(new ItemStack(ModItems.temporalCoreActive), new ItemStack(ModBlocks.blockTemporal), new ItemStack(ModItems.preciousCharm), new ItemStack(ModItems.gearChronosphere)), new ItemStack(STItems.TIMETICKET), 666666, 500000, 500000, 500000, 500000, 500000, 500000, 500000, 500000);
     }
 
     public static void addAltarRecipes(List<ItemStack> input, ItemStack output, int timeenergy, int... energy) {

@@ -1,12 +1,6 @@
 package com.wdcftgg.spacetime.mods.jei.timealtar;
 
 import com.wdcftgg.spacetime.blocks.tileEntity.TimeAltarCoreEntity;
-import com.wdcftgg.spacetime.item.STItems;
-import lumaceon.mods.clockworkphase.init.ModBlocks;
-import lumaceon.mods.clockworkphase.init.ModItems;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;

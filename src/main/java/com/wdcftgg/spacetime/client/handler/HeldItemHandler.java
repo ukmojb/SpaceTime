@@ -2,6 +2,7 @@ package com.wdcftgg.spacetime.client.handler;
 
 
 import com.wdcftgg.spacetime.SpaceTime;
+import com.wdcftgg.spacetime.proxy.ClientProxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemTransformVec3f;
@@ -10,6 +11,9 @@ import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.util.vector.Quaternion;
 
 import java.util.Iterator;
@@ -22,6 +26,7 @@ import java.util.Map;
  * @Author : wdcftgg
  * @create 2023/5/19 22:36
  */
+@SideOnly(Side.CLIENT)
 public class HeldItemHandler {
     public HeldItemHandler() {
     }
@@ -32,11 +37,9 @@ public class HeldItemHandler {
 
         while(var1.hasNext()) {
             RenderPlayer renderPlayer = (RenderPlayer)var1.next();
-            List<LayerRenderer<EntityLivingBase>> layers = SpaceTime.getLayerRenderers(renderPlayer);
+            List<LayerRenderer<EntityLivingBase>> layers = ClientProxy.getLayerRenderers(renderPlayer);
             if (layers != null) {
-                layers.removeIf((it) -> {
-                    return it instanceof LayerHeldItem;
-                });
+                layers.removeIf((it) -> it instanceof LayerHeldItem);
                 renderPlayer.addLayer(new SwordBlockingLayer(renderPlayer));
             }
         }

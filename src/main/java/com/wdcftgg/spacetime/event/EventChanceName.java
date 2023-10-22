@@ -1,7 +1,5 @@
 package com.wdcftgg.spacetime.event;
 
-import com.wdcftgg.spacetime.blocks.STBlocks;
-import com.wdcftgg.spacetime.item.STItems;
 import lumaceon.mods.clockworkphase.init.ModBlocks;
 import lumaceon.mods.clockworkphase.init.ModItems;
 import net.minecraft.block.Block;

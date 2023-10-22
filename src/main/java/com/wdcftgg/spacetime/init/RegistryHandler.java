@@ -9,6 +9,7 @@ import com.wdcftgg.spacetime.blocks.stairs.BlockBaseStairs;
 import com.wdcftgg.spacetime.blocks.stairs.BlockSpaceStairs;
 import com.wdcftgg.spacetime.blocks.stairs.BlockTimeStairs;
 import com.wdcftgg.spacetime.blocks.tileEntity.ConcretizationHourGlassEntity;
+import com.wdcftgg.spacetime.blocks.tileEntity.EndGatewayImitateEntity;
 import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.*;
 import com.wdcftgg.spacetime.blocks.tileEntity.TimeAltarCoreEntity;
 import com.wdcftgg.spacetime.client.render.HourGlass.*;
@@ -17,12 +18,7 @@ import com.wdcftgg.spacetime.entity.*;
 import com.wdcftgg.spacetime.item.STItems;
 import com.wdcftgg.spacetime.util.IHasModel;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFence;
-import net.minecraft.block.BlockStairs;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
@@ -35,7 +31,6 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -106,23 +101,6 @@ public class RegistryHandler {
 		ModEntityInit.registerEntities();
 
 
-		RenderingRegistry.registerEntityRenderingHandler(EntityUnstableTimePolymer.class, RenderUnstableTimePolymer::new);
-		RenderingRegistry.registerEntityRenderingHandler(EntityTimeCrack.class, RenderTimeCrack::new);
-		RenderingRegistry.registerEntityRenderingHandler(EntityTime.class, RenderTime::new);
-		RenderingRegistry.registerEntityRenderingHandler(EntityTimePhantom.class, RenderTimePhantom::new);
-		RenderingRegistry.registerEntityRenderingHandler(EntitySword.class, RenderSword::new);
-
-		ClientRegistry.bindTileEntitySpecialRenderer(HourGlassEntity.class, new HourGrassRender());
-		ClientRegistry.bindTileEntitySpecialRenderer(AirHourGlassEntity.class, new AirHourGrassRender());
-		ClientRegistry.bindTileEntitySpecialRenderer(DeathHourGlassEntity.class, new DeathHourGrassRender());
-		ClientRegistry.bindTileEntitySpecialRenderer(EarthHourGlassEntity.class, new EarthHourGrassRender());
-		ClientRegistry.bindTileEntitySpecialRenderer(FireHourGlassEntity.class, new FireHourGrassRender());
-		ClientRegistry.bindTileEntitySpecialRenderer(LifeHourGlassEntity.class, new LifeHourGrassRender());
-		ClientRegistry.bindTileEntitySpecialRenderer(LightHourGlassEntity.class, new LightHourGrassRender());
-		ClientRegistry.bindTileEntitySpecialRenderer(MoonHourGlassEntity.class, new MoonHourGrassRender());
-		ClientRegistry.bindTileEntitySpecialRenderer(WaterHourGlassEntity.class, new WaterHourGrassRender());
-		ClientRegistry.bindTileEntitySpecialRenderer(ConcretizationHourGlassEntity.class, new RenderConcretizationHourGlass());
-		ClientRegistry.bindTileEntitySpecialRenderer(TimeAltarCoreEntity.class, new RenderTimeAltarCore());
 
 
 

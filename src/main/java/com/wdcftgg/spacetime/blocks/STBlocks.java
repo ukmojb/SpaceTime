@@ -1,17 +1,11 @@
 package com.wdcftgg.spacetime.blocks;
 
+import com.wdcftgg.spacetime.blocks.HourGlass.*;
 import com.wdcftgg.spacetime.blocks.fence.BlockSpaceFence;
 import com.wdcftgg.spacetime.blocks.fence.BlockTimeFence;
-import com.wdcftgg.spacetime.blocks.slab.BlockSlabBase;
-import com.wdcftgg.spacetime.blocks.slab.BlockTimeSlab;
-import com.wdcftgg.spacetime.blocks.stairs.BlockSpaceStairs;
-import com.wdcftgg.spacetime.blocks.stairs.BlockTimeStairs;
-import com.wdcftgg.spacetime.blocks.HourGlass.*;
-import com.wdcftgg.spacetime.blocks.slab.BlockSpaceSlab;
 import com.wdcftgg.spacetime.blocks.stextractor.*;
 import com.wdcftgg.spacetime.init.RegistryHandler;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +42,7 @@ public class STBlocks {
 	public static final Block TimeBrick = new BlockTimeBrick();
 	public static final Block SpaceFence = new BlockSpaceFence();
 	public static final Block TimeFence = new BlockTimeFence();
+	public static final Block EndGatewayImitate = new BlockEndGatewayImitate();
 	public static final Block SpaceStairs = RegistryHandler.SPACE_STAIRS;
 	public static final Block TimeStairs = RegistryHandler.TIME_STAIRS;
 	public static final Block SpaceSlab = RegistryHandler.SPACE_SLAB;

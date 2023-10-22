@@ -6,31 +6,25 @@ import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.*;
 import com.wdcftgg.spacetime.blocks.tileEntity.stextractor.STExtractorEntity;
 import com.wdcftgg.spacetime.client.handler.HeldItemHandler;
 import com.wdcftgg.spacetime.config.config;
+import com.wdcftgg.spacetime.dimension.SpaceWorldProvider;
 import com.wdcftgg.spacetime.event.*;
 import com.wdcftgg.spacetime.gui.GuiElementLoader;
 import com.wdcftgg.spacetime.init.RegistryHandler;
 import com.wdcftgg.spacetime.network.PacketHandler;
-import com.wdcftgg.spacetime.proxy.ProxyBase;
+import com.wdcftgg.spacetime.proxy.CommonProxy;
 import com.wdcftgg.spacetime.recipe.CraftingLoader;
 import com.wdcftgg.spacetime.util.Reference;
-import com.wdcftgg.spacetime.dimension.SpaceWorldProvider;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
@@ -40,6 +34,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
 
@@ -56,13 +51,16 @@ public class SpaceTime {
     public static int spacedimID = 253;
     public static DimensionType myDim;
 
+    public static final String CLIENT_PROXY_CLASS = "com.wdcftgg.spacetime.proxy.ClientProxy";
+    public static final String SERVER_PROXY_CLASS = "com.wdcftgg.spacetime.proxy.ServerProxy";
+
+    @SidedProxy(clientSide = CLIENT_PROXY_CLASS, serverSide = SERVER_PROXY_CLASS)
+    public static CommonProxy proxy;
 
 
     @Mod.Instance
     public static SpaceTime instance;
 
-    @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
-    public static ProxyBase proxy;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -74,6 +72,7 @@ public class SpaceTime {
         myDim = DimensionType.register("space_dimension", "_spacedim", spacedimID, SpaceWorldProvider.class, false);
         DimensionManager.registerDimension(spacedimID, myDim);
 
+        proxy.onPreInit();
 
     }
 
@@ -86,15 +85,10 @@ public class SpaceTime {
         CraftingLoader.init();
         new GuiElementLoader();
 
-        MinecraftForge.EVENT_BUS.register(new EventSword());
-        MinecraftForge.EVENT_BUS.register(new EventRender());
-        MinecraftForge.EVENT_BUS.register(new EventToolTip());
-        MinecraftForge.EVENT_BUS.register(new EventModuleXP());
-        MinecraftForge.EVENT_BUS.register(new EventTimeBack());
+        proxy.onInit();
 
         PacketHandler.init();
 
-//        ModAdvancements.init();
 
 	}
 
@@ -103,7 +97,7 @@ public class SpaceTime {
         // Moved Spawning registry to last since forge doesn't auto-generate sub
         // "M' biomes until late
         RegistryHandler.postInitReg();
-        HeldItemHandler.replaceHeldItemLayer();
+        proxy.onPostInit();
     }
 
 
@@ -133,6 +127,7 @@ public class SpaceTime {
         GameRegistry.registerTileEntity(TimeAltarCoreEntity.class, new ResourceLocation(MODID, "timealtarcore"));
         GameRegistry.registerTileEntity(SpaceTimeAirEntity.class, new ResourceLocation(MODID, "spacetimeair"));
         GameRegistry.registerTileEntity(STExtractorEntity.class, new ResourceLocation(MODID, "spacetime_extractor"));
+        GameRegistry.registerTileEntity(EndGatewayImitateEntity.class, new ResourceLocation(MODID, "endgatewayimitate"));
     }
 
     public static void LogWarning(String str, Object... args) {
@@ -161,9 +156,7 @@ public class SpaceTime {
 //        }
     }
 
-    public static List<LayerRenderer<EntityLivingBase>> getLayerRenderers(RenderPlayer instance) {
-        return (List)getPrivateValue(RenderLivingBase.class, instance, "layerRenderers");
-    }
+
 
     private static Set<Item> exclude;
     private static Set<Item> include;
@@ -179,38 +172,5 @@ public class SpaceTime {
         }
     }
 
-    public void damageSword(EntityPlayer player, float damage) {
-        if (damage >= 3.0F) {
-            ItemStack stack = player.getActiveItemStack();
-            ItemStack copy = stack.copy();
-            int i = 1 + MathHelper.floor(damage);
-            stack.damageItem(i, player);
-            if (stack.isEmpty()) {
-                EnumHand enumhand = player.getActiveHand();
-                ForgeEventFactory.onPlayerDestroyItem(player, copy, enumhand);
-                if (enumhand == EnumHand.MAIN_HAND) {
-                    player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
-                } else {
-                    player.setItemStackToSlot(EntityEquipmentSlot.OFFHAND, ItemStack.EMPTY);
-                }
 
-                player.resetActiveHand();
-                player.playSound(SoundEvents.ITEM_SHIELD_BREAK, 0.8F, 0.8F + player.world.rand.nextFloat() * 0.4F);
-            }
-        }
-    }
-
-    public boolean getIsBlocking(EntityPlayer player) {
-        this.getClass();
-        boolean ready = 72000 - player.getItemInUseCount() >= 0;
-        return ready && getCanStackBlock(player.getActiveItemStack());
-    }
-
-    private static <T> Object getPrivateValue(Class<T> clazz, T instance, String name) {
-        try {
-            return ObfuscationReflectionHelper.getPrivateValue(clazz, instance, name);
-        } catch (Exception var4) {
-            return null;
-        }
-    }
 }

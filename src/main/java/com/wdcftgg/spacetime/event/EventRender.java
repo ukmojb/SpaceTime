@@ -32,6 +32,7 @@ import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderSpecificHandEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -42,7 +43,7 @@ import org.lwjgl.opengl.GL11;
  */
 
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(Side.CLIENT)
 public class EventRender {
 
     private final Minecraft mc = Minecraft.getMinecraft();
@@ -167,6 +168,7 @@ public class EventRender {
             GlStateManager.blendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE_MINUS_SRC_ALPHA);
         }
     }
+
 
     @SubscribeEvent
     public void onPostRenderLiving(RenderLivingEvent.Post event) {

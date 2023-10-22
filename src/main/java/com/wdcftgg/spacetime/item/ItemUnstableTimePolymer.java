@@ -39,6 +39,7 @@ public class ItemUnstableTimePolymer extends Item implements ITime, IHasModel {
 
     }
 
+
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack is, World worldIn, List<String> list, ITooltipFlag flagIn)

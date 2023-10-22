@@ -13,7 +13,6 @@ import gnu.trove.set.TIntSet;
 import gnu.trove.set.hash.TIntHashSet;
 import lumaceon.mods.clockworkphase.init.ModBlocks;
 import lumaceon.mods.clockworkphase.init.ModItems;
-import lumaceon.mods.clockworkphase.recipe.Recipes;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -23,7 +22,6 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 
 public class CraftingLoader
 {

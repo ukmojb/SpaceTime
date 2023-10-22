@@ -20,7 +20,7 @@ import java.util.TimerTask;
  * @Author : wdcftgg
  * @create 2023/4/30 23:04
  */
-public class TimeCompressorEntity  extends TileEntity implements ITickable {
+public class TimeCompressorEntity extends TileEntity implements ITickable {
     public void update() {
         if (!world.isRemote) {
             if(isGlass(this.pos) && isBrass(this.pos) && temporalOrGlass(this.pos)) {
