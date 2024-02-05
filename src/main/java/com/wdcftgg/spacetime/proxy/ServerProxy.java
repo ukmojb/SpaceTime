@@ -1,9 +1,9 @@
 package com.wdcftgg.spacetime.proxy;
 
-import com.wdcftgg.spacetime.event.*;
+import com.wdcftgg.spacetime.event.EventModuleXP;
+import com.wdcftgg.spacetime.event.EventSword;
+import com.wdcftgg.spacetime.event.EventTimeBack;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.relauncher.Side;
 
 public class ServerProxy extends CommonProxy {
 

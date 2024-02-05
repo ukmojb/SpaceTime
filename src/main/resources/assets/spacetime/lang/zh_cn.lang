@@ -122,3 +122,9 @@ spacetime.altar.time.noenergy=手中时间不足。
 # patchouli
 spacetime.patchouli.name=时间之册
 spacetime.patchouli.landing_text=时空的奥秘...
+
+# space say
+spacetime.space.say.1=异域之人，踏入此间，所求为何？
+spacetime.space.say.2=是为了尘世之间那无趣的名利？
+spacetime.space.say.3=亦或是觊觎时空的伟力？
+spacetime.space.say.4=又或者…是想接触此间的禁忌呢？

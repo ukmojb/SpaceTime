@@ -1,4 +1,4 @@
-package com.wdcftgg.spacetime.entity.ai;
+package com.wdcftgg.spacetime.entity.ai.time;
 
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;

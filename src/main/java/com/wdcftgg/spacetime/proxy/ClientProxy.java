@@ -5,8 +5,8 @@ import com.wdcftgg.spacetime.blocks.tileEntity.EndGatewayImitateEntity;
 import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.*;
 import com.wdcftgg.spacetime.blocks.tileEntity.TimeAltarCoreEntity;
 import com.wdcftgg.spacetime.client.handler.HeldItemHandler;
-import com.wdcftgg.spacetime.client.render.*;
 import com.wdcftgg.spacetime.client.render.HourGlass.*;
+import com.wdcftgg.spacetime.client.render.*;
 import com.wdcftgg.spacetime.entity.*;
 import com.wdcftgg.spacetime.event.EventRender;
 import com.wdcftgg.spacetime.event.EventToolTip;
@@ -14,18 +14,14 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
-import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
-import net.minecraftforge.fml.relauncher.Side;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ClientProxy extends CommonProxy {
@@ -55,6 +51,8 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityTime.class, RenderTime::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityTimePhantom.class, RenderTimePhantom::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntitySword.class, RenderSword::new);
+
+		RenderingRegistry.registerEntityRenderingHandler(EntitySpace.class, RenderSpace::new);
 
 		ClientRegistry.bindTileEntitySpecialRenderer(HourGlassEntity.class, new HourGrassRender());
 		ClientRegistry.bindTileEntitySpecialRenderer(AirHourGlassEntity.class, new AirHourGrassRender());

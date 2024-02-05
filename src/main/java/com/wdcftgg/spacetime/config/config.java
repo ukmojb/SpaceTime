@@ -22,6 +22,8 @@ public class config {
     public static double TIMELASTLIFEMAXHEALTH = 300d;
     public static boolean ALTARAUTOMATE = false;
 
+    public static int SPACEDIMID = 253;
+
     public config() {
     }
 
@@ -30,6 +32,7 @@ public class config {
         String CATEGORY_SWORDCORE = "swordcore";
         String CATEGORY_TIMECORE = "timecore";
         String CATEGORY_BOSS = "boss";
+        String CATEGORY_DIM = "world";
 
         try {
             config.load();
@@ -40,6 +43,7 @@ public class config {
             ALTARAUTOMATE = config.get(CATEGORY_TIMECORE, "AltarAutomate", ALTARAUTOMATE, "Whether the altar can be automated").getBoolean();
             TIMEMAXHEALTH = config.get(CATEGORY_BOSS, "TimeMaxHealth", TIMEMAXHEALTH, "Boss[time] every life health").getDouble();
             TIMELASTLIFEMAXHEALTH = config.get(CATEGORY_BOSS, "TimeLastLifeMaxHealth", TIMELASTLIFEMAXHEALTH, "Boss[time] Last life health").getDouble();
+            SPACEDIMID = config.get(CATEGORY_DIM, "SPACEDIMID", SPACEDIMID, "space Dimension id").getInt();
             } catch (Exception var11) {
         } finally {
             config.save();

@@ -36,9 +36,30 @@ public final class SpaceWorldProvider extends WorldProvider {
     }
 
     @Override
+    public void setAllowedSpawnTypes(boolean allowHostile, boolean allowPeaceful) {
+        super.setAllowedSpawnTypes(false, false);
+    }
+
+
+    @Override
     public boolean canSnowAt(BlockPos pos, boolean checkLight)
     {
         return false;
+    }
+
+    @Override
+    public boolean canDoRainSnowIce(net.minecraft.world.chunk.Chunk chunk)
+    {
+        return false;
+    }
+
+    @Override
+    public void resetRainAndThunder()
+    {
+        world.getWorldInfo().setRainTime(0);
+        world.getWorldInfo().setRaining(false);
+        world.getWorldInfo().setThunderTime(0);
+        world.getWorldInfo().setThundering(false);
     }
 
     @Override

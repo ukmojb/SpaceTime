@@ -1,4 +1,4 @@
-package com.wdcftgg.spacetime.entity.ai;
+package com.wdcftgg.spacetime.entity.ai.time;
 
 import com.wdcftgg.spacetime.entity.EntitySword;
 import net.minecraft.entity.EntityCreature;
@@ -18,7 +18,7 @@ import java.util.Random;
  * @Author : wdcftgg
  * @create 2023/7/16 0:19
  */
-public class TimeAIAttackMelee  extends EntityAIBase
+public class TimeAIAttackMelee extends EntityAIBase
 {
     private World world;
     protected EntityCreature attacker;
@@ -181,7 +181,7 @@ public class TimeAIAttackMelee  extends EntityAIBase
 
         this.attackTick = Math.max(this.attackTick - 1, 0);
         Random r = new Random();
-        if (r.nextFloat() <= 0.0075) {
+        if (r.nextFloat() <= 0.005) {
             EntitySword entitySword = new EntitySword(world);
             entitySword.setPosition(targetX, targetY + 7, targetZ);
             world.spawnEntity(entitySword);
@@ -196,7 +196,7 @@ public class TimeAIAttackMelee  extends EntityAIBase
 
         if (distToEnemySqr <= d0 && this.attackTick <= 0)
         {
-            this.attackTick = 5;
+            this.attackTick = 2;
             this.attacker.swingArm(EnumHand.MAIN_HAND);
             this.attacker.attackEntityAsMob(enemy);
         }
@@ -204,6 +204,6 @@ public class TimeAIAttackMelee  extends EntityAIBase
 
     protected double getAttackReachSqr(EntityLivingBase attackTarget)
     {
-        return (double)(this.attacker.width * 2.0F * this.attacker.width * 2.0F + attackTarget.width);
+        return (double)(this.attacker.width * 4.0F * this.attacker.width * 4.0F + attackTarget.width);
     }
 }

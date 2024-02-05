@@ -1,8 +1,8 @@
 package com.wdcftgg.spacetime.entity;
 
-import com.wdcftgg.spacetime.entity.ai.TimeAIAttackMelee;
-import com.wdcftgg.spacetime.entity.ai.TimeAIHurtByTarget;
-import com.wdcftgg.spacetime.entity.ai.TimeAIMoveTowardsRestriction;
+import com.wdcftgg.spacetime.entity.ai.time.TimeAIAttackMelee;
+import com.wdcftgg.spacetime.entity.ai.time.TimeAIHurtByTarget;
+import com.wdcftgg.spacetime.entity.ai.time.TimeAIMoveTowardsRestriction;
 import com.wdcftgg.spacetime.network.MessageTimeParticle;
 import com.wdcftgg.spacetime.network.PacketHandler;
 import net.minecraft.entity.EntityLivingBase;

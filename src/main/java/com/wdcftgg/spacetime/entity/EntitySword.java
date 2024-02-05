@@ -73,12 +73,12 @@ public class EntitySword extends EntityLiving {
             if (this.ticksExisted == 1) {
                 this.setSwordType(randomSwordId());
             }
-            if (world.getBlockState(this.getPosition()).getBlock() == Blocks.AIR) {
-                this.setPosition(this.posX, this.posY * 0.985, this.posZ);
+            if (world.getBlockState(this.getPosition().up()).getBlock() == Blocks.AIR) {
+                this.setPosition(this.posX, this.posY * 0.92, this.posZ);
                 fallsound = false;
             } else {
                 if (!fallsound) {
-                    world.playSound(null, this.posX, this.posY, this.posZ, ModSounds.FALLSWORD,SoundCategory.NEUTRAL, 10F, 1f);
+                    world.playSound(null, this.posX, this.posY, this.posZ, ModSounds.FALLSWORD,SoundCategory.NEUTRAL, 4f, 1f);
                     for (EntityLivingBase livingbase : this.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(this.getPosition().east().north().down(), this.getPosition().west().south().up(4)))) {
                         if (livingbase instanceof EntityMob) continue;
                         livingbase.attackEntityFrom(new DamageSource("Sword"), 7);
@@ -86,7 +86,7 @@ public class EntitySword extends EntityLiving {
                 }
                 fallsound = true;
             }
-            if (this.ticksExisted >= 100) {
+            if (this.ticksExisted >= 200) {
                 world.removeEntity(this);
             }
             for (EntityLivingBase livingbase : this.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(this.getPosition().east().north().down(), this.getPosition().west().south().up(4)))) {

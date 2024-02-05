@@ -17,9 +17,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import org.lwjgl.opengl.GL11;
 
-import static org.lwjgl.opengl.GL12.GL_LIGHT_MODEL_COLOR_CONTROL;
-import static org.lwjgl.opengl.GL12.GL_SEPARATE_SPECULAR_COLOR;
-
 /**
  * Created by IntelliJ IDEA.
  *
@@ -53,27 +50,28 @@ public class RenderTimeAltarCore extends TileEntitySpecialRenderer<TimeAltarCore
         GlStateManager.disableLighting();
         GlStateManager.enableBlend();
         GlStateManager.enablePolygonOffset();
+        GL11.glDisable(GL11.GL_CULL_FACE);
         GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GL11.glTranslatef((float) x + 4.5f,(float) y + 1,(float) z - 2.5f);
-        GlStateManager.translate(-4f, -1f, +3f);
-        GlStateManager.rotate(g, 0F, 1F, 0F);
+        GlStateManager.translate((float) x + 0.49,(float) y + 1.01,(float) z + 0.49);
+//        GlStateManager.translate(-4f, -1f, +3f);
+        GlStateManager.rotate(g, 0, 1f, 0);
         GlStateManager.color(53/255f, 254/255f, 255/255f, a);
         GlStateManager.doPolygonOffset(-1, -0);
-        GL11.glLightModeli(GL_LIGHT_MODEL_COLOR_CONTROL, GL_SEPARATE_SPECULAR_COLOR);
 
         Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("spacetime", str));
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder buffer = tessellator.getBuffer();
         buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-        buffer.pos(3.5, 1, -3.5).tex(0,0).endVertex();
-        buffer.pos(-3.5, 1, -3.5).tex(1,0).endVertex();
-        buffer.pos(-3.5, 1, 3.5).tex(1,1).endVertex();
-        buffer.pos(3.5, 1, 3.5).tex(0,1).endVertex();
+        buffer.pos(4, 0, -4).tex(0,0).endVertex();
+        buffer.pos(-4, 0, -4).tex(1,0).endVertex();
+        buffer.pos(-4, 0, 4).tex(1,1).endVertex();
+        buffer.pos(4, 0, 4).tex(0,1).endVertex();
         tessellator.draw();
 
         GlStateManager.disablePolygonOffset();
         GlStateManager.disableBlend();
         GlStateManager.enableLighting();
+        GL11.glEnable(GL11.GL_CULL_FACE);
         GlStateManager.popMatrix();
     }
 

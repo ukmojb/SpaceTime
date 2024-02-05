@@ -1,6 +1,7 @@
 package com.wdcftgg.spacetime.blocks.tileEntity;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
@@ -21,21 +22,17 @@ public class SpaceTimeTurbulenceEntity extends TileEntity implements ITickable {
         if (!world.isRemote) {
             for (EntityLivingBase livingbase : this.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(this.pos))) {
                 if (livingbase.isDead) continue;
+                if (!(livingbase instanceof EntityPlayer)) continue;
                 if (livingbase.getHealth() >= livingbase.getMaxHealth() * 0.01f){
                     livingbase.setHealth(livingbase.getHealth() * 0.97f);
                 }
                 if (livingbase.getHealth() <= livingbase.getMaxHealth() * 0.01f){
-                    PotionEffect debuff1 = livingbase.getActivePotionEffect(MobEffects.WEAKNESS);
-                    PotionEffect debuff2 = livingbase.getActivePotionEffect(MobEffects.MINING_FATIGUE);
-                    PotionEffect debuff3 = livingbase.getActivePotionEffect(MobEffects.SLOWNESS);
                     PotionEffect wk = new PotionEffect(MobEffects.WEAKNESS, 100,  0, false, false);
                     PotionEffect mf = new PotionEffect(MobEffects.MINING_FATIGUE, 100,  0, false, false);
                     PotionEffect sn = new PotionEffect(MobEffects.SLOWNESS, 100,  0, false, false);
-                    if(debuff1 == null || debuff2 == null || debuff3 == null) {
-                        livingbase.addPotionEffect(wk);
-                        livingbase.addPotionEffect(mf);
-                        livingbase.addPotionEffect(sn);
-                    }
+                    livingbase.addPotionEffect(wk);
+                    livingbase.addPotionEffect(mf);
+                    livingbase.addPotionEffect(sn);
                 }
             }
         }

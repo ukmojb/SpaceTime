@@ -2,9 +2,9 @@ package com.wdcftgg.spacetime.entity;
 
 
 import com.wdcftgg.spacetime.config.config;
-import com.wdcftgg.spacetime.entity.ai.TimeAIAttackMelee;
-import com.wdcftgg.spacetime.entity.ai.TimeAIHurtByTarget;
-import com.wdcftgg.spacetime.entity.ai.TimeAIMoveTowardsRestriction;
+import com.wdcftgg.spacetime.entity.ai.time.TimeAIAttackMelee;
+import com.wdcftgg.spacetime.entity.ai.time.TimeAIHurtByTarget;
+import com.wdcftgg.spacetime.entity.ai.time.TimeAIMoveTowardsRestriction;
 import com.wdcftgg.spacetime.event.EventTimeBack;
 import com.wdcftgg.spacetime.network.MessageTimeBack;
 import com.wdcftgg.spacetime.network.MessageTimeParticle;
@@ -67,6 +67,7 @@ public class EntityTime extends EntityMob {
             60.0f
     };
 
+    @Override
     public void setCustomNameTag(String p_setCustomNameTag_1_) {
         super.setCustomNameTag(p_setCustomNameTag_1_);
         this.bossInfo.setName(this.getDisplayName());

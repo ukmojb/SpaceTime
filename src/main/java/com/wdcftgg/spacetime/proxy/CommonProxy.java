@@ -1,8 +1,6 @@
 package com.wdcftgg.spacetime.proxy;
 
 import net.minecraft.item.Item;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.Loader;
 
 public class CommonProxy {
 
