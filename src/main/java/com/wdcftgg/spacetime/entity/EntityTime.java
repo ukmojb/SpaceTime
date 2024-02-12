@@ -1,7 +1,7 @@
 package com.wdcftgg.spacetime.entity;
 
 
-import com.wdcftgg.spacetime.config.config;
+import com.wdcftgg.spacetime.config.Config;
 import com.wdcftgg.spacetime.entity.ai.time.TimeAIAttackMelee;
 import com.wdcftgg.spacetime.entity.ai.time.TimeAIHurtByTarget;
 import com.wdcftgg.spacetime.entity.ai.time.TimeAIMoveTowardsRestriction;
@@ -12,12 +12,14 @@ import com.wdcftgg.spacetime.network.PacketHandler;
 import lumaceon.mods.clockworkphase.util.TimeSandHelper;
 import net.minecraft.command.CommandSenderWrapper;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -78,7 +80,7 @@ public class EntityTime extends EntityMob {
     {
         super.applyEntityAttributes();
 
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(config.TIMEMAXHEALTH);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(Config.TIMEMAXHEALTH);
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.8D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
@@ -185,6 +187,8 @@ public class EntityTime extends EntityMob {
         }
         return this.isEntityInvulnerable(source) ? false : super.attackEntityFrom(source, amount);
     }
+
+
 
     @Override
     public void writeEntityToNBT(NBTTagCompound compound){

@@ -1,7 +1,7 @@
 package com.wdcftgg.spacetime.event;
 
 import com.wdcftgg.spacetime.SpaceTime;
-import com.wdcftgg.spacetime.config.config;
+import com.wdcftgg.spacetime.config.Config;
 import com.wdcftgg.spacetime.init.ModSounds;
 import com.wdcftgg.spacetime.potion.ModPotions;
 import net.minecraft.entity.player.EntityPlayer;
@@ -87,7 +87,7 @@ public class EventSword {
                 if (player.rayTrace(1.5,2) != null){
                     Vec3d hitVec = player.rayTrace(1,1).hitVec;
                     Random r = new Random();
-                    for (int i = 0; i <= config.SWORDBLOCKINGPARTICLE; i++) {
+                    for (int i = 0; i <= Config.SWORDBLOCKINGPARTICLE; i++) {
                         player.world.spawnParticle(EnumParticleTypes.END_ROD,hitVec.x,hitVec.y,hitVec.z,r.nextDouble() - 0.5,r.nextDouble()- 0.5,r.nextDouble()- 0.5, 10);
                     }
                 }

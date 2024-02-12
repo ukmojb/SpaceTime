@@ -46,12 +46,12 @@ public class PotionsSwordcore extends PotionBase {
     @Override
     public boolean isInstant()
     {
-        return true;
+        return false;
     }
 
     @Override
     public boolean isReady(int duration, int amplifier)
     {
-        return duration % 1 == 0;
+        return true;
     }
 }

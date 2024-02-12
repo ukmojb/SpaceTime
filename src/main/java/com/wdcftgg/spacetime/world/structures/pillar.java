@@ -1,7 +1,7 @@
 package com.wdcftgg.spacetime.world.structures;
 
 import com.wdcftgg.spacetime.SpaceTime;
-import com.wdcftgg.spacetime.config.config;
+import com.wdcftgg.spacetime.config.Config;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -33,7 +33,7 @@ public class pillar implements IWorldGenerator {
             return;
         }
 
-        if (chunkX == 0 && chunkZ == 0 && world.provider.getDimension() == config.SPACEDIMID){
+        if (chunkX == 0 && chunkZ == 0 && world.provider.getDimension() == Config.SPACEDIMID){
             BlockPos pos;
             pos = new BlockPos(-7, 26, -7);
             template.addBlocksToWorld(world, pos, new PlacementSettings(), 2|4|16);

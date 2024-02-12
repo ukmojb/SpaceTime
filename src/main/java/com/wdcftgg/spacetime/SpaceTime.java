@@ -4,7 +4,7 @@ package com.wdcftgg.spacetime;
 import com.wdcftgg.spacetime.blocks.tileEntity.*;
 import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.*;
 import com.wdcftgg.spacetime.blocks.tileEntity.stextractor.STExtractorEntity;
-import com.wdcftgg.spacetime.config.config;
+import com.wdcftgg.spacetime.config.Config;
 import com.wdcftgg.spacetime.dimension.SpaceWorldProvider;
 import com.wdcftgg.spacetime.gui.GuiElementLoader;
 import com.wdcftgg.spacetime.init.RegistryHandler;
@@ -58,10 +58,10 @@ public class SpaceTime {
         logger = event.getModLog();
         RegistryHandler.preInitRegistries(event);
 
-        config.init(event.getSuggestedConfigurationFile());
+        Config.init(event.getSuggestedConfigurationFile());
 
-        myDim = DimensionType.register("space_dimension", "_spacedim", config.SPACEDIMID, SpaceWorldProvider.class, false);
-        DimensionManager.registerDimension(config.SPACEDIMID, myDim);
+        myDim = DimensionType.register("space_dimension", "_spacedim", Config.SPACEDIMID, SpaceWorldProvider.class, false);
+        DimensionManager.registerDimension(Config.SPACEDIMID, myDim);
 
         proxy.onPreInit();
 

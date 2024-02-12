@@ -2,7 +2,7 @@ package com.wdcftgg.spacetime.event;
 
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.tileEntity.TimeAltarCoreEntity;
-import com.wdcftgg.spacetime.config.config;
+import com.wdcftgg.spacetime.config.Config;
 import com.wdcftgg.spacetime.entity.EntityTimePhantom;
 import com.wdcftgg.spacetime.potion.ModPotions;
 import lumaceon.mods.clockworkphase.init.ModItems;
@@ -74,7 +74,7 @@ public class EventRender {
             GlStateManager.enablePolygonOffset();
             GlStateManager.enableBlend(); //开启混合器(使GL支持Alpha透明通道)
 
-            fontRenderer.drawString(text, config.GUIPOSX, config.GUIPOSY, 0xFFFFFFFF);
+            fontRenderer.drawString(text, Config.GUIPOSX, Config.GUIPOSY, 0xFFFFFFFF);
 
             GlStateManager.disableBlend();
             GlStateManager.enableLighting();

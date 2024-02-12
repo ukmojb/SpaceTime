@@ -1,6 +1,6 @@
 package com.wdcftgg.spacetime.event;
 
-import com.wdcftgg.spacetime.config.config;
+import com.wdcftgg.spacetime.config.Config;
 import com.wdcftgg.spacetime.entity.EntityTime;
 import com.wdcftgg.spacetime.entity.EntityTimePhantom;
 import com.wdcftgg.spacetime.network.MessageTimeBack;
@@ -32,7 +32,7 @@ public class EventTime {
         if (event.getEntity() instanceof EntityTime && !event.getEntityLiving().world.isRemote){
             EntityLiving living = (EntityLiving) event.getEntityLiving();
             if (living.getEntityAttribute(LIFE_POWER).getBaseValue() == 2.0D){
-                living.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(config.TIMELASTLIFEMAXHEALTH);
+                living.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(Config.TIMELASTLIFEMAXHEALTH);
                 EntityTimePhantom ent = new EntityTimePhantom(living.world);
                 ent.setPosition(living.posX, living.posY, living.posZ);
                 living.world.spawnEntity(ent);

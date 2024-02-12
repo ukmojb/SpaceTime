@@ -53,6 +53,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntitySword.class, RenderSword::new);
 
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpace.class, RenderSpace::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntitySpaceSword.class, RenderSpaceSword::new);
 
 		ClientRegistry.bindTileEntitySpecialRenderer(HourGlassEntity.class, new HourGrassRender());
 		ClientRegistry.bindTileEntitySpecialRenderer(AirHourGlassEntity.class, new AirHourGrassRender());

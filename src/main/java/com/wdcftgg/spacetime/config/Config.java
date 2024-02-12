@@ -12,7 +12,7 @@ import java.io.File;
  * @create 2023/5/28 12:58
  */
 
-public class config {
+public class Config {
 
     public static int SWORDBLOCKINGPARTICLE = 20;
     public static double ROTATIONALSPEED = 30d;
@@ -21,10 +21,10 @@ public class config {
     public static double TIMEMAXHEALTH = 150d;
     public static double TIMELASTLIFEMAXHEALTH = 300d;
     public static boolean ALTARAUTOMATE = false;
-
     public static int SPACEDIMID = 253;
+    public static int SPACEPHASES2HIGH = 165;
 
-    public config() {
+    public Config() {
     }
 
     public static void init(File configurationFile) {
@@ -44,6 +44,7 @@ public class config {
             TIMEMAXHEALTH = config.get(CATEGORY_BOSS, "TimeMaxHealth", TIMEMAXHEALTH, "Boss[time] every life health").getDouble();
             TIMELASTLIFEMAXHEALTH = config.get(CATEGORY_BOSS, "TimeLastLifeMaxHealth", TIMELASTLIFEMAXHEALTH, "Boss[time] Last life health").getDouble();
             SPACEDIMID = config.get(CATEGORY_DIM, "SPACEDIMID", SPACEDIMID, "space Dimension id").getInt();
+            SPACEPHASES2HIGH = config.get(CATEGORY_BOSS, "SPACEPHASES2HIGH", SPACEPHASES2HIGH, "players will be attacked when they reach this height").getInt();
             } catch (Exception var11) {
         } finally {
             config.save();

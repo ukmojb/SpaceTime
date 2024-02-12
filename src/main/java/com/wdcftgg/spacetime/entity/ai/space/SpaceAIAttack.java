@@ -1,8 +1,12 @@
 package com.wdcftgg.spacetime.entity.ai.space;
 
+import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.STBlocks;
+import com.wdcftgg.spacetime.config.Config;
 import com.wdcftgg.spacetime.entity.EntitySpace;
+import com.wdcftgg.spacetime.entity.EntitySpaceSword;
 import com.wdcftgg.spacetime.entity.EntitySword;
+import com.wdcftgg.spacetime.potion.ModPotions;
 import com.wdcftgg.spacetime.util.Tools;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,9 +15,17 @@ import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.pathfinding.Path;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.structure.template.PlacementSettings;
+import net.minecraft.world.gen.structure.template.Template;
+import net.minecraft.world.gen.structure.template.TemplateManager;
 import software.bernie.geckolib3.core.AnimationState;
 
 import java.util.*;
@@ -54,6 +66,21 @@ public class SpaceAIAttack extends EntityAIBase
             new BlockPos(73, 82, -5),
             new BlockPos(73, 82, 4),
             new BlockPos(73, 82, 13),
+
+    };
+    
+
+
+    public final BlockPos[] swordspownposlist = new  BlockPos[]{
+            new BlockPos(69.0, 80.0, 9.0),
+            new BlockPos(51.0, 80.0, 9.0),
+            new BlockPos(60.0, 80.0, 9.0),
+            new BlockPos(69.0, 80.0, 0.0),
+            new BlockPos(60.0, 80.0, 0.0),
+            new BlockPos(51.0, 80.0, 0.0),
+            new BlockPos(51.0, 80.0, -9.0),
+            new BlockPos(60.0, 80.0, -9.0),
+            new BlockPos(69.0, 80.0, -9.0),
 
     };
 
@@ -116,8 +143,6 @@ public class SpaceAIAttack extends EntityAIBase
                         break;
                     }
                 }
-
-                int num1 = -1;
                 int num2 = (int) ((entitySpace.world.getTotalWorldTime() - attacktime) % 300);
 
                 if (num2 >= 130 && num2 <= 140) {
@@ -140,6 +165,67 @@ public class SpaceAIAttack extends EntityAIBase
                         world.addWeatherEffect(new EntityLightningBolt(world, player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ(), true));
                     }
                 }
+            } else if (phases == 1) {
+                if (entitySpace.getMode() != "magiccircle") {
+                    entitySpace.setMode("magiccircle");
+                    Tools.setBlockAABB(new BlockPos(73, 80, -13), new BlockPos(47, 82, 13), Blocks.AIR, entitySpace);
+                    if (Tools.getSpaceChallengefieldSword(world).size() < 5) {
+                        int spawnnum = 5;
+                        while (spawnnum != 0) {
+                            Random random = new Random();
+                            int randomint = random.nextInt(9);
+                            if (world.getEntitiesWithinAABB(EntitySpaceSword.class, new AxisAlignedBB(swordspownposlist[randomint])).isEmpty()) {
+                                EntitySpaceSword spaceSword = new EntitySpaceSword(world);
+                                Tools.setPosition(spaceSword, swordspownposlist[randomint]);
+                                world.spawnEntity(spaceSword);
+                                spawnnum -= 1;
+                            }
+                        }
+                    }
+
+                }
+            } else if (phases == 2) {
+                if (entitySpace.getMode() != "sprinting") {
+                    entitySpace.setMode("sprinting");
+
+                    MinecraftServer server = world.getMinecraftServer();
+                    TemplateManager manager = world.getSaveHandler().getStructureTemplateManager();
+                    Template template = manager.getTemplate(server, new ResourceLocation(SpaceTime.MODID, "challengefield2"));
+
+                    BlockPos pos = new BlockPos(46, 150, -14);
+                    template.addBlocksToWorld(world, pos, new PlacementSettings(), 2|4|16);
+                    SpaceTime.Log("challengefield2 saved");
+
+                    Tools.setBlockAABB(new BlockPos(74, 79, 14), new BlockPos(45, 82, -14), Blocks.AIR, entitySpace);
+
+                    for (EntityPlayer player : Tools.getSpaceChallengefieldPlayer(world)) {
+                        player.removeActivePotionEffect(ModPotions.LossSpatialSense);
+                        Tools.setPosition(player, new BlockPos(60.5,151,0.5));
+                    }
+
+                    world.addWeatherEffect(new EntityLightningBolt(world, 46, 152, -14, true));
+                    world.addWeatherEffect(new EntityLightningBolt(world, 46, 152, 14, true));
+                    world.addWeatherEffect(new EntityLightningBolt(world, 74, 152, -14, true));
+                    world.addWeatherEffect(new EntityLightningBolt(world, 74, 152, -14, true));
+                }
+
+                /**
+                 * Try to find and set a path to XYZ. Returns true if successful. Args : x, y, z, speed
+                 *
+                    public boolean tryMoveToXYZ(double x, double y, double z, double speedIn)
+                    {
+                        return this.setPath(this.getPathToXYZ(x, y, z), speedIn);
+                    }
+                */
+            } else {
+
+            }
+
+            if (phases != 0) {
+
+            }
+            if (phases != 1) {
+
             }
         }
     }
