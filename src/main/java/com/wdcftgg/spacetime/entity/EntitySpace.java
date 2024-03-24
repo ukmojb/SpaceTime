@@ -3,17 +3,20 @@ package com.wdcftgg.spacetime.entity;
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.entity.ai.space.SpaceAIAttack;
 import com.wdcftgg.spacetime.entity.ai.time.TimeAIHurtByTarget;
+import com.wdcftgg.spacetime.network.MessageSpaceCollideWithPlayer;
+import com.wdcftgg.spacetime.network.MessageTimeParticle;
 import com.wdcftgg.spacetime.network.PacketHandler;
 import com.wdcftgg.spacetime.proxy.CommonProxy;
 import com.wdcftgg.spacetime.util.Tools;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.BossInfo;
@@ -31,6 +34,8 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -128,14 +133,31 @@ public class EntitySpace extends EntityMob implements IAnimatable {
 
             if (phases == 2) {
                 if (sprinting != "") {
-                    String[] posnum = sprinting.split(",");
-                    if (posnum.length != 0) {
-                        BlockPos pos0 = new BlockPos(Integer.getInteger(posnum[0]), Integer.getInteger(posnum[1]), Integer.getInteger(posnum[2]));
-                        if (pos0.equals(Tools.getintpos(this.getPosition()))) {
-                            this.setSprinting("");
+                    List<String> poslist = Arrays.asList(sprinting.split("/"));
+                    if (poslist.size() > 1) {
+                        List<String> posnum = Arrays.asList(poslist.get(1).split(","));
+                        if (posnum.size() > 2) {
+                            if ((Integer.valueOf(posnum.get(0)) == (int) this.posX) && (Integer.valueOf(posnum.get(2)) == (int) this.posZ)) {
+                                sprinting = "";
+                                SpaceAIAttack.attacktime = 30;
+                                System.out.println("sad");
+                            }
                         }
                     }
                 }
+                if (world.getEntitiesWithinAABB(EntitySpace.class, new AxisAlignedBB(new BlockPos(76, 150, -16), new BlockPos(44, 153, 16))).isEmpty()) {
+                    if (world.getTotalWorldTime() % 10 == 0)
+                        sprinting = "";
+                }
+                for (EntityLivingBase livingbase : this.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(this.getPosition().east(2).north(2).down(), this.getPosition().west(2).south(2).up()))) {
+                    if (livingbase instanceof EntitySpace) continue;
+                    livingbase.attackEntityFrom(DamageSource.GENERIC, 3);
+                }
+            }
+
+            if (!Tools.getSpaceChallengefieldPlayer(world).isEmpty()) {
+                this.setAttackTarget(Tools.getSpaceChallengefieldPlayer(world).get(0));
+                this.getLookHelper().setLookPositionWithEntity(Tools.getSpaceChallengefieldPlayer(world).get(0), 30.0F, 30.0F);
             }
 
 
@@ -143,10 +165,6 @@ public class EntitySpace extends EntityMob implements IAnimatable {
                 world.removeEntity(this);
             }
         }
-
-
-
-
     }
 
     @Override
@@ -230,6 +248,46 @@ public class EntitySpace extends EntityMob implements IAnimatable {
         this.bossInfo.removePlayer(player);
     }
 
+    @Override
+    public boolean canBePushed() {
+        return false;
+    }
+
+    @Override
+    public void applyEntityCollision(Entity entityIn) {
+//        if (entityIn instanceof EntityLivingBase) {
+
+//        }
+        System.out.println("EntityCollision");
+    }
+
+    @Override
+    public void onCollideWithPlayer(EntityPlayer player)
+    {
+        if (phases == 2) {
+            PacketHandler.INSTANCE.sendToServer(new MessageSpaceCollideWithPlayer(5, player));
+        }
+    }
+
+    @Override
+    public void move(MoverType type, double x, double y, double z)
+    {
+        double d0 = this.posX;
+        double d1 = this.posY;
+        double d2 = this.posZ;
+
+        // 移动生物
+        super.move(type, x, y, z);
+
+        // 检查生物是否与方块相交，如果相交则重新设置位置
+        AxisAlignedBB axisalignedbb = this.getEntityBoundingBox();
+        this.posX = (d0 + this.posX) / 2.0D;
+        this.posY = (d1 + this.posY) / 2.0D;
+        this.posZ = (d2 + this.posZ) / 2.0D;
+        this.setEntityBoundingBox(axisalignedbb);
+        this.resetPositionToBB();
+    }
+
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
         if(mode == "speak" || mode == "default") {
@@ -277,8 +335,8 @@ public class EntitySpace extends EntityMob implements IAnimatable {
         return attackTick;
     }
 
-    public void setAttackTick(int attackTick) {
-        EntitySpace.attackTick = attackTick;
+    public void setAttackTick(int num) {
+        EntitySpace.attackTick = num;
     }
 
     public void laterspeak(String str, long oldtime, long time, long latertime) {
@@ -294,7 +352,7 @@ public class EntitySpace extends EntityMob implements IAnimatable {
         return sprinting;
     }
 
-    public void setSprinting(String sprinting) {
-        EntitySpace.sprinting = sprinting;
+    public void setSprinting(String sss) {
+        EntitySpace.sprinting = sss;
     }
 }

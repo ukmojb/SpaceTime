@@ -17,9 +17,11 @@ public class PacketHandler {
     }
 
     public static void init() {
-        INSTANCE.registerMessage(MessageTimeParticle.class, MessageTimeParticle.class, 10, Side.CLIENT);
-        INSTANCE.registerMessage(MessageTimeBack.class, MessageTimeBack.class, 11, Side.CLIENT);
-        INSTANCE.registerMessage(MessageTimeAltarCore.class, MessageTimeAltarCore.class, 12, Side.CLIENT);
+        INSTANCE.registerMessage(MessageTimeParticle.class, MessageTimeParticle.class, 0, Side.CLIENT);
+        INSTANCE.registerMessage(MessageTimeBack.class, MessageTimeBack.class, 1, Side.CLIENT);
+        INSTANCE.registerMessage(MessageTimeAltarCore.class, MessageTimeAltarCore.class, 2, Side.CLIENT);
+        INSTANCE.registerMessage(MessageSpaceCollideWithPlayer.class, MessageSpaceCollideWithPlayer.class, 3, Side.SERVER);
+        INSTANCE.registerMessage(MessageParticleBurst.class, MessageParticleBurst.class, 4, Side.CLIENT);
     }
 
     static {

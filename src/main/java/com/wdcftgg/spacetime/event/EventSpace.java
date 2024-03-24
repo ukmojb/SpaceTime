@@ -3,6 +3,7 @@ package com.wdcftgg.spacetime.event;
 import com.wdcftgg.spacetime.entity.EntitySpace;
 import com.wdcftgg.spacetime.util.Tools;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -38,6 +39,7 @@ public class EventSpace {
                             event.getWorld().spawnEntity(entitySpace);
                             stack.shrink(1);
                             Tools.setBlockAABB(pos.up().west().north(), pos.down().east().south(), Blocks.AIR, entitySpace);
+
                         }
                     }
                 }

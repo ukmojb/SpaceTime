@@ -14,6 +14,8 @@ public class ModEntityInit {
         registerEntity("UnstableTimePolymer", EntityUnstableTimePolymer.class);
         registerEntity("Sword", EntitySword.class);
         registerEntity("TimePhantom", EntityTimePhantom.class);
+        registerEntity("BlackHole", EntityBlackHole.class);
+        registerEntity("Rubble", EntityRubble.class);
 
 
         registerEntityAndEgg("TimeCrack", EntityTimeCrack.class);

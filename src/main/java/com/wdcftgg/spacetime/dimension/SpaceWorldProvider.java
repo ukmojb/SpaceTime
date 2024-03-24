@@ -4,6 +4,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.storage.WorldInfo;
+import net.minecraftforge.client.IRenderHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -40,26 +46,30 @@ public final class SpaceWorldProvider extends WorldProvider {
         super.setAllowedSpawnTypes(false, false);
     }
 
-
-    @Override
-    public boolean canSnowAt(BlockPos pos, boolean checkLight)
-    {
-        return false;
-    }
-
     @Override
     public boolean canDoRainSnowIce(net.minecraft.world.chunk.Chunk chunk)
     {
         return false;
     }
 
+    @Nullable
+    @Override
+    @SideOnly(Side.CLIENT)
+    public IRenderHandler getWeatherRenderer()
+    {
+        return null;
+    }
+
     @Override
     public void resetRainAndThunder()
     {
-        world.getWorldInfo().setRainTime(0);
-        world.getWorldInfo().setRaining(false);
-        world.getWorldInfo().setThunderTime(0);
-        world.getWorldInfo().setThundering(false);
+        WorldInfo worldinfo = world.getWorldInfo();
+
+        worldinfo.setCleanWeatherTime(20000);
+        worldinfo.setRainTime(0);
+        worldinfo.setThunderTime(0);
+        worldinfo.setRaining(false);
+        worldinfo.setThundering(false);
     }
 
     @Override

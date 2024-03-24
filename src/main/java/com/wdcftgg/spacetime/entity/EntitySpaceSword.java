@@ -39,13 +39,21 @@ public class EntitySpaceSword extends EntityLiving implements IAnimatable {
         this.setSize(0.7F, 2.5F);
     }
 
+    @Override
+    protected void applyEntityAttributes()
+    {
+        super.applyEntityAttributes();
+
+        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(10D);
+    }
+
     public void onDeath(DamageSource cause)
     {
         if (!world.isRemote && !CommonProxy.spacelist.isEmpty()){
             for (int num : CommonProxy.spacelist) {
                 EntitySpace entitySpace = (EntitySpace) world.getEntityByID(num);
                 if (entitySpace != null) {
-                    entitySpace.attackEntityFrom(DamageSource.OUT_OF_WORLD, (float) (entitySpace.getMaxHealth() * 0.05 + 5));
+                    entitySpace.attackEntityFrom(DamageSource.OUT_OF_WORLD, (float) (entitySpace.getMaxHealth() * 0.05));
                 }
             }
         }

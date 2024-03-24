@@ -293,8 +293,7 @@
 			}
 		},
 		"animation.model.sprinting": {
-			"loop": "hold_on_last_frame",
-			"animation_length": 2,
+			"animation_length": 2333,
 			"bones": {
 				"Sword1": {
 					"rotation": {

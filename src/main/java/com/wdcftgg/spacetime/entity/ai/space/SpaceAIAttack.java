@@ -9,10 +9,12 @@ import com.wdcftgg.spacetime.entity.EntitySword;
 import com.wdcftgg.spacetime.potion.ModPotions;
 import com.wdcftgg.spacetime.util.Tools;
 import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.pathfinding.Path;
 import net.minecraft.potion.PotionEffect;
@@ -110,10 +112,6 @@ public class SpaceAIAttack extends EntityAIBase
     {
         EntityLivingBase entitylivingbase = this.attacker.getAttackTarget();
 
-        if (entitylivingbase != null) {
-            this.attacker.getLookHelper().setLookPositionWithEntity(entitylivingbase, 30.0F, 30.0F);
-        }
-
         attackWithPhases(attacker, entitylivingbase, attacker.getPhases());
         attacker.setAttackTick(this.attackTick);
     }
@@ -182,6 +180,10 @@ public class SpaceAIAttack extends EntityAIBase
                             }
                         }
                     }
+                    for (EntityPlayer player : Tools.getSpaceChallengefieldPlayer(world)) {
+                        if (!player.isCreative())
+                            player.addPotionEffect(new PotionEffect(ModPotions.LossSpatialSense, 99999, 0, true, false));
+                    }
 
                 }
             } else if (phases == 2) {
@@ -199,32 +201,23 @@ public class SpaceAIAttack extends EntityAIBase
                     Tools.setBlockAABB(new BlockPos(74, 79, 14), new BlockPos(45, 82, -14), Blocks.AIR, entitySpace);
 
                     for (EntityPlayer player : Tools.getSpaceChallengefieldPlayer(world)) {
+                        EntityPlayerMP playermp = (EntityPlayerMP) player;
+                        playermp.connection.setPlayerLocation(60.5, 151, 0.5, playermp.rotationYaw, playermp.rotationPitch);
                         player.removeActivePotionEffect(ModPotions.LossSpatialSense);
-                        Tools.setPosition(player, new BlockPos(60.5,151,0.5));
                     }
 
                     world.addWeatherEffect(new EntityLightningBolt(world, 46, 152, -14, true));
                     world.addWeatherEffect(new EntityLightningBolt(world, 46, 152, 14, true));
                     world.addWeatherEffect(new EntityLightningBolt(world, 74, 152, -14, true));
                     world.addWeatherEffect(new EntityLightningBolt(world, 74, 152, -14, true));
+
+                    Tools.setPosition(entitySpace, new BlockPos(entitySpace.posX, 151, entitySpace.posZ));
                 }
+                if (target != null) {
+                    Tools.setSprintingPos(entitySpace, target);
 
-                /**
-                 * Try to find and set a path to XYZ. Returns true if successful. Args : x, y, z, speed
-                 *
-                    public boolean tryMoveToXYZ(double x, double y, double z, double speedIn)
-                    {
-                        return this.setPath(this.getPathToXYZ(x, y, z), speedIn);
-                    }
-                */
+                }
             } else {
-
-            }
-
-            if (phases != 0) {
-
-            }
-            if (phases != 1) {
 
             }
         }
