@@ -3,7 +3,6 @@ package com.wdcftgg.spacetime.entity;
 import com.wdcftgg.spacetime.network.MessageParticleBurst;
 import com.wdcftgg.spacetime.network.PacketHandler;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -28,8 +27,8 @@ public class EntityRubble extends EntityThrowable {
 
     @Override
     public void entityInit() {
-        this.dataManager.set(Rubble_Block, (int)Integer.valueOf(0));
-        this.dataManager.set(Rubble_Meta, (int)Integer.valueOf(0));
+        this.dataManager.register(Rubble_Block, 1);
+        this.dataManager.register(Rubble_Meta, 0);
     }
 
     public EntityRubble(World world, double x, double y, double z) {
@@ -46,7 +45,7 @@ public class EntityRubble extends EntityThrowable {
             result.entityHit.attackEntityFrom(rubble, b0);
         }
 
-        if(this.ticksExisted > 2) {
+        if(this.ticksExisted > 10) {
             this.setDead();
 
 //            world.playSoundAtEntity(this, "hbm:block.debris", 1.5F, 1.0F);

@@ -5,9 +5,6 @@ import com.wdcftgg.spacetime.event.EventSword;
 import com.wdcftgg.spacetime.event.EventTimeBack;
 import net.minecraftforge.common.MinecraftForge;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ServerProxy extends CommonProxy {
 
 

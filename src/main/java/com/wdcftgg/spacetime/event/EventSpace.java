@@ -1,9 +1,9 @@
 package com.wdcftgg.spacetime.event;
 
+import com.wdcftgg.spacetime.entity.EntityBlackHole;
 import com.wdcftgg.spacetime.entity.EntitySpace;
 import com.wdcftgg.spacetime.util.Tools;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -26,6 +26,14 @@ public class EventSpace {
         EntityPlayer player = event.getEntityPlayer();
         BlockPos pos = new BlockPos(60,81,0);
         if (!player.world.isRemote){
+            if (event.getWorld().getBlockState(event.getPos()).getBlock() == Blocks.STONE){
+                System.out.println("ssss");
+                EntityBlackHole bl = new EntityBlackHole(player.world, 5);
+                bl.posX = event.getPos().getX();
+                bl.posY = event.getPos().getY();
+                bl.posZ = event.getPos().getZ();
+                player.world.spawnEntity(bl);
+            }
             if (event.getHand() != EnumHand.MAIN_HAND)
                 return;
 
@@ -43,6 +51,7 @@ public class EventSpace {
                         }
                     }
                 }
+
             }
         }
     }

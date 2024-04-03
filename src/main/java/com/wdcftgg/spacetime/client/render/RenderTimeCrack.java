@@ -14,6 +14,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 
 /**
  * Created by IntelliJ IDEA.
@@ -54,8 +55,8 @@ public class RenderTimeCrack extends Render {
             scale -= bob2 / 3.0F;
             this.bindTexture(portaltex);
             GL11.glPushMatrix();
-            GL11.glEnable(3042); //GL_BLEND
-            GL11.glBlendFunc(770, 771);
+            GL11.glEnable(GL11.GL_BLEND); //GL_BLEND
+            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, alpha);
             if (Minecraft.getMinecraft().getRenderViewEntity() instanceof EntityPlayer) {
 //                GL11.glDepthMask(false);
@@ -86,8 +87,8 @@ public class RenderTimeCrack extends Render {
 //                GL11.glDepthMask(true);
             }
 
-            GL11.glDisable(32826);
-            GL11.glDisable(3042);
+            GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+            GL11.glDisable(GL11.GL_BLEND);
             GL11.glPopMatrix();
         }
 

@@ -1,8 +1,6 @@
 package com.wdcftgg.spacetime.client.render;
 
-import com.wdcftgg.spacetime.client.model.ModelSpace;
 import com.wdcftgg.spacetime.client.model.ModelSpaceSword;
-import com.wdcftgg.spacetime.entity.EntitySpace;
 import com.wdcftgg.spacetime.entity.EntitySpaceSword;
 import net.minecraft.client.renderer.entity.RenderManager;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;

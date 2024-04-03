@@ -1,15 +1,14 @@
 package com.wdcftgg.spacetime.entity;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.passive.EntityRabbit;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -17,27 +16,30 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class EntityBlackHole extends Entity {
+public class EntityBlackHole extends EntityLiving {
 
     Random rand = new Random();
     public static DamageSource blackhole_damagesource = new DamageSource("blockhole").setDamageIsAbsolute().setDamageBypassesArmor();
 
     public static DataParameter<Float> BlackHole_Size = EntityDataManager.<Float>createKey(EntityBlackHole.class, DataSerializers.FLOAT);
 
-    public EntityBlackHole(World world) {
-        super(world);
-        this.ignoreFrustumCheck = true;
-        this.isImmuneToFire = true;
-        this.noClip = true;
+
+    public EntityBlackHole(World worldIn)
+    {
+        super(worldIn);
+        this.setSize(1, 1);
+        this.setNoAI(true);
+        this.setNoGravity(true);
     }
 
     public EntityBlackHole(World world, float size) {
@@ -47,10 +49,17 @@ public class EntityBlackHole extends Entity {
     }
 
     @Override
-    public void onUpdate() {
-        super.onUpdate();
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
 
-        float size = this.dataManager.get(BlackHole_Size);
+        float size;
+
+        try {
+            size = this.getDataManager().get(EntityBlackHole.BlackHole_Size);
+        } catch (Throwable var12)
+        {
+            size = 0.5f;
+        }
 
         if(!world.isRemote) {
             for(int k = 0; k < size * 2; k++) {
@@ -152,21 +161,49 @@ public class EntityBlackHole extends Entity {
         this.motionX *= 0.99D;
         this.motionY *= 0.99D;
         this.motionZ *= 0.99D;
+        this.setPosition(this.posX, 160, this.posZ);
+    }
+
+    @Nullable
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata)
+    {
+
+        this.setSize(this.dataManager.get(BlackHole_Size));
+        return livingdata;
+    }
+
+    public void setSize(float size)
+    {
+        this.dataManager.set(BlackHole_Size, size);
+    }
+
+    public Float getSize()
+    {
+        return this.dataManager.get(BlackHole_Size);
+    }
+
+
+    public void entityInit() {
+        super.entityInit();
+        this.dataManager.register(BlackHole_Size, 0.5F);
     }
 
     @Override
-    protected void entityInit() {
-        this.dataManager.set(BlackHole_Size, 0.5F);
-    }
-
-    @Override
-    protected void readEntityFromNBT(NBTTagCompound nbt) {
+    public void readEntityFromNBT(NBTTagCompound nbt) {
+        super.readEntityFromNBT(nbt);
         this.dataManager.set(BlackHole_Size, nbt.getFloat("size"));
     }
 
     @Override
-    protected void writeEntityToNBT(NBTTagCompound nbt) {
+    public void writeEntityToNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
         nbt.setFloat("size", this.dataManager.get(BlackHole_Size));
+    }
+
+    @Override
+    public boolean attackEntityFrom(DamageSource source, float amount)
+    {
+        return false;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.wdcftgg.spacetime.proxy;
 
+import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.tileEntity.ConcretizationHourGlassEntity;
 import com.wdcftgg.spacetime.blocks.tileEntity.EndGatewayImitateEntity;
 import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.*;
@@ -17,6 +18,7 @@ import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -46,11 +48,15 @@ public class ClientProxy extends CommonProxy {
 	public void onPreInit() {
 		super.onPreInit();
 
+		OBJLoader.INSTANCE.addDomain(SpaceTime.MODID);
+
 		RenderingRegistry.registerEntityRenderingHandler(EntityUnstableTimePolymer.class, RenderUnstableTimePolymer::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityTimeCrack.class, RenderTimeCrack::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityTime.class, RenderTime::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityTimePhantom.class, RenderTimePhantom::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntitySword.class, RenderSword::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityBlackHole.class, RenderBlackHole::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityRubble.class, RenderRubble::new);
 
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpace.class, RenderSpace::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpaceSword.class, RenderSpaceSword::new);
