@@ -819,8 +819,8 @@ public class BlackHoleModel extends ModelBase{
         if (entity instanceof EntityBlackHole) {
             EntityBlackHole blackHole = (EntityBlackHole) entity;
             float size = blackHole.getSize();
-            GlStateManager.translate(0,  size * -1.5, 0);
-            GlStateManager.scale(2.5 * size, 2.5 * size, 2.5 * size);
+            GlStateManager.translate(0,  size * -0.5, size * -0.2);
+            GlStateManager.scale(1.5 * size, 1.5 * size, 1.5 * size);
 
         }
         voxel_file.render(scale);

@@ -2,11 +2,11 @@ package com.wdcftgg.spacetime.client.render;
 
 
 import com.wdcftgg.spacetime.SpaceTime;
+import com.wdcftgg.spacetime.client.Vec3;
 import com.wdcftgg.spacetime.client.model.BlackHoleModel;
 import com.wdcftgg.spacetime.entity.EntityBlackHole;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -59,7 +59,7 @@ public class RenderBlackHole extends RenderLiving<EntityBlackHole> {
 //        Tessellator.getInstance().getBuffer().pos(-1, 1, 0).tex(0, 1).endVertex();
 //        Tessellator.getInstance().draw();
 
-        renderDisc(entity, partialTicks);
+        renderDisc(entity, partialTicks, size);
         renderJets(entity, partialTicks);
 
         GL11.glEnable(GL11.GL_CULL_FACE);
@@ -68,11 +68,11 @@ public class RenderBlackHole extends RenderLiving<EntityBlackHole> {
         GL11.glPopMatrix();
     }
 
-    protected ResourceLocation discTex() {
+    protected ResourceLocation discTex(){
         return this.disc;
     }
 
-    protected void renderDisc(Entity entity, float partialTicks) {
+    protected void renderDisc(EntityBlackHole entity, float interp, float size){
 
         float glow = 0.75F;
 
@@ -81,91 +81,108 @@ public class RenderBlackHole extends RenderLiving<EntityBlackHole> {
         GL11.glPushMatrix();
         GL11.glRotatef(entity.getEntityId() % 90 - 45, 1, 0, 0);
         GL11.glRotatef(entity.getEntityId() % 360, 0, 1, 0);
-        GL11.glShadeModel(GL11.GL_SMOOTH);
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glDisable(GL11.GL_ALPHA_TEST);
-        GL11.glDepthMask(false);
-        GL11.glAlphaFunc(GL11.GL_GEQUAL, 0.0F);
-        OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+        GlStateManager.scale(0.2 * size,0.2 * size,0.2 * size);
+        GlStateManager.shadeModel(GL11.GL_SMOOTH);
+        GlStateManager.enableBlend();
+        GlStateManager.disableAlpha();
+        GlStateManager.depthMask(false);
+        GlStateManager.alphaFunc(GL11.GL_GEQUAL, 0.0F);
+        GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 
-        Tessellator tess = Tessellator.getInstance();
+        Tessellator tes = Tessellator.getInstance();
+        BufferBuilder buf = tes.getBuffer();
 
         int count = 16;
 
-        Vec3d vec = new Vec3d(1, 0, 0);
+        Vec3 vec = Vec3.createVectorHelper(1, 0, 0);
 
-        for (int k = 0; k < steps(); k++) {
+        float[] color = {0, 0, 0, 0};
+        for(int k = 0; k < steps(); k++) {
 
             GL11.glPushMatrix();
-            GL11.glRotatef((entity.ticksExisted + partialTicks) * -((float) Math.pow(k + 1, 1.25)), 0, 1, 0);
-            OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+            GL11.glRotatef((entity.ticksExisted + interp % 360) * -((float)Math.pow(k + 1, 1.25)), 0, 1, 0);
+            GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
             double s = 3 - k * 0.175D;
 
-            for (int j = 0; j < 2; j++) {
+            for(int j = 0; j < 2; j++) {
 
-                tess.getBuffer().begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-                for (int i = 0; i < count; i++) {
+                buf.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_COLOR);
+                for(int i = 0; i < count; i++) {
 
-                    if (j == 0)
-                        setColorFromIteration(tess, k, 1F);
-                    else
-                        tess.getBuffer().color(1.0F, 1.0F, 1.0F, glow);
+                    if(j == 0){
+                        this.setColorFromIteration(k, 1F, color);
+                    } else {
+                        color[0] = 1;
+                        color[1] = 1;
+                        color[2] = 1;
+                        color[3] = glow;
+                    }
+                    buf.pos(vec.xCoord * s, 0, vec.zCoord * s).tex(0.5 + vec.xCoord * 0.25, 0.5 + vec.zCoord * 0.25).color(color[0], color[1], color[2], color[3]).endVertex();
+                    this.setColorFromIteration(k, 0F, color);
+                    buf.pos(vec.xCoord * s * 2, 0, vec.zCoord * s * 2).tex(0.5 + vec.xCoord * 0.5, 0.5 + vec.zCoord * 0.5).color(color[0], color[1], color[2], color[3]).endVertex();
 
-                    tess.getBuffer().pos(vec.x * s, 0, vec.z * s).tex(0.5 + vec.x * 0.25, 0.5 + vec.z * 0.25).endVertex();
-                    setColorFromIteration(tess, k, 0F);
-                    tess.getBuffer().pos(vec.x * s * 2, 0, vec.z * s * 2).tex(0.5 + vec.x * 0.5, 0.5 + vec.z * 0.5).endVertex();
+                    vec.rotateAroundY((float)(Math.PI * 2 / count));
+                    this.setColorFromIteration(k, 0F, color);
+                    buf.pos(vec.xCoord * s * 2, 0, vec.zCoord * s * 2).tex(0.5 + vec.xCoord * 0.5, 0.5 + vec.zCoord * 0.5).color(color[0], color[1], color[2], color[3]).endVertex();
 
-                    vec = vec.rotateYaw((float) Math.PI * 2 / count);
-                    setColorFromIteration(tess, k, 0F);
-                    tess.getBuffer().pos(vec.x * s * 2, 0, vec.z * s * 2).tex(0.5 + vec.x * 0.5, 0.5 + vec.z * 0.5).endVertex();
-
-                    if (j == 0)
-                        setColorFromIteration(tess, k, 1F);
-                    else
-                        tess.getBuffer().color(1.0F, 1.0F, 1.0F, glow);
-
-                    tess.getBuffer().pos(vec.x * s, 0, vec.z * s).tex(0.5 + vec.x * 0.25, 0.5 + vec.z * 0.25).endVertex();
+                    if(j == 0){
+                        this.setColorFromIteration(k, 1F, color);
+                    } else {
+                        color[0] = 1;
+                        color[1] = 1;
+                        color[2] = 1;
+                        color[3] = glow;
+                    }
+                    buf.pos(vec.xCoord * s, 0, vec.zCoord * s).tex(0.5 + vec.xCoord * 0.25, 0.5 + vec.zCoord * 0.25).color(color[0], color[1], color[2], color[3]).endVertex();
                 }
-                tess.draw();
+                tes.draw();
 
-                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+                GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
             }
 
             GL11.glPopMatrix();
         }
 
-        GL11.glShadeModel(GL11.GL_FLAT);
-        GL11.glDisable(GL11.GL_BLEND);
-        GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
-        GL11.glDepthMask(true);
-        GL11.glEnable(GL11.GL_ALPHA_TEST);
+        GlStateManager.shadeModel(GL11.GL_FLAT);
+        GlStateManager.disableBlend();
+        GlStateManager.alphaFunc(GL11.GL_GREATER, 0.1F);
+        GlStateManager.depthMask(true);
+        GlStateManager.enableAlpha();
         GL11.glPopMatrix();
     }
 
-    protected int steps() {
+    protected int steps(){
         return 15;
     }
 
-    protected void setColorFromIteration(Tessellator tess, int iteration, float alpha) {
+    protected void setColorFromIteration(int iteration, float alpha, float[] col){
 
-        if (iteration < 5) {
+        if(iteration < 5) {
             float g = 0.125F + iteration * (1F / 10F);
-            tess.getBuffer().color(1.0F, g, 0.0F, alpha);
+            col[0] = 1;
+            col[1] = g;
+            col[2] = 0;
+            col[3] = alpha;
             return;
         }
 
-        if (iteration == 5) {
-            tess.getBuffer().color(1.0F, 1.0F, 0.0F, alpha);
+        if(iteration == 5) {
+            col[0] = 1.0F;
+            col[1] = 1.0F;
+            col[2] = 1.0F;
+            col[3] = alpha;
             return;
         }
 
-        if (iteration > 5) {
-
+        if(iteration > 5) {
             int i = iteration - 6;
             float r = 1.0F - i * (1F / 9F);
             float g = 1F - i * (1F / 9F);
             float b = i * (1F / 5F);
-            tess.getBuffer().color(r, g, b, alpha);
+            col[0] = r;
+            col[1] = g;
+            col[2] = b;
+            col[3] = alpha;
         }
     }
 
