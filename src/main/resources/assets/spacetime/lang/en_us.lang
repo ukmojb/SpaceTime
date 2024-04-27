@@ -39,6 +39,7 @@ tile.spacetime.space_stairs.name=Space Stairs
 tile.spacetime.time_stairs.name=Time Stairs
 tile.spacetime.space_fence.name=Space Fence
 tile.spacetime.time_fence.name=Time Fence
+tile.spacetime.reverse_beacon.name=Reverse Beacon
 
 # Items
 

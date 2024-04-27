@@ -207,7 +207,6 @@ public class SpaceAIAttack extends EntityAIBase
                 }
                 if (target != null) {
                     Tools.setSprintingPos(entitySpace, target);
-
                 }
             } else {
 

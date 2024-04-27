@@ -36,7 +36,7 @@ public class Tools {
     }
 
     public static List<EntityPlayer> getSpaceChallengefieldPlayer(World world) {
-        if (!world.isRemote && world.provider.getDimension() == Config.SPACEDIMID) {
+        if (!world.isRemote && world.provider.getDimension() == Config.SPACEDDIM) {
             List<EntityPlayer> players = world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(new BlockPos(73, 80, -13), new BlockPos(47, 180, 13)));
             return players;
         }
@@ -44,7 +44,7 @@ public class Tools {
     }
 
     public static List<EntitySpaceSword> getSpaceChallengefieldSword(World world) {
-        if (!world.isRemote && world.provider.getDimension() == Config.SPACEDIMID) {
+        if (!world.isRemote && world.provider.getDimension() == Config.SPACEDDIM) {
             List<EntitySpaceSword> entitySpaceSwordList = world.getEntitiesWithinAABB(EntitySpaceSword.class, new AxisAlignedBB(new BlockPos(73, 80, -13), new BlockPos(47, 82, 13)));
             return entitySpaceSwordList;
         }
@@ -70,13 +70,13 @@ public class Tools {
                     if (targetposz != spaceposz) {
                         newposx = ((15 - spaceposz) / (targetposz - spaceposz)) * (targetposx - spaceposx) + spaceposx;
                         if (Arrays.asList(entitySpace.getSprinting().split("/")).size() < 2) {
-                            EntitySpace.sprinting = (spaceposx + "," + (int) entitySpace.posY + "," + spaceposz) + "/" + (newposx + "," + (int) entitySpace.posY + "," + 15 + "/" + 1);
+                            EntitySpace.sprinting = (spaceposx + "," + (int) entitySpace.posY + "," + spaceposz) + "/" + (newposx + "," + (int) entitySpace.posY + "," + 15 + "/" + 1) + "/" + (entitySpace.rotationPitch + "," + entitySpace.rotationYaw);
                         } else {
                             entMove(entitySpace);
                         }
                     } else {
                         if (Arrays.asList(entitySpace.getSprinting().split("/")).size() < 2) {
-                            EntitySpace.sprinting = (spaceposx + "," + (int) entitySpace.posY + "," + spaceposz) + "/" + ((int) entitySpace.posX + "," + (int) entitySpace.posY + "," + 15 + "/" + 1);
+                            EntitySpace.sprinting = (spaceposx + "," + (int) entitySpace.posY + "," + spaceposz) + "/" + ((int) entitySpace.posX + "," + (int) entitySpace.posY + "," + 15 + "/" + 1) + "/" + (entitySpace.rotationPitch + "," + entitySpace.rotationYaw);
                         } else {
                             entMove(entitySpace);
                         }
@@ -85,13 +85,13 @@ public class Tools {
                     if (targetposz != spaceposz) {
                         newposx = ((-15 - spaceposz) / (targetposz - spaceposz)) * (targetposx - spaceposx) + spaceposx;
                         if (Arrays.asList(entitySpace.getSprinting().split("/")).size() < 2) {
-                            EntitySpace.sprinting = (spaceposx + "," + (int) entitySpace.posY + "," + spaceposz) + "/" + (newposx + "," + (int) entitySpace.posY + "," + -15 + "/" + 1);
+                            EntitySpace.sprinting = (spaceposx + "," + (int) entitySpace.posY + "," + spaceposz) + "/" + (newposx + "," + (int) entitySpace.posY + "," + -15 + "/" + 1) + "/" + (entitySpace.rotationPitch + "," + entitySpace.rotationYaw);
                         } else {
                             entMove(entitySpace);
                         }
                     } else {
                         if (Arrays.asList(entitySpace.getSprinting().split("/")).size() < 2) {
-                            EntitySpace.sprinting = (spaceposx + "," + (int) entitySpace.posY + "," + spaceposz) + "/" + ((int) entitySpace.posX + "," + (int) entitySpace.posY + "," + -15 + "/" + 1);
+                            EntitySpace.sprinting = (spaceposx + "," + (int) entitySpace.posY + "," + spaceposz) + "/" + ((int) entitySpace.posX + "," + (int) entitySpace.posY + "," + -15 + "/" + 1) + "/" + (entitySpace.rotationPitch + "," + entitySpace.rotationYaw);
                         } else {
                             entMove(entitySpace);
                         }
@@ -103,13 +103,13 @@ public class Tools {
                     if (targetposx != spaceposx) {
                         newposz = ((75 - spaceposx) / (targetposx - spaceposx)) * (targetposz - spaceposz) + spaceposz;
                         if (Arrays.asList(entitySpace.getSprinting().split("/")).size() < 2) {
-                            EntitySpace.sprinting = (spaceposx + "," + (int) entitySpace.posY + "," + spaceposz) + "/" + (75 + "," + (int) entitySpace.posY + "," + newposz + "/" + 2);
+                            EntitySpace.sprinting = (spaceposx + "," + (int) entitySpace.posY + "," + spaceposz) + "/" + (75 + "," + (int) entitySpace.posY + "," + newposz + "/" + 2) + "/" + (entitySpace.rotationPitch + "," + entitySpace.rotationYaw);
                         } else {
                             entMove(entitySpace);
                         }
                     } else {
                         if (Arrays.asList(entitySpace.getSprinting().split("/")).size() < 2) {
-                            EntitySpace.sprinting = (spaceposx + "," + (int) entitySpace.posY + "," + spaceposz) + "/" + (75 + "," + (int) entitySpace.posY + "," + (int) entitySpace.posZ + "/" + 2);
+                            EntitySpace.sprinting = (spaceposx + "," + (int) entitySpace.posY + "," + spaceposz) + "/" + (75 + "," + (int) entitySpace.posY + "," + (int) entitySpace.posZ + "/" + 2) + "/" + (entitySpace.rotationPitch + "," + entitySpace.rotationYaw);
                         } else {
                             entMove(entitySpace);
                         }
@@ -118,13 +118,13 @@ public class Tools {
                     if (targetposx != spaceposx) {
                         newposz = ((45 - spaceposx) / (targetposx - spaceposx)) * (targetposz - spaceposz) + spaceposz;
                         if (Arrays.asList(entitySpace.getSprinting().split("/")).size() < 2) {
-                            EntitySpace.sprinting = (spaceposx + "," + (int) entitySpace.posY + "," + spaceposz) + "/" + (45 + "," + (int) entitySpace.posY + "," + newposz + "/" + 2);
+                            EntitySpace.sprinting = (spaceposx + "," + (int) entitySpace.posY + "," + spaceposz) + "/" + (45 + "," + (int) entitySpace.posY + "," + newposz + "/" + 2) + "/" + (entitySpace.rotationPitch + "," + entitySpace.rotationYaw);
                         } else {
                             entMove(entitySpace);
                         }
                     } else {
                         if (Arrays.asList(entitySpace.getSprinting().split("/")).size() < 2) {
-                            EntitySpace.sprinting = (spaceposx + "," + (int) entitySpace.posY + "," + spaceposz) + "/" + (45 + "," + (int) entitySpace.posY + "," + (int) entitySpace.posZ + "/" + 2);
+                            EntitySpace.sprinting = (spaceposx + "," + (int) entitySpace.posY + "," + spaceposz) + "/" + (45 + "," + (int) entitySpace.posY + "," + (int) entitySpace.posZ + "/" + 2) + "/" + (entitySpace.rotationPitch + "," + entitySpace.rotationYaw);
                         } else {
                             entMove(entitySpace);
                         }
@@ -142,14 +142,17 @@ public class Tools {
         if (entitySpace.getSprinting().split("/").length > 1){
             List<String> stringList0 = Arrays.asList(entitySpace.getSprinting().split("/")[0].split(","));
             List<String> stringList = Arrays.asList(entitySpace.getSprinting().split("/")[1].split(","));
+            List<String> stringList2 = Arrays.asList(entitySpace.getSprinting().split("/")[2].split(","));
             List<String> stringList1 = Arrays.asList(entitySpace.getSprinting().split("/"));
             int targetX = Integer.valueOf(stringList.get(0));
             int targetY = Integer.valueOf(stringList.get(1));
             int targetZ = Integer.valueOf(stringList.get(2));
             int oldposX = Integer.valueOf(stringList0.get(0));
-            int oldposY = Integer.valueOf(stringList0.get(1));
             int oldposZ = Integer.valueOf(stringList0.get(2));
             int num = Integer.valueOf(stringList1.get(2));
+            int oldposY = Integer.valueOf(stringList0.get(1));
+            float rotationPitch = Float.valueOf(stringList2.get(0));
+            float rotationYaw = Float.valueOf(stringList2.get(1));
             double posX = entitySpace.posX;
             double posY = entitySpace.posY;
             double posZ = entitySpace.posZ;
@@ -161,6 +164,8 @@ public class Tools {
             } else {
                 setAndfindPos(entitySpace, targetX, targetY, targetZ, posX, posY, posZ, oldposX, oldposY, oldposZ, speed, num);
             }
+            entitySpace.rotationYaw = rotationYaw;
+            entitySpace.rotationPitch = rotationPitch;
         }
     }
 

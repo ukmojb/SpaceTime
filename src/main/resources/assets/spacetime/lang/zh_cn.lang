@@ -39,6 +39,7 @@ tile.spacetime.space_stairs.name=时间楼梯
 tile.spacetime.time_stairs.name=空间楼梯
 tile.spacetime.space_fence.name=时间栅栏
 tile.spacetime.time_fence.name=空间栅栏
+tile.spacetime.reverse_beacon.name=颠倒信标
 
 # Items
 

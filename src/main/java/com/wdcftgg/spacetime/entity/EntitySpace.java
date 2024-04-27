@@ -151,7 +151,7 @@ public class EntitySpace extends EntityMob implements IAnimatable {
                 }
             }
 
-            if (!Tools.getSpaceChallengefieldPlayer(world).isEmpty()) {
+            if (!Tools.getSpaceChallengefieldPlayer(world).isEmpty() && phases <= 1) {
                 this.setAttackTarget(Tools.getSpaceChallengefieldPlayer(world).get(0));
                 this.getLookHelper().setLookPositionWithEntity(Tools.getSpaceChallengefieldPlayer(world).get(0), 30.0F, 30.0F);
             }

@@ -33,7 +33,7 @@ public class pillar implements IWorldGenerator {
             return;
         }
 
-        if (chunkX == 0 && chunkZ == 0 && world.provider.getDimension() == Config.SPACEDIMID){
+        if (chunkX == 0 && chunkZ == 0 && world.provider.getDimension() == Config.SPACEDDIM){
             BlockPos pos;
             pos = new BlockPos(-7, 26, -7);
             template.addBlocksToWorld(world, pos, new PlacementSettings(), 2|4|16);

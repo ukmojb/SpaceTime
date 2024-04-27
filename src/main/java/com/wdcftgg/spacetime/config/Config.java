@@ -21,7 +21,8 @@ public class Config {
     public static double TIMEMAXHEALTH = 150d;
     public static double TIMELASTLIFEMAXHEALTH = 300d;
     public static boolean ALTARAUTOMATE = false;
-    public static int SPACEDIMID = 253;
+    public static int SPACEDDIM = 253;
+    public static int BLACKHOLEDIM = 254;
     public static int SPACEPHASES2HIGH = 165;
 
     public Config() {
@@ -43,7 +44,7 @@ public class Config {
             ALTARAUTOMATE = config.get(CATEGORY_TIMECORE, "AltarAutomate", ALTARAUTOMATE, "Whether the altar can be automated").getBoolean();
             TIMEMAXHEALTH = config.get(CATEGORY_BOSS, "TimeMaxHealth", TIMEMAXHEALTH, "Boss[time] every life health").getDouble();
             TIMELASTLIFEMAXHEALTH = config.get(CATEGORY_BOSS, "TimeLastLifeMaxHealth", TIMELASTLIFEMAXHEALTH, "Boss[time] Last life health").getDouble();
-            SPACEDIMID = config.get(CATEGORY_DIM, "SPACEDIMID", SPACEDIMID, "space Dimension id").getInt();
+            SPACEDDIM = config.get(CATEGORY_DIM, "SPACEDIMID", SPACEDDIM, "space Dimension id").getInt();
             SPACEPHASES2HIGH = config.get(CATEGORY_BOSS, "SPACEPHASES2HIGH", SPACEPHASES2HIGH, "players will be attacked when they reach this height").getInt();
             } catch (Exception var11) {
         } finally {

@@ -46,7 +46,9 @@ public class EntityRubble extends EntityThrowable {
         }
 
         if(this.ticksExisted > 10) {
-            this.setDead();
+            if(this.ticksExisted > 30) {
+                this.setDead();
+            }
 
 //            world.playSoundAtEntity(this, "hbm:block.debris", 1.5F, 1.0F);
             //worldObj.playAuxSFX(2001, (int)posX, (int)posY, (int)posZ, this.dataWatcher.getWatchableObjectInt(16) + (this.dataWatcher.getWatchableObjectInt(17) << 12));
@@ -82,4 +84,6 @@ public class EntityRubble extends EntityThrowable {
         nbt.setInteger("block", this.dataManager.get(Rubble_Block));
         nbt.setInteger("meta", this.dataManager.get(Rubble_Meta));
     }
+
+
 }

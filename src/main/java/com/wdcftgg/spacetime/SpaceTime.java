@@ -5,6 +5,7 @@ import com.wdcftgg.spacetime.blocks.tileEntity.*;
 import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.*;
 import com.wdcftgg.spacetime.blocks.tileEntity.stextractor.STExtractorEntity;
 import com.wdcftgg.spacetime.config.Config;
+import com.wdcftgg.spacetime.dimension.BlackHoleWorldProvider;
 import com.wdcftgg.spacetime.dimension.SpaceWorldProvider;
 import com.wdcftgg.spacetime.gui.GuiElementLoader;
 import com.wdcftgg.spacetime.init.RegistryHandler;
@@ -40,7 +41,8 @@ public class SpaceTime {
     public static Logger logger;
     public static final boolean SHOW_WARN = true;
 
-    public static DimensionType myDim;
+    public static DimensionType SpaceDim;
+    public static DimensionType BlackHoleDim;
 
     public static final String CLIENT_PROXY_CLASS = "com.wdcftgg.spacetime.proxy.ClientProxy";
     public static final String SERVER_PROXY_CLASS = "com.wdcftgg.spacetime.proxy.ServerProxy";
@@ -60,8 +62,10 @@ public class SpaceTime {
 
         Config.init(event.getSuggestedConfigurationFile());
 
-        myDim = DimensionType.register("space_dimension", "_spacedim", Config.SPACEDIMID, SpaceWorldProvider.class, false);
-        DimensionManager.registerDimension(Config.SPACEDIMID, myDim);
+        SpaceDim = DimensionType.register("space_dimension", "_spacedim", Config.SPACEDDIM, SpaceWorldProvider.class, false);
+        DimensionManager.registerDimension(Config.SPACEDDIM, SpaceDim);
+        BlackHoleDim = DimensionType.register("blackhole_dimension", "_blackholedim", Config.BLACKHOLEDIM, BlackHoleWorldProvider.class, false);
+        DimensionManager.registerDimension(Config.BLACKHOLEDIM, BlackHoleDim);
 
         proxy.onPreInit();
 
@@ -104,6 +108,7 @@ public class SpaceTime {
 
         GameRegistry.registerTileEntity(TimeCompressorEntity.class, new ResourceLocation(MODID, "CompressorEntity"));
         GameRegistry.registerTileEntity(SpaceTimeTurbulenceEntity.class, new ResourceLocation(MODID, "TimeTurbulenceEntity"));
+        GameRegistry.registerTileEntity(ReverseBeaconEntity.class, new ResourceLocation(MODID, "ReverseBeaconEntity"));
 
         GameRegistry.registerTileEntity(HourGlassEntity.class, new ResourceLocation(MODID, "hourglass"));
         GameRegistry.registerTileEntity(AirHourGlassEntity.class, new ResourceLocation(MODID, "airhourglass"));

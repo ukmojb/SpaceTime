@@ -34,7 +34,7 @@ public class challengefield implements IWorldGenerator {
             return;
         }
 
-        if (chunkX == 0 && chunkZ == 0 && world.provider.getDimension() == Config.SPACEDIMID){
+        if (chunkX == 0 && chunkZ == 0 && world.provider.getDimension() == Config.SPACEDDIM){
             BlockPos pos = new BlockPos(39, 73, -21);
             template.addBlocksToWorld(world, pos, new PlacementSettings(), 2|4|16);
             SpaceTime.Log("challengefield saved");

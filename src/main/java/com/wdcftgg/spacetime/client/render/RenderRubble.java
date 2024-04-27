@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.culling.ICamera;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.client.renderer.texture.*;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -70,7 +71,7 @@ public class RenderRubble extends Render<EntityRubble> {
             if(getBlockIconName(b, meta) == null || getBlockIconName(b, meta) == "") {
 
                 s = "minecraft:stone";
-                System.out.println("qqq");
+//                System.out.println("qqq");
             }
 
             String[] split = s.split(":");

@@ -5,8 +5,10 @@ import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.client.Vec3;
 import com.wdcftgg.spacetime.client.model.BlackHoleModel;
 import com.wdcftgg.spacetime.entity.EntityBlackHole;
+import com.wdcftgg.spacetime.entity.EntityRubble;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.culling.ICamera;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -158,10 +160,11 @@ public class RenderBlackHole extends RenderLiving<EntityBlackHole> {
     protected void setColorFromIteration(int iteration, float alpha, float[] col){
 
         if(iteration < 5) {
-            float g = 0.125F + iteration * (1F / 10F);
-            col[0] = 1;
-            col[1] = g;
-            col[2] = 0;
+            float g = -7F + iteration * (1F / 10F);
+//            float g = 0.125F + iteration * (1F / 10F);
+            col[0] = g;
+            col[1] = 0;
+            col[2] = 1;
             col[3] = alpha;
             return;
         }
@@ -176,9 +179,9 @@ public class RenderBlackHole extends RenderLiving<EntityBlackHole> {
 
         if(iteration > 5) {
             int i = iteration - 6;
-            float r = 1.0F - i * (1F / 9F);
-            float g = 1F - i * (1F / 9F);
-            float b = i * (1F / 5F);
+            float r = 10.0F - i * (1F / 9F);
+            float g = 0;
+            float b = 1;
             col[0] = r;
             col[1] = g;
             col[2] = b;

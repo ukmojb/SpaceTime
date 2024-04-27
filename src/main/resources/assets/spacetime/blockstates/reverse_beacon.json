@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "normal": {
+      "model": "spacetime:reverse_beacon_model",
+      "y": 90,
+      "uvlock": true
+    }
+  }
+}
