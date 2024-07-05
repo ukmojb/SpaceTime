@@ -10,7 +10,9 @@ import com.wdcftgg.spacetime.client.handler.HeldItemHandler;
 import com.wdcftgg.spacetime.client.render.HourGlass.*;
 import com.wdcftgg.spacetime.client.render.*;
 import com.wdcftgg.spacetime.entity.*;
+import com.wdcftgg.spacetime.event.EventLossSpatialSense;
 import com.wdcftgg.spacetime.event.EventRender;
+import com.wdcftgg.spacetime.event.EventTimeBack;
 import com.wdcftgg.spacetime.event.EventToolTip;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
@@ -40,8 +42,10 @@ public class ClientProxy extends CommonProxy {
 
 	public void onInit(){
 		super.onInit();
+		MinecraftForge.EVENT_BUS.register(new EventLossSpatialSense());
 		MinecraftForge.EVENT_BUS.register(new EventRender());
 		MinecraftForge.EVENT_BUS.register(new EventToolTip());
+		MinecraftForge.EVENT_BUS.register(new EventTimeBack());
 	}
 
 
@@ -57,6 +61,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntitySword.class, RenderSword::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityBlackHole.class, RenderBlackHole::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityRubble.class, RenderRubble::new);
+
 
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpace.class, RenderSpace::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpaceSword.class, RenderSpaceSword::new);

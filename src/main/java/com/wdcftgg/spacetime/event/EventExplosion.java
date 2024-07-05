@@ -18,7 +18,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Mod.EventBusSubscriber
 public class EventExplosion {
     @SubscribeEvent
-    public static void onExplosionEvent(ExplosionEvent.Detonate event) {
+    public void onExplosionEvent(ExplosionEvent.Detonate event) {
         for (Entity entity : event.getAffectedEntities()){
             if (entity instanceof EntityItem) {
                 EntityItem item = (EntityItem) entity;

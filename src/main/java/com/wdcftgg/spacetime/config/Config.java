@@ -24,6 +24,7 @@ public class Config {
     public static int SPACEDDIM = 253;
     public static int BLACKHOLEDIM = 254;
     public static int SPACEPHASES2HIGH = 165;
+    public static int ABSORBNUM = 5184;
 
     public Config() {
     }
@@ -43,9 +44,10 @@ public class Config {
             GUIPOSY = config.get(CATEGORY_TIMECORE, "GuiPosY", ROTATIONALSPEED, "The altar shows the gui orientation of the energy requirements on the y axis").getInt();
             ALTARAUTOMATE = config.get(CATEGORY_TIMECORE, "AltarAutomate", ALTARAUTOMATE, "Whether the altar can be automated").getBoolean();
             TIMEMAXHEALTH = config.get(CATEGORY_BOSS, "TimeMaxHealth", TIMEMAXHEALTH, "Boss[time] every life health").getDouble();
-            TIMELASTLIFEMAXHEALTH = config.get(CATEGORY_BOSS, "TimeLastLifeMaxHealth", TIMELASTLIFEMAXHEALTH, "Boss[time] Last life health").getDouble();
             SPACEDDIM = config.get(CATEGORY_DIM, "SPACEDIMID", SPACEDDIM, "space Dimension id").getInt();
+            TIMELASTLIFEMAXHEALTH = config.get(CATEGORY_BOSS, "TimeLastLifeMaxHealth", TIMELASTLIFEMAXHEALTH, "Boss[time] Last life health").getDouble();
             SPACEPHASES2HIGH = config.get(CATEGORY_BOSS, "SPACEPHASES2HIGH", SPACEPHASES2HIGH, "players will be attacked when they reach this height").getInt();
+            ABSORBNUM = config.get(CATEGORY_BOSS, "ABSORBNUM", ABSORBNUM, "the number of make the black hole explode").getInt();
             } catch (Exception var11) {
         } finally {
             config.save();

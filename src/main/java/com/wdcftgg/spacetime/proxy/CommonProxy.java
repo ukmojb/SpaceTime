@@ -7,7 +7,6 @@ import java.util.List;
 
 public class CommonProxy {
 
-	public static List<Integer> spacelist = new ArrayList<>();
 
 	public void registerItemRenderer(Item item, int meta, String id) {
 		//Ignored

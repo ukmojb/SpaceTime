@@ -43,6 +43,7 @@ public class EventSword {
                 event.setCanceled(true);
             }
         }
+
     }
 
     @SubscribeEvent

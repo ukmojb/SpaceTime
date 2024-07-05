@@ -12,16 +12,20 @@ import net.minecraftforge.fml.relauncher.Side;
 
 public class PacketHandler {
     public static final SimpleNetworkWrapper INSTANCE;
+    public static int num = 0;
 
     public PacketHandler() {
     }
 
     public static void init() {
-        INSTANCE.registerMessage(MessageTimeParticle.class, MessageTimeParticle.class, 0, Side.CLIENT);
-        INSTANCE.registerMessage(MessageTimeBack.class, MessageTimeBack.class, 1, Side.CLIENT);
-        INSTANCE.registerMessage(MessageTimeAltarCore.class, MessageTimeAltarCore.class, 2, Side.CLIENT);
-        INSTANCE.registerMessage(MessageSpaceCollideWithPlayer.class, MessageSpaceCollideWithPlayer.class, 3, Side.SERVER);
-        INSTANCE.registerMessage(MessageParticleBurst.class, MessageParticleBurst.class, 4, Side.CLIENT);
+        INSTANCE.registerMessage(MessageTimeParticle.class, MessageTimeParticle.class, num++, Side.CLIENT);
+        INSTANCE.registerMessage(MessageTimeBack.class, MessageTimeBack.class, num++, Side.CLIENT);
+        INSTANCE.registerMessage(MessageTimeAltarCore.class, MessageTimeAltarCore.class, num++, Side.CLIENT);
+        INSTANCE.registerMessage(MessageParticleBurst.class, MessageParticleBurst.class, num++, Side.CLIENT);
+
+
+        INSTANCE.registerMessage(MessageSpacePhase0.class, MessageSpacePhase0.class, num++, Side.SERVER);
+        INSTANCE.registerMessage(MessageSpaceCollideWithPlayer.class, MessageSpaceCollideWithPlayer.class, num++, Side.SERVER);
     }
 
     static {

@@ -61,8 +61,11 @@ public class RenderBlackHole extends RenderLiving<EntityBlackHole> {
 //        Tessellator.getInstance().getBuffer().pos(-1, 1, 0).tex(0, 1).endVertex();
 //        Tessellator.getInstance().draw();
 
+        //吸积盘
         renderDisc(entity, partialTicks, size);
-        renderJets(entity, partialTicks);
+
+        //辐射光
+        renderJets(entity, partialTicks, size);
 
         GL11.glEnable(GL11.GL_CULL_FACE);
         GL11.glEnable(GL11.GL_LIGHTING);
@@ -77,13 +80,15 @@ public class RenderBlackHole extends RenderLiving<EntityBlackHole> {
     protected void renderDisc(EntityBlackHole entity, float interp, float size){
 
         float glow = 0.75F;
+        float discSize = (float) (Math.sqrt(0.15 * size) + 0.2);
 
         bindTexture(discTex());
 
         GL11.glPushMatrix();
         GL11.glRotatef(entity.getEntityId() % 90 - 45, 1, 0, 0);
         GL11.glRotatef(entity.getEntityId() % 360, 0, 1, 0);
-        GlStateManager.scale(0.2 * size,0.2 * size,0.2 * size);
+        GlStateManager.translate(0, Math.max(0, 2 - size), 0);
+        GlStateManager.scale(discSize, discSize, discSize);
         GlStateManager.shadeModel(GL11.GL_SMOOTH);
         GlStateManager.enableBlend();
         GlStateManager.disableAlpha();
@@ -287,7 +292,7 @@ public class RenderBlackHole extends RenderLiving<EntityBlackHole> {
         GL11.glPopMatrix();
     }
 
-    protected void renderJets(Entity entity, float interp) {
+    protected void renderJets(Entity entity, float interp, float size) {
 
         Tessellator tess = Tessellator.getInstance();
 

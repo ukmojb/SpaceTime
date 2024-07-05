@@ -18,7 +18,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class EventHeterospaceLiving {
 
     @SubscribeEvent
-    public static void onLivingAttack(LivingAttackEvent event) {
+    public void onLivingAttack(LivingAttackEvent event) {
         if (event.getEntity() instanceof EntityLivingBase) {
             EntityLivingBase entity = (EntityLivingBase) event.getEntity();
             if (entity.getActivePotionEffect(ModPotions.heterospace) != null) {
@@ -28,7 +28,7 @@ public class EventHeterospaceLiving {
     }
 
     @SubscribeEvent
-    public static void onLivingDeath(LivingDeathEvent event) {
+    public void onLivingDeath(LivingDeathEvent event) {
         if (event.getEntity() instanceof EntityLivingBase) {
             EntityLivingBase entity = (EntityLivingBase) event.getEntity();
             if (entity.getActivePotionEffect(ModPotions.heterospace) != null) {
@@ -38,7 +38,7 @@ public class EventHeterospaceLiving {
     }
 
     @SubscribeEvent
-    public static void onLivingFall(LivingFallEvent event) {
+    public void onLivingFall(LivingFallEvent event) {
         if (event.getEntity() instanceof EntityLivingBase) {
             EntityLivingBase entity = (EntityLivingBase) event.getEntity();
             if (entity.getActivePotionEffect(ModPotions.heterospace) != null) {
@@ -48,7 +48,7 @@ public class EventHeterospaceLiving {
     }
 
     @SubscribeEvent
-    public static void onLivingKnockBack(LivingKnockBackEvent event) {
+    public void onLivingKnockBack(LivingKnockBackEvent event) {
         if (event.getEntity() instanceof EntityLivingBase) {
             EntityLivingBase entity = (EntityLivingBase) event.getEntity();
             if (entity.getActivePotionEffect(ModPotions.heterospace) != null) {
@@ -58,7 +58,7 @@ public class EventHeterospaceLiving {
     }
 
     @SubscribeEvent
-    public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
+    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         if (event.getEntity() instanceof EntityLivingBase) {
             EntityLivingBase entity = (EntityLivingBase) event.getEntity();
             if (entity.getActivePotionEffect(ModPotions.heterospace) != null) {

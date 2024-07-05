@@ -1,30 +1,48 @@
 package com.wdcftgg.spacetime.entity;
 
+import com.wdcftgg.spacetime.SpaceTime;
+import com.wdcftgg.spacetime.blocks.STBlocks;
+import com.wdcftgg.spacetime.dimension.SpaceWorldProvider;
 import com.wdcftgg.spacetime.entity.ai.space.SpaceAIAttack;
 import com.wdcftgg.spacetime.entity.ai.time.TimeAIHurtByTarget;
+import com.wdcftgg.spacetime.network.MessageParticleBurst;
 import com.wdcftgg.spacetime.network.MessageSpaceCollideWithPlayer;
+import com.wdcftgg.spacetime.network.MessageSpacePhase0;
 import com.wdcftgg.spacetime.network.PacketHandler;
 import com.wdcftgg.spacetime.proxy.CommonProxy;
+import com.wdcftgg.spacetime.proxy.ServerProxy;
 import com.wdcftgg.spacetime.util.Tools;
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
-import software.bernie.geckolib3.core.AnimationState;
+import net.minecraft.world.gen.structure.template.PlacementSettings;
+import net.minecraft.world.gen.structure.template.Template;
+import net.minecraft.world.gen.structure.template.TemplateManager;
+import software.bernie.example.registry.SoundRegistry;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.event.CustomInstructionKeyframeEvent;
+import software.bernie.geckolib3.core.event.SoundKeyframeEvent;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
@@ -47,11 +65,14 @@ public class EntitySpace extends EntityMob implements IAnimatable {
     private final BossInfoServer bossInfo;
 
     private static String mode = "speak";
-    private static int phases = 0;
-    private static int attackTick = 100;
+    private static int phases = -1;
+    private static int attackTick = 0;
     private static int spawnTick = -1;
+    public static int phase0Tick = -1;
     private static int phase1Tick = -1;
-    public static int attackmode = -1;
+    private static int phase3Tick = -1;
+
+    public static boolean canattack = true;
     public static String sprinting = "";
 
 
@@ -66,7 +87,6 @@ public class EntitySpace extends EntityMob implements IAnimatable {
     {
         super(worldIn);
         this.bossInfo = (BossInfoServer)(new BossInfoServer(this.getDisplayName(), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
-        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
         this.setSize(1F, 1.8F);
         this.setNoGravity(true);
     }
@@ -95,26 +115,36 @@ public class EntitySpace extends EntityMob implements IAnimatable {
             if (spawnTick == -1) {
                 spawnTick = (int) world.getTotalWorldTime();
             }
+            if (!ServerProxy.spacelist.contains(this.getEntityId())) {
+                ServerProxy.spacelist.add(this.getEntityId());
+            }
             laterspeak("spacetime.space.say.1", spawnTick, world.getTotalWorldTime(), 60);
             laterspeak("spacetime.space.say.2", spawnTick, world.getTotalWorldTime(), 100);
             laterspeak("spacetime.space.say.3", spawnTick, world.getTotalWorldTime(), 160);
             laterspeak("spacetime.space.say.4", spawnTick, world.getTotalWorldTime(), 240);
 
-            if (world.getTotalWorldTime() == (spawnTick + 240)) {
-                mode = "default";
-                attackmode = (int) world.getTotalWorldTime();
+            int pathhealth = (int) (this.getMaxHealth() / 4);
+            if (mode != "speak") {
+                if (pathhealth >= (int) this.getHealth()) {
+                    phases = 3;
+                } else if (pathhealth * 2 >= (int) this.getHealth()) {
+                    phases = 2;
+                } else if (pathhealth * 3 >= (int) this.getHealth()) {
+                    phases = 1;
+                } else {
+                    phases = 0;
+                }
             }
 
-            int pathhealth = (int) (this.getMaxHealth() / 4);
+            if (world.getTotalWorldTime() == (spawnTick + 240)) {
+                mode = "default";
+            }
 
-            if (pathhealth >= (int) this.getHealth()){
-                phases = 3;
-            } else if (pathhealth * 2 >= (int) this.getHealth()) {
-                phases = 2;
-            } else if (pathhealth * 3 >= (int) this.getHealth()) {
-                phases = 1;
-            } else{
-                phases = 0;
+            if (phases == 0) {
+                laterspeak("spacetime.space.say.5", phase1Tick, world.getTotalWorldTime(), 20);
+                laterspeak("spacetime.space.say.6", phase1Tick, world.getTotalWorldTime(), 80);
+                laterspeak("spacetime.space.say.7", phase1Tick, world.getTotalWorldTime(), 120);
+                laterspeak("spacetime.space.say.8", phase1Tick, world.getTotalWorldTime(), 160);
             }
 
             if (phases == 1) {
@@ -126,6 +156,17 @@ public class EntitySpace extends EntityMob implements IAnimatable {
                 laterspeak("spacetime.space.say.7", phase1Tick, world.getTotalWorldTime(), 120);
                 laterspeak("spacetime.space.say.8", phase1Tick, world.getTotalWorldTime(), 160);
             }
+            if (phases == 3) {
+                if (phase3Tick == -1) {
+                    phase3Tick = (int) world.getTotalWorldTime();
+                }
+                setMode("wait");
+                laterspeak("spacetime.space.say.9", phase3Tick, world.getTotalWorldTime(), 20);
+                laterspeak("spacetime.space.say.10", phase3Tick, world.getTotalWorldTime(), 80);
+                laterspeak("spacetime.space.say.11", phase3Tick, world.getTotalWorldTime(), 120);
+                laterspeak("spacetime.space.say.12", phase3Tick, world.getTotalWorldTime(), 160);
+                laterattack(phase3Tick, world.getTotalWorldTime(), 180);
+            }
 
             if (phases == 2) {
                 if (sprinting != "") {
@@ -135,15 +176,18 @@ public class EntitySpace extends EntityMob implements IAnimatable {
                         if (posnum.size() > 2) {
                             if ((Integer.valueOf(posnum.get(0)) == (int) this.posX) && (Integer.valueOf(posnum.get(2)) == (int) this.posZ)) {
                                 sprinting = "";
+                                this.getLookHelper().setLookPositionWithEntity(SpaceWorldProvider.getPlayerList().get(0), 0, 0);
                                 SpaceAIAttack.attacktime = 30;
-                                System.out.println("sad");
                             }
                         }
                     }
                 }
                 if (world.getEntitiesWithinAABB(EntitySpace.class, new AxisAlignedBB(new BlockPos(76, 150, -16), new BlockPos(44, 153, 16))).isEmpty()) {
-                    if (world.getTotalWorldTime() % 10 == 0)
+                    if (world.getTotalWorldTime() % 10 == 0) {
                         sprinting = "";
+                        this.getLookHelper().setLookPositionWithEntity(SpaceWorldProvider.getPlayerList().get(0), 0, 0);
+                        SpaceAIAttack.attacktime = 30;
+                    }
                 }
                 for (EntityLivingBase livingbase : this.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(this.getPosition().east(2).north(2).down(), this.getPosition().west(2).south(2).up()))) {
                     if (livingbase instanceof EntitySpace) continue;
@@ -151,9 +195,9 @@ public class EntitySpace extends EntityMob implements IAnimatable {
                 }
             }
 
-            if (!Tools.getSpaceChallengefieldPlayer(world).isEmpty() && phases <= 1) {
-                this.setAttackTarget(Tools.getSpaceChallengefieldPlayer(world).get(0));
-                this.getLookHelper().setLookPositionWithEntity(Tools.getSpaceChallengefieldPlayer(world).get(0), 30.0F, 30.0F);
+            if (!SpaceWorldProvider.getPlayerList().isEmpty() && phases <= 1) {
+                this.setAttackTarget(SpaceWorldProvider.getPlayerList().get(0));
+                this.getLookHelper().setLookPositionWithEntity(SpaceWorldProvider.getPlayerList().get(0), 30.0F, 30.0F);
             }
 
 
@@ -161,6 +205,8 @@ public class EntitySpace extends EntityMob implements IAnimatable {
                 world.removeEntity(this);
             }
         }
+
+        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
     }
 
     @Override
@@ -190,19 +236,13 @@ public class EntitySpace extends EntityMob implements IAnimatable {
     public void onDeath(DamageSource cause)
     {
         SpaceAIAttack.attacktime = -1;
-        CommonProxy.spacelist.remove((Integer) this.getEntityId());
-    }
-
-    @Nullable
-    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata)
-    {
-        CommonProxy.spacelist.add(this.getEntityId());
-        return livingdata;
+        ServerProxy.spacelist.remove((Integer) this.getEntityId());
     }
 
     @Override
     public void writeEntityToNBT(NBTTagCompound compound){
         super.writeEntityToNBT(compound);
+        compound.setBoolean("canattack", canattack);
         compound.setString("mode", mode);
         compound.setInteger("phases", phases);
         compound.setInteger("attackTick", attackTick);
@@ -214,6 +254,7 @@ public class EntitySpace extends EntityMob implements IAnimatable {
     @Override
     public void readEntityFromNBT(NBTTagCompound compound){
         super.readEntityFromNBT(compound);
+        canattack = compound.getBoolean("canattack");
         mode = compound.getString("mode");
         phases = compound.getInteger("phases");
         attackTick = compound.getInteger("attackTick");
@@ -254,7 +295,6 @@ public class EntitySpace extends EntityMob implements IAnimatable {
 //        if (entityIn instanceof EntityLivingBase) {
 
 //        }
-        System.out.println("EntityCollision");
     }
 
     @Override
@@ -286,28 +326,54 @@ public class EntitySpace extends EntityMob implements IAnimatable {
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
-        if(mode == "speak" || mode == "default") {
+
+        if(mode == "speak" || mode == "before_reward") {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.speak", true));
+            return PlayState.CONTINUE;
         }
-        if(mode == "attack_0_0") {
+
+        if(mode == "turbulence") {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.turbulence", true));
+            return PlayState.CONTINUE;
         }
         if(mode == "magiccircle") {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.magiccircle", true));
+            return PlayState.CONTINUE;
         }
         if(mode == "sprinting") {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.sprinting", true));
+            return PlayState.CONTINUE;
         }
-        if (event.getController().getAnimationState() == AnimationState.Stopped) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.speak", true));
+        if(mode == "weakness") {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.weakness", true));
+            return PlayState.CONTINUE;
         }
-        return PlayState.CONTINUE;
+        if(mode == "wait") {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.wait", true));
+            return PlayState.CONTINUE;
+        }
+        if (event.getController().getCurrentAnimation() == null) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model." + mode, true));
+            return PlayState.CONTINUE;
+        }
+        return PlayState.STOP;
     }
 
     @Override
     public void registerControllers(AnimationData data) {
         AnimationController controller = new AnimationController(this, "controller", 0, this::predicate);
+        controller.registerCustomInstructionListener(this::phaseListener);
         data.addAnimationController(controller);
+    }
+
+    private <T extends IAnimatable> void phaseListener(CustomInstructionKeyframeEvent<T> event)
+    {
+        if (phases == 0) {
+            PacketHandler.INSTANCE.sendToServer(new MessageSpacePhase0(this.getEntityId()));
+        }
+        if(mode == "weakness") {
+            this.setMode("sprinting");
+        }
     }
 
     @Override
@@ -335,7 +401,7 @@ public class EntitySpace extends EntityMob implements IAnimatable {
         EntitySpace.attackTick = num;
     }
 
-    public void laterspeak(String str, long oldtime, long time, long latertime) {
+    private void laterspeak(String str, long oldtime, long time, long latertime) {
         if (time == (oldtime + latertime)) {
             EntityPlayer player = this.world.getClosestPlayer(this.posX, this.posY, this.posZ, 200, false);
             if (player != null) {
@@ -344,11 +410,38 @@ public class EntitySpace extends EntityMob implements IAnimatable {
         }
     }
 
-    public String getSprinting() {
-        return sprinting;
+    private void laterattack(long oldtime, long time, long latertime) {
+        for (int i = 0; i < 3; i++) {
+            if (time == (oldtime + latertime + i * 20)) {
+                EntityBlackHole bl = new EntityBlackHole(world, 1.7F, false);
+                bl.setPosition(60, 100, 0);
+                world.spawnEntity(bl);
+            }
+        }
+    }
+    public void blackHoleDead() {
+        this.setMode("before_reward");
+
+        MinecraftServer server = world.getMinecraftServer();
+        TemplateManager manager = world.getSaveHandler().getStructureTemplateManager();
+        Template template = manager.getTemplate(server, new ResourceLocation(SpaceTime.MODID, "challengefield"));
+
+        BlockPos pos = new BlockPos(39, 73, -21);
+        template.addBlocksToWorld(world, pos, new PlacementSettings(), 2|4|16);
+        SpaceTime.Log("challengefield re-saved");
+
+        this.setPosition(60, 80, 0);
+
+        for (EntityPlayerMP playerMP : SpaceWorldProvider.getPlayerList()) {
+            if (!playerMP.isSpectator() && !playerMP.isCreative()) {
+                playerMP.setPosition(50, 80, 0);
+            }
+        }
+
+        this.getLookHelper().setLookPosition(50, 82, 0, 0, 0);
     }
 
-    public void setSprinting(String sss) {
-        EntitySpace.sprinting = sss;
+    public String getSprinting() {
+        return sprinting;
     }
 }

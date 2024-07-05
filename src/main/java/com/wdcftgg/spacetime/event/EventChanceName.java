@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Mod.EventBusSubscriber
 public class EventChanceName {
     @SubscribeEvent
-    public static void onItemRegister(RegistryEvent.Register<Item> event)
+    public void onItemRegister(RegistryEvent.Register<Item> event)
     {
         for (Item item : event.getRegistry().getValues()) {
             if (item.equals(ModItems.ingotTemporal)){
@@ -36,7 +36,7 @@ public class EventChanceName {
     }
 
     @SubscribeEvent
-    public static void onBlockRegister(RegistryEvent.Register<Block> event) {
+    public void onBlockRegister(RegistryEvent.Register<Block> event) {
         for (Block block : event.getRegistry().getValues()) {
             if (block.equals(ModBlocks.blockTemporal)) {
                 block.setTranslationKey("spacetime.time_block");

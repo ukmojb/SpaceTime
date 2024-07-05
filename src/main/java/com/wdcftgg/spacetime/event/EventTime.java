@@ -25,10 +25,10 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 @Mod.EventBusSubscriber
 public class EventTime {
 
-    private static final IAttribute LIFE_POWER = new RangedAttribute(null, "spacetime.attribute.life", 4.0, 0.0, 4.0).setShouldWatch(false);
+    private final IAttribute LIFE_POWER = new RangedAttribute(null, "spacetime.attribute.life", 4.0, 0.0, 4.0).setShouldWatch(false);
 
     @SubscribeEvent
-    public static void onLivingDeath(LivingDeathEvent event) {
+    public void onLivingDeath(LivingDeathEvent event) {
         if (event.getEntity() instanceof EntityTime && !event.getEntityLiving().world.isRemote){
             EntityLiving living = (EntityLiving) event.getEntityLiving();
             if (living.getEntityAttribute(LIFE_POWER).getBaseValue() == 2.0D){

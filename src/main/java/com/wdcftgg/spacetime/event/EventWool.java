@@ -20,7 +20,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class EventWool {
 
     @SubscribeEvent
-    public static void onInteract(PlayerInteractEvent.RightClickBlock event) {
+    public void onInteract(PlayerInteractEvent.RightClickBlock event) {
         EntityPlayer player = event.getEntityPlayer();
         if (!player.world.isRemote){
             if (event.getHand() != EnumHand.MAIN_HAND)

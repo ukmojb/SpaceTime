@@ -144,7 +144,6 @@ public class ReverseBeaconEntity extends
                         if (customColor != null)
                             afloat = customColor;
                         else {
-                            System.out.println(tileentitybeacon$beamsegment.getHeight()+ "mmm");
                             tileentitybeacon$beamsegment.incrementHeight();
                             continue;
                         }

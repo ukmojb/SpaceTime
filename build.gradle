@@ -132,6 +132,8 @@ dependencies {
 
     compileOnly("curse.maven:Patchouli-306770:3162874")
 
+    compileOnly("curse.maven:llibrary-243298:3116493")
+
 }
 
 // Adds Access Transformer files to tasks

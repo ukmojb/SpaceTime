@@ -1,38 +1,21 @@
 package com.wdcftgg.spacetime.client.render;
 
-import com.wdcftgg.spacetime.SpaceTime;
-import com.wdcftgg.spacetime.client.model.RubbleModel;
+import com.wdcftgg.spacetime.client.model.ModelRubbleBlock;
 import com.wdcftgg.spacetime.entity.EntityRubble;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.culling.ICamera;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.client.renderer.texture.*;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
-import net.minecraftforge.client.event.RenderBlockOverlayEvent;
-import net.minecraftforge.client.model.obj.OBJLoader;
-import net.minecraftforge.client.model.obj.OBJModel;
-import net.minecraftforge.client.model.pipeline.VertexBufferConsumer;
 import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nullable;
 
 public class RenderRubble extends Render<EntityRubble> {
 
-    private final ModelBase rubbleModel = new RubbleModel();
+    private final ModelBase rubbleModel = new ModelRubbleBlock();
 
 
     public RenderRubble(RenderManager renderManager) {
@@ -55,7 +38,7 @@ public class RenderRubble extends Render<EntityRubble> {
 
         GL11.glPushMatrix();
         GL11.glTranslated(x, y, z);
-        GL11.glScalef(0.07F, 0.07F, 0.07F);
+        GL11.glScalef(0.03F, 0.03F, 0.03F);
         GL11.glRotatef(180, 1, 0, 0);
         GL11.glRotatef(((rubble.ticksExisted + partialTicks) % 360) * 10, 1, 1, 1);
 
@@ -71,7 +54,6 @@ public class RenderRubble extends Render<EntityRubble> {
             if(getBlockIconName(b, meta) == null || getBlockIconName(b, meta) == "") {
 
                 s = "minecraft:stone";
-//                System.out.println("qqq");
             }
 
             String[] split = s.split(":");

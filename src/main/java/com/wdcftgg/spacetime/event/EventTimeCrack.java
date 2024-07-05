@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Mod.EventBusSubscriber
 public class EventTimeCrack {
     @SubscribeEvent
-    public static void onLivingDeath(LivingDeathEvent event) {
+    public void onLivingDeath(LivingDeathEvent event) {
         if (!event.getEntityLiving().world.isRemote){
             if (event.getEntityLiving() instanceof EntityTimeCrack){
                 EntityLiving living = (EntityLiving) event.getEntityLiving();

@@ -22,7 +22,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Mod.EventBusSubscriber
 public class EventSpace {
     @SubscribeEvent
-    public static void onInteract(PlayerInteractEvent.RightClickBlock event) {
+    public void onInteract(PlayerInteractEvent.RightClickBlock event) {
         EntityPlayer player = event.getEntityPlayer();
         BlockPos pos = new BlockPos(60,81,0);
         if (!player.world.isRemote){
@@ -39,7 +39,6 @@ public class EventSpace {
                             event.getWorld().spawnEntity(entitySpace);
                             stack.shrink(1);
                             Tools.setBlockAABB(pos.up().west().north(), pos.down().east().south(), Blocks.AIR, entitySpace);
-
                         }
                     }
                 }

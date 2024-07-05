@@ -19,7 +19,7 @@ public class SpaceTimeTurbulenceEntity extends TileEntity implements ITickable {
     @SuppressWarnings ("rawtypes")
     @Override
     public void update() {
-        if (!world.isRemote) {
+        if (!world.isRemote && world.getWorldTime() % 10 == 0) {
             for (EntityLivingBase livingbase : this.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(this.pos))) {
                 if (livingbase.isDead) continue;
                 if (!(livingbase instanceof EntityPlayer)) continue;

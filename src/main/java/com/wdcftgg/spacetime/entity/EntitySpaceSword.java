@@ -1,6 +1,7 @@
 package com.wdcftgg.spacetime.entity;
 
 import com.wdcftgg.spacetime.proxy.CommonProxy;
+import com.wdcftgg.spacetime.proxy.ServerProxy;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.util.DamageSource;
@@ -36,10 +37,11 @@ public class EntitySpaceSword extends EntityLiving implements IAnimatable {
         this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(10D);
     }
 
+    @Override
     public void onDeath(DamageSource cause)
     {
-        if (!world.isRemote && !CommonProxy.spacelist.isEmpty()){
-            for (int num : CommonProxy.spacelist) {
+        if (!world.isRemote && !ServerProxy.spacelist.isEmpty()){
+            for (int num : ServerProxy.spacelist) {
                 EntitySpace entitySpace = (EntitySpace) world.getEntityByID(num);
                 if (entitySpace != null) {
                     entitySpace.attackEntityFrom(DamageSource.OUT_OF_WORLD, (float) (entitySpace.getMaxHealth() * 0.05));

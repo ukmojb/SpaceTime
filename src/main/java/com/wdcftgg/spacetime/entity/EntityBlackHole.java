@@ -6,15 +6,20 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -30,7 +35,8 @@ import java.util.Random;
 public class EntityBlackHole extends EntityLiving {
 
     Random rand = new Random();
-    private float angle;
+    private static boolean annihilability = false;
+    private static int absorb_num = 0;
     public static DamageSource blackhole_damagesource = new DamageSource("blockhole").setDamageIsAbsolute().setDamageBypassesArmor();
 
     public static DataParameter<Float> BlackHole_Size = EntityDataManager.<Float>createKey(EntityBlackHole.class, DataSerializers.FLOAT);
@@ -39,14 +45,14 @@ public class EntityBlackHole extends EntityLiving {
     public EntityBlackHole(World worldIn)
     {
         super(worldIn);
-        this.setSize(5, 5);
-        this.setNoAI(true);
+        this.setSize(1, 1);
         this.setNoGravity(true);
     }
 
-    public EntityBlackHole(World world, float size) {
+    public EntityBlackHole(World world, float size, boolean annihilability) {
         this(world);
         this.dataManager.set(BlackHole_Size, size);
+        EntityBlackHole.annihilability = annihilability;
 //        this.dataWatcher.updateObject(16, size);
     }
 
@@ -63,29 +69,31 @@ public class EntityBlackHole extends EntityLiving {
             size = 0.5f;
         }
 
+        this.setSize(size, size);
+
         if(!world.isRemote) {
-            for(int k = 0; k < size * 3; k++) {
+            for (int k = 0; k < size * 3; k++) {
                 double phi = rand.nextDouble() * (Math.PI * 2);
                 double costheta = rand.nextDouble() * 2 - 1;
                 double theta = Math.acos(costheta);
-                double x = Math.sin( theta) * Math.cos( phi );
-                double y = Math.sin( theta) * Math.sin( phi );
-                double z = Math.cos( theta );
+                double x = Math.sin(theta) * Math.cos(phi);
+                double y = Math.sin(theta) * Math.sin(phi);
+                double z = Math.cos(theta);
 
                 Vec3d vec = new Vec3d(x, y, z);
 //                Vec3d vec = Vec3d.createVectorHelper(x, y, z);
-                int length = (int)Math.ceil(size * 15);
+                int length = (int) Math.ceil(size * 15);
 
-                for(int i = 0; i < length; i ++) {
-                    int x0 = (int)(this.posX + (vec.x * i));
-                    int y0 = (int)(this.posY + (vec.y * i));
-                    int z0 = (int)(this.posZ + (vec.z * i));
+                for (int i = 0; i < length; i++) {
+                    int x0 = (int) (this.posX + (vec.x * i));
+                    int y0 = (int) (this.posY + (vec.y * i));
+                    int z0 = (int) (this.posZ + (vec.z * i));
 
-                    if(world.getBlockState(new BlockPos(x0, y0, z0)).getMaterial().isLiquid()) {
+                    if (world.getBlockState(new BlockPos(x0, y0, z0)).getMaterial().isLiquid()) {
                         world.setBlockToAir(new BlockPos(x0, y0, z0));
                     }
 
-                    if(world.getBlockState(new BlockPos(x0, y0, z0)).getBlock() != Blocks.AIR) {
+                    if (world.getBlockState(new BlockPos(x0, y0, z0)).getBlock() != Blocks.AIR) {
                         EntityRubble rubble = new EntityRubble(world);
                         rubble.posX = x0 + 0.5F;
                         rubble.posY = y0;
@@ -99,131 +107,143 @@ public class EntityBlackHole extends EntityLiving {
                     }
                 }
             }
-        }
 
-        double range = size * 20;
 
-        List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(this, new AxisAlignedBB(
-                posX - range, posY - range, posZ - range, posX + range, posY + range, posZ + range));
+            double range = size * 20;
 
-        for(Entity e : entities) {
+            List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(null, new AxisAlignedBB(
+                    posX - range, posY - range, posZ - range, posX + range, posY + range, posZ + range));
+
+            for (Entity e : entities) {
 
 //            if(e instanceof EntityPlayer && ((EntityPlayer)e).capabilities.isCreativeMode)
 //                continue;
 
-            if(e instanceof EntityFallingBlock && !world.isRemote && e.ticksExisted > 1) {
+                if (e instanceof EntityFallingBlock && !world.isRemote && e.ticksExisted > 1) {
 
-                double x = e.posX;
-                double y = e.posY;
-                double z = e.posZ;
-                IBlockState b = ((EntityFallingBlock)e).getBlock();
-                int meta = ((EntityFallingBlock)e).getBlock().getBlock().getMetaFromState(((EntityFallingBlock)e).getBlock());
+                    double x = e.posX;
+                    double y = e.posY;
+                    double z = e.posZ;
+                    IBlockState b = ((EntityFallingBlock) e).getBlock();
+                    int meta = ((EntityFallingBlock) e).getBlock().getBlock().getMetaFromState(((EntityFallingBlock) e).getBlock());
 
-                e.setDead();
+                    e.setDead();
 
-                EntityRubble rubble = new EntityRubble(world);
-                rubble.setMetaBasedOnBlock(b.getBlock(), meta);
-                rubble.setPositionAndRotation(x, y, z, 0, 0);
-                rubble.motionX = e.motionX;
-                rubble.motionY = e.motionY;
-                rubble.motionZ = e.motionZ;
-                world.spawnEntity(rubble);
-            }
-
-            Vec3d vec = new Vec3d(posX - e.posX, posY - e.posY, posZ - e.posZ);
-
-            double dist = vec.length();
-
-            if(dist > range)
-                continue;
-
-            vec = vec.normalize();
-
-            float distance = e.getDistance(this);
-
-            if(!(e instanceof EntityItem))
-                vec.rotateYaw((float)Math.toRadians(15));
-
-            if (!(e instanceof EntityPlayer)) {
-                double speed;
-                if (distance * 0.01 > 0.5) {
-                    speed = 0.1D;
-                } else {
-                    speed = distance * 0.005;
+                    EntityRubble rubble = new EntityRubble(world);
+                    rubble.setMetaBasedOnBlock(b.getBlock(), meta);
+                    rubble.setPositionAndRotation(x, y, z, 0, 0);
+                    rubble.motionX = e.motionX;
+                    rubble.motionY = e.motionY;
+                    rubble.motionZ = e.motionZ;
+                    world.spawnEntity(rubble);
                 }
-                e.motionX += vec.x * speed;
-                if (Math.abs(this.posY - e.posY) > size) {
-                    e.motionY += vec.y * speed + 0.05;
+
+                Vec3d vec = new Vec3d(posX - e.posX, posY - e.posY, posZ - e.posZ);
+
+                double dist = vec.length();
+
+                if (dist > range)
+                    continue;
+
+                vec = vec.normalize();
+
+                if (!(e instanceof EntityItem) && !(e instanceof EntityBlackHole)) {
+                    vec.rotateYaw((float) Math.toRadians(15));
                 }
-                e.motionZ += vec.z * speed;
 
-                if (Math.abs(this.posY - e.posY) < size * 2) {
-                    Vec3d newvec = new Vec3d(vec.z * -1, 0, vec.z).normalize();
+                if (!(e instanceof EntityPlayer)) {
+                    double speed;
+                    double distance = e.getDistance(this);
+                    if (distance * 0.01 > 0.5) {
+                        speed = 0.1D;
+                    } else {
+                        speed = distance * 0.005;
+                    }
+                    e.motionX += vec.x * speed;
+                    if (Math.abs(this.posY - e.posY) > size) {
+                        e.motionY += vec.y * speed + 0.05;
+                    }
+                    e.motionZ += vec.z * speed;
 
-                    double speed2 = 0.4D;
+                    if (Math.abs(this.posY - e.posY) < size * 2) {
+                        Vec3d newvec = new Vec3d(vec.z * -1, 0, vec.z).normalize();
 
-                    e.motionX += newvec.x * speed2;
-                    e.motionZ += newvec.z * speed2;
+                        double speed2 = 0.4D;
+
+                        e.motionX += newvec.x * speed2;
+                        e.motionZ += newvec.z * speed2;
+                    }
                 }
-            }
 
-            if  (e instanceof EntityPlayer) {
+                if (e instanceof EntityPlayer && !((EntityPlayer) e).capabilities.isCreativeMode) {
 
-                double speed = 0.2;
-//                if (distance * 0.01 > 0.5) {
-//                    speed = 0.009D;
-//                } else {
-//                    speed = distance * 0.003;
-//                }
-                e.motionX += vec.x * speed;
-                if (Math.abs(this.posY - e.posY) > size) {
-                    e.motionY += vec.y * speed;
-                }
-                e.motionZ += vec.z * speed;
+                    double speed = 0.2;
+                    e.motionX += vec.x * speed;
+                    if (Math.abs(this.posY - e.posY) > size) {
+                        e.motionY += vec.y * speed;
+                    }
+                    e.motionZ += vec.z * speed;
 
-                if (Math.abs(this.posY - e.posY) < size * 2) {
+                    if (Math.abs(this.posY - e.posY) < size * 2) {
 //                    Vec3d newvec = new Vec3d(vec.z > 0 ? vec.z * -1 : vec.z, 0, vec.z).normalize();
 
-                    Vec3d newvec = new Vec3d(-vec.y, 0.0, vec.x).normalize();
+                        Vec3d newvec = new Vec3d(-vec.y, 0.0, vec.x).normalize();
 
-                    // 如果垂直向量与给定向量平行，则进行调整
-                    if (newvec.dotProduct(vec) != 0.0) {
-                        newvec = new Vec3d(vec.z, 0.0, -vec.x).normalize();
+                        // 如果垂直向量与给定向量平行，则进行调整
+                        if (newvec.dotProduct(vec) != 0.0) {
+                            newvec = new Vec3d(vec.z, 0.0, -vec.x).normalize();
+                        }
+
+                        double speed2 = 0.1D;
+
+                        e.motionX += newvec.x * speed2;
+                        e.motionZ += newvec.z * speed2;
                     }
-
-                    double speed2 = 0.1D;
-
-                    e.motionX += newvec.x * speed2;
-                    e.motionZ += newvec.z * speed2;
                 }
-            }
 
 
-            if(e instanceof EntityBlackHole)
-                continue;
-
-            if(dist < size * 1.5) {
-                if(!(e instanceof EntityPlayer && ((EntityPlayer)e).capabilities.isCreativeMode)) {
-                    e.attackEntityFrom(blackhole_damagesource, 1000);
-
-                }
-                if(e instanceof EntityPlayer) {
-                    if (((EntityPlayer) e).capabilities.isCreativeMode) {
-                        e.changeDimension(Config.BLACKHOLEDIM);
-                        e.setPosition(0, 10, 0);
-                    } else {
+                if (dist < size * 1.5) {
+                    if (e instanceof EntityBlackHole && e.getUniqueID() != this.getUniqueID()) {
+                        float size0 = e.getDataManager().get(EntityBlackHole.BlackHole_Size);
+                        float size1 = this.getDataManager().get(EntityBlackHole.BlackHole_Size);
+                        float newSize = size0 + size1;
+                        if (size0 >= size1) {
+                            this.setDead();
+                            ((EntityBlackHole) e).setSize(newSize);
+                        } else {
+                            e.setDead();
+                            this.setSize(newSize);
+                        }
+                    }
+                    if (!(e instanceof EntityPlayer && ((EntityPlayer) e).capabilities.isCreativeMode)) {
                         e.attackEntityFrom(blackhole_damagesource, 1000);
+
+                    } else {
+                        addAbsorbNum(e);
+                    }
+                    if (e instanceof EntityPlayer) {
+                        if (((EntityPlayer) e).capabilities.isCreativeMode) {
+                            e.changeDimension(Config.BLACKHOLEDIM);
+                            e.setPosition(0, 10, 0);
+                        } else {
+                            e.attackEntityFrom(blackhole_damagesource, 1000);
+                        }
+                    }
+
+                    if (!(e instanceof EntityLivingBase)) {
+                        e.setDead();
+
                     }
                 }
-
-                if(!(e instanceof EntityLivingBase)) {
-                    e.setDead();
-                }
             }
-        }
 
-        this.motionX *= 0.99D;
-        this.motionZ *= 0.99D;
+            if (this.isAnnihilability() && absorb_num >= Config.ABSORBNUM) {
+                world.addWeatherEffect(new EntityLightningBolt(world, this.posX, this.posY, this.posZ, true));
+                world.createExplosion(this, this.posX, this.posY, this.posZ, 30, true);
+                this.setDead();
+            }
+
+        }
     }
 
     @Nullable
@@ -254,12 +274,16 @@ public class EntityBlackHole extends EntityLiving {
     public void readEntityFromNBT(NBTTagCompound nbt) {
         super.readEntityFromNBT(nbt);
         this.dataManager.set(BlackHole_Size, nbt.getFloat("size"));
+        annihilability = nbt.getBoolean("annihilability");
+        absorb_num = nbt.getInteger("absorb_num");
     }
 
     @Override
     public void writeEntityToNBT(NBTTagCompound nbt) {
         super.writeEntityToNBT(nbt);
         nbt.setFloat("size", this.dataManager.get(BlackHole_Size));
+        nbt.setBoolean("annihilability", annihilability);
+        nbt.setInteger("absorb_num", absorb_num);
     }
 
     @Override
@@ -286,8 +310,32 @@ public class EntityBlackHole extends EntityLiving {
         return 1.0F;
     }
 
+    public boolean isAnnihilability() {
+        return annihilability;
+    }
 
-    private static double log(double value, double base) {
-        return Math.log(value) / Math.log(base);
+    private void addAbsorbNum(Entity entity) {
+        if (entity instanceof EntityItem) {
+            EntityItem entityItem = (EntityItem) entity;
+            if (entityItem.getItem().getItem().getRegistryName().equals("shulker_box")) {
+                ItemStack shulker_box = entityItem.getItem();
+                absorb_num += getShulkerBoxItemNum(shulker_box);
+            } else {
+                absorb_num++;
+            }
+        }
+    }
+
+    private int getShulkerBoxItemNum(ItemStack shulker_box) {
+        int num = 0;
+        if (shulker_box.getItem().getRegistryName().toString().contains("shulker_box")) {
+            NBTTagCompound BlockEntityTag = (NBTTagCompound) shulker_box.getTagCompound().getTag("BlockEntityTag");
+            for (NBTBase nbtBase : BlockEntityTag.getTagList("Items", 10)) {
+                NBTTagCompound nbttagcompound = (NBTTagCompound) nbtBase;
+                int num0 = nbttagcompound.getInteger("Count");
+                num += num0;
+            }
+        }
+        return num;
     }
 }

@@ -21,7 +21,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Mod.EventBusSubscriber
 public class EventLossSpatialSense {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public static void onRenderPre(RenderPlayerEvent.Pre event) {
+    public void onRenderPre(RenderPlayerEvent.Pre event) {
         EntityPlayer player = event.getEntityPlayer();
         if (player.isPotionActive(ModPotions.LossSpatialSense)) {
             GlStateManager.pushMatrix();
@@ -31,14 +31,14 @@ public class EventLossSpatialSense {
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
-    public static void onRenderPre(RenderPlayerEvent.Post event) {
+    public void onRenderPre(RenderPlayerEvent.Post event) {
         EntityPlayer player = event.getEntityPlayer();
         if (player.isPotionActive(ModPotions.LossSpatialSense))
             GlStateManager.popMatrix();
     }
 
     @SubscribeEvent
-    public static void onCameraSetup(EntityViewRenderEvent.CameraSetup event) {
+    public void onCameraSetup(EntityViewRenderEvent.CameraSetup event) {
         Minecraft minecraft = Minecraft.getMinecraft();
         Entity renderViewEntity = minecraft.getRenderViewEntity();
         if (renderViewEntity instanceof EntityPlayer) {

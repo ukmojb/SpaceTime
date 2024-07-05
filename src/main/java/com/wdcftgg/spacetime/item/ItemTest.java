@@ -12,6 +12,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumActionResult;
@@ -44,11 +46,23 @@ public class ItemTest extends Item implements IHasModel {
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
     {
         if (!world.isRemote) {
-            EntityBlackHole bl = new EntityBlackHole(player.world, 5);
-            bl.setPosition(player.posX, player.posY, player.posZ);
+            EntityBlackHole bl = new EntityBlackHole(player.world, 1, false);
+            bl.setPosition(player.posX + 30, player.posY, player.posZ);
             player.world.spawnEntity(bl);
-
-            player.getHeldItem(hand).shrink(1);
+//
+//            player.getHeldItem(hand).shrink(1);
+//            ItemStack offitem = player.getHeldItem(EnumHand.OFF_HAND);
+//            if (offitem.getItem().getRegistryName().toString().contains("shulker_box")) {
+//                NBTTagCompound BlockEntityTag = (NBTTagCompound) offitem.getTagCompound().getTag("BlockEntityTag");
+//                int num0 = 0;
+//                for (NBTBase nbtBase : BlockEntityTag.getTagList("Items", 10)) {
+//                    NBTTagCompound nbttagcompound = (NBTTagCompound) nbtBase;
+//                    int num = nbttagcompound.getInteger("Count");
+//                    num0 += num;
+//                }
+////                System.out.println(num0 + "---d");
+////                System.out.println(offitem.serializeNBT()..getTagList("Items", 10) + "---d");
+//            }
         }
         return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
     }
