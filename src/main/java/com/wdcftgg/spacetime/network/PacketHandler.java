@@ -9,6 +9,7 @@ package com.wdcftgg.spacetime.network;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
+import software.bernie.geckolib3.core.event.ParticleKeyFrameEvent;
 
 public class PacketHandler {
     public static final SimpleNetworkWrapper INSTANCE;
@@ -25,6 +26,9 @@ public class PacketHandler {
 
 
         INSTANCE.registerMessage(MessageSpacePhase0.class, MessageSpacePhase0.class, num++, Side.SERVER);
+        INSTANCE.registerMessage(MessageCustomInstructionKey.class, MessageCustomInstructionKey.class, num++, Side.SERVER);
+        INSTANCE.registerMessage(MessageParticleKey.class, MessageParticleKey.class, num++, Side.SERVER);
+        INSTANCE.registerMessage(MessageSoundKey.class, MessageSoundKey.class, num++, Side.SERVER);
         INSTANCE.registerMessage(MessageSpaceCollideWithPlayer.class, MessageSpaceCollideWithPlayer.class, num++, Side.SERVER);
     }
 

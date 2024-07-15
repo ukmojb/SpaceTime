@@ -1,6 +1,7 @@
 package com.wdcftgg.spacetime.entity;
 
 import com.wdcftgg.spacetime.config.Config;
+import com.wdcftgg.spacetime.proxy.ServerProxy;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -35,7 +36,7 @@ import java.util.Random;
 public class EntityBlackHole extends EntityLiving {
 
     Random rand = new Random();
-    private static boolean annihilability = false;
+    private boolean annihilability = false;
     private static int absorb_num = 0;
     public static DamageSource blackhole_damagesource = new DamageSource("blockhole").setDamageIsAbsolute().setDamageBypassesArmor();
 
@@ -52,7 +53,7 @@ public class EntityBlackHole extends EntityLiving {
     public EntityBlackHole(World world, float size, boolean annihilability) {
         this(world);
         this.dataManager.set(BlackHole_Size, size);
-        EntityBlackHole.annihilability = annihilability;
+        this.annihilability = annihilability;
 //        this.dataWatcher.updateObject(16, size);
     }
 
@@ -222,17 +223,19 @@ public class EntityBlackHole extends EntityLiving {
                         addAbsorbNum(e);
                     }
                     if (e instanceof EntityPlayer) {
-                        if (((EntityPlayer) e).capabilities.isCreativeMode) {
-                            e.changeDimension(Config.BLACKHOLEDIM);
-                            e.setPosition(0, 10, 0);
+                        EntityPlayer player = (EntityPlayer) e;
+                        if (player.capabilities.isCreativeMode || this.isAnnihilability()) {
+                            player.changeDimension(Config.BLACKHOLEDIM);
+                            player.setPosition(0, 10, 0);
+                            clearSpace();
+                            playerToChallenge(player);
                         } else {
-                            e.attackEntityFrom(blackhole_damagesource, 1000);
+                            player.attackEntityFrom(blackhole_damagesource, 1000);
                         }
                     }
 
                     if (!(e instanceof EntityLivingBase)) {
                         e.setDead();
-
                     }
                 }
             }
@@ -263,6 +266,7 @@ public class EntityBlackHole extends EntityLiving {
     {
         return this.dataManager.get(BlackHole_Size);
     }
+
 
 
     public void entityInit() {
@@ -337,5 +341,21 @@ public class EntityBlackHole extends EntityLiving {
             }
         }
         return num;
+    }
+
+    private void clearSpace(){
+        if (!ServerProxy.spacelist.isEmpty()) {
+            for (int i = 0; i < ServerProxy.spacelist.size(); i++) {
+                if (world.getEntityByID(ServerProxy.spacelist.get(i)) != null) {
+                    world.getEntityByID(ServerProxy.spacelist.get(i)).setDead();
+                }
+            }
+        }
+    }
+
+    private void playerToChallenge(EntityPlayer player) {
+        if (!player.getEntityData().hasKey("needtochallenge")) {
+            player.getEntityData().setBoolean("needtochallenge", true);
+        }
     }
 }

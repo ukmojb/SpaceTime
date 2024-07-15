@@ -3,12 +3,16 @@ package com.wdcftgg.spacetime.event;
 import com.wdcftgg.spacetime.entity.EntityBlackHole;
 import com.wdcftgg.spacetime.entity.EntitySpace;
 import com.wdcftgg.spacetime.util.Tools;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -43,6 +47,25 @@ public class EventSpace {
                     }
                 }
 
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onEntityTravelToDimension(EntityTravelToDimensionEvent event) {
+        Entity entity = event.getEntity();
+        if (entity instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) entity;
+            if (!player.world.isRemote){
+                if (player.getEntityData().hasKey("needtochallenge")) {
+                    boolean challenge = player.getEntityData().getBoolean("needtochallenge");
+                    if (challenge) {
+                        World world = DimensionManager.getWorld(event.getDimension());
+
+
+//                        world.spawnEntity()
+                    }
+                }
             }
         }
     }

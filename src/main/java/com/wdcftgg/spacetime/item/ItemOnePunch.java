@@ -47,6 +47,7 @@ public class ItemOnePunch extends Item implements  IHasModel {
     @Override
     public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
     {
+        entity.setDead();
         entity.attackEntityFrom(DamageSource.OUT_OF_WORLD, 9999);
         return false;
     }

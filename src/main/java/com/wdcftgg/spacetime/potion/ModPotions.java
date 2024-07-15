@@ -2,6 +2,7 @@ package com.wdcftgg.spacetime.potion;
 
 import com.wdcftgg.spacetime.potion.potions.PotionsHeterospace;
 import com.wdcftgg.spacetime.potion.potions.PotionsLossSpatialSense;
+import com.wdcftgg.spacetime.potion.potions.PotionsMovetoplayer;
 import com.wdcftgg.spacetime.potion.potions.PotionsSwordcore;
 import com.wdcftgg.spacetime.util.Reference;
 import net.minecraft.potion.Potion;
@@ -16,6 +17,7 @@ public class ModPotions {
     public static final Potion heterospace = new PotionsHeterospace();
     public static final Potion swordcore = new PotionsSwordcore();
     public static final Potion LossSpatialSense = new PotionsLossSpatialSense();
+    public static final Potion MoveToPlayer = new PotionsMovetoplayer();
 
 
 
@@ -24,5 +26,6 @@ public class ModPotions {
         evt.getRegistry().register(heterospace);
         evt.getRegistry().register(swordcore);
         evt.getRegistry().register(LossSpatialSense);
+        evt.getRegistry().register(MoveToPlayer);
     }
 }

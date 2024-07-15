@@ -1,14 +1,17 @@
 package com.wdcftgg.spacetime.proxy;
 
-import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.tileEntity.ConcretizationHourGlassEntity;
 import com.wdcftgg.spacetime.blocks.tileEntity.EndGatewayImitateEntity;
 import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.*;
 import com.wdcftgg.spacetime.blocks.tileEntity.ReverseBeaconEntity;
 import com.wdcftgg.spacetime.blocks.tileEntity.TimeAltarCoreEntity;
 import com.wdcftgg.spacetime.client.handler.HeldItemHandler;
-import com.wdcftgg.spacetime.client.render.HourGlass.*;
-import com.wdcftgg.spacetime.client.render.*;
+import com.wdcftgg.spacetime.client.render.block.HourGlass.*;
+import com.wdcftgg.spacetime.client.render.block.RenderConcretizationHourGlass;
+import com.wdcftgg.spacetime.client.render.block.RenderEndGatewayImitate;
+import com.wdcftgg.spacetime.client.render.block.RenderReverseBeacon;
+import com.wdcftgg.spacetime.client.render.block.RenderTimeAltarCore;
+import com.wdcftgg.spacetime.client.render.entity.*;
 import com.wdcftgg.spacetime.entity.*;
 import com.wdcftgg.spacetime.event.EventLossSpatialSense;
 import com.wdcftgg.spacetime.event.EventRender;
@@ -21,7 +24,6 @@ import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -61,9 +63,11 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntitySword.class, RenderSword::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityBlackHole.class, RenderBlackHole::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityRubble.class, RenderRubble::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityPortal.class, RenderPortal::new);
 
 
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpace.class, RenderSpace::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntitySpace2.class, RenderSpace2::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpaceSword.class, RenderSpaceSword::new);
 
 		ClientRegistry.bindTileEntitySpecialRenderer(HourGlassEntity.class, new HourGrassRender());

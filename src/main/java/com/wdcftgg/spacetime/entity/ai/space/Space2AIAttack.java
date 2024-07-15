@@ -1,0 +1,83 @@
+package com.wdcftgg.spacetime.entity.ai.space;
+
+import com.wdcftgg.spacetime.SpaceTime;
+import com.wdcftgg.spacetime.dimension.SpaceWorldProvider;
+import com.wdcftgg.spacetime.entity.EntitySpace;
+import com.wdcftgg.spacetime.entity.EntitySpace2;
+import com.wdcftgg.spacetime.entity.EntitySpaceSword;
+import com.wdcftgg.spacetime.potion.ModPotions;
+import com.wdcftgg.spacetime.util.Tools;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraft.world.gen.structure.template.PlacementSettings;
+import net.minecraft.world.gen.structure.template.Template;
+import net.minecraft.world.gen.structure.template.TemplateManager;
+
+import java.util.Random;
+
+public class Space2AIAttack extends EntityAIBase {
+    private World world;
+    protected EntitySpace2 attacker;
+    protected int attackTick;
+    protected Boolean isCloseCombat;
+
+    public static long attacktime = -1;
+
+
+    public Space2AIAttack(EntitySpace2 creature) {
+        this.attacker = creature;
+        this.world = creature.world;
+        this.setMutexBits(5);
+    }
+
+    public boolean shouldExecute() {
+        return attacker.getMode() != "speak";
+    }
+
+    public boolean shouldContinueExecuting() {
+        return attackTick > 0;
+    }
+
+    public void startExecuting() {
+
+    }
+
+    public void updateTask() {
+        EntityLivingBase entitylivingbase = this.attacker.getAttackTarget();
+
+        attack(attacker, entitylivingbase);
+        attacker.setAttackTick(this.attackTick);
+    }
+
+    protected void attack(EntitySpace2 entitySpace2, EntityLivingBase target) {
+
+        if (entitySpace2.getMode() == "speak") return;
+        if (target == null) return;
+
+        double distance = entitySpace2.getDistance(target);
+        Random random = new Random();
+
+        if (isCloseCombat == null) isCloseCombat = distance <= 10;
+        if (world.getTotalWorldTime() % 20 == 0) isCloseCombat = distance <= 10;
+
+        if (isCloseCombat) {
+            int movement = random.nextInt();
+
+
+        } else {
+
+        }
+
+
+    }
+}

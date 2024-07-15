@@ -9,6 +9,7 @@ import java.util.List;
 public class ServerProxy extends CommonProxy {
 
     public static List<Integer> spacelist = new ArrayList<>();
+    public static List<Integer> space2list = new ArrayList<>();
 
     public ServerProxy() {
     }
@@ -23,7 +24,6 @@ public class ServerProxy extends CommonProxy {
 
     public void onInit(){
         super.onInit();
-        MinecraftForge.EVENT_BUS.register(new EventSword());
         MinecraftForge.EVENT_BUS.register(new EventModuleXP());
         MinecraftForge.EVENT_BUS.register(new EventChanceName());
         MinecraftForge.EVENT_BUS.register(new EventExplosion());

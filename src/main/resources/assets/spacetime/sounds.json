@@ -38,5 +38,15 @@
         "stream" : true
       }
     ]
+  },
+  "snap_fingers":
+  {
+    "category": "record",
+    "sounds": [
+      {
+        "name" : "spacetime:snap_fingers",
+        "stream" : true
+      }
+    ]
   }
 }

@@ -104,7 +104,7 @@ public class BlackHoleWorldProvider extends WorldProvider {
     @SideOnly(Side.CLIENT)
     public net.minecraftforge.client.IRenderHandler getSkyRenderer()
     {
-
+        if (Config.RENDERBLACKHOLEMODE == 3) return null;
         Tessellator tessellator = Tessellator.getInstance();
         Minecraft mc = Minecraft.getMinecraft();
         BufferBuilder bufferbuilder = tessellator.getBuffer();
@@ -120,23 +120,22 @@ public class BlackHoleWorldProvider extends WorldProvider {
         GlStateManager.translate(0, -5, 0);
         GlStateManager.doPolygonOffset(-1, 0);
 
-        ResourceLocation BlackHole_TEXTURES = new ResourceLocation(SpaceTime.MODID, "textures/environment/blackholedim.png");;
+        ResourceLocation BlackHole_TEXTURES = new ResourceLocation(SpaceTime.MODID, "textures/environment/blackholedim_" + Config.RENDERBLACKHOLEMODE + ".png");;
 
-        float f17 = 100.0F;
+        float xz = 100.0F;
+        float y = 80.F;
         mc.getTextureManager().bindTexture(BlackHole_TEXTURES);
         bufferbuilder.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-        bufferbuilder.pos((double)(-f17), 80, (double)(-f17)).tex(0.0D, 0.0D).endVertex();
-        bufferbuilder.pos((double)f17, 80, (double)(-f17)).tex(1.0D, 0.0D).endVertex();
-        bufferbuilder.pos((double)f17, 80, (double)f17).tex(1.0D, 1.0D).endVertex();
-        bufferbuilder.pos((double)(-f17), 80, (double)f17).tex(0.0D, 1.0D).endVertex();
+        bufferbuilder.pos((double)(-xz), y, (double)(-xz)).tex(0.0D, 0.0D).endVertex();
+        bufferbuilder.pos((double)xz, y, (double)(-xz)).tex(1.0D, 0.0D).endVertex();
+        bufferbuilder.pos((double)xz, y, (double)xz).tex(1.0D, 1.0D).endVertex();
+        bufferbuilder.pos((double)(-xz), y, (double)xz).tex(0.0D, 1.0D).endVertex();
         tessellator.draw();
         GlStateManager.disablePolygonOffset();
         GlStateManager.disableBlend();
         GlStateManager.enableLighting();
         GL11.glEnable(GL11.GL_CULL_FACE);
         GlStateManager.popMatrix();
-//            }
-//        };
         return null;
     }
 }

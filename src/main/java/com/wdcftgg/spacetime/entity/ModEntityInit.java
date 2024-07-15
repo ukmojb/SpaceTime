@@ -19,8 +19,10 @@ public class ModEntityInit {
 
 
         registerEntityAndEgg("TimeCrack", EntityTimeCrack.class);
+        registerEntityAndEgg("Portal", EntityPortal.class);
         registerEntityAndEgg("Time", EntityTime.class,0x0009c8, 0x660000);
         registerEntityAndEgg("Space", EntitySpace.class,0x0009c8, 0x660000);
+        registerEntityAndEgg("Space2", EntitySpace2.class,0x0009c8, 0x660000);
         registerEntityAndEgg("SpaceSword", EntitySpaceSword.class,0x0009c8, 0x660000);
 
 //        this.dataManager.set(RABBIT_TYPE, Integer.valueOf(rabbitTypeId));
