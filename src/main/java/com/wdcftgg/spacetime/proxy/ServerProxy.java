@@ -1,7 +1,9 @@
 package com.wdcftgg.spacetime.proxy;
 
+
 import com.wdcftgg.spacetime.event.*;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,5 +34,6 @@ public class ServerProxy extends CommonProxy {
         MinecraftForge.EVENT_BUS.register(new EventTime());
         MinecraftForge.EVENT_BUS.register(new EventTimeCrack());
         MinecraftForge.EVENT_BUS.register(new EventWool());
+        MinecraftForge.EVENT_BUS.register(new EventSpaceStop());
     }
 }

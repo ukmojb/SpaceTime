@@ -1,4 +1,4 @@
-package com.wdcftgg.spacetime.event;
+package com.wdcftgg.spacetime.client.event;
 
 import com.wdcftgg.spacetime.blocks.stextractor.STExtractorBase;
 import net.minecraft.client.resources.I18n;

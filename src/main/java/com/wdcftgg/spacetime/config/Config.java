@@ -14,7 +14,7 @@ import java.io.File;
 
 public class Config {
 
-    private static final String CATEGORY_SWORDCORE = "swordcore";
+    private static final String CATEGORY_POTION = "potion";
     private static final String CATEGORY_TIMECORE = "timecore";
     private static final String CATEGORY_BOSS = "boss";
     private static final String CATEGORY_DIM = "world";
@@ -24,6 +24,7 @@ public class Config {
     public static int GUIPOSY = 50;
     public static double TIMEMAXHEALTH = 150d;
     public static double TIMELASTLIFEMAXHEALTH = 300d;
+    public static boolean SAYINBAR = true;
     public static boolean ALTARAUTOMATE = false;
     public static int SPACEDDIM = 253;
     public static int BLACKHOLEDIM = 254;
@@ -52,6 +53,7 @@ public class Config {
             dimInit(config);
             bossInit(config);
             timeInit(config);
+            potionInit(config);
             } catch (Exception var11) {
         } finally {
             config.save();
@@ -80,5 +82,9 @@ public class Config {
         GUIPOSX = config.get(CATEGORY_TIMECORE, "GuiPosX", GUIPOSX, "The altar shows the gui orientation of the energy requirements on the x axis").getInt();
         GUIPOSY = config.get(CATEGORY_TIMECORE, "GuiPosY", GUIPOSY, "The altar shows the gui orientation of the energy requirements on the y axis").getInt();
         ALTARAUTOMATE = config.get(CATEGORY_TIMECORE, "AltarAutomate", ALTARAUTOMATE, "Whether the altar can be automated").getBoolean();
+    }
+
+    private static void potionInit(Configuration config) {
+        SAYINBAR = config.get(CATEGORY_POTION, "SpaceStopSayInBar", SAYINBAR, "if true, a prompt will appear in the action bar when the space is fixed").getBoolean();
     }
 }

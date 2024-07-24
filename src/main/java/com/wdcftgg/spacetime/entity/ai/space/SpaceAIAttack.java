@@ -141,10 +141,10 @@ public class SpaceAIAttack extends EntityAIBase
                         player.removeActivePotionEffect(ModPotions.LossSpatialSense);
                     }
 
-                    world.addWeatherEffect(new EntityLightningBolt(world, 46, 152, -14, true));
-                    world.addWeatherEffect(new EntityLightningBolt(world, 46, 152, 14, true));
-                    world.addWeatherEffect(new EntityLightningBolt(world, 74, 152, -14, true));
-                    world.addWeatherEffect(new EntityLightningBolt(world, 74, 152, -14, true));
+                    world.addWeatherEffect(new EntityLightningBolt(world, 46, 152, -14, false));
+                    world.addWeatherEffect(new EntityLightningBolt(world, 46, 152, 14, false));
+                    world.addWeatherEffect(new EntityLightningBolt(world, 74, 152, -14, false));
+                    world.addWeatherEffect(new EntityLightningBolt(world, 74, 152, -14, false));
 
                     Tools.setPosition(entitySpace, new BlockPos(entitySpace.posX, 151, entitySpace.posZ));
 

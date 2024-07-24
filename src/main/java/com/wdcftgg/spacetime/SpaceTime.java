@@ -11,15 +11,22 @@ import com.wdcftgg.spacetime.gui.GuiElementLoader;
 import com.wdcftgg.spacetime.init.RegistryHandler;
 import com.wdcftgg.spacetime.network.PacketHandler;
 import com.wdcftgg.spacetime.proxy.CommonProxy;
+import com.wdcftgg.spacetime.proxy.ServerProxy;
 import com.wdcftgg.spacetime.recipe.CraftingLoader;
 import com.wdcftgg.spacetime.world.structures.challengefield;
 import com.wdcftgg.spacetime.world.structures.pillar;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -27,7 +34,9 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.items.CapabilityItemHandler;
 import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
 
@@ -45,11 +54,11 @@ public class SpaceTime {
     public static DimensionType BlackHoleDim;
 
     public static final String CLIENT_PROXY_CLASS = "com.wdcftgg.spacetime.proxy.ClientProxy";
-    public static final String SERVER_PROXY_CLASS = "com.wdcftgg.spacetime.proxy.ServerProxy";
+    public static final String SERVER_PROXY_CLASS = "com.wdcftgg.spacetime.proxy.CommonProxy";
 
     @SidedProxy(clientSide = CLIENT_PROXY_CLASS, serverSide = SERVER_PROXY_CLASS)
     public static CommonProxy proxy;
-
+    public static ServerProxy serverProxy = new ServerProxy();
 
     @Mod.Instance
     public static SpaceTime instance;
@@ -68,6 +77,7 @@ public class SpaceTime {
         DimensionManager.registerDimension(Config.BLACKHOLEDIM, BlackHoleDim);
 
         proxy.onPreInit();
+        serverProxy.onPreInit();
 
     }
 
@@ -82,6 +92,7 @@ public class SpaceTime {
         new GuiElementLoader();
 
         proxy.onInit();
+        serverProxy.onInit();
 
         PacketHandler.init();
 
@@ -94,6 +105,7 @@ public class SpaceTime {
         // "M' biomes until late
         RegistryHandler.postInitReg();
         proxy.onPostInit();
+        serverProxy.onPostInit();
     }
 
 
@@ -175,6 +187,4 @@ public class SpaceTime {
             return include != null && include.contains(item);
         }
     }
-
-
 }

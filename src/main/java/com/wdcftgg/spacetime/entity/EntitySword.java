@@ -1,11 +1,11 @@
 package com.wdcftgg.spacetime.entity;
 
 import com.wdcftgg.spacetime.init.ModSounds;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IEntityLivingData;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
@@ -70,10 +70,11 @@ public class EntitySword extends EntityLiving {
     {
         super.onLivingUpdate();
         if (!this.world.isRemote) {
+
             if (this.ticksExisted == 1) {
                 this.setSwordType(randomSwordId());
             }
-            if (world.getBlockState(this.getPosition().up()).getBlock() == Blocks.AIR) {
+            if (world.getBlockState(this.getPosition().up()).getBlock() == Blocks.AIR || world.getBlockState(this.getPosition()).getBlock() == Blocks.AIR) {
                 this.setPosition(this.posX, this.posY * 0.92, this.posZ);
                 fallsound = false;
             } else {
@@ -86,13 +87,15 @@ public class EntitySword extends EntityLiving {
                 }
                 fallsound = true;
             }
-            if (this.ticksExisted >= 200) {
-                world.removeEntity(this);
-            }
+//            if (this.ticksExisted >= 200) {
+//                world.removeEntity(this);
+//            }
             for (EntityLivingBase livingbase : this.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(this.getPosition().east().north().down(), this.getPosition().west().south().up(4)))) {
                 if (livingbase instanceof EntityMob) continue;
                 livingbase.attackEntityFrom(new DamageSource("Sword"), 5);
             }
+
+
         }
     }
 

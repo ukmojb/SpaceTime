@@ -1,4 +1,4 @@
-package com.wdcftgg.spacetime.event;
+package com.wdcftgg.spacetime.client.event;
 
 import com.wdcftgg.spacetime.potion.ModPotions;
 import net.minecraft.client.Minecraft;

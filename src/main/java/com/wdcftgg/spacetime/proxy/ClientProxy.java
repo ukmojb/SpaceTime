@@ -5,7 +5,7 @@ import com.wdcftgg.spacetime.blocks.tileEntity.EndGatewayImitateEntity;
 import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.*;
 import com.wdcftgg.spacetime.blocks.tileEntity.ReverseBeaconEntity;
 import com.wdcftgg.spacetime.blocks.tileEntity.TimeAltarCoreEntity;
-import com.wdcftgg.spacetime.client.handler.HeldItemHandler;
+import com.wdcftgg.spacetime.client.event.*;
 import com.wdcftgg.spacetime.client.render.block.HourGlass.*;
 import com.wdcftgg.spacetime.client.render.block.RenderConcretizationHourGlass;
 import com.wdcftgg.spacetime.client.render.block.RenderEndGatewayImitate;
@@ -13,10 +13,7 @@ import com.wdcftgg.spacetime.client.render.block.RenderReverseBeacon;
 import com.wdcftgg.spacetime.client.render.block.RenderTimeAltarCore;
 import com.wdcftgg.spacetime.client.render.entity.*;
 import com.wdcftgg.spacetime.entity.*;
-import com.wdcftgg.spacetime.event.EventLossSpatialSense;
-import com.wdcftgg.spacetime.event.EventRender;
-import com.wdcftgg.spacetime.event.EventTimeBack;
-import com.wdcftgg.spacetime.event.EventToolTip;
+import com.wdcftgg.spacetime.init.ParticleInit;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderPlayer;
@@ -48,13 +45,13 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForge.EVENT_BUS.register(new EventRender());
 		MinecraftForge.EVENT_BUS.register(new EventToolTip());
 		MinecraftForge.EVENT_BUS.register(new EventTimeBack());
+		MinecraftForge.EVENT_BUS.register(new EventSpaceStop());
 	}
 
 
 
 	public void onPreInit() {
 		super.onPreInit();
-
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityUnstableTimePolymer.class, RenderUnstableTimePolymer::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityTimeCrack.class, RenderTimeCrack::new);
@@ -69,6 +66,8 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpace.class, RenderSpace::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpace2.class, RenderSpace2::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpaceSword.class, RenderSpaceSword::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntitySpearsubspace.class, RenderSpearsubspace::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntitySpearsubspace1.class, RenderSpearsubspace1::new);
 
 		ClientRegistry.bindTileEntitySpecialRenderer(HourGlassEntity.class, new HourGrassRender());
 		ClientRegistry.bindTileEntitySpecialRenderer(AirHourGlassEntity.class, new AirHourGrassRender());
@@ -87,7 +86,8 @@ public class ClientProxy extends CommonProxy {
 
 	public void onPostInit() {
 		super.onPostInit();
-		HeldItemHandler.replaceHeldItemLayer();
+
+		ParticleInit.registerParticle();
 	}
 
 	public static List<LayerRenderer<EntityLivingBase>> getLayerRenderers(RenderPlayer instance) {

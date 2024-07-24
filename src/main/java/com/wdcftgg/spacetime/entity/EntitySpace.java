@@ -88,6 +88,7 @@ public class EntitySpace extends EntityMob implements IAnimatable {
         super(worldIn);
         this.bossInfo = (BossInfoServer)(new BossInfoServer(this.getDisplayName(), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
         this.setSize(1F, 1.8F);
+        this.isImmuneToFire = true;
         this.setNoGravity(true);
     }
 

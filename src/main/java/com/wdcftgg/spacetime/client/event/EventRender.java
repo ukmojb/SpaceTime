@@ -1,4 +1,4 @@
-package com.wdcftgg.spacetime.event;
+package com.wdcftgg.spacetime.client.event;
 
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.tileEntity.TimeAltarCoreEntity;
@@ -204,30 +204,7 @@ public class EventRender {
 
     }
 
-    @SubscribeEvent
-    public void onRenderHand(RenderSpecificHandEvent evt) {
-        EntityPlayerSP player = this.mc.player;
-        if (player != null && player.isHandActive() && player.getActiveHand() == evt.getHand()) {
-            ItemStack stack = evt.getItemStack();
-            if (SpaceTime.getCanStackBlock(stack) && player.getActivePotionEffect(ModPotions.swordcore) != null) {
-                GlStateManager.pushMatrix();
-                boolean rightHanded = (evt.getHand() == EnumHand.MAIN_HAND ? player.getPrimaryHand() : player.getPrimaryHand().opposite()) == EnumHandSide.RIGHT;
-                this.transformSideFirstPerson(rightHanded ? 1.0F : -1.0F, evt.getEquipProgress(), stack);
-                this.mc.getItemRenderer().renderItemSide(player, stack, rightHanded ? ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND : ItemCameraTransforms.TransformType.FIRST_PERSON_LEFT_HAND, !rightHanded);
-                GlStateManager.popMatrix();
-                evt.setCanceled(true);
-            }
-        }
 
-    }
-
-    private void transformSideFirstPerson(float side, float equippedProg, ItemStack stack) {
-        GlStateManager.translate(side * 0.56F, -0.52F + equippedProg * -0.6F, -0.72F);
-        GlStateManager.translate(side * -0.14142136F, 0.08F, 0.14142136F);
-        GlStateManager.rotate(-102.25F, 1.0F, 0.0F, 0.0F);
-        GlStateManager.rotate(side * 13.365F, 0.0F, 1.0F, 0.0F);
-        GlStateManager.rotate(side * 78.05F, 0.0F, 0.0F, 1.0F);
-    }
 
     private boolean isFullScreen(){
         boolean full0 = Display.isFullscreen();

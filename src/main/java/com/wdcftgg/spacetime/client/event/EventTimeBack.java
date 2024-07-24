@@ -1,4 +1,4 @@
-package com.wdcftgg.spacetime.event;
+package com.wdcftgg.spacetime.client.event;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;

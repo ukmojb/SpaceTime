@@ -15,7 +15,7 @@ import java.util.List;
 public class PotionsMovetoplayer extends PotionBase {
 
     public PotionsMovetoplayer() {
-        super("move_to_player", false, 0X0036a6, 0);
+        super("move_to_player", false, 0X0036a6, 666);
         MinecraftForge.EVENT_BUS.register(this);
         setBeneficial();
     }

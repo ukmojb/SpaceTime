@@ -1,7 +1,6 @@
 package com.wdcftgg.spacetime.network;
 
 import com.wdcftgg.spacetime.entity.EntitySpace;
-import com.wdcftgg.spacetime.event.EventTimeBack;
 import com.wdcftgg.spacetime.proxy.ServerProxy;
 import io.netty.buffer.ByteBuf;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;

@@ -5,10 +5,13 @@ import com.wdcftgg.spacetime.config.Config;
 import com.wdcftgg.spacetime.init.ModSounds;
 import com.wdcftgg.spacetime.potion.potions.PotionsMovetoplayer;
 import com.wdcftgg.spacetime.proxy.ServerProxy;
+import com.wdcftgg.spacetime.util.Tools;
 import net.minecraft.command.CommandException;
 import net.minecraft.entity.*;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.JsonToNBT;
@@ -24,6 +27,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
@@ -36,10 +40,11 @@ import java.util.Random;
 
 public class EntityPortal extends EntityLiving {
 
-    private static final DataParameter<Integer> mode_type = EntityDataManager.<Integer>createKey(EntitySword.class, DataSerializers.VARINT);
     private int mode = 0;
     private int cooling = 0;
     private boolean canSummon = false;
+    private boolean canAttack = false;
+    private NBTTagCompound nbtent = new NBTTagCompound();
 
 
     public EntityPortal(World worldIn)
@@ -57,6 +62,15 @@ public class EntityPortal extends EntityLiving {
         this.setNoGravity(true);
         this.setNoAI(true);
     }
+    public EntityPortal(World worldIn, int mode, NBTTagCompound nbtent)
+    {
+        super(worldIn);
+        this.setSize(2F, 2F);
+        this.setMode(mode);
+        this.setNoGravity(true);
+        this.setNoAI(true);
+        this.setNbtent(nbtent);
+    }
 
     @Override
     public void writeEntityToNBT(NBTTagCompound compound){
@@ -64,6 +78,8 @@ public class EntityPortal extends EntityLiving {
         compound.setInteger("mode", mode);
         compound.setInteger("cooling", cooling);
         compound.setBoolean("canSummon", canSummon);
+        compound.setBoolean("canAttack", canAttack);
+        compound.setTag("nbtent", nbtent);
     }
 
     @Override
@@ -72,6 +88,8 @@ public class EntityPortal extends EntityLiving {
         mode = compound.getInteger("mode");
         cooling = compound.getInteger("cooling");
         canSummon = compound.getBoolean("canSummon");
+        canAttack = compound.getBoolean("canAttack");
+        nbtent = (NBTTagCompound) compound.getTag("nbtent");
     }
 
     @Override
@@ -112,6 +130,56 @@ public class EntityPortal extends EntityLiving {
                         setCooling(Config.SUMMONMOBCOOLING + random.nextInt(50));
                     }
                 }
+                if (this.ticksExisted >= 100) this.setDead();
+            }
+            if (mode == 2) {
+                if (this.ticksExisted >= 15) this.setDead();
+            }
+
+            if (mode == 3) {
+                if (!ServerProxy.space2list.isEmpty() && world.getTotalWorldTime() % 20 == 0) {
+                    for (Integer id : ServerProxy.space2list) {
+                        EntitySpace2 entitySpace2 = (EntitySpace2) world.getEntityByID(id);
+                        if (entitySpace2 != null) {
+                            this.rotationYaw = entitySpace2.rotationYaw;
+                            this.rotationPitch = entitySpace2.rotationPitch;
+                        } else {
+                            ServerProxy.space2list.remove(id);
+                        }
+                    }
+                }
+
+                Entity entity = Tools.getEntityFromNbt(nbtent, world);
+                if (entity != null) {
+                    this.shoot(entity, this, this.rotationPitch, this.rotationYaw, 0.0F, 1.5F, 1.0F);
+                }
+                if (this.ticksExisted >= 20) this.setDead();
+            }
+            if (mode == 4) {
+                if (!ServerProxy.space2list.isEmpty() && world.getTotalWorldTime() % 20 == 0) {
+                    for (Integer id : ServerProxy.space2list) {
+                        EntitySpace2 entitySpace2 = (EntitySpace2) world.getEntityByID(id);
+                        if (entitySpace2 != null) {
+                            this.rotationYaw = entitySpace2.rotationYaw;
+                            this.rotationPitch = entitySpace2.rotationPitch;
+                        } else {
+                            ServerProxy.space2list.remove(id);
+                        }
+                    }
+                }
+
+                if (cooling > 0) cooling--;
+
+                if (isCanAttack() && getCooling() <= 0) {
+                    Random random = new Random();
+
+                    EntitySpearsubspace spearsubspace = new EntitySpearsubspace(world, this.posX, this.posY, this.posZ, 1);
+                    spearsubspace.shoot(this, this.prevRotationPitch, this.getRotationYawHead(), 0.0F, 1.5F, 1.0F);
+                    world.spawnEntity(spearsubspace);
+
+                    setCooling(Config.SUMMONMOBCOOLING + random.nextInt(50));
+                }
+                if (this.ticksExisted >= 100) this.setDead();
             }
         }
     }
@@ -120,7 +188,7 @@ public class EntityPortal extends EntityLiving {
     public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata)
     {
         Random random = new Random();
-        this.setCooling(random.nextInt(50));
+        this.setCooling(random.nextInt(80));
 
         return livingdata;
     }
@@ -131,11 +199,10 @@ public class EntityPortal extends EntityLiving {
         return false;
     }
 
-    @Override
+
     protected void onDeathUpdate()
     {
-        ++this.deathTime;
-
+        super.onDeathUpdate();
         if (this.deathTime == 20)
         {
             this.setDead();
@@ -166,5 +233,37 @@ public class EntityPortal extends EntityLiving {
     public int getMode()
     {
         return this.mode;
+    }
+
+    public NBTTagCompound getNbtent() {
+        return nbtent;
+    }
+
+    public void setNbtent(NBTTagCompound nbtent) {
+        this.nbtent = nbtent;
+    }
+
+    public boolean isCanAttack() {
+        return canAttack;
+    }
+
+    public void setCanAttack(boolean canAttack) {
+        this.canAttack = canAttack;
+    }
+
+    private void shoot(Entity entity, Entity entityThrower, float rotationPitchIn, float rotationYawIn, float pitchOffset, float velocity, float inaccuracy){
+        if (entity instanceof IProjectile) {
+            IProjectile projectile = (IProjectile) entity;
+            float f = -MathHelper.sin(rotationYawIn * 0.017453292F) * MathHelper.cos(rotationPitchIn * 0.017453292F);
+            float f1 = -MathHelper.sin((rotationPitchIn + pitchOffset) * 0.017453292F);
+            float f2 = MathHelper.cos(rotationYawIn * 0.017453292F) * MathHelper.cos(rotationPitchIn * 0.017453292F);
+            projectile.shoot((double) f, (double) f1, (double) f2, velocity, inaccuracy);
+            entity.motionX += entityThrower.motionX;
+            entity.motionZ += entityThrower.motionZ;
+
+            if (!entityThrower.onGround) {
+                this.motionY += entityThrower.motionY;
+            }
+        }
     }
 }

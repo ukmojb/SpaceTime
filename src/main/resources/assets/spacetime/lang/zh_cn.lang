@@ -65,9 +65,8 @@ item.spacetime.time_gear.name=时间齿轮
 
 
 # Potion
-
 spacetime.potion.heterospace=时宗抹杀
-
+spacetime.space_stop.say=周围空间已被固定
 
 # Achievement
 
@@ -137,3 +136,4 @@ spacetime.space.say.9=易空间者，犹为吾之权能之一也。
 spacetime.space.say.10=惧，乃远道之情也。
 spacetime.space.say.11=聚空为一，成奇点，唤之黑洞。
 spacetime.space.say.12=拟造之，不知汝将何所为？
+

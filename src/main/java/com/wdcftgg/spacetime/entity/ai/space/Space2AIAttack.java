@@ -61,23 +61,33 @@ public class Space2AIAttack extends EntityAIBase {
 
     protected void attack(EntitySpace2 entitySpace2, EntityLivingBase target) {
 
-        if (entitySpace2.getMode() == "speak") return;
-        if (target == null) return;
+        if (!entitySpace2.getMode().equals("default")) return;
+        if (target == null) {
+            entitySpace2.setMode("default");
+            return;
+        }
 
         double distance = entitySpace2.getDistance(target);
         Random random = new Random();
 
-        if (isCloseCombat == null) isCloseCombat = distance <= 10;
-        if (world.getTotalWorldTime() % 20 == 0) isCloseCombat = distance <= 10;
+        isCloseCombat = distance <= 8;
 
         if (isCloseCombat) {
-            int movement = random.nextInt();
-
-
+            int rand = random.nextInt(20);
+            if (rand <= 2) {
+                entitySpace2.setMode("attack2");
+            } else {
+                entitySpace2.setMode("attack1");
+            }
         } else {
-
+            int rand = random.nextInt(20);
+            if (rand == 0) {
+                entitySpace2.setMode("summon");
+            } else if (rand >= 12) {
+                entitySpace2.setMode("attack1");
+            } else {
+                entitySpace2.setMode("walk");
+            }
         }
-
-
     }
 }

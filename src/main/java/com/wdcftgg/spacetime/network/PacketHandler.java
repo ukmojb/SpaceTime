@@ -30,6 +30,8 @@ public class PacketHandler {
         INSTANCE.registerMessage(MessageParticleKey.class, MessageParticleKey.class, num++, Side.SERVER);
         INSTANCE.registerMessage(MessageSoundKey.class, MessageSoundKey.class, num++, Side.SERVER);
         INSTANCE.registerMessage(MessageSpaceCollideWithPlayer.class, MessageSpaceCollideWithPlayer.class, num++, Side.SERVER);
+        INSTANCE.registerMessage(MessageSyncMode.class, MessageSyncMode.class, num++, Side.SERVER);
+        INSTANCE.registerMessage(MessageSpaceGetProjectile.class, MessageSpaceGetProjectile.class, num++, Side.SERVER);
     }
 
     static {
