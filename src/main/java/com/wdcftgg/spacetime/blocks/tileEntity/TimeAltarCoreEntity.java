@@ -23,10 +23,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -261,13 +258,8 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
         TimeAltarRecipesEnergy.put(output, in);
     }
 
-    private static List<ItemStack> newArray(ItemStack item, ItemStack item1, ItemStack item2, ItemStack item3){
-        List<ItemStack> input = new ArrayList<ItemStack>();
-        input.add(item);
-        input.add(item1);
-        input.add(item2);
-        input.add(item3);
-        return input;
+    private static List<ItemStack> newArray(ItemStack... items){
+        return new ArrayList<ItemStack>(Arrays.asList(items));
     }
 
 }

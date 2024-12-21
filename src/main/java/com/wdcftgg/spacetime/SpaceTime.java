@@ -83,7 +83,7 @@ public class SpaceTime {
 
 
     @EventHandler
-    public static void Init(FMLInitializationEvent event) {
+    public void Init(FMLInitializationEvent event) {
 
         GeckoLib.initialize();
         RegisterTileEntity();
@@ -110,7 +110,7 @@ public class SpaceTime {
 
 
     @EventHandler
-    public static void serverInit(FMLServerStartingEvent event) {
+    public void serverInit(FMLServerStartingEvent event) {
         RegistryHandler.serverRegistries(event);
     }
 

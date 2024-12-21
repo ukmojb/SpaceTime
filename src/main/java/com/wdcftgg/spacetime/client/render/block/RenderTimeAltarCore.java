@@ -53,12 +53,12 @@ public class RenderTimeAltarCore extends TileEntitySpecialRenderer<TimeAltarCore
         GL11.glDisable(GL11.GL_CULL_FACE);
         GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GlStateManager.translate((float) x + 0.49,(float) y + 1.01,(float) z + 0.49);
-//        GlStateManager.translate(-4f, -1f, +3f);
         GlStateManager.rotate(g, 0, 1f, 0);
         GlStateManager.color(53/255f, 254/255f, 255/255f, a);
         GlStateManager.doPolygonOffset(-1, -0);
 
         Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("spacetime", str));
+
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder buffer = tessellator.getBuffer();
         buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);

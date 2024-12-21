@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
@@ -22,6 +23,7 @@ public class GuiElementLoader implements IGuiHandler {
         NetworkRegistry.INSTANCE.registerGuiHandler(SpaceTime.instance, this);
     }
     public static final int GUI_Extractor = 0;
+    public static final int GUI_Book = 1;
 
 
     @Nullable

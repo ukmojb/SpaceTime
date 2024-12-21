@@ -257,6 +257,17 @@ public class EntityBlackHole extends EntityLiving {
         return livingdata;
     }
 
+    @Override
+    public void onDeath(DamageSource cause)
+    {
+        if (!world.isRemote && !ServerProxy.spacelist.isEmpty()){
+            EntitySpace entitySpace = (EntitySpace) world.getEntityByID(ServerProxy.spacelist.get(0));
+            if (entitySpace != null) {
+                entitySpace.blackHoleDead();
+            }
+        }
+    }
+
     public void setSize(float size)
     {
         this.dataManager.set(BlackHole_Size, size);

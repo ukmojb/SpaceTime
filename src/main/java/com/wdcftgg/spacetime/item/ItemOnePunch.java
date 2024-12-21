@@ -31,7 +31,7 @@ import java.util.List;
  * @Author : wdcftgg
  * @create 2023/5/1 22:53
  */
-public class ItemOnePunch extends Item implements  IHasModel {
+public class ItemOnePunch extends Item implements IHasModel {
     public ItemOnePunch()
     {
         setTranslationKey("one_punch");

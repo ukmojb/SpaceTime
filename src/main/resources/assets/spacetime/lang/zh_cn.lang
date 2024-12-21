@@ -61,6 +61,7 @@ item.spacetime.time_ingot.name=时间之锭
 item.spacetime.time_nugget.name=时间之粒
 item.spacetime.time_chip.name=时间碎片
 item.spacetime.time_gear.name=时间齿轮
+item.spacetime.spacetimebook.name=时空之书
 
 
 
@@ -91,12 +92,12 @@ spacetime.extractor.tooltip.1=上好的没有bug的时间萃取器！
 spacetime.extractor.tooltip.2=§m不要998，不要888，合成之后立马带回家！
 spacetime.one_punch.tooltip=别看了，就是一个装饰品。
 spacetime.spacetime_dust.tooltip=微弱如尘埃！
-spacetime.spacetime_nugget.tooltip=小小的§m，软软的，香香的...
+spacetime.spacetime_nugget.tooltip=§m小小的，软软的，香香的...
 spacetime.spacetime_ingot.tooltip=时空的三维具象态！
 spacetime.magnifying_glass.tooltip=右键时空沙漏以查看内部能量.
 spacetime.timeticket.tooltip.0=右键召唤boss[时]
 spacetime.timeticket.tooltip.1=尽量转为小窗口来打boss，否则将明显掉帧！
-
+spacetime.spacetimebook.tooltip=这本书的知识好像与某个未知的存在连接...
 # jei
 spacetime.jei.timecrack=注意按顺序投入!
 spacetime.jei.altar=所需能量:
