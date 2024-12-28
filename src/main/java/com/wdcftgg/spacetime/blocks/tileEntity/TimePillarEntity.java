@@ -21,6 +21,7 @@ public class TimePillarEntity  extends TileEntity implements ITickable {
                 EntityPlayer player = world.getClosestPlayer(this.pos.getX(), this.pos.getY(), this.pos.getZ(), 30, false);
                 if (player != null) {
                     player.addItemStackToInventory(new ItemStack(STBlocks.TIMEPILLAR));
+                    world.destroyBlock(this.pos, false);
                 }
             } else {
                 ticksexisted++;
