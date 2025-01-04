@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "normal": {
+      "model": "spacetime:temporal_brass_block_model"
+    }
+  }
+}

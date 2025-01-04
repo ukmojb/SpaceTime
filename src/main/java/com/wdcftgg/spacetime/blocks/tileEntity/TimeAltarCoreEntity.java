@@ -8,6 +8,7 @@ import com.wdcftgg.spacetime.network.MessageTimeAltarCore;
 import com.wdcftgg.spacetime.network.PacketHandler;
 import lumaceon.mods.clockworkphase.init.ModBlocks;
 import lumaceon.mods.clockworkphase.init.ModItems;
+import net.ilexiconn.llibrary.server.nbt.NBTHandler;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
@@ -34,11 +35,11 @@ import java.util.*;
 public class TimeAltarCoreEntity extends TileEntity implements ITickable {
 
 
-    int timeenergy;
+    private int timeenergy;
 
 
-    public static int OUTPUT = -1;
-    public static int TIMESAND = -1;
+    private int OutPut = -1;
+    private int TimeSand = -1;
 
     public static boolean init = false;
     public static ItemStack itemStackout = ItemStack.EMPTY;
@@ -58,15 +59,15 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
                 if(areItemsValid(items) && outPutItem(items) != null) {
                     int num = Item.getIdFromItem(outPutItem(items).getItem());
                     int timesand = needtimeenergy(items);
-                    OUTPUT = num;
-                    TIMESAND = timesand;
+                    OutPut = num;
+                    TimeSand = timesand;
                     world.getTileEntity(pos).getTileData().setInteger("output", num);
                     if (world.getBlockState(pos.up()).getBlock() == Blocks.AIR) {
                         world.setBlockState(pos.up(), STBlocks.AIR.getDefaultState());
                     }
               }else{
-                    OUTPUT = -1;
-                    TIMESAND = -1;
+                    OutPut = -1;
+                    TimeSand = -1;
                     world.getTileEntity(pos).getTileData().setInteger("output", 0);
                     if (world.getBlockState(pos.up()).getBlock() == STBlocks.AIR) {
                         world.setBlockToAir(pos.up());
@@ -81,15 +82,19 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
     @Nonnull
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound data) {
-        NBTTagCompound ret = super.writeToNBT(data);
-        ret.setInteger("timeenergy", timeenergy);
-        return ret;
+        NBTTagCompound nbt = super.writeToNBT(data);
+        nbt.setInteger("timeenergy", timeenergy);
+        nbt.setInteger("timesand", TimeSand);
+        nbt.setInteger("output", OutPut);
+        return nbt;
     }
 
     @Override
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         timeenergy = data.getInteger("timeenergy");
+        TimeSand = data.getInteger("timesand");
+        OutPut = data.getInteger("output");
     }
 
     @Override
@@ -97,8 +102,6 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
     {
         return world.getTileEntity(pos).serializeNBT();
     }
-
-
 
 
     boolean isstructure (BlockPos pos, World world) {
@@ -262,4 +265,19 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
         return new ArrayList<ItemStack>(Arrays.asList(items));
     }
 
+    public int getTimeSand() {
+        return TimeSand;
+    }
+
+    public void setTimeSand(int num) {
+        this.TimeSand = num;
+    }
+
+    public int getOutPut() {
+        return OutPut;
+    }
+
+    public void setOutPut(int OUTPUT) {
+        this.OutPut = OUTPUT;
+    }
 }

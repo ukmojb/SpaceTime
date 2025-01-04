@@ -106,8 +106,11 @@ public class BlockTimeAltarCore extends Block implements IHasModel {
         ItemStack itemStack = player.getHeldItem(hand);
         boolean output = true;
         if (!world.isRemote) {
-            if (TimeAltarCoreEntity.TIMESAND >= 0 && TimeAltarCoreEntity.OUTPUT >= 0) {
-                if (TimeSandHelper.getTimeSand(itemStack) >= TimeAltarCoreEntity.TIMESAND) {
+            TimeAltarCoreEntity te = (TimeAltarCoreEntity) world.getTileEntity(pos);
+            if (te == null) return false;
+
+            if (te.getTimeSand() >= 0 && te.getOutPut() >= 0) {
+                if (TimeSandHelper.getTimeSand(itemStack) >= te.getTimeSand()) {
                     ItemStack itemStack1 = TimeAltarCoreEntity.itemStackout;
                     Map<ItemStack, List<Integer>> in = TimeAltarCoreEntity.TimeAltarRecipesEnergy;
                     List<Integer> energy = in.get(itemStack1);
@@ -116,7 +119,7 @@ public class BlockTimeAltarCore extends Block implements IHasModel {
                     if (hasPlentyEnergy(energy, pos, world, player)) {
                         killItems(world, pos);
                         removeHourEnergy((player.isCreative() ? nulllist : energy), pos, world);
-                        TimeSandHelper.removeTimeSand(itemStack, TimeAltarCoreEntity.TIMESAND);
+                        TimeSandHelper.removeTimeSand(itemStack, te.getTimeSand());
 //                        if (config.ALTARAUTOMATE) {
 //                            EntityItem item = new EntityItem(world, pos.getX(), pos.getY() + 1, pos.getZ(), itemStack1);
 //                            world.spawnEntity(item);

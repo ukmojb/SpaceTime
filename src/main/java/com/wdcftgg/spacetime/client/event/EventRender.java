@@ -10,20 +10,26 @@ import lumaceon.mods.clockworkphase.item.construct.pocketwatch.ItemPocketWatch;
 import lumaceon.mods.clockworkphase.util.InventorySearchHelper;
 import lumaceon.mods.clockworkphase.util.NBTHelper;
 import lumaceon.mods.clockworkphase.util.TimeSandParser;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import org.lwjgl.opengl.Display;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumHandSide;
@@ -35,6 +41,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import org.lwjgl.opengl.GL11;
+
 
 /**
  * Created by IntelliJ IDEA.
@@ -49,13 +56,12 @@ public class EventRender {
 
     private final Minecraft mc = Minecraft.getMinecraft();
 
-    private int ticks = 1;
+    public static RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 
     @SubscribeEvent
     public void onOverlayRender(final RenderGameOverlayEvent.Post event) {
+        if (event.getType() != RenderGameOverlayEvent.ElementType.HELMET) return;
 
-        if (event.getType() != RenderGameOverlayEvent.ElementType.HELMET)
-            return;
 
         Minecraft mc = Minecraft.getMinecraft();
         Tessellator tessellator = Tessellator.getInstance();
@@ -65,21 +71,38 @@ public class EventRender {
         ResourceLocation res;
         if (Minecraft.getMinecraft().player != null) {
             EntityPlayer player = Minecraft.getMinecraft().player;
-            if (TimeAltarCoreEntity.TIMESAND < 0) return;
-            String text = TimeSandParser.getStringForRenderingFromTimeSand(TimeAltarCoreEntity.TIMESAND);
-            FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+            Vec3d start  = player.getPositionEyes(event.getPartialTicks());
+            Vec3d vec31 = player.getLook(event.getPartialTicks());
+            Vec3d end = start.add(vec31.x * 6, vec31.y * 6, vec31.z * 6);
 
-            GlStateManager.pushMatrix();
+            RayTraceResult result = player.getEntityWorld().rayTraceBlocks(start, end, false);
 
-            GlStateManager.disableLighting();
-            GlStateManager.enablePolygonOffset();
-            GlStateManager.enableBlend(); //开启混合器(使GL支持Alpha透明通道)
+            if (result != null && result.getBlockPos() != null) {
 
-            fontRenderer.drawString(text, Config.GUIPOSX, Config.GUIPOSY, 0xFFFFFFFF);
+                TileEntity te = player.world.getTileEntity(result.getBlockPos());
 
-            GlStateManager.disableBlend();
-            GlStateManager.enableLighting();
-            GlStateManager.popMatrix();
+                if (te != null) {
+                    if (te instanceof TimeAltarCoreEntity) {
+                        TimeAltarCoreEntity timeAltarCore = (TimeAltarCoreEntity) te;
+                        if (timeAltarCore.getTimeSand() >= 0) {
+                            GlStateManager.pushMatrix();
+                            String text = TimeSandParser.getStringForRenderingFromTimeSand(timeAltarCore.getTimeSand());
+                            FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+
+
+                            GlStateManager.disableLighting();
+                            GlStateManager.enablePolygonOffset();
+                            GlStateManager.enableBlend();
+
+                            fontRenderer.drawString(text, Config.GUIPOSX, Config.GUIPOSY, 0xFFFFFFFF);
+
+                            GlStateManager.disableBlend();
+                            GlStateManager.enableLighting();
+                            GlStateManager.popMatrix();
+                        }
+                    }
+                }
+            }
         }
         if (Minecraft.getMinecraft().player != null && Minecraft.getMinecraft().player.getActivePotionEffect(ModPotions.heterospace) != null){
 
@@ -100,27 +123,33 @@ public class EventRender {
             GlStateManager.disableBlend();
             GlStateManager.popMatrix();
         }
+
         EntityPlayer player = Minecraft.getMinecraft().player;
         ItemStack[] pocketWatches = InventorySearchHelper.getPocketWatches(player.inventory);
+                System.out.println("sssss");
         if (pocketWatches != null && ItemPocketWatch.doesActiveItemModuleExist(pocketWatches, ModItems.moduleLifeWalk)) {
             ItemStack lifeWalk = ItemPocketWatch.getItemModuleFromMultiple(pocketWatches, ModItems.moduleLifeWalk);
             int lifeModulePower = (int) NBTHelper.getInt(lifeWalk, "module_power");
             for (int i=0;i< lifeModulePower/50;i++) {
                 GlStateManager.pushMatrix();
+                ScaledResolution resolution = new ScaledResolution(mc);
+
+                int screenWidth = resolution.getScaledWidth();
+                int screenHeight = resolution.getScaledHeight();
 
                 res = new ResourceLocation(SpaceTime.MODID, "textures/gui/life.png");
-                double y1 = mc.displayHeight * 0.02 + i * mc.displayHeight * 0.01 + (!player.getActivePotionMap().isEmpty() ? mc.displayHeight * 0.047 : 0);
-                double y0 = mc.displayHeight * 0.001 + i * mc.displayHeight * 0.01 + (!player.getActivePotionMap().isEmpty() ? mc.displayHeight * 0.047 : 0);
+                double y1 = screenHeight * 0.02 + i * screenHeight * 0.01 + (!player.getActivePotionMap().isEmpty() ? screenHeight * 0.047 : 0);
+                double y0 = screenHeight * 0.001 + i * screenHeight * 0.01 + (!player.getActivePotionMap().isEmpty() ? screenHeight * 0.047 : 0);
 
+//                int scale = (mc.gameSettings.guiScale != 0  ? ((int) mc.displayWidth / mc.gameSettings.guiScale) : 0);
+//                if (mc.gameSettings.guiScale == 3) scale = mc.displayWidth / 2;
 
-                int scale = (mc.gameSettings.guiScale != 0  ? ((int) mc.displayWidth / mc.gameSettings.guiScale) : 0);
-                if (mc.gameSettings.guiScale == 3) scale = mc.displayWidth / 2;
                 mc.getTextureManager().bindTexture(res);
                 buffer.begin(7, DefaultVertexFormats.POSITION_TEX);
-                buffer.pos((!isFullScreen() ? mc.displayWidth * 0.48 : (mc.displayWidth * 0.48 + scale)/2), (!isFullScreen() ? y1 : y1/2), -90).tex(0, 1).endVertex();
-                buffer.pos((!isFullScreen() ? mc.displayWidth * 0.49 : (mc.displayWidth * 0.49 + scale)/2), (!isFullScreen() ? y1 : y1/2), -90).tex(1, 1).endVertex();
-                buffer.pos((!isFullScreen() ? mc.displayWidth * 0.49 : (mc.displayWidth * 0.49 + scale)/2), (!isFullScreen() ? y0 : y0/2), -90).tex(1, 0).endVertex();
-                buffer.pos((!isFullScreen() ? mc.displayWidth * 0.48 : (mc.displayWidth * 0.48 + scale)/2), (!isFullScreen() ? y0 : y0/2), -90).tex(0, 0).endVertex();
+                buffer.pos(screenWidth * 0.98, y1, -90).tex(0, 1).endVertex();
+                buffer.pos(screenWidth * 0.99, y1, -90).tex(1, 1).endVertex();
+                buffer.pos(screenWidth * 0.99, y0, -90).tex(1, 0).endVertex();
+                buffer.pos(screenWidth * 0.98, y0, -90).tex(0, 0).endVertex();
                 tessellator.draw();
 
                 GlStateManager.popMatrix();
@@ -131,19 +160,21 @@ public class EventRender {
             int deathModulePower = (int) NBTHelper.getInt(deathWalk, "module_power");
             for (int i=0;i< deathModulePower/50;i++) {
                 GlStateManager.pushMatrix();
+                ScaledResolution resolution = new ScaledResolution(mc);
+
+                int screenWidth = resolution.getScaledWidth();
+                int screenHeight = resolution.getScaledHeight();
 
                 res = new ResourceLocation(SpaceTime.MODID, "textures/gui/death.png");
-                double y1 = mc.displayHeight * 0.02 + i * mc.displayHeight * 0.01 + (!player.getActivePotionMap().isEmpty() ? mc.displayHeight * 0.047 : 0);
-                double y0 = mc.displayHeight * 0.001 + i * mc.displayHeight * 0.01 + (!player.getActivePotionMap().isEmpty() ? mc.displayHeight * 0.047 : 0);
+                double y1 = screenHeight * 0.02 + i * screenHeight * 0.01 + (!player.getActivePotionMap().isEmpty() ? screenHeight * 0.047 : 0);
+                double y0 = screenHeight * 0.001 + i * screenHeight * 0.01 + (!player.getActivePotionMap().isEmpty() ? screenHeight * 0.047 : 0);
 
-                int scale = (mc.gameSettings.guiScale != 0  ? ((int) mc.displayWidth / mc.gameSettings.guiScale) : 0);
-                if (mc.gameSettings.guiScale == 3) scale = mc.displayWidth / 2;
                 mc.getTextureManager().bindTexture(res);
                 buffer.begin(7, DefaultVertexFormats.POSITION_TEX);
-                buffer.pos((!isFullScreen() ? mc.displayWidth * 0.49 : (mc.displayWidth * 0.49 + scale)/2), (!isFullScreen() ? y1 : y1/2), -90).tex(0, 1).endVertex();
-                buffer.pos((!isFullScreen() ? mc.displayWidth * 0.5 : (mc.displayWidth * 0.5 + scale)/2), (!isFullScreen() ? y1 : y1/2), -90).tex(1, 1).endVertex();
-                buffer.pos((!isFullScreen() ? mc.displayWidth * 0.5 : (mc.displayWidth * 0.5 + scale)/2), (!isFullScreen() ? y0 : y0/2), -90).tex(1, 0).endVertex();
-                buffer.pos((!isFullScreen() ? mc.displayWidth * 0.49 : (mc.displayWidth * 0.49 + scale)/2), (!isFullScreen() ? y0 : y0/2), -90).tex(0, 0).endVertex();
+                buffer.pos(screenWidth * 0.99, y1, -90).tex(0, 1).endVertex();
+                buffer.pos(screenWidth, y1, -90).tex(1, 1).endVertex();
+                buffer.pos(screenWidth, y0, -90).tex(1, 0).endVertex();
+                buffer.pos(screenWidth * 0.99, y0, -90).tex(0, 0).endVertex();
                 tessellator.draw();
 
                 GlStateManager.popMatrix();
@@ -202,14 +233,5 @@ public class EventRender {
             }
         }
 
-    }
-
-
-
-    private boolean isFullScreen(){
-        boolean full0 = Display.isFullscreen();
-        boolean full1 = Minecraft.getMinecraft().isFullScreen();
-        boolean full2 = Minecraft.getMinecraft().gameSettings.fullScreen;
-        return  full0 && full1 && full2;
     }
 }

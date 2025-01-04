@@ -48,5 +48,6 @@ public class STBlocks {
 	public static final Block SpaceSlab = RegistryHandler.SPACE_SLAB;
 	public static final Block TimeSlab = RegistryHandler.TIME_SLAB;
 	public static final Block ReverseBeacon = new BlockReverseBeacon();
+	public static final Block TemporalBrass = new BlockTemporalBrass();
 
 }
