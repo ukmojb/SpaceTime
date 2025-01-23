@@ -1,22 +1,14 @@
 package com.wdcftgg.spacetime.entity;
 
-import com.wdcftgg.spacetime.config.Config;
 import com.wdcftgg.spacetime.entity.ai.space.Space2AIAttack;
 import com.wdcftgg.spacetime.entity.ai.space.SpaceAIAttack;
 import com.wdcftgg.spacetime.network.*;
 import com.wdcftgg.spacetime.proxy.ServerProxy;
 import com.wdcftgg.spacetime.util.Tools;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.item.EntityFallingBlock;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.entity.projectile.EntityThrowable;
-import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -39,7 +31,6 @@ import software.bernie.geckolib3.core.event.SoundKeyframeEvent;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.util.GeckoLibUtil;
 
 import java.util.*;
 
@@ -53,6 +44,7 @@ public class EntitySpace2 extends EntityMob implements IAnimatable {
     private static boolean attractPlayer = false;
 
     private static String mode = "default";
+    private static String lastmode = "default";
 
     //正常重力为0.03F
     private double gravityVelocity = 0.0D;
@@ -90,6 +82,8 @@ public class EntitySpace2 extends EntityMob implements IAnimatable {
     public void onLivingUpdate()
     {
         super.onLivingUpdate();
+
+        if (!getLastmode().equals("default")) System.out.println(getLastmode());
 
         if (!world.isRemote) {
             if (!ServerProxy.space2list.contains(this.getEntityId()) && world.getTotalWorldTime() % 20 == 0) {
@@ -163,13 +157,14 @@ public class EntitySpace2 extends EntityMob implements IAnimatable {
     public void onDeath(DamageSource cause)
     {
         SpaceAIAttack.attacktime = -1;
-        ServerProxy.spacelist.remove((Integer) this.getEntityId());
+        ServerProxy.space2list.remove(this.getEntityId());
     }
 
     @Override
     public void writeEntityToNBT(NBTTagCompound compound){
         super.writeEntityToNBT(compound);
         compound.setString("mode", mode);
+        compound.setString("lastmode", lastmode);
         compound.setTag("projectileNBTList", projectileNBTList);
         compound.setDouble("gravityVelocity", gravityVelocity);
         compound.setInteger("spearhitnum", spearhitnum);
@@ -182,6 +177,7 @@ public class EntitySpace2 extends EntityMob implements IAnimatable {
     public void readEntityFromNBT(NBTTagCompound compound){
         super.readEntityFromNBT(compound);
         mode = compound.getString("mode");
+        lastmode = compound.getString("lastmode");
         projectileNBTList = (NBTTagList) compound.getTag("projectileNBTList");
         gravityVelocity = compound.getDouble("gravityVelocity");
         spearhitnum = compound.getInteger("spearhitnum");
@@ -228,7 +224,7 @@ public class EntitySpace2 extends EntityMob implements IAnimatable {
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event)
     {
         if (mode.equals("default") || !(event.getController().getAnimationState() == AnimationState.Running)) {
-            PacketHandler.INSTANCE.sendToServer(new MessageSyncMode("default"));
+            PacketHandler.INSTANCE.sendToServer(new MessageSyncModeSpace2("default"));
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.space.default", false));
             return PlayState.CONTINUE;
         }
@@ -242,6 +238,14 @@ public class EntitySpace2 extends EntityMob implements IAnimatable {
         }
         if (mode.equals("attack2")) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.space.attack2", false));
+            return PlayState.CONTINUE;
+        }
+        if (mode.equals("attack4")) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.space.attack4", false));
+            return PlayState.CONTINUE;
+        }
+        if (mode.equals("attack5")) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.space.attack5", false));
             return PlayState.CONTINUE;
         }
         if (mode.equals("walk")) {
@@ -395,6 +399,26 @@ public class EntitySpace2 extends EntityMob implements IAnimatable {
                 attack3();
             }
         }
+        if (animationName.equals("animation.space.attack4")) {
+            if (instructions.equals("attack")) {
+                BlockPos left = Tools.getLeftPosition(this, 0.5F);
+                BlockPos right = Tools.getRightPosition(this, 0.5F);
+                EntitySpearsubspace spearsubspace = new EntitySpearsubspace(world, left.getX(), left.getY() + 3.5, left.getZ(), 0);
+                EntitySpearsubspace spearsubspace1 = new EntitySpearsubspace(world, right.getX(), right.getY() + 3.5, right.getZ(), 0);
+                spearsubspace.shoot(this, 18, this.getRotationYawHead() - 10, 0.0F, 1.5F, 1.0F);
+                spearsubspace1.shoot(this, 18, this.getRotationYawHead() + 10, 0.0F, 1.5F, 1.0F);
+                world.spawnEntity(spearsubspace);
+                world.spawnEntity(spearsubspace1);
+            }
+        }
+        if (animationName.equals("animation.space.attack5")) {
+            if (instructions.equals("attack")) {
+                BlockPos right = Tools.getRightPosition(this, 1.5F);
+                EntitySpearsubspace spearsubspace = new EntitySpearsubspace(world, right.getX(), right.getY() + 0.5, right.getZ(), 0);
+                spearsubspace.shoot(this, 0, this.getRotationYawHead(), 0.0F, 1.5F, 1.0F);
+                world.spawnEntity(spearsubspace);
+            }
+        }
         if (instructions.equals("stopped")) {
             this.setMode("default");
         }
@@ -426,7 +450,20 @@ public class EntitySpace2 extends EntityMob implements IAnimatable {
     }
 
     public void setMode(String str){
+        setLastmode(mode);
         mode = str;
+    }
+
+    public void setNLMode(String str){
+        mode = str;
+    }
+
+    public String getLastmode() {
+        return lastmode;
+    }
+
+    public void setLastmode(String str) {
+        lastmode = str;
     }
 
     public int getAttackTick() {

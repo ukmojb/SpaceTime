@@ -19,6 +19,7 @@ public class Config {
     private static final String CATEGORY_BOSS = "boss";
     private static final String CATEGORY_DIM = "world";
 
+    public static boolean LossSpatialSense = true;
     public static double ROTATIONALSPEED = 30d;
     public static int GUIPOSX = 0;
     public static int GUIPOSY = 50;
@@ -86,5 +87,6 @@ public class Config {
 
     private static void potionInit(Configuration config) {
         SAYINBAR = config.get(CATEGORY_POTION, "SpaceStopSayInBar", SAYINBAR, "if true, a prompt will appear in the action bar when the space is fixed").getBoolean();
+        LossSpatialSense = config.get(CATEGORY_POTION, "LossSpatialSenseRender", LossSpatialSense, "if true, the gui will be rendered").getBoolean();
     }
 }

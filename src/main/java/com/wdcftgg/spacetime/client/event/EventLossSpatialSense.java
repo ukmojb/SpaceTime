@@ -1,5 +1,6 @@
 package com.wdcftgg.spacetime.client.event;
 
+import com.wdcftgg.spacetime.config.Config;
 import com.wdcftgg.spacetime.potion.ModPotions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -60,6 +61,7 @@ public class EventLossSpatialSense {
             if (player.isPotionActive(ModPotions.LossSpatialSense)) {
                 GlStateManager.pushMatrix();
                 GlStateManager.rotate(180, 0, 0, 0);
+                if (Config.LossSpatialSense) GlStateManager.popMatrix();
             }
         }
     }

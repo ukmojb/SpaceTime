@@ -32,17 +32,17 @@ public class ModEntityInit {
 
     private  static  void registerEntityAndEgg(String name, Class<? extends Entity> entity)
     {
-        registerEntityAndEgg(name, entity, ENTITY_NEXT_ID, 50, 0x3786e7, 0x660000);
+        registerEntityAndEgg(name, entity, ENTITY_NEXT_ID, 200, 0x3786e7, 0x660000);
     }
 
     private  static  void registerEntityAndEgg(String name, Class<? extends Entity> entity, int color1, int color2)
     {
-        registerEntityAndEgg(name, entity, ENTITY_NEXT_ID, 50, color1, color2);
+        registerEntityAndEgg(name, entity, ENTITY_NEXT_ID, 200, color1, color2);
     }
 
     private  static  void registerEntity(String name, Class<? extends Entity> entity)
     {
-        registerEntityNoEgg(name, entity, ENTITY_NEXT_ID, 50);
+        registerEntityNoEgg(name, entity, ENTITY_NEXT_ID, 200);
     }
 
     private  static  void registerEntityAndEgg(String name, Class<? extends Entity> entity, int id, int range, int color1, int color2){

@@ -24,7 +24,7 @@ import javax.annotation.Nullable;
 public class BlackHoleWorldProvider extends WorldProvider {
     @Override
     public final DimensionType getDimensionType() {
-        return DimensionType.register("blackhole", "_blackhole", Config.BLACKHOLEDIM, BlackHoleWorldProvider.class, false);
+        return SpaceTime.BlackHoleDim;
     }
 
     private static int num = 1;

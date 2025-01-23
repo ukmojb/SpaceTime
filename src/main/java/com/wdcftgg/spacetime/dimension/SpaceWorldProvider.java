@@ -9,12 +9,16 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Biomes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
+import net.minecraft.world.biome.BiomeProvider;
+import net.minecraft.world.biome.BiomeProviderSingle;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.client.IRenderHandler;
@@ -27,6 +31,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * Created by IntelliJ IDEA.
  *
@@ -38,11 +43,9 @@ public final class SpaceWorldProvider extends WorldProvider {
     public static List<EntityPlayerMP> playerList = new ArrayList<>();
 
     @Override
-    public final DimensionType getDimensionType() {
-        return DimensionType.register("space", "_space", Config.SPACEDDIM, SpaceWorldProvider.class, false);
+    public DimensionType getDimensionType() {
+        return SpaceTime.SpaceDim;
     }
-
-    private static int num = 1;
 
     @Override
     public boolean isSurfaceWorld()
@@ -58,6 +61,12 @@ public final class SpaceWorldProvider extends WorldProvider {
 
     @Override
     public boolean isDaytime()
+    {
+        return false;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public boolean isSkyColored()
     {
         return false;
     }
@@ -83,10 +92,34 @@ public final class SpaceWorldProvider extends WorldProvider {
     }
 
     @Override
-    public boolean canDoRainSnowIce(net.minecraft.world.chunk.Chunk chunk)
+    @SideOnly(Side.CLIENT)
+    public Vec3d getSkyColor(net.minecraft.entity.Entity cameraEntity, float partialTicks)
+    {
+        return new Vec3d(0,0,0);
+    }
+
+    @SideOnly(Side.CLIENT)
+    public float getSunBrightness(float par1)
+    {
+        return 8;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public boolean doesXZShowFog(int x, int z)
     {
         return false;
     }
+
+    @Override
+    public BiomeProvider getBiomeProvider() {
+        return new BiomeProviderSingle(Biomes.VOID);
+    }
+
+    @Override
+    public boolean canDoRainSnowIce(Chunk chunk) {
+        return false;
+    }
+
 
     @Nullable
     @Override
@@ -94,18 +127,6 @@ public final class SpaceWorldProvider extends WorldProvider {
     public IRenderHandler getWeatherRenderer()
     {
         return null;
-    }
-
-    @Override
-    public void resetRainAndThunder()
-    {
-        WorldInfo worldinfo = world.getWorldInfo();
-
-        worldinfo.setCleanWeatherTime(20000);
-        worldinfo.setRainTime(0);
-        worldinfo.setThunderTime(0);
-        worldinfo.setRaining(false);
-        worldinfo.setThundering(false);
     }
 
     @Override

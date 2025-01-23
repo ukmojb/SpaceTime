@@ -4,7 +4,7 @@ import com.wdcftgg.spacetime.entity.EntitySpace2;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 
-public class Space2AILookIdle  extends EntityAIBase
+public class Space2AILookIdle extends EntityAIBase
 {
     /** The entity that is looking idle. */
     private final EntitySpace2 entitySpace2;

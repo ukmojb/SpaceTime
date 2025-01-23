@@ -36,6 +36,11 @@ public class RenderBlackHole extends RenderLiving<EntityBlackHole> {
         return TEXTURES;
     }
 
+    public boolean shouldRender(EntityBlackHole livingEntity, ICamera camera, double camX, double camY, double camZ)
+    {
+        return true;
+    }
+
     @Override
     public void doRender(EntityBlackHole entity, double x, double y, double z, float entityYaw, float partialTicks) {
         super.doRender(entity, x, y, z, entityYaw, partialTicks);

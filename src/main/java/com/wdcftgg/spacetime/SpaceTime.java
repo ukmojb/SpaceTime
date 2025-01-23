@@ -52,7 +52,6 @@ public class SpaceTime {
 
     public static DimensionType SpaceDim;
 
-
     public static DimensionType BlackHoleDim;
 
     public static final String CLIENT_PROXY_CLASS = "com.wdcftgg.spacetime.proxy.ClientProxy";

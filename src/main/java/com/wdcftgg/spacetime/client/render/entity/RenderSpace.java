@@ -2,7 +2,12 @@ package com.wdcftgg.spacetime.client.render.entity;
 
 import com.wdcftgg.spacetime.client.model.ModelSpace;
 import com.wdcftgg.spacetime.entity.EntitySpace;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EnumPlayerModelParts;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextFormatting;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 /**
@@ -23,5 +28,13 @@ public class RenderSpace extends GeoEntityRenderer<EntitySpace>
     {
         entity.hurtTime = 0;
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
+    }
+
+    @Override
+    protected void applyRotations(EntitySpace entityLiving, float ageInTicks, float rotationYaw, float partialTicks) {
+
+        float r = (float) ((entityLiving.rotationYawHead - entityLiving.rotationYaw) * 0.5);
+
+        GlStateManager.rotate(entityLiving.rotationYawHead + 180, 0, -1, 0);
     }
 }

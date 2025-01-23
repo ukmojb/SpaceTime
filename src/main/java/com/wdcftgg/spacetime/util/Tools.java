@@ -13,6 +13,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.storage.AnvilChunkLoader;
 
@@ -46,7 +47,7 @@ public class Tools {
         return new ArrayList<EntitySpaceSword>();
     }
 
-    public static BlockPos getLeftPosition(Entity entity, float offset) {
+    public static BlockPos getRightPosition(Entity entity, float offset) {
         // 获取实体的朝向（Yaw 角度）
         float yaw = entity.rotationYaw;
 
@@ -71,7 +72,7 @@ public class Tools {
         return new BlockPos(leftX, leftY, leftZ);
     }
 
-    public static BlockPos getRightPosition(Entity entity, float offset) {
+    public static BlockPos getLeftPosition(Entity entity, float offset) {
         // 获取实体的朝向（Yaw 角度）
         float yaw = entity.rotationYaw;
 
@@ -150,5 +151,25 @@ public class Tools {
         }
 
         return closestPlayer;
+    }
+
+
+    public static void faceEntity(EntityLivingBase entity, Entity target) {
+        if (target != null) {
+            // 计算目标位置与实体位置的差值
+            double deltaX = target.posX - entity.posX;
+            double deltaY = target.posY + target.getEyeHeight() - (entity.posY + entity.getEyeHeight());
+            double deltaZ = target.posZ - entity.posZ;
+
+            // 计算Yaw（水平角度）和Pitch（垂直角度）
+            double distanceXZ = Math.sqrt(deltaX * deltaX + deltaZ * deltaZ); // 水平平面的距离
+            float yaw = (float) (MathHelper.atan2(deltaZ, deltaX) * (180D / Math.PI)) - 90.0F;
+            float pitch = (float) (-(MathHelper.atan2(deltaY, distanceXZ) * (180D / Math.PI)));
+
+            // 设置实体的Yaw和Pitch
+            entity.rotationYaw = yaw;
+            entity.rotationPitch = pitch;
+            entity.setRotationYawHead(yaw);
+        }
     }
 }

@@ -73,6 +73,7 @@ public class EntitySpearsubspace extends EntityThrowableCopy {
     @Override
     protected void onImpact(RayTraceResult result) {
         if (world.isRemote) return;
+        if (this.ticksExisted <= 3) return;
         if (mode == 0) {
             if (result.entityHit != null) {
                 Entity entity = result.entityHit;

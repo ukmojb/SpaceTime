@@ -3,10 +3,7 @@ package com.wdcftgg.spacetime.entity;
 import com.wdcftgg.spacetime.config.Config;
 import com.wdcftgg.spacetime.proxy.ServerProxy;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.*;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.entity.item.EntityItem;
@@ -46,6 +43,8 @@ public class EntityBlackHole extends EntityLiving {
     public EntityBlackHole(World worldIn)
     {
         super(worldIn);
+        this.isImmuneToFire = true;
+        this.setEntityInvulnerable(true);
         this.setSize(1, 1);
         this.setNoGravity(true);
     }
@@ -54,6 +53,8 @@ public class EntityBlackHole extends EntityLiving {
         this(world);
         this.dataManager.set(BlackHole_Size, size);
         this.annihilability = annihilability;
+        this.isImmuneToFire = true;
+        this.setEntityInvulnerable(true);
 //        this.dataWatcher.updateObject(16, size);
     }
 
@@ -279,7 +280,6 @@ public class EntityBlackHole extends EntityLiving {
     }
 
 
-
     public void entityInit() {
         super.entityInit();
         this.dataManager.register(BlackHole_Size, 0.5F);
@@ -302,6 +302,15 @@ public class EntityBlackHole extends EntityLiving {
     }
 
     @Override
+    protected void applyEntityAttributes()
+    {
+        super.applyEntityAttributes();
+
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(1000);
+        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(100D);
+    }
+
+    @Override
     public boolean attackEntityFrom(DamageSource source, float amount)
     {
         return false;
@@ -310,7 +319,14 @@ public class EntityBlackHole extends EntityLiving {
     @Override
     @SideOnly(Side.CLIENT)
     public boolean isInRangeToRenderDist(double distance) {
-        return distance < 25000;
+        return distance <= 250000;
+    }
+
+
+    @SideOnly(Side.CLIENT)
+    public static double getRenderDistanceWeight()
+    {
+        return 100;
     }
 
     @Override

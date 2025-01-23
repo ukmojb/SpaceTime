@@ -126,7 +126,6 @@ public class EventRender {
 
         EntityPlayer player = Minecraft.getMinecraft().player;
         ItemStack[] pocketWatches = InventorySearchHelper.getPocketWatches(player.inventory);
-                System.out.println("sssss");
         if (pocketWatches != null && ItemPocketWatch.doesActiveItemModuleExist(pocketWatches, ModItems.moduleLifeWalk)) {
             ItemStack lifeWalk = ItemPocketWatch.getItemModuleFromMultiple(pocketWatches, ModItems.moduleLifeWalk);
             int lifeModulePower = (int) NBTHelper.getInt(lifeWalk, "module_power");

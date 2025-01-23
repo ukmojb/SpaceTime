@@ -61,12 +61,27 @@ public class Space2AIAttack extends EntityAIBase {
 
     protected void attack(EntitySpace2 entitySpace2, EntityLivingBase target) {
 
+
         if (!entitySpace2.getMode().equals("default")) return;
         if (target == null) {
             entitySpace2.setMode("default");
             return;
         }
 
+
+        //连续的远程变招
+        if (entitySpace2.getLastmode() == "attack1") {
+            entitySpace2.setMode("attack4");
+            entitySpace2.setLastmode("attack4");
+            return;
+        }
+        if (entitySpace2.getLastmode() == "attack4") {
+            entitySpace2.setMode("attack5");
+            return;
+        }
+
+
+        //正常出招
         double distance = entitySpace2.getDistance(target);
         Random random = new Random();
 
@@ -82,7 +97,7 @@ public class Space2AIAttack extends EntityAIBase {
         } else {
             int rand = random.nextInt(20);
             if (rand == 0) {
-                entitySpace2.setMode("summon");
+//                entitySpace2.setMode("summon");
             } else if (rand >= 12) {
                 entitySpace2.setMode("attack1");
             } else {
@@ -90,4 +105,6 @@ public class Space2AIAttack extends EntityAIBase {
             }
         }
     }
+
+
 }

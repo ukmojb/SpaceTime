@@ -8,15 +8,17 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class MessageSyncMode implements IMessageHandler<MessageSyncMode, IMessage>, IMessage  {
+import java.util.Objects;
+
+public class MessageSyncModeSpace2 implements IMessageHandler<MessageSyncModeSpace2, IMessage>, IMessage  {
 
     public String mode;
 
 
-    public MessageSyncMode() {
+    public MessageSyncModeSpace2() {
     }
 
-    public MessageSyncMode(String mode) {
+    public MessageSyncModeSpace2(String mode) {
         this.mode = mode;
     }
 
@@ -29,11 +31,11 @@ public class MessageSyncMode implements IMessageHandler<MessageSyncMode, IMessag
     }
 
 
-    public IMessage onMessage(MessageSyncMode message, MessageContext ctx) {
+    public IMessage onMessage(MessageSyncModeSpace2 message, MessageContext ctx) {
         for (Integer id : ServerProxy.space2list) {
             EntitySpace2 entitySpace2 = (EntitySpace2) ctx.getServerHandler().player.world.getEntityByID(id);
             if (entitySpace2 != null) {
-                entitySpace2.setMode(message.mode);
+                entitySpace2.setNLMode(message.mode);
             } else {
                 ServerProxy.space2list.remove(id);
             }
