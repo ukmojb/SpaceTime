@@ -1,27 +1,9 @@
 package com.wdcftgg.spacetime.entity.ai.space;
 
-import com.wdcftgg.spacetime.SpaceTime;
-import com.wdcftgg.spacetime.dimension.SpaceWorldProvider;
-import com.wdcftgg.spacetime.entity.EntitySpace;
 import com.wdcftgg.spacetime.entity.EntitySpace2;
-import com.wdcftgg.spacetime.entity.EntitySpaceSword;
-import com.wdcftgg.spacetime.potion.ModPotions;
-import com.wdcftgg.spacetime.util.Tools;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.structure.template.PlacementSettings;
-import net.minecraft.world.gen.structure.template.Template;
-import net.minecraft.world.gen.structure.template.TemplateManager;
 
 import java.util.Random;
 

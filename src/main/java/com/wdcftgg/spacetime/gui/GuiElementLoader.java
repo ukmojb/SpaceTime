@@ -4,11 +4,12 @@ import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.tileEntity.stextractor.STExtractorEntity;
 import com.wdcftgg.spacetime.gui.container.ContainerSTExtractor;
 import com.wdcftgg.spacetime.gui.guicontainer.GuiSTExtractor;
+import com.wdcftgg.spacetime.gui.guicontainer.GuiSpaceTimePocketWatch;
+import lumaceon.mods.clockworkphase.util.NBTHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
@@ -24,6 +25,7 @@ public class GuiElementLoader implements IGuiHandler {
     }
     public static final int GUI_Extractor = 0;
     public static final int GUI_Book = 1;
+    public static final int GUI_SpaceTimeWatch = 1;
 
 
     @Nullable
@@ -59,7 +61,8 @@ public class GuiElementLoader implements IGuiHandler {
                     return new GuiSTExtractor((STExtractorEntity)te, player.inventory, ((STExtractorEntity) te).getSTExtractorID());
                 }
                 break;
-
+            case GUI_SpaceTimeWatch:
+                return new GuiSpaceTimePocketWatch(NBTHelper.getInventoryFromNBTTag(player.inventory.getCurrentItem(), "pw_modules"));
             default:
                 return null;
         }

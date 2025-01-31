@@ -1,6 +1,5 @@
 package com.wdcftgg.spacetime.event;
 
-import com.wdcftgg.spacetime.entity.EntityBlackHole;
 import com.wdcftgg.spacetime.entity.EntitySpace;
 import com.wdcftgg.spacetime.util.Tools;
 import net.minecraft.entity.Entity;

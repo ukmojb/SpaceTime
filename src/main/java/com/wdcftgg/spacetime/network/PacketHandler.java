@@ -33,6 +33,7 @@ public class PacketHandler {
         INSTANCE.registerMessage(MessageSpaceCollideWithPlayer.class, MessageSpaceCollideWithPlayer.class, num++, Side.SERVER);
         INSTANCE.registerMessage(MessageSyncModeSpace2.class, MessageSyncModeSpace2.class, num++, Side.SERVER);
         INSTANCE.registerMessage(MessageSpaceGetProjectile.class, MessageSpaceGetProjectile.class, num++, Side.SERVER);
+        INSTANCE.registerMessage(MessageSpaceTimePocketWatchGui.class, MessageSpaceTimePocketWatchGui.class, num++, Side.SERVER);
     }
 
     static {

@@ -14,6 +14,7 @@ import com.wdcftgg.spacetime.client.render.block.RenderTimeAltarCore;
 import com.wdcftgg.spacetime.client.render.entity.*;
 import com.wdcftgg.spacetime.entity.*;
 import com.wdcftgg.spacetime.init.ParticleInit;
+import com.wdcftgg.spacetime.util.ISidedFunction;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderPlayer;
@@ -40,7 +41,6 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	public void onInit(){
-		super.onInit();
 		MinecraftForge.EVENT_BUS.register(new EventLossSpatialSense());
 		MinecraftForge.EVENT_BUS.register(new EventRender());
 		MinecraftForge.EVENT_BUS.register(new EventToolTip());
@@ -51,7 +51,6 @@ public class ClientProxy extends CommonProxy {
 
 
 	public void onPreInit() {
-		super.onPreInit();
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityUnstableTimePolymer.class, RenderUnstableTimePolymer::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityTimeCrack.class, RenderTimeCrack::new);
@@ -85,7 +84,6 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	public void onPostInit() {
-		super.onPostInit();
 
 		ParticleInit.registerParticle();
 	}
@@ -100,6 +98,10 @@ public class ClientProxy extends CommonProxy {
 		} catch (Exception var4) {
 			return null;
 		}
+	}
+
+	public <F, T> T apply(ISidedFunction<F, T> func, F input) {
+		return func.applyClient(input);
 	}
 
 }

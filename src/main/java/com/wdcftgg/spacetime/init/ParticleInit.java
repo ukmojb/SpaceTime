@@ -4,7 +4,6 @@ import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.client.particle.ParticleSpearsubspace;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.IParticleFactory;
-import net.minecraft.client.particle.ParticleEndRod;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.relauncher.Side;

@@ -1,7 +1,6 @@
 package com.wdcftgg.spacetime.entity.ai.space;
 
 import com.wdcftgg.spacetime.entity.EntitySpace2;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
 
 public class Space2AILookIdle extends EntityAIBase

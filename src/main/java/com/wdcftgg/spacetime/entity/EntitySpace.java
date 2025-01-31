@@ -1,22 +1,21 @@
 package com.wdcftgg.spacetime.entity;
 
 import com.wdcftgg.spacetime.SpaceTime;
-import com.wdcftgg.spacetime.blocks.STBlocks;
-import com.wdcftgg.spacetime.client.render.block.RenderTimeAltarCore;
 import com.wdcftgg.spacetime.config.Config;
 import com.wdcftgg.spacetime.dimension.SpaceWorldProvider;
 import com.wdcftgg.spacetime.entity.ai.space.SpaceAIAttack;
 import com.wdcftgg.spacetime.entity.ai.time.TimeAIHurtByTarget;
-import com.wdcftgg.spacetime.network.*;
+import com.wdcftgg.spacetime.network.MessageSpaceCollideWithPlayer;
+import com.wdcftgg.spacetime.network.MessageSpacePhase0;
+import com.wdcftgg.spacetime.network.MessageSpaceWeakness;
+import com.wdcftgg.spacetime.network.PacketHandler;
 import com.wdcftgg.spacetime.proxy.CommonProxy;
-import com.wdcftgg.spacetime.proxy.ServerProxy;
 import com.wdcftgg.spacetime.util.Tools;
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.command.CommandSenderWrapper;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.MoverType;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,29 +26,22 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfoServer;
-import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
-import software.bernie.example.registry.SoundRegistry;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.CustomInstructionKeyframeEvent;
-import software.bernie.geckolib3.core.event.SoundKeyframeEvent;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -130,8 +122,8 @@ public class EntitySpace extends EntityMob implements IAnimatable {
             if (spawnTick == -1) {
                 spawnTick = (int) world.getTotalWorldTime();
             }
-            if (!ServerProxy.spacelist.contains(this.getEntityId())) {
-                ServerProxy.spacelist.add(this.getEntityId());
+            if (!CommonProxy.spacelist.contains(this.getEntityId())) {
+                CommonProxy.spacelist.add(this.getEntityId());
             }
             laterspeak("spacetime.space.say.1", spawnTick, world.getTotalWorldTime(), 60);
             laterspeak("spacetime.space.say.2", spawnTick, world.getTotalWorldTime(), 100);
@@ -243,7 +235,7 @@ public class EntitySpace extends EntityMob implements IAnimatable {
     public void onDeath(DamageSource cause)
     {
         SpaceAIAttack.attacktime = -1;
-        ServerProxy.spacelist.remove((Integer) this.getEntityId());
+        CommonProxy.spacelist.remove((Integer) this.getEntityId());
     }
 
     @Override

@@ -3,9 +3,12 @@ package com.wdcftgg.spacetime.entity;
 import com.wdcftgg.spacetime.entity.ai.space.Space2AIAttack;
 import com.wdcftgg.spacetime.entity.ai.space.SpaceAIAttack;
 import com.wdcftgg.spacetime.network.*;
-import com.wdcftgg.spacetime.proxy.ServerProxy;
+import com.wdcftgg.spacetime.proxy.CommonProxy;
 import com.wdcftgg.spacetime.util.Tools;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IProjectile;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -32,7 +35,8 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import java.util.*;
+import java.util.List;
+import java.util.Random;
 
 public class EntitySpace2 extends EntityMob implements IAnimatable {
 
@@ -86,8 +90,8 @@ public class EntitySpace2 extends EntityMob implements IAnimatable {
         if (!getLastmode().equals("default")) System.out.println(getLastmode());
 
         if (!world.isRemote) {
-            if (!ServerProxy.space2list.contains(this.getEntityId()) && world.getTotalWorldTime() % 20 == 0) {
-                ServerProxy.space2list.add(this.getEntityId());
+            if (!CommonProxy.space2list.contains(this.getEntityId()) && world.getTotalWorldTime() % 20 == 0) {
+                CommonProxy.space2list.add(this.getEntityId());
             }
 
             if (this.getProjectileNBTList().tagCount() >= 10 && this.getMode().equals("default")) {
@@ -157,7 +161,7 @@ public class EntitySpace2 extends EntityMob implements IAnimatable {
     public void onDeath(DamageSource cause)
     {
         SpaceAIAttack.attacktime = -1;
-        ServerProxy.space2list.remove(this.getEntityId());
+        CommonProxy.space2list.remove(this.getEntityId());
     }
 
     @Override

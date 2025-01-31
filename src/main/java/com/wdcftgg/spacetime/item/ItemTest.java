@@ -1,28 +1,20 @@
 package com.wdcftgg.spacetime.item;
 
 import com.wdcftgg.spacetime.SpaceTime;
-import com.wdcftgg.spacetime.client.particle.ParticleSpearsubspace;
-import com.wdcftgg.spacetime.entity.EntityPortal;
 import com.wdcftgg.spacetime.entity.EntitySpearsubspace;
 import com.wdcftgg.spacetime.init.ModCreativeTab;
-import com.wdcftgg.spacetime.init.ParticleInit;
-import com.wdcftgg.spacetime.potion.ModPotions;
 import com.wdcftgg.spacetime.util.IHasModel;
 import com.wdcftgg.spacetime.util.Tools;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.*;
-import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import javax.tools.Tool;
-import java.util.List;
 
 
 public class ItemTest extends Item implements IHasModel {

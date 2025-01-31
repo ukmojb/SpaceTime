@@ -99,11 +99,16 @@ spacetime.magnifying_glass.tooltip=右键时空沙漏以查看内部能量.
 spacetime.timeticket.tooltip.0=右键召唤boss[时]
 spacetime.timeticket.tooltip.1=尽量转为小窗口来打boss，否则将明显掉帧！
 spacetime.spacetimebook.tooltip=这本书的知识好像与某个未知的存在连接...
+
+
 # jei
 spacetime.jei.timecrack=注意按顺序投入!
 spacetime.jei.altar=所需能量:
 spacetime.timecrack.category=时间裂缝
 spacetime.timealtar.category=时间祭坛
+
+#jei craft
+spacetime.modulexp.craft=消耗30级经验
 
 # sendMessage
 spacetime.energy.0=能量:

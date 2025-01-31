@@ -1,15 +1,10 @@
 package com.wdcftgg.spacetime.blocks.tileEntity;
 
 import com.wdcftgg.spacetime.blocks.STBlocks;
-import com.wdcftgg.spacetime.item.STItems;
-import com.wdcftgg.spacetime.util.TimeHelper;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
-
-import java.util.Objects;
 
 public class TimePillarEntity  extends TileEntity implements ITickable {
 

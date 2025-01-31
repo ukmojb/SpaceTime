@@ -2,16 +2,10 @@ package com.wdcftgg.spacetime.proxy;
 
 
 import com.wdcftgg.spacetime.event.*;
+import com.wdcftgg.spacetime.util.ISidedFunction;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.capabilities.CapabilityManager;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ServerProxy extends CommonProxy {
-
-    public static List<Integer> spacelist = new ArrayList<>();
-    public static List<Integer> space2list = new ArrayList<>();
 
     public ServerProxy() {
     }
@@ -35,5 +29,9 @@ public class ServerProxy extends CommonProxy {
         MinecraftForge.EVENT_BUS.register(new EventTimeCrack());
         MinecraftForge.EVENT_BUS.register(new EventWool());
         MinecraftForge.EVENT_BUS.register(new EventSpaceStop());
+    }
+
+    public <F, T> T apply(ISidedFunction<F, T> func, F input) {
+        return func.applyServer(input);
     }
 }

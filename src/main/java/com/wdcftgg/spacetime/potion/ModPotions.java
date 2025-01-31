@@ -2,7 +2,6 @@ package com.wdcftgg.spacetime.potion;
 
 import com.wdcftgg.spacetime.potion.potions.*;
 import com.wdcftgg.spacetime.util.Reference;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;

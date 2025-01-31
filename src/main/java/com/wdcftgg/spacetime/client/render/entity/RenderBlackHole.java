@@ -5,8 +5,6 @@ import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.client.Vec3;
 import com.wdcftgg.spacetime.client.model.BlackHoleModel;
 import com.wdcftgg.spacetime.entity.EntityBlackHole;
-import com.wdcftgg.spacetime.entity.EntityRubble;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.culling.ICamera;
 import net.minecraft.client.renderer.entity.RenderLiving;

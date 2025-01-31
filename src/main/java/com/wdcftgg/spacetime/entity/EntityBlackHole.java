@@ -1,7 +1,7 @@
 package com.wdcftgg.spacetime.entity;
 
 import com.wdcftgg.spacetime.config.Config;
-import com.wdcftgg.spacetime.proxy.ServerProxy;
+import com.wdcftgg.spacetime.proxy.CommonProxy;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.effect.EntityLightningBolt;
@@ -9,7 +9,6 @@ import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,7 +16,6 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -261,8 +259,8 @@ public class EntityBlackHole extends EntityLiving {
     @Override
     public void onDeath(DamageSource cause)
     {
-        if (!world.isRemote && !ServerProxy.spacelist.isEmpty()){
-            EntitySpace entitySpace = (EntitySpace) world.getEntityByID(ServerProxy.spacelist.get(0));
+        if (!world.isRemote && !CommonProxy.spacelist.isEmpty()){
+            EntitySpace entitySpace = (EntitySpace) world.getEntityByID(CommonProxy.spacelist.get(0));
             if (entitySpace != null) {
                 entitySpace.blackHoleDead();
             }
@@ -371,10 +369,10 @@ public class EntityBlackHole extends EntityLiving {
     }
 
     private void clearSpace(){
-        if (!ServerProxy.spacelist.isEmpty()) {
-            for (int i = 0; i < ServerProxy.spacelist.size(); i++) {
-                if (world.getEntityByID(ServerProxy.spacelist.get(i)) != null) {
-                    world.getEntityByID(ServerProxy.spacelist.get(i)).setDead();
+        if (!CommonProxy.spacelist.isEmpty()) {
+            for (int i = 0; i < CommonProxy.spacelist.size(); i++) {
+                if (world.getEntityByID(CommonProxy.spacelist.get(i)) != null) {
+                    world.getEntityByID(CommonProxy.spacelist.get(i)).setDead();
                 }
             }
         }

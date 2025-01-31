@@ -4,10 +4,6 @@ import com.wdcftgg.spacetime.client.model.ModelSpace;
 import com.wdcftgg.spacetime.entity.EntitySpace;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EnumPlayerModelParts;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.TextFormatting;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 
 /**

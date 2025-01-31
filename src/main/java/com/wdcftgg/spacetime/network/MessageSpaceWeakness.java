@@ -1,12 +1,7 @@
 package com.wdcftgg.spacetime.network;
 
-import com.wdcftgg.spacetime.blocks.STBlocks;
 import com.wdcftgg.spacetime.entity.EntitySpace;
-import com.wdcftgg.spacetime.util.Tools;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

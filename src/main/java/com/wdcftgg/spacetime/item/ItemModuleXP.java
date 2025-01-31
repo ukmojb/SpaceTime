@@ -4,6 +4,9 @@ import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.init.ModCreativeTab;
 import com.wdcftgg.spacetime.util.IHasModel;
 import lumaceon.mods.clockworkphase.item.construct.pocketwatch.module.ItemModule;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,5 +33,14 @@ public class ItemModuleXP extends ItemModule implements IHasModel {
     @Override
     public int getPowerDivisor() {
         return 5;
+    }
+
+    @Override
+    public void onCreated(ItemStack stack, World worldIn, EntityPlayer playerIn) {
+        if (!worldIn.isRemote) {
+            if (playerIn.experienceLevel >= 30) {
+                playerIn.addExperienceLevel(-30);
+            }
+        }
     }
 }

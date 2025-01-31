@@ -2,40 +2,23 @@ package com.wdcftgg.spacetime.entity;
 
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.config.Config;
-import com.wdcftgg.spacetime.init.ModSounds;
 import com.wdcftgg.spacetime.potion.potions.PotionsMovetoplayer;
-import com.wdcftgg.spacetime.proxy.ServerProxy;
+import com.wdcftgg.spacetime.proxy.CommonProxy;
 import com.wdcftgg.spacetime.util.Tools;
-import net.minecraft.command.CommandException;
-import net.minecraft.entity.*;
-import net.minecraft.entity.item.EntityXPOrb;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.entity.projectile.EntityThrowable;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.nbt.JsonToNBT;
-import net.minecraft.nbt.NBTException;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.IProjectile;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.storage.AnvilChunkLoader;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class EntityPortal extends EntityLiving {
@@ -98,14 +81,14 @@ public class EntityPortal extends EntityLiving {
         super.onLivingUpdate();
         if (!this.world.isRemote) {
             if (mode == 1) {
-                if (!ServerProxy.space2list.isEmpty() && world.getTotalWorldTime() % 20 == 0) {
-                    for (Integer id : ServerProxy.space2list) {
+                if (!CommonProxy.space2list.isEmpty() && world.getTotalWorldTime() % 20 == 0) {
+                    for (Integer id : CommonProxy.space2list) {
                         EntitySpace2 entitySpace2 = (EntitySpace2) world.getEntityByID(id);
                         if (entitySpace2 != null) {
                             this.rotationYaw = entitySpace2.rotationYaw;
                             this.rotationPitch = entitySpace2.rotationPitch;
                         } else {
-                            ServerProxy.space2list.remove(id);
+                            CommonProxy.space2list.remove(id);
                         }
                     }
                 }
@@ -137,14 +120,14 @@ public class EntityPortal extends EntityLiving {
             }
 
             if (mode == 3) {
-                if (!ServerProxy.space2list.isEmpty() && world.getTotalWorldTime() % 20 == 0) {
-                    for (Integer id : ServerProxy.space2list) {
+                if (!CommonProxy.space2list.isEmpty() && world.getTotalWorldTime() % 20 == 0) {
+                    for (Integer id : CommonProxy.space2list) {
                         EntitySpace2 entitySpace2 = (EntitySpace2) world.getEntityByID(id);
                         if (entitySpace2 != null) {
                             this.rotationYaw = entitySpace2.rotationYaw;
                             this.rotationPitch = entitySpace2.rotationPitch;
                         } else {
-                            ServerProxy.space2list.remove(id);
+                            CommonProxy.space2list.remove(id);
                         }
                     }
                 }
@@ -156,14 +139,14 @@ public class EntityPortal extends EntityLiving {
                 if (this.ticksExisted >= 20) this.setDead();
             }
             if (mode == 4) {
-                if (!ServerProxy.space2list.isEmpty() && world.getTotalWorldTime() % 20 == 0) {
-                    for (Integer id : ServerProxy.space2list) {
+                if (!CommonProxy.space2list.isEmpty() && world.getTotalWorldTime() % 20 == 0) {
+                    for (Integer id : CommonProxy.space2list) {
                         EntitySpace2 entitySpace2 = (EntitySpace2) world.getEntityByID(id);
                         if (entitySpace2 != null) {
                             this.rotationYaw = entitySpace2.rotationYaw;
                             this.rotationPitch = entitySpace2.rotationPitch;
                         } else {
-                            ServerProxy.space2list.remove(id);
+                            CommonProxy.space2list.remove(id);
                         }
                     }
                 }

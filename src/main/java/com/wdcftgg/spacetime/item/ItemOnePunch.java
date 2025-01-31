@@ -1,19 +1,15 @@
 package com.wdcftgg.spacetime.item;
 
 import com.wdcftgg.spacetime.SpaceTime;
-import com.wdcftgg.spacetime.client.event.EventTimeBack;
 import com.wdcftgg.spacetime.entity.EntitySpace2;
 import com.wdcftgg.spacetime.init.ModCreativeTab;
-import com.wdcftgg.spacetime.potion.ModPotions;
 import com.wdcftgg.spacetime.util.IHasModel;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.PlayerCapabilities;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumActionResult;

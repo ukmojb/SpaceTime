@@ -5,7 +5,6 @@ import com.wdcftgg.spacetime.config.Config;
 import com.wdcftgg.spacetime.potion.PotionBase;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.common.MinecraftForge;

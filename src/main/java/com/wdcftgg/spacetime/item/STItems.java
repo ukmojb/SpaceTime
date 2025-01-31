@@ -26,8 +26,9 @@ public class STItems {
 	public static final Item SUPERGOLDENAPPLE = new ItemSuperGoldApple();
 	public static final Item TIMETICKET = new ItemTimeTicket();
 	public static final Item MAGNIFYINGGLASS = new ItemMagnifyingGlass();
-	public static final Item ItemTest = new ItemTest();
-	public static final Item ItemSpaceTimeBook = new ItemSpaceTimeBook();
+	public static final Item Test = new ItemTest();
+	public static final Item SpaceTimeBook = new ItemSpaceTimeBook();
+	public static final Item SpaceTimePocketWatch = new ItemSpaceTimePocketWatch();
 
 
 }

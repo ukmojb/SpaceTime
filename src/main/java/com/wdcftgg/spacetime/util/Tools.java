@@ -1,7 +1,6 @@
 package com.wdcftgg.spacetime.util;
 
 import com.wdcftgg.spacetime.config.Config;
-import com.wdcftgg.spacetime.entity.EntitySpace;
 import com.wdcftgg.spacetime.entity.EntitySpaceSword;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -9,8 +8,6 @@ import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -18,7 +15,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.storage.AnvilChunkLoader;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by IntelliJ IDEA.

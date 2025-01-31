@@ -5,8 +5,6 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
-import java.io.IOException;
-
 public class STBookGui extends GuiScreen {
     private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(SpaceTime.MODID, "textures/gui/book_gui.jpg");
 

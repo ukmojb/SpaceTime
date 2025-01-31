@@ -1,14 +1,11 @@
 package com.wdcftgg.spacetime.potion.potions;
 
 import com.google.common.collect.Lists;
-import com.wdcftgg.spacetime.config.Config;
 import com.wdcftgg.spacetime.potion.PotionBase;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.MinecraftForge;
 
