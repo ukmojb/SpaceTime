@@ -45,6 +45,7 @@ public class EntityBlackHole extends EntityLiving {
         this.setEntityInvulnerable(true);
         this.setSize(1, 1);
         this.setNoGravity(true);
+        this.enablePersistence();
     }
 
     public EntityBlackHole(World world, float size, boolean annihilability) {
@@ -53,8 +54,15 @@ public class EntityBlackHole extends EntityLiving {
         this.annihilability = annihilability;
         this.isImmuneToFire = true;
         this.setEntityInvulnerable(true);
+        this.enablePersistence();
 //        this.dataWatcher.updateObject(16, size);
     }
+
+    @Override
+    public boolean canDespawn() {
+        return false;
+    }
+
 
     @Override
     public void onLivingUpdate() {
@@ -108,6 +116,8 @@ public class EntityBlackHole extends EntityLiving {
                 }
             }
 
+            if (world.getTotalWorldTime() % 20 == 0) System.out.println(absorb_num);
+
 
             double range = size * 20;
 
@@ -116,8 +126,9 @@ public class EntityBlackHole extends EntityLiving {
 
             for (Entity e : entities) {
 
-//            if(e instanceof EntityPlayer && ((EntityPlayer)e).capabilities.isCreativeMode)
-//                continue;
+                if(e instanceof EntitySpace) {
+                    continue;
+                }
 
                 if (e instanceof EntityFallingBlock && !world.isRemote && e.ticksExisted > 1) {
 
@@ -204,23 +215,29 @@ public class EntityBlackHole extends EntityLiving {
 
                 if (dist < size * 1.5) {
                     if (e instanceof EntityBlackHole && e.getUniqueID() != this.getUniqueID()) {
+                        EntityBlackHole blackHole = (EntityBlackHole) e;
                         float size0 = e.getDataManager().get(EntityBlackHole.BlackHole_Size);
                         float size1 = this.getDataManager().get(EntityBlackHole.BlackHole_Size);
                         float newSize = size0 + size1;
+                        boolean isAnnihilability = blackHole.isAnnihilability();
+
                         if (size0 >= size1) {
                             this.setDead();
-                            ((EntityBlackHole) e).setSize(newSize);
+                            blackHole.setSize(newSize);
+                            blackHole.annihilability = this.annihilability || blackHole.annihilability;
                         } else {
-                            e.setDead();
+                            blackHole.setDead();
                             this.setSize(newSize);
+                            this.annihilability = this.annihilability || blackHole.annihilability;
                         }
                     }
-                    if (!(e instanceof EntityPlayer && ((EntityPlayer) e).capabilities.isCreativeMode)) {
-                        e.attackEntityFrom(blackhole_damagesource, 1000);
-
-                    } else {
+//                    if (!(e instanceof EntityPlayer && ((EntityPlayer) e).capabilities.isCreativeMode)) {
+//                        e.attackEntityFrom(blackhole_damagesource, 1000);
+//                        System.out.println("ahdiad");
+//
+//                    } else {
                         addAbsorbNum(e);
-                    }
+//                    }
                     if (e instanceof EntityPlayer) {
                         EntityPlayer player = (EntityPlayer) e;
                         if (player.capabilities.isCreativeMode || this.isAnnihilability()) {
@@ -233,16 +250,25 @@ public class EntityBlackHole extends EntityLiving {
                         }
                     }
 
-                    if (!(e instanceof EntityLivingBase)) {
+                    if (!(e instanceof EntityBlackHole)) {
                         e.setDead();
                     }
                 }
             }
 
-            if (this.isAnnihilability() && absorb_num >= Config.ABSORBNUM) {
+            if (absorb_num >= Config.ABSORBNUM) {
                 world.addWeatherEffect(new EntityLightningBolt(world, this.posX, this.posY, this.posZ, true));
                 world.createExplosion(this, this.posX, this.posY, this.posZ, 30, true);
                 this.setDead();
+
+                for (int eId : CommonProxy.spacelist) {
+                    EntitySpace entitySpace = (EntitySpace) world.getEntityByID(eId);
+                    if (entitySpace != null) {
+                        System.out.println("kjhsdiawd");
+                        entitySpace.blackHoleDead();
+                    }
+                }
+//                EntitySpace entitySpace = (EntitySpace) world.getEntityByID(CommonProxy.spacelist.get(0));
             }
 
         }
@@ -262,6 +288,7 @@ public class EntityBlackHole extends EntityLiving {
         if (!world.isRemote && !CommonProxy.spacelist.isEmpty()){
             EntitySpace entitySpace = (EntitySpace) world.getEntityByID(CommonProxy.spacelist.get(0));
             if (entitySpace != null) {
+
                 entitySpace.blackHoleDead();
             }
         }
@@ -349,10 +376,10 @@ public class EntityBlackHole extends EntityLiving {
             if (entityItem.getItem().getItem().getRegistryName().equals("shulker_box")) {
                 ItemStack shulker_box = entityItem.getItem();
                 absorb_num += getShulkerBoxItemNum(shulker_box);
-            } else {
-                absorb_num++;
+                return;
             }
         }
+        absorb_num++;
     }
 
     private int getShulkerBoxItemNum(ItemStack shulker_box) {

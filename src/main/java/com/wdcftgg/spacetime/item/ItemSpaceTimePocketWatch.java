@@ -19,13 +19,14 @@ public class ItemSpaceTimePocketWatch extends ItemPocketWatch implements IHasMod
         SpaceTime.proxy.registerItemRenderer(this, 0, "inventory");
     }
 
-    @SideOnly(Side.CLIENT)
     @Override
+    @SideOnly(Side.CLIENT)
     public void useTemporalAbility()
     {
         this.handlePocketWatchAbility();
     }
 
+    @SideOnly(Side.CLIENT)
     private  void handlePocketWatchAbility()
     {
         if(!FMLClientHandler.instance().isGUIOpen(GuiPocketWatch.class))

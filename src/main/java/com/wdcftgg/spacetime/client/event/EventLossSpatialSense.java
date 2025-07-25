@@ -28,6 +28,7 @@ public class EventLossSpatialSense {
             GlStateManager.pushMatrix();
             GlStateManager.rotate(180, 0, 0, 0);
             GlStateManager.translate(0, -1.8f, 0);
+            GlStateManager.popMatrix();
         }
     }
 
@@ -48,32 +49,6 @@ public class EventLossSpatialSense {
                 player.setRotationYawHead(-event.getYaw() + 180);
                 player.setRenderYawOffset(-event.getYaw() + 180);
                 GlStateManager.rotate(180, 0.0F, 0.0F, 1);
-            }
-        }
-    }
-
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public void onOverlayRender(final RenderGameOverlayEvent.Pre event) {
-        Minecraft minecraft = Minecraft.getMinecraft();
-        Entity renderViewEntity = minecraft.getRenderViewEntity();
-        if (renderViewEntity instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) renderViewEntity;
-            if (player.isPotionActive(ModPotions.LossSpatialSense)) {
-                GlStateManager.pushMatrix();
-                GlStateManager.rotate(180, 0, 0, 0);
-                if (Config.LossSpatialSense) GlStateManager.popMatrix();
-            }
-        }
-    }
-
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void onOverlayRender(final RenderGameOverlayEvent.Post event) {
-        Minecraft minecraft = Minecraft.getMinecraft();
-        Entity renderViewEntity = minecraft.getRenderViewEntity();
-        if (renderViewEntity instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) renderViewEntity;
-            if (player.isPotionActive(ModPotions.LossSpatialSense)) {
-                GlStateManager.popMatrix();
             }
         }
     }

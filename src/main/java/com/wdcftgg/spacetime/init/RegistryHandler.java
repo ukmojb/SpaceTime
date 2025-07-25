@@ -8,6 +8,7 @@ import com.wdcftgg.spacetime.blocks.slab.BlockTimeSlab;
 import com.wdcftgg.spacetime.blocks.stairs.BlockBaseStairs;
 import com.wdcftgg.spacetime.blocks.stairs.BlockSpaceStairs;
 import com.wdcftgg.spacetime.blocks.stairs.BlockTimeStairs;
+import com.wdcftgg.spacetime.dimension.BiomeNull;
 import com.wdcftgg.spacetime.entity.ModEntityInit;
 import com.wdcftgg.spacetime.item.STItems;
 import com.wdcftgg.spacetime.util.IHasModel;
@@ -17,6 +18,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeVoid;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -29,10 +32,17 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @EventBusSubscriber
 public class RegistryHandler {
 
+	public static final Biome NULL = new BiomeNull().setRegistryName(SpaceTime.MODID + ":null");
+
 	public static BlockSlabBase SPACE_SLAB = new BlockSpaceSlab(Material.WOOD);
 	public static BlockSlabBase TIME_SLAB = new BlockTimeSlab(Material.WOOD);
 	public static BlockBaseStairs SPACE_STAIRS = new BlockSpaceStairs();
 	public static BlockBaseStairs TIME_STAIRS = new BlockTimeStairs();
+
+	@SubscribeEvent
+	public static void registerBiomes(RegistryEvent.Register<Biome> event) {
+		event.getRegistry().register(NULL);
+	}
 
 	@SubscribeEvent
 	public static void onItemRegister(RegistryEvent.Register<Item> event)
@@ -87,13 +97,7 @@ public class RegistryHandler {
 
 	public static void preInitRegistries(FMLPreInitializationEvent event)
 	{
-
-
-
 		ModEntityInit.registerEntities();
-
-
-
 
 
 	}
@@ -132,4 +136,5 @@ public class RegistryHandler {
 	private static Item newItemBlock(Block block){
 		return new ItemBlock(block).setRegistryName(block.getRegistryName()).setTranslationKey(block.getTranslationKey());
 	}
+
 }

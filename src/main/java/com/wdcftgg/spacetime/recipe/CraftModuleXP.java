@@ -108,7 +108,7 @@ public class CraftModuleXP extends IForgeRegistryEntry.Impl<IRecipe> implements 
     }
 
     public void updatePlayer(EntityPlayerMP player) {
-//        player.connection.sendPacket(new SPacketSetExperience(player.experience, player.experienceTotal, player.experienceLevel));
+        player.connection.sendPacket(new SPacketSetExperience(player.experience, player.experienceTotal, player.experienceLevel));
     }
 
 

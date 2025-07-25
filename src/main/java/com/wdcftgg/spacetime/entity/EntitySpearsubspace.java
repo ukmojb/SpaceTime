@@ -1,6 +1,7 @@
 package com.wdcftgg.spacetime.entity;
 
 import com.wdcftgg.spacetime.potion.ModPotions;
+import com.wdcftgg.spacetime.util.SpaceFrozenHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -111,7 +112,9 @@ public class EntitySpearsubspace extends EntityThrowableCopy {
                     world.createExplosion(this, this.posX, this.posY, this.posZ, 3, true);
                     livingBase.attackEntityFrom(DamageSource.GENERIC, 15);
                     livingBase.attackEntityFrom(DamageSource.OUT_OF_WORLD, 5);
-                    livingBase.addPotionEffect(new PotionEffect(ModPotions.SpaceStop, 2 * 20, 0, true, true));
+//                    livingBase.addPotionEffect(new PotionEffect(ModPotions.SpaceStop, 2 * 20, 0, true, true));
+
+                    SpaceFrozenHelper.addSpaceFrozen(livingBase, SpaceFrozenHelper.getIsSpaceFrozen(livingBase) ? 4 : 8);
 
                     this.setDead();
                 }
@@ -127,7 +130,8 @@ public class EntitySpearsubspace extends EntityThrowableCopy {
                     if (entity instanceof EntityPortal) return;
                     if (entity instanceof EntityLivingBase) {
                         EntityLivingBase livingBase = (EntityLivingBase) entity;
-                        livingBase.addPotionEffect(new PotionEffect(ModPotions.SpaceStop, 1 * 20, 0, true, true));
+                        SpaceFrozenHelper.addSpaceFrozen(livingBase, SpaceFrozenHelper.getIsSpaceFrozen(livingBase) ? 2 : 5);
+//                        livingBase.addPotionEffect(new PotionEffect(ModPotions.SpaceStop, 1 * 20, 0, true, true));
                     }
                 }
 

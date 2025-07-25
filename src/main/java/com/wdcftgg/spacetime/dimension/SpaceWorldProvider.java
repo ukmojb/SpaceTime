@@ -1,12 +1,15 @@
 package com.wdcftgg.spacetime.dimension;
 
 import com.wdcftgg.spacetime.SpaceTime;
+import com.wdcftgg.spacetime.init.RegistryHandler;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Biomes;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
+import net.minecraft.world.WorldProviderEnd;
 import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.biome.BiomeProviderSingle;
 import net.minecraft.world.chunk.Chunk;
@@ -28,6 +31,13 @@ import java.util.List;
  */
 public final class SpaceWorldProvider extends WorldProvider {
 
+    @Override
+    protected void init()
+    {
+        this.hasSkyLight = true;
+        this.biomeProvider = new BiomeProviderSingle(RegistryHandler.NULL);
+    }
+
     public static List<EntityPlayerMP> playerList = new ArrayList<>();
 
     @Override
@@ -39,6 +49,12 @@ public final class SpaceWorldProvider extends WorldProvider {
     public boolean isSurfaceWorld()
     {
         return false;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public Vec3d getFogColor(float celestialAngle, float partialTicks) {
+        return new Vec3d(0.0D, 0.0D, 0.0D);
     }
 
     @Override
@@ -64,21 +80,6 @@ public final class SpaceWorldProvider extends WorldProvider {
         super.setAllowedSpawnTypes(false, false);
     }
 
-    @SideOnly(Side.CLIENT)
-    public Vec3d getFogColor(float p_76562_1_, float p_76562_2_)
-    {
-        int i = 10518688;
-        float f = MathHelper.cos(p_76562_1_ * ((float)Math.PI * 2F)) * 2.0F + 0.5F;
-        f = MathHelper.clamp(f, 0.0F, 1.0F);
-        float f1 = 0.627451F;
-        float f2 = 0.5019608F;
-        float f3 = 0.627451F;
-        f1 = f1 * (f * 0.0F + 0.15F);
-        f2 = f2 * (f * 0.0F + 0.15F);
-        f3 = f3 * (f * 0.0F + 0.15F);
-        return new Vec3d((double)f1, (double)f2, (double)f3);
-    }
-
     @Override
     @SideOnly(Side.CLIENT)
     public Vec3d getSkyColor(net.minecraft.entity.Entity cameraEntity, float partialTicks)
@@ -86,21 +87,17 @@ public final class SpaceWorldProvider extends WorldProvider {
         return new Vec3d(0,0,0);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public float getSunBrightness(float par1)
     {
-        return 8;
+        return 1;
     }
 
     @SideOnly(Side.CLIENT)
     public boolean doesXZShowFog(int x, int z)
     {
         return false;
-    }
-
-    @Override
-    public BiomeProvider getBiomeProvider() {
-        return new BiomeProviderSingle(Biomes.VOID);
     }
 
     @Override
@@ -118,24 +115,38 @@ public final class SpaceWorldProvider extends WorldProvider {
     }
 
     @Override
+    public boolean canDoLightning(Chunk chunk) {
+        return false;
+    }
+
+
+    @Override
+    public boolean canSnowAt(BlockPos pos, boolean checkLight) {
+        return false;
+    }
+
+    @Override
+    public BiomeProvider getBiomeProvider() {
+        return new BiomeProviderSingle(Biomes.VOID);
+
+    }
+
+    @Override
+    public float calculateCelestialAngle(long worldTime, float partialTicks) {
+        return 0.0F;
+    }
+
+
+    @Override
+    @Nullable
+    @SideOnly(Side.CLIENT)
+    public float[] calcSunriseSunsetColors(float celestialAngle, float partialTicks) {
+        return null;
+    }
+
+    @Override
     public IChunkGenerator createChunkGenerator()
     {
         return new ChunkGeneratorSpace(world);
-    }
-
-    @Override
-    public void onPlayerAdded(EntityPlayerMP player)
-    {
-        playerList.add(player);
-    }
-
-    @Override
-    public void onPlayerRemoved(EntityPlayerMP player)
-    {
-        playerList.remove(player);
-    }
-
-    public static List<EntityPlayerMP> getPlayerList() {
-        return playerList;
     }
 }

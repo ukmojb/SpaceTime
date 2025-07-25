@@ -3,7 +3,6 @@ package com.wdcftgg.spacetime.potion.potions;
 import com.google.common.collect.Lists;
 import com.wdcftgg.spacetime.potion.PotionBase;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -32,11 +31,23 @@ public class PotionsSpaceStop extends PotionBase {
             if (player.world.getTotalWorldTime() % 20 == 0) {
                 player.sendStatusMessage(new TextComponentTranslation("spacetime.space_stop.say"), true);
             }
-        } else {
-            ent.motionX = 0;
-            ent.motionY = 0;
-            ent.motionZ = 0;
+            player.motionX = 0;
+            player.motionY = 0;
+            player.motionZ = 0;
+
+            // 取消跳跃和下落
+            player.velocityChanged = true;
+            player.fallDistance = 0;
+
+            // 让玩家始终停在原地
+            player.posX = player.prevPosX;
+            player.posY = player.prevPosY;
+            player.posZ = player.prevPosZ;
+            player.world.updateEntityWithOptionalForce(player, false);
         }
+        ent.motionX = 0;
+        ent.motionY = 0;
+        ent.motionZ = 0;
     }
 
     @Override
@@ -45,23 +56,4 @@ public class PotionsSpaceStop extends PotionBase {
         return true;
     }
 
-    @Override
-    public void removeAttributesModifiersFromEntity(EntityLivingBase entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier)
-    {
-        if (entityLivingBaseIn instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) entityLivingBaseIn;
-            player.capabilities.setPlayerWalkSpeed(0.1F);
-        }
-        super.removeAttributesModifiersFromEntity(entityLivingBaseIn, attributeMapIn, amplifier);
-    }
-
-    @Override
-    public void applyAttributesModifiersToEntity(EntityLivingBase entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier)
-    {
-        if (entityLivingBaseIn instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) entityLivingBaseIn;
-            player.capabilities.setPlayerWalkSpeed(0F);
-        }
-        super.applyAttributesModifiersToEntity(entityLivingBaseIn, attributeMapIn, amplifier);
-    }
 }

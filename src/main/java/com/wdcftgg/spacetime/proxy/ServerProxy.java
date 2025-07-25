@@ -2,6 +2,7 @@ package com.wdcftgg.spacetime.proxy;
 
 
 import com.wdcftgg.spacetime.event.*;
+import com.wdcftgg.spacetime.init.CapabilityLoader;
 import com.wdcftgg.spacetime.util.ISidedFunction;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -12,6 +13,7 @@ public class ServerProxy extends CommonProxy {
 
     public void onPreInit() {
         super.onPreInit();
+        CapabilityLoader.initCapability();
     }
 
     public void onPostInit() {
@@ -29,6 +31,9 @@ public class ServerProxy extends CommonProxy {
         MinecraftForge.EVENT_BUS.register(new EventTimeCrack());
         MinecraftForge.EVENT_BUS.register(new EventWool());
         MinecraftForge.EVENT_BUS.register(new EventSpaceStop());
+        MinecraftForge.EVENT_BUS.register(new EventSpaceFrozen());
+
+        MinecraftForge.EVENT_BUS.register(new CapabilityLoader());
     }
 
     public <F, T> T apply(ISidedFunction<F, T> func, F input) {

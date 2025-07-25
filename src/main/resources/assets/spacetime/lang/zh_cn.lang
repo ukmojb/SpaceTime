@@ -126,6 +126,10 @@ spacetime.altar.water=水源
 spacetime.altar.hourglass.noenergy=时空沙漏的能量不足请自行检查。
 spacetime.altar.time.noenergy=手中时间不足。
 
+# space frozen text
+spacetime.spacefrozen=时空冻结值
+
+
 # patchouli
 spacetime.patchouli.name=时间之册
 spacetime.patchouli.landing_text=时空的奥秘...

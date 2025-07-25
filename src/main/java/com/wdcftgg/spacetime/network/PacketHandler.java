@@ -23,6 +23,7 @@ public class PacketHandler {
         INSTANCE.registerMessage(MessageTimeAltarCore.class, MessageTimeAltarCore.class, num++, Side.CLIENT);
         INSTANCE.registerMessage(MessageRemovePotion.class, MessageRemovePotion.class, num++, Side.CLIENT);
         INSTANCE.registerMessage(MessageParticleBurst.class, MessageParticleBurst.class, num++, Side.CLIENT);
+        INSTANCE.registerMessage(MessageSpaceFrozen.class, MessageSpaceFrozen.class, num++, Side.CLIENT);
 
 
         INSTANCE.registerMessage(MessageSpacePhase0.class, MessageSpacePhase0.class, num++, Side.SERVER);
@@ -34,6 +35,8 @@ public class PacketHandler {
         INSTANCE.registerMessage(MessageSyncModeSpace2.class, MessageSyncModeSpace2.class, num++, Side.SERVER);
         INSTANCE.registerMessage(MessageSpaceGetProjectile.class, MessageSpaceGetProjectile.class, num++, Side.SERVER);
         INSTANCE.registerMessage(MessageSpaceTimePocketWatchGui.class, MessageSpaceTimePocketWatchGui.class, num++, Side.SERVER);
+        INSTANCE.registerMessage(MessageBookUpdate.class, MessageBookUpdate.class, num++, Side.SERVER);
+        INSTANCE.registerMessage(MessageSyncModeSpace.class, MessageSyncModeSpace.class, num++, Side.SERVER);
     }
 
     static {

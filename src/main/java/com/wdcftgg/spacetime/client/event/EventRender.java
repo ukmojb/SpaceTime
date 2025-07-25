@@ -5,6 +5,7 @@ import com.wdcftgg.spacetime.blocks.tileEntity.TimeAltarCoreEntity;
 import com.wdcftgg.spacetime.config.Config;
 import com.wdcftgg.spacetime.entity.EntityTimePhantom;
 import com.wdcftgg.spacetime.potion.ModPotions;
+import com.wdcftgg.spacetime.util.SpaceFrozenHelper;
 import lumaceon.mods.clockworkphase.init.ModItems;
 import lumaceon.mods.clockworkphase.item.construct.pocketwatch.ItemPocketWatch;
 import lumaceon.mods.clockworkphase.util.InventorySearchHelper;
@@ -21,6 +22,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -61,11 +63,10 @@ public class EventRender {
         Minecraft mc = Minecraft.getMinecraft();
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder buffer = tessellator.getBuffer();
+        EntityPlayer player = Minecraft.getMinecraft().player;
 
-
-        ResourceLocation res;
-        if (Minecraft.getMinecraft().player != null) {
-            EntityPlayer player = Minecraft.getMinecraft().player;
+        //时间祭坛的显示
+        if (player != null) {
             Vec3d start  = player.getPositionEyes(event.getPartialTicks());
             Vec3d vec31 = player.getLook(event.getPartialTicks());
             Vec3d end = start.add(vec31.x * 6, vec31.y * 6, vec31.z * 6);
@@ -87,93 +88,132 @@ public class EventRender {
 
                             GlStateManager.disableLighting();
                             GlStateManager.enablePolygonOffset();
-                            GlStateManager.enableBlend();
 
                             fontRenderer.drawString(text, Config.GUIPOSX, Config.GUIPOSY, 0xFFFFFFFF);
 
-                            GlStateManager.disableBlend();
                             GlStateManager.enableLighting();
                             GlStateManager.popMatrix();
                         }
                     }
                 }
             }
-        }
-        if (Minecraft.getMinecraft().player != null && Minecraft.getMinecraft().player.getActivePotionEffect(ModPotions.heterospace) != null){
 
-            GlStateManager.pushMatrix();
-            GlStateManager.enableBlend();
+            //时宗抹杀
+            if (Minecraft.getMinecraft().player.getActivePotionEffect(ModPotions.heterospace) != null) {
 
-            res = new ResourceLocation(SpaceTime.MODID, "textures/gui/heterospace.png");
-
-            mc.getTextureManager().bindTexture(res);
-            GlStateManager.color(148/255f, 22/255f, 232/255f, 0.25f);//RGBA
-            buffer.begin(7, DefaultVertexFormats.POSITION_TEX);
-            buffer.pos(0, mc.displayHeight * 0.5, -90).tex(0, 1).endVertex();
-            buffer.pos(mc.displayWidth * 0.5, mc.displayHeight * 0.5, -90).tex(1, 1).endVertex();
-            buffer.pos(mc.displayWidth * 0.5, 0, -90).tex(1, 0).endVertex();
-            buffer.pos(0, 0, -90).tex(0, 0).endVertex();
-            tessellator.draw();
-            
-            GlStateManager.disableBlend();
-            GlStateManager.popMatrix();
-        }
-
-        EntityPlayer player = Minecraft.getMinecraft().player;
-        ItemStack[] pocketWatches = InventorySearchHelper.getPocketWatches(player.inventory);
-        if (pocketWatches != null && ItemPocketWatch.doesActiveItemModuleExist(pocketWatches, ModItems.moduleLifeWalk)) {
-            ItemStack lifeWalk = ItemPocketWatch.getItemModuleFromMultiple(pocketWatches, ModItems.moduleLifeWalk);
-            int lifeModulePower = (int) NBTHelper.getInt(lifeWalk, "module_power");
-            for (int i=0;i< lifeModulePower/50;i++) {
                 GlStateManager.pushMatrix();
+
                 ScaledResolution resolution = new ScaledResolution(mc);
 
                 int screenWidth = resolution.getScaledWidth();
                 int screenHeight = resolution.getScaledHeight();
 
-                res = new ResourceLocation(SpaceTime.MODID, "textures/gui/life.png");
-                double y1 = screenHeight * 0.02 + i * screenHeight * 0.01 + (!player.getActivePotionMap().isEmpty() ? screenHeight * 0.047 : 0);
-                double y0 = screenHeight * 0.001 + i * screenHeight * 0.01 + (!player.getActivePotionMap().isEmpty() ? screenHeight * 0.047 : 0);
+                ResourceLocation res = new ResourceLocation(SpaceTime.MODID, "textures/gui/heterospace.png");
+
+                mc.getTextureManager().bindTexture(res);
+                GlStateManager.color(148 / 255f, 22 / 255f, 232 / 255f, 0.25f);//RGBA
+                buffer.begin(7, DefaultVertexFormats.POSITION_TEX);
+                buffer.pos(0, screenHeight, -90).tex(0, 1).endVertex();
+                buffer.pos(screenWidth, screenHeight, -90).tex(1, 1).endVertex();
+                buffer.pos(screenWidth, 0, -90).tex(1, 0).endVertex();
+                buffer.pos(0, 0, -90).tex(0, 0).endVertex();
+                tessellator.draw();
+
+                GlStateManager.popMatrix();
+            }
+
+            //生命和死亡模块
+            ItemStack[] pocketWatches = InventorySearchHelper.getPocketWatches(player.inventory);
+            if (pocketWatches != null && ItemPocketWatch.doesActiveItemModuleExist(pocketWatches, ModItems.moduleLifeWalk)) {
+                ItemStack lifeWalk = ItemPocketWatch.getItemModuleFromMultiple(pocketWatches, ModItems.moduleLifeWalk);
+                int lifeModulePower = (int) NBTHelper.getInt(lifeWalk, "module_power");
+                for (int i = 0; i < lifeModulePower / 50; i++) {
+                    GlStateManager.pushMatrix();
+                    ScaledResolution resolution = new ScaledResolution(mc);
+
+                    int screenWidth = resolution.getScaledWidth();
+                    int screenHeight = resolution.getScaledHeight();
+
+                    ResourceLocation res = new ResourceLocation(SpaceTime.MODID, "textures/gui/life.png");
+                    double y1 = screenHeight * 0.02 + i * screenHeight * 0.01 + (!player.getActivePotionMap().isEmpty() ? screenHeight * 0.047 : 0);
+                    double y0 = screenHeight * 0.001 + i * screenHeight * 0.01 + (!player.getActivePotionMap().isEmpty() ? screenHeight * 0.047 : 0);
 
 //                int scale = (mc.gameSettings.guiScale != 0  ? ((int) mc.displayWidth / mc.gameSettings.guiScale) : 0);
 //                if (mc.gameSettings.guiScale == 3) scale = mc.displayWidth / 2;
 
-                mc.getTextureManager().bindTexture(res);
-                buffer.begin(7, DefaultVertexFormats.POSITION_TEX);
-                buffer.pos(screenWidth * 0.98, y1, -90).tex(0, 1).endVertex();
-                buffer.pos(screenWidth * 0.99, y1, -90).tex(1, 1).endVertex();
-                buffer.pos(screenWidth * 0.99, y0, -90).tex(1, 0).endVertex();
-                buffer.pos(screenWidth * 0.98, y0, -90).tex(0, 0).endVertex();
-                tessellator.draw();
+                    mc.getTextureManager().bindTexture(res);
+                    buffer.begin(7, DefaultVertexFormats.POSITION_TEX);
+                    buffer.pos(screenWidth * 0.98, y1, -90).tex(0, 1).endVertex();
+                    buffer.pos(screenWidth * 0.99, y1, -90).tex(1, 1).endVertex();
+                    buffer.pos(screenWidth * 0.99, y0, -90).tex(1, 0).endVertex();
+                    buffer.pos(screenWidth * 0.98, y0, -90).tex(0, 0).endVertex();
+                    tessellator.draw();
 
-                GlStateManager.popMatrix();
+                    GlStateManager.popMatrix();
+                }
             }
-        }
-        if (pocketWatches != null && ItemPocketWatch.doesActiveItemModuleExist(pocketWatches, ModItems.moduleDeathWalk)) {
-            ItemStack deathWalk = ItemPocketWatch.getItemModuleFromMultiple(pocketWatches, ModItems.moduleDeathWalk);
-            int deathModulePower = (int) NBTHelper.getInt(deathWalk, "module_power");
-            for (int i=0;i< deathModulePower/50;i++) {
+            if (pocketWatches != null && ItemPocketWatch.doesActiveItemModuleExist(pocketWatches, ModItems.moduleDeathWalk)) {
+                ItemStack deathWalk = ItemPocketWatch.getItemModuleFromMultiple(pocketWatches, ModItems.moduleDeathWalk);
+                int deathModulePower = (int) NBTHelper.getInt(deathWalk, "module_power");
+                for (int i = 0; i < deathModulePower / 50; i++) {
+                    GlStateManager.pushMatrix();
+                    ScaledResolution resolution = new ScaledResolution(mc);
+
+                    int screenWidth = resolution.getScaledWidth();
+                    int screenHeight = resolution.getScaledHeight();
+
+                    ResourceLocation res = new ResourceLocation(SpaceTime.MODID, "textures/gui/death.png");
+                    double y1 = screenHeight * 0.02 + i * screenHeight * 0.01 + (!player.getActivePotionMap().isEmpty() ? screenHeight * 0.047 : 0);
+                    double y0 = screenHeight * 0.001 + i * screenHeight * 0.01 + (!player.getActivePotionMap().isEmpty() ? screenHeight * 0.047 : 0);
+
+                    mc.getTextureManager().bindTexture(res);
+                    buffer.begin(7, DefaultVertexFormats.POSITION_TEX);
+                    buffer.pos(screenWidth * 0.99, y1, -90).tex(0, 1).endVertex();
+                    buffer.pos(screenWidth, y1, -90).tex(1, 1).endVertex();
+                    buffer.pos(screenWidth, y0, -90).tex(1, 0).endVertex();
+                    buffer.pos(screenWidth * 0.99, y0, -90).tex(0, 0).endVertex();
+                    tessellator.draw();
+
+                    GlStateManager.popMatrix();
+                }
+            }
+
+            if (SpaceFrozenHelper.getSpaceFrozen(player) > 0) {
                 GlStateManager.pushMatrix();
+
                 ScaledResolution resolution = new ScaledResolution(mc);
 
                 int screenWidth = resolution.getScaledWidth();
                 int screenHeight = resolution.getScaledHeight();
 
-                res = new ResourceLocation(SpaceTime.MODID, "textures/gui/death.png");
-                double y1 = screenHeight * 0.02 + i * screenHeight * 0.01 + (!player.getActivePotionMap().isEmpty() ? screenHeight * 0.047 : 0);
-                double y0 = screenHeight * 0.001 + i * screenHeight * 0.01 + (!player.getActivePotionMap().isEmpty() ? screenHeight * 0.047 : 0);
+                Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(I18n.format(SpaceTime.MODID + ".spacefrozen"), (float) (screenWidth * 0.455), (float) (screenHeight * 0.75), 0x6c00ec);
+
+                ResourceLocation res = new ResourceLocation(SpaceTime.MODID, "textures/gui/spacefrozen.png");
 
                 mc.getTextureManager().bindTexture(res);
+//                  GlStateManager.color(148 / 255f, 22 / 255f, 232 / 255f, 0.25f);//RGBA
                 buffer.begin(7, DefaultVertexFormats.POSITION_TEX);
-                buffer.pos(screenWidth * 0.99, y1, -90).tex(0, 1).endVertex();
-                buffer.pos(screenWidth, y1, -90).tex(1, 1).endVertex();
-                buffer.pos(screenWidth, y0, -90).tex(1, 0).endVertex();
-                buffer.pos(screenWidth * 0.99, y0, -90).tex(0, 0).endVertex();
+                buffer.pos(screenWidth * 0.4, screenHeight * 0.85, -90).tex(0, 1).endVertex();
+                buffer.pos(screenWidth * 0.6, screenHeight * 0.85, -90).tex(1, 1).endVertex();
+                buffer.pos(screenWidth * 0.6, screenHeight * 0.8, -90).tex(1, 0).endVertex();
+                buffer.pos(screenWidth * 0.4, screenHeight * 0.8, -90).tex(0, 0).endVertex();
+                tessellator.draw();
+
+                ResourceLocation res1 = new ResourceLocation(SpaceTime.MODID, "textures/gui/spacefrozen_1.png");
+
+                mc.getTextureManager().bindTexture(res1);
+//                  GlStateManager.color(148 / 255f, 22 / 255f, 232 / 255f, 0.25f);//RGBA
+                buffer.begin(7, DefaultVertexFormats.POSITION_TEX);
+                buffer.pos(screenWidth * 0.4, screenHeight * 0.85, -90).tex(0, 1).endVertex();
+                buffer.pos(screenWidth * 0.4 + screenWidth * 0.2 * Math.min((double) SpaceFrozenHelper.getSpaceFrozen(player) / 100, 1d), screenHeight * 0.85, -90).tex(Math.min((double) SpaceFrozenHelper.getSpaceFrozen(player) / 100, 1d), 1).endVertex();
+                buffer.pos(screenWidth * 0.4 + screenWidth * 0.2 * Math.min((double) SpaceFrozenHelper.getSpaceFrozen(player) / 100, 1d), screenHeight * 0.8, -90).tex(Math.min((double) SpaceFrozenHelper.getSpaceFrozen(player) / 100, 1d), 0).endVertex();
+                buffer.pos(screenWidth * 0.4, screenHeight * 0.8, -90).tex(0, 0).endVertex();
                 tessellator.draw();
 
                 GlStateManager.popMatrix();
             }
         }
+
     }
 
 
@@ -207,25 +247,5 @@ public class EventRender {
         if (event.getEntity() instanceof EntityTimePhantom) {
             GlStateManager.disableBlend();
         }
-    }
-
-    @SubscribeEvent
-    public void onRenderLiving(RenderLivingEvent.Pre<AbstractClientPlayer> evt) {
-        if (evt.getEntity() instanceof AbstractClientPlayer) {
-            AbstractClientPlayer player = (AbstractClientPlayer)evt.getEntity();
-            if (player.isHandActive() && SpaceTime.getCanStackBlock(player.getActiveItemStack())) {
-                ModelPlayer model = (ModelPlayer)evt.getRenderer().getMainModel();
-                boolean left2 = player.getActiveHand() == EnumHand.OFF_HAND && player.getPrimaryHand() == EnumHandSide.RIGHT;
-                boolean left1 = player.getActiveHand() == EnumHand.MAIN_HAND && player.getPrimaryHand() == EnumHandSide.LEFT;
-                if (!left1 && !left2) {
-                    if (model.rightArmPose == ModelBiped.ArmPose.ITEM) {
-                        model.rightArmPose = ModelBiped.ArmPose.BLOCK;
-                    }
-                } else if (model.leftArmPose == ModelBiped.ArmPose.ITEM) {
-                    model.leftArmPose = ModelBiped.ArmPose.BLOCK;
-                }
-            }
-        }
-
     }
 }

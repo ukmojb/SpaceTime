@@ -41,11 +41,13 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	public void onInit(){
+		super.onInit();
 		MinecraftForge.EVENT_BUS.register(new EventLossSpatialSense());
 		MinecraftForge.EVENT_BUS.register(new EventRender());
 		MinecraftForge.EVENT_BUS.register(new EventToolTip());
 		MinecraftForge.EVENT_BUS.register(new EventTimeBack());
 		MinecraftForge.EVENT_BUS.register(new EventSpaceStop());
+		MinecraftForge.EVENT_BUS.register(new EventSpaceFrozen());
 	}
 
 

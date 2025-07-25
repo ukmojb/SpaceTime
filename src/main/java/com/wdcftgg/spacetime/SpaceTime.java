@@ -4,10 +4,13 @@ package com.wdcftgg.spacetime;
 import com.wdcftgg.spacetime.blocks.tileEntity.*;
 import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.*;
 import com.wdcftgg.spacetime.blocks.tileEntity.stextractor.STExtractorEntity;
+import com.wdcftgg.spacetime.command.CommandSpaceTime;
 import com.wdcftgg.spacetime.config.Config;
 import com.wdcftgg.spacetime.dimension.BlackHoleWorldProvider;
 import com.wdcftgg.spacetime.dimension.SpaceWorldProvider;
 import com.wdcftgg.spacetime.gui.GuiElementLoader;
+import com.wdcftgg.spacetime.gui.book.BookRegistry;
+import com.wdcftgg.spacetime.gui.book.json.JsonFileLoader;
 import com.wdcftgg.spacetime.init.RegistryHandler;
 import com.wdcftgg.spacetime.network.PacketHandler;
 import com.wdcftgg.spacetime.proxy.CommonProxy;
@@ -47,7 +50,7 @@ public class SpaceTime {
     public static DimensionType BlackHoleDim;
 
     public static final String CLIENT_PROXY_CLASS = "com.wdcftgg.spacetime.proxy.ClientProxy";
-    public static final String SERVER_PROXY_CLASS = "com.wdcftgg.spacetime.proxy.CommonProxy";
+    public static final String SERVER_PROXY_CLASS = "com.wdcftgg.spacetime.proxy.ServerProxy";
 
     @SidedProxy(clientSide = CLIENT_PROXY_CLASS, serverSide = SERVER_PROXY_CLASS)
     public static CommonProxy proxy;
@@ -90,7 +93,9 @@ public class SpaceTime {
 
         PacketHandler.init();
 
+        BookRegistry.initBook();
 
+//        JsonFileLoader.loadAllJsons("books");
 	}
 
     @EventHandler
@@ -106,6 +111,7 @@ public class SpaceTime {
     @EventHandler
     public void serverInit(FMLServerStartingEvent event) {
         RegistryHandler.serverRegistries(event);
+        event.registerServerCommand(new CommandSpaceTime());
     }
 
 
@@ -132,6 +138,7 @@ public class SpaceTime {
         GameRegistry.registerTileEntity(SpaceTimeAirEntity.class, new ResourceLocation(MODID, "spacetimeair"));
         GameRegistry.registerTileEntity(STExtractorEntity.class, new ResourceLocation(MODID, "spacetime_extractor"));
         GameRegistry.registerTileEntity(EndGatewayImitateEntity.class, new ResourceLocation(MODID, "endgatewayimitate"));
+        GameRegistry.registerTileEntity(TimePillarEntity.class, new ResourceLocation(MODID, "timepillar"));
     }
 
     private static void RegisterWorldGen() {

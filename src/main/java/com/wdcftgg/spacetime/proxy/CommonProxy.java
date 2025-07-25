@@ -25,15 +25,6 @@ public class CommonProxy {
 
 	public void onInit(){
 
-		MinecraftForge.EVENT_BUS.register(new EventModuleXP());
-		MinecraftForge.EVENT_BUS.register(new EventChanceName());
-		MinecraftForge.EVENT_BUS.register(new EventExplosion());
-		MinecraftForge.EVENT_BUS.register(new EventHeterospaceLiving());
-		MinecraftForge.EVENT_BUS.register(new EventSpace());
-		MinecraftForge.EVENT_BUS.register(new EventTime());
-		MinecraftForge.EVENT_BUS.register(new EventTimeCrack());
-		MinecraftForge.EVENT_BUS.register(new EventWool());
-		MinecraftForge.EVENT_BUS.register(new EventSpaceStop());
 	}
 
 	public <F, T> T apply(ISidedFunction<F, T> func, F input) {

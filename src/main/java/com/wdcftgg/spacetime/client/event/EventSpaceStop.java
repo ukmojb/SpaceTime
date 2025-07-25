@@ -8,16 +8,21 @@ import net.minecraftforge.client.event.FOVUpdateEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @Mod.EventBusSubscriber
 public class EventSpaceStop {
 
+
     private int num = 60;
 
+    @SideOnly(Side.CLIENT)
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onClientChatEvent(ClientChatEvent event) {
-        EntityPlayer player = Minecraft.getMinecraft().player;
-        if (player != null) {
+        Minecraft mc = Minecraft.getMinecraft();
+        if (mc.player != null) {
+            EntityPlayer player = mc.player;
             if (player.isPotionActive(ModPotions.SpaceStop)) {
                 boolean shouldFreeze = true;
                 if (player.isDead || player.getHealth() <= 0) {
@@ -30,6 +35,7 @@ public class EventSpaceStop {
         }
     }
 
+    @SideOnly(Side.CLIENT)
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onFOVUpdate(FOVUpdateEvent event) {
         EntityPlayer player = event.getEntity();
@@ -50,7 +56,8 @@ public class EventSpaceStop {
         }
     }
 
-    public float getFovModifier(EntityPlayer player)
+    @SideOnly(Side.CLIENT)
+    private float getFovModifier(EntityPlayer player)
     {
         float f = 1.0F;
 

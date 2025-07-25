@@ -7,15 +7,20 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.storage.AnvilChunkLoader;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,6 +31,18 @@ import java.util.Objects;
  * @create 2024/2/4 23:09
  */
 public class Tools {
+
+    public static List<EntityPlayerMP> getPlayersInDimension(int dimensionId) {
+        MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
+        if (server == null) return Collections.emptyList();
+
+        WorldServer world = server.getWorld(dimensionId);
+        if (world == null) return Collections.emptyList();
+
+        // 获取所有玩家（服务端玩家）
+        return world.getPlayers(EntityPlayerMP.class, player -> true);
+    }
+
     public static void setBlockAABB(BlockPos pos1, BlockPos pos2, Block block, EntityLivingBase livingBase) {
         Objects.requireNonNull(livingBase.getServer()).commandManager.executeCommand(livingBase, "/fill " + pos1.getX() + " " + pos1.getY() + " " + pos1.getZ() + " " + pos2.getX() + " " + pos2.getY() + " " + pos2.getZ() + " " + block.getRegistryName());
     }
@@ -39,11 +56,12 @@ public class Tools {
     }
 
     public static List<EntitySpaceSword> getSpaceChallengefieldSword(World world) {
+        List<EntitySpaceSword> entitySpaceSwordList = new ArrayList<>();
         if (!world.isRemote && world.provider.getDimension() == Config.SPACEDDIM) {
-            List<EntitySpaceSword> entitySpaceSwordList = world.getEntitiesWithinAABB(EntitySpaceSword.class, new AxisAlignedBB(new BlockPos(73, 80, -13), new BlockPos(47, 82, 13)));
+            entitySpaceSwordList = world.getEntitiesWithinAABB(EntitySpaceSword.class, new AxisAlignedBB(new BlockPos(73, 80, -13), new BlockPos(47, 82, 13)));
             return entitySpaceSwordList;
         }
-        return new ArrayList<EntitySpaceSword>();
+        return entitySpaceSwordList;
     }
 
     public static BlockPos getRightPosition(Entity entity, float offset) {

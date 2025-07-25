@@ -2,6 +2,7 @@ package com.wdcftgg.spacetime.entity.ai.space;
 
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.STBlocks;
+import com.wdcftgg.spacetime.config.Config;
 import com.wdcftgg.spacetime.dimension.SpaceWorldProvider;
 import com.wdcftgg.spacetime.entity.EntitySpace;
 import com.wdcftgg.spacetime.entity.EntitySpaceSword;
@@ -17,10 +18,12 @@ import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -30,6 +33,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
+import net.minecraftforge.common.DimensionManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,9 +51,6 @@ public class SpaceAIAttack extends EntityAIBase
     private World world;
     protected EntitySpace attacker;
     protected int attackTick;
-
-    public static long attacktime = -1;
-
 
     public final BlockPos[] swordspownposlist = new  BlockPos[]{
             new BlockPos(69.0, 80.0, 9.0),
@@ -73,7 +74,7 @@ public class SpaceAIAttack extends EntityAIBase
 
     public boolean shouldExecute()
     {
-        return attacker.getMode() != "speak";
+        return attacker.getMode() != "speak" && attacker.getMode() != "before_reward" && attacker.getMode() != "reward" && attacker.getPhases() != 4;
     }
 
     public boolean shouldContinueExecuting()
@@ -84,9 +85,9 @@ public class SpaceAIAttack extends EntityAIBase
     public void startExecuting()
     {
         Random random = new Random();
-        if (!SpaceWorldProvider.getPlayerList().isEmpty()) {
-            int randint = random.nextInt(SpaceWorldProvider.getPlayerList().size());
-            attacker.setAttackTarget(SpaceWorldProvider.getPlayerList().get(randint));
+        if (!Tools.getPlayersInDimension(Config.SPACEDDIM).isEmpty()) {
+            int randint = random.nextInt(Tools.getPlayersInDimension(Config.SPACEDDIM).size());
+            attacker.setAttackTarget(Tools.getPlayersInDimension(Config.SPACEDDIM).get(randint));
         }
     }
 
@@ -101,7 +102,7 @@ public class SpaceAIAttack extends EntityAIBase
     protected void attackWithPhases(EntitySpace entitySpace, EntityLivingBase target, int phases)
     {
 
-        if (entitySpace.getMode() == "speak") return;
+        if (entitySpace.getMode() == "speak" || entitySpace.getMode() == "before_reward" || entitySpace.getMode() == "reward" || attacker.getPhases() == 4) return;
 
         this.attackTick = Math.max(entitySpace.getAttackTick() - 1, 0);
         if (entitySpace.getAttackTick() <= 0) {
@@ -114,14 +115,23 @@ public class SpaceAIAttack extends EntityAIBase
                     if (Tools.getSpaceChallengefieldSword(world).size() < 5) {
                         spawnSword(world);
                     }
-                    for (EntityPlayer player : SpaceWorldProvider.getPlayerList()) {
-                        System.out.println("addPotionEffect");
-//                        if (!player.isCreative())
+                    for (EntityPlayer player : Tools.getPlayersInDimension(Config.SPACEDDIM)) {
                         player.addPotionEffect(new PotionEffect(ModPotions.LossSpatialSense, 99999, 0, true, false));
+                        player.addPotionEffect(new PotionEffect(MobEffects.LEVITATION, 99999, 0, true, false));
                     }
                 } else {
                     if (Tools.getSpaceChallengefieldSword(world).isEmpty()) {
                         spawnSword(world);
+                    }
+                    if (world.getTotalWorldTime() % 10 == 0) {
+                        for (EntityPlayer player : Tools.getPlayersInDimension(Config.SPACEDDIM)) {
+                            if (player.posY >= 160 && !(player.capabilities.isCreativeMode)) {
+                                player.setPosition(60.5, 151, 0.5);
+//                                entityPlayerMP.connection.setPlayerLocation(60.5, 151, 0.5, player.rotationYaw, player.rotationPitch);
+                                world.addWeatherEffect(new EntityLightningBolt(world, 60.5, 151, 0.5, false));
+                                player.attackEntityFrom(DamageSource.GENERIC, 15);
+                            }
+                        }
                     }
                 }
             } else if (phases == 2) {
@@ -130,6 +140,11 @@ public class SpaceAIAttack extends EntityAIBase
                         world.removeEntity(spaceSword);
                     }
                 }
+
+                if (world.getTotalWorldTime() % 10 == 0) {
+                    Tools.setPosition(entitySpace, new BlockPos(entitySpace.posX, 151, entitySpace.posZ));
+                }
+
                 if (entitySpace.getMode() != "sprinting" && entitySpace.getMode() != "weakness") {
                     entitySpace.setMode("sprinting");
 
@@ -144,9 +159,14 @@ public class SpaceAIAttack extends EntityAIBase
                     Tools.setBlockAABB(new BlockPos(74, 79, 14), new BlockPos(45, 82, -14), Blocks.AIR, entitySpace);
 
 
-                    for (EntityPlayerMP player : SpaceWorldProvider.getPlayerList()) {
+                    for (EntityPlayer player : Tools.getPlayersInDimension(Config.SPACEDDIM)) {
+                        EntityPlayerMP entityPlayerMP = (EntityPlayerMP) player;
                         player.removeActivePotionEffect(ModPotions.LossSpatialSense);
-                        player.connection.setPlayerLocation(60.5, 151, 0.5, player.rotationYaw, player.rotationPitch);
+                        player.removeActivePotionEffect(MobEffects.LEVITATION);
+
+                        entityPlayerMP.connection.setPlayerLocation(60.5, 151, 0.5, player.rotationYaw, player.rotationPitch);
+                        PacketHandler.INSTANCE.sendTo(new MessageRemovePotion(Potion.getIdFromPotion(ModPotions.LossSpatialSense)), entityPlayerMP);
+                        PacketHandler.INSTANCE.sendTo(new MessageRemovePotion(Potion.getIdFromPotion(MobEffects.LEVITATION)), entityPlayerMP);
                     }
 
                     world.addWeatherEffect(new EntityLightningBolt(world, 46, 152, -14, false));
@@ -154,15 +174,15 @@ public class SpaceAIAttack extends EntityAIBase
                     world.addWeatherEffect(new EntityLightningBolt(world, 74, 152, -14, false));
                     world.addWeatherEffect(new EntityLightningBolt(world, 74, 152, -14, false));
 
-                    Tools.setPosition(entitySpace, new BlockPos(entitySpace.posX, 151, entitySpace.posZ));
+                    Tools.setPosition(entitySpace, new BlockPos(45, 151, -15));
 
                 }
 
-                for (EntityPlayerMP player : SpaceWorldProvider.getPlayerList()) {
-                    player.removePotionEffect(ModPotions.LossSpatialSense);
-                    PacketHandler.INSTANCE.sendTo(new MessageRemovePotion(Potion.getIdFromPotion(ModPotions.LossSpatialSense)), player);
-
-                }
+//                for (EntityPlayerMP player : SpaceWorldProvider.getPlayerList()) {
+//                    player.removePotionEffect(ModPotions.LossSpatialSense);
+//                        player.removeActivePotionEffect(MobEffects.LEVITATION);
+//
+//                }
 
 //                CollidedTimePillarInAABB(entitySpace, entitySpace.getEntityBoundingBox());
 
@@ -177,9 +197,12 @@ public class SpaceAIAttack extends EntityAIBase
                 if (entitySpace.getMode() != "wait") {
                     entitySpace.setMode("wait");
                     entitySpace.setPosition(60, 200, 0);
-                    for (EntityPlayer player : SpaceWorldProvider.getPlayerList()) {
-                        EntityPlayerMP playermp = (EntityPlayerMP) player;
-                        playermp.connection.setPlayerLocation(0, 90, 0, playermp.rotationYaw, playermp.rotationPitch);
+                    World world1 = DimensionManager.getWorld(Config.SPACEDDIM);
+
+                    List<EntityPlayer> playersInDimension = world1.playerEntities;
+                    for (EntityPlayer player : playersInDimension) {
+                        EntityPlayerMP entityPlayerMP = (EntityPlayerMP) player;
+                        entityPlayerMP.connection.setPlayerLocation(0, 90, 0, player.rotationYaw, player.rotationPitch);
                     }
                 }
             }

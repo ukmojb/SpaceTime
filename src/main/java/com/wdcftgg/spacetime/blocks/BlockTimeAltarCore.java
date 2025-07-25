@@ -120,12 +120,9 @@ public class BlockTimeAltarCore extends Block implements IHasModel {
                         killItems(world, pos);
                         removeHourEnergy((player.isCreative() ? nulllist : energy), pos, world);
                         TimeSandHelper.removeTimeSand(itemStack, te.getTimeSand());
-//                        if (config.ALTARAUTOMATE) {
-//                            EntityItem item = new EntityItem(world, pos.getX(), pos.getY() + 1, pos.getZ(), itemStack1);
-//                            world.spawnEntity(item);
-//                        } else {
-                            summonZombie(pos, world, player, itemStack1);
-//                        }
+
+                        EntityItem item = new EntityItem(world, pos.getX(), pos.getY() + 1, pos.getZ(), itemStack1);
+                        world.spawnEntity(item);
                     } else {
                         player.sendMessage(new TextComponentString(I18n.format("spacetime.altar.hourglass.noenergy")));
                     }

@@ -1,6 +1,7 @@
 package com.wdcftgg.spacetime.network;
 
 import io.netty.buffer.ByteBuf;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -29,7 +30,7 @@ public class MessageRemovePotion implements IMessageHandler<MessageRemovePotion,
 
 
     public IMessage onMessage(MessageRemovePotion message, MessageContext ctx) {
-        EntityPlayer player = ctx.getServerHandler().player;
+        EntityPlayer player = Minecraft.getMinecraft().player;
         if (player != null) {
             Potion potion = Potion.getPotionById(message.potid);
             player.removePotionEffect(potion);

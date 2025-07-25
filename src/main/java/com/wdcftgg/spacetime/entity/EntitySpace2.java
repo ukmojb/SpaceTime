@@ -65,6 +65,7 @@ public class EntitySpace2 extends EntityMob implements IAnimatable {
         this.setNoGravity(true);
         this.isImmuneToFire = true;
         this.setSize(1F, 1.8F);
+        this.enablePersistence();
     }
 
     @Override
@@ -87,7 +88,7 @@ public class EntitySpace2 extends EntityMob implements IAnimatable {
     {
         super.onLivingUpdate();
 
-        if (!getLastmode().equals("default")) System.out.println(getLastmode());
+//        if (!getLastmode().equals("default")) System.out.println(getLastmode());
 
         if (!world.isRemote) {
             if (!CommonProxy.space2list.contains(this.getEntityId()) && world.getTotalWorldTime() % 20 == 0) {
@@ -160,7 +161,6 @@ public class EntitySpace2 extends EntityMob implements IAnimatable {
     @Override
     public void onDeath(DamageSource cause)
     {
-        SpaceAIAttack.attacktime = -1;
         CommonProxy.space2list.remove(this.getEntityId());
     }
 
