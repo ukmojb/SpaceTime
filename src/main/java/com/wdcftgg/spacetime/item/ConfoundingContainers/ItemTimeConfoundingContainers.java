@@ -9,6 +9,7 @@ package com.wdcftgg.spacetime.item.ConfoundingContainers;
 
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.init.ModCreativeTab;
+import com.wdcftgg.spacetime.item.ItemBase;
 import com.wdcftgg.spacetime.item.STItems;
 import com.wdcftgg.spacetime.util.IHasModel;
 import lumaceon.mods.clockworkphase.item.construct.abstracts.ITimeSand;
@@ -27,7 +28,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class ItemTimeConfoundingContainers extends Item implements ITimeSand, IHasModel, ITimeSandSupplier {
+public class ItemTimeConfoundingContainers extends ItemBase implements ITimeSand, IHasModel, ITimeSandSupplier {
 
     public ItemTimeConfoundingContainers()
     {

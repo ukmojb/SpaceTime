@@ -2,6 +2,7 @@ package com.wdcftgg.spacetime.item.ConfoundingContainers;
 
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.init.ModCreativeTab;
+import com.wdcftgg.spacetime.item.ItemBase;
 import com.wdcftgg.spacetime.item.STItems;
 import com.wdcftgg.spacetime.util.IHasModel;
 import com.wdcftgg.spacetime.util.ISpace;
@@ -24,7 +25,7 @@ import java.util.List;
  * @Author : wdcftgg
  * @create 2023/4/30 0:16
  */
-public class ItemSpaceConfoundingContainers extends Item implements ISpace, IHasModel {
+public class ItemSpaceConfoundingContainers extends ItemBase implements ISpace, IHasModel {
     public ItemSpaceConfoundingContainers()
     {
         setMaxStackSize(1);

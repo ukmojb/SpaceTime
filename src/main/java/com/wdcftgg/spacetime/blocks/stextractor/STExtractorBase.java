@@ -1,6 +1,7 @@
 package com.wdcftgg.spacetime.blocks.stextractor;
 
 import com.wdcftgg.spacetime.SpaceTime;
+import com.wdcftgg.spacetime.blocks.BlockBase;
 import com.wdcftgg.spacetime.blocks.STBlocks;
 import com.wdcftgg.spacetime.blocks.tileEntity.stextractor.STExtractorEntity;
 import com.wdcftgg.spacetime.gui.GuiElementLoader;
@@ -32,7 +33,7 @@ import net.minecraft.world.World;
  * @Author : wdcftgg
  * @create 2023/7/27 9:33
  */
-public class STExtractorBase extends Block implements ITileEntityProvider, IHasModel {
+public class STExtractorBase extends BlockBase implements ITileEntityProvider, IHasModel {
     public STExtractorBase(String name){
         super(Material.ROCK);
         setTranslationKey(name + "_stextractor");

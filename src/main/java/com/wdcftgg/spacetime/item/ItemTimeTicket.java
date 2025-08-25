@@ -26,7 +26,7 @@ import java.util.List;
  * @Author : wdcftgg
  * @create 2023/8/5 11:46
  */
-public class ItemTimeTicket extends Item implements IHasModel {
+public class ItemTimeTicket extends ItemBase implements IHasModel {
     public ItemTimeTicket()
     {
         setTranslationKey("timeticket");

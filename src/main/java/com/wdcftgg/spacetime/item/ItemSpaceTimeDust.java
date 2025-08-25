@@ -19,7 +19,7 @@ import java.util.List;
  * @Author : wdcftgg
  * @create 2023/6/7 20:12
  */
-public class ItemSpaceTimeDust extends Item implements IHasModel {
+public class ItemSpaceTimeDust extends ItemBase implements IHasModel {
     public ItemSpaceTimeDust()
     {
         setTranslationKey("spacetime_dust");

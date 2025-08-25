@@ -41,6 +41,7 @@ tile.spacetime.space_fence.name=时间栅栏
 tile.spacetime.time_fence.name=空间栅栏
 tile.spacetime.reverse_beacon.name=颠倒信标
 tile.spacetime.temporal_brass_block.name=时间黄铜块
+tile.spacetime.space_reword.name=时空之赐
 
 # Items
 

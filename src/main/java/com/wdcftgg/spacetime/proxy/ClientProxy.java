@@ -1,16 +1,10 @@
 package com.wdcftgg.spacetime.proxy;
 
-import com.wdcftgg.spacetime.blocks.tileEntity.ConcretizationHourGlassEntity;
-import com.wdcftgg.spacetime.blocks.tileEntity.EndGatewayImitateEntity;
+import com.wdcftgg.spacetime.blocks.tileEntity.*;
 import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.*;
-import com.wdcftgg.spacetime.blocks.tileEntity.ReverseBeaconEntity;
-import com.wdcftgg.spacetime.blocks.tileEntity.TimeAltarCoreEntity;
 import com.wdcftgg.spacetime.client.event.*;
+import com.wdcftgg.spacetime.client.render.block.*;
 import com.wdcftgg.spacetime.client.render.block.HourGlass.*;
-import com.wdcftgg.spacetime.client.render.block.RenderConcretizationHourGlass;
-import com.wdcftgg.spacetime.client.render.block.RenderEndGatewayImitate;
-import com.wdcftgg.spacetime.client.render.block.RenderReverseBeacon;
-import com.wdcftgg.spacetime.client.render.block.RenderTimeAltarCore;
 import com.wdcftgg.spacetime.client.render.entity.*;
 import com.wdcftgg.spacetime.entity.*;
 import com.wdcftgg.spacetime.init.ParticleInit;
@@ -83,6 +77,7 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TimeAltarCoreEntity.class, new RenderTimeAltarCore());
 		ClientRegistry.bindTileEntitySpecialRenderer(EndGatewayImitateEntity.class, new RenderEndGatewayImitate());
 		ClientRegistry.bindTileEntitySpecialRenderer(ReverseBeaconEntity.class, new RenderReverseBeacon());
+		ClientRegistry.bindTileEntitySpecialRenderer(SpaceRewordEntity.class, new RenderSpaceReword());
 	}
 
 	public void onPostInit() {

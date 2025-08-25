@@ -35,7 +35,7 @@ public final class SpaceWorldProvider extends WorldProvider {
     protected void init()
     {
         this.hasSkyLight = true;
-        this.biomeProvider = new BiomeProviderSingle(RegistryHandler.NULL);
+        this.biomeProvider = new STBiomeProvider();
     }
 
     public static List<EntityPlayerMP> playerList = new ArrayList<>();
@@ -126,12 +126,6 @@ public final class SpaceWorldProvider extends WorldProvider {
     }
 
     @Override
-    public BiomeProvider getBiomeProvider() {
-        return new BiomeProviderSingle(Biomes.VOID);
-
-    }
-
-    @Override
     public float calculateCelestialAngle(long worldTime, float partialTicks) {
         return 0.0F;
     }
@@ -142,6 +136,24 @@ public final class SpaceWorldProvider extends WorldProvider {
     @SideOnly(Side.CLIENT)
     public float[] calcSunriseSunsetColors(float celestialAngle, float partialTicks) {
         return null;
+    }
+
+    @Override
+    public BiomeProvider getBiomeProvider() {
+        return new STBiomeProvider();
+    }
+
+    @Override
+    public void setWorldTime(long time)
+    {
+
+    }
+
+
+    @Override
+    public long getWorldTime()
+    {
+        return 17843;
     }
 
     @Override

@@ -27,7 +27,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockReverseBeacon extends Block implements IHasModel {
+public class BlockReverseBeacon extends BlockBase implements IHasModel {
     public BlockReverseBeacon()
     {
         super(Material.GLASS, MapColor.DIAMOND);

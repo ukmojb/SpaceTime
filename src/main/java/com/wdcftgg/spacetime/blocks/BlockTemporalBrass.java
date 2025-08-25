@@ -11,7 +11,7 @@ import net.minecraft.item.ItemBlock;
 
 import java.util.Random;
 
-public class BlockTemporalBrass extends Block implements IHasModel {
+public class BlockTemporalBrass extends BlockBase implements IHasModel {
     public BlockTemporalBrass()
     {
         super(Material.ROCK);

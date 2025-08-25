@@ -21,7 +21,7 @@ import java.util.Random;
  * @Author : wdcftgg
  * @create 2023/4/30 23:00
  */
-public class BlockTimeCompressor extends Block implements IHasModel {
+public class BlockTimeCompressor extends BlockBase implements IHasModel {
     public BlockTimeCompressor()
     {
         super(Material.ROCK);

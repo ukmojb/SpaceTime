@@ -5,6 +5,7 @@ import com.wdcftgg.spacetime.init.ModCreativeTab;
 import com.wdcftgg.spacetime.util.IHasModel;
 import lumaceon.mods.clockworkphase.item.construct.pocketwatch.module.ItemModule;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -15,6 +16,7 @@ import net.minecraft.world.World;
  * @create 2023/7/31 17:34
  */
 public class ItemModuleXP extends ItemModule implements IHasModel {
+    private String translationKey;
     public ItemModuleXP() {
         setTranslationKey("module_xp");
         setRegistryName("module_xp");
@@ -23,6 +25,18 @@ public class ItemModuleXP extends ItemModule implements IHasModel {
         STItems.ITEMS.add(this);
     }
 
+    @Override
+    public String getTranslationKey(ItemStack stack)
+    {
+        return "item.spacetime." + this.translationKey;
+    }
+
+    @Override
+    public Item setTranslationKey(String key)
+    {
+        this.translationKey = key;
+        return this;
+    }
 
     @Override
     public void registerModels()

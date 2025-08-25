@@ -19,7 +19,7 @@ import java.util.List;
  * @Author : wdcftgg
  * @create 2023/6/7 20:10
  */
-public class ItemSpaceTimeNugget extends Item implements IHasModel {
+public class ItemSpaceTimeNugget extends ItemBase implements IHasModel {
     public ItemSpaceTimeNugget()
     {
         setRegistryName("spacetime_nugget");

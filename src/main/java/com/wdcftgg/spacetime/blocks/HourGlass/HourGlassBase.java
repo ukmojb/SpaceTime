@@ -6,6 +6,7 @@ import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.HourGlassEntity;
 import com.wdcftgg.spacetime.init.ModCreativeTab;
 import com.wdcftgg.spacetime.item.STItems;
 import com.wdcftgg.spacetime.util.IHasModel;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -33,6 +34,7 @@ import net.minecraft.world.World;
  * @create 2023/5/3 15:20
  */
 public class HourGlassBase extends BlockDirectional implements ITileEntityProvider, IHasModel {
+    private String translationKey;
     public HourGlassBase(String name){
         super(Material.ROCK);
         setTranslationKey(name);
@@ -56,6 +58,19 @@ public class HourGlassBase extends BlockDirectional implements ITileEntityProvid
             "moon",
             "water"
     };
+
+    @Override
+    public String getTranslationKey()
+    {
+        return "tile.spacetime." + this.translationKey;
+    }
+
+    @Override
+    public Block setTranslationKey(String key)
+    {
+        this.translationKey = key;
+        return this;
+    }
 
 
     @Override

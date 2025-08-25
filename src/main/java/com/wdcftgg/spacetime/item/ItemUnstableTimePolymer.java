@@ -28,7 +28,7 @@ import java.util.List;
  * @Author : wdcftgg
  * @create 2023/4/30 15:24
  */
-public class ItemUnstableTimePolymer extends Item implements ITime, IHasModel {
+public class ItemUnstableTimePolymer extends ItemBase implements ITime, IHasModel {
     public ItemUnstableTimePolymer()
     {
         setTranslationKey("unstable_time_polymer");

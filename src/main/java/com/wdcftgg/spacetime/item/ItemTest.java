@@ -26,7 +26,7 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
 
-public class ItemTest extends Item implements IHasModel {
+public class ItemTest extends ItemBase implements IHasModel {
     public ItemTest()
     {
         setTranslationKey("sssssssad");

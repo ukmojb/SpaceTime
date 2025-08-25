@@ -20,7 +20,7 @@ import net.minecraft.world.World;
  * @Author : wdcftgg
  * @create 2023/10/1 15:51
  */
-public class BlockEndGatewayImitate extends Block implements IHasModel {
+public class BlockEndGatewayImitate extends BlockBase implements IHasModel {
     public BlockEndGatewayImitate()
     {
         super(Material.ROCK);

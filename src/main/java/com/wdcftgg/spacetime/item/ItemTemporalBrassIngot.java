@@ -11,7 +11,7 @@ import net.minecraft.item.Item;
  * @Author : wdcftgg
  * @create 2023/7/18 18:11
  */
-public class ItemTemporalBrassIngot extends Item implements IHasModel {
+public class ItemTemporalBrassIngot extends ItemBase implements IHasModel {
     public ItemTemporalBrassIngot()
     {
         setTranslationKey("temporal_brass_ingot");

@@ -15,7 +15,7 @@ import net.minecraft.item.ItemBlock;
  * @Author : wdcftgg
  * @create 2023/9/23 11:04
  */
-public class BlockTimeBrick extends Block implements IHasModel {
+public class BlockTimeBrick extends BlockBase implements IHasModel {
     public BlockTimeBrick() {
         super(Material.ROCK);
         setTranslationKey("time_brick");

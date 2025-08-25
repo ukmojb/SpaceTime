@@ -10,6 +10,7 @@ import com.wdcftgg.spacetime.init.ModCreativeTab;
 import com.wdcftgg.spacetime.util.IHasModel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -19,6 +20,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemSuperGoldApple extends ItemFood implements IHasModel {
+    private String translationKey;
     public ItemSuperGoldApple() {
         super(10, 66.6F, true);
         this.setAlwaysEdible();
@@ -27,6 +29,19 @@ public class ItemSuperGoldApple extends ItemFood implements IHasModel {
         this.setCreativeTab(ModCreativeTab.SpaceTimeTab);
 
         STItems.ITEMS.add(this);
+    }
+
+    @Override
+    public String getTranslationKey(ItemStack stack)
+    {
+        return "item.spacetime." + this.translationKey;
+    }
+
+    @Override
+    public Item setTranslationKey(String key)
+    {
+        this.translationKey = key;
+        return this;
     }
 
     @Override

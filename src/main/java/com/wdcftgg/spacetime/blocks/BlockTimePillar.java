@@ -28,7 +28,7 @@ import java.util.Random;
  * @Author : wdcftgg
  * @create 2023/4/29 3:04
  */
-public class BlockTimePillar extends Block implements IHasModel {
+public class BlockTimePillar extends BlockBase implements IHasModel {
     public BlockTimePillar()
     {
         super(Material.ROCK);
@@ -64,17 +64,6 @@ public class BlockTimePillar extends Block implements IHasModel {
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
         return false;
-    }
-
-    @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
-    {
-        super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-
-        TimePillarEntity timePillarEntity = (TimePillarEntity) worldIn.getTileEntity(pos);
-        if (!worldIn.isRemote) {
-
-        }
     }
 
     @Override

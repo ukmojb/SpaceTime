@@ -8,6 +8,7 @@ package com.wdcftgg.spacetime.blocks.slab;
  */
 
 import com.wdcftgg.spacetime.SpaceTime;
+import com.wdcftgg.spacetime.blocks.BlockBase;
 import com.wdcftgg.spacetime.init.ModCreativeTab;
 import com.wdcftgg.spacetime.util.IHasModel;
 import net.minecraft.block.Block;
@@ -34,7 +35,7 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 
-public class BlockSlabBase extends Block implements IHasModel {
+public class BlockSlabBase extends BlockBase implements IHasModel {
     public static final PropertyEnum<EnumBlockFrostHalf> HALF = PropertyEnum.create("half", EnumBlockFrostHalf.class);
     protected static final AxisAlignedBB AABB_BOTTOM_HALF = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D);
     protected static final AxisAlignedBB AABB_TOP_HALF = new AxisAlignedBB(0.0D, 0.5D, 0.0D, 1.0D, 1.0D, 1.0D);

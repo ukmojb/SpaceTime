@@ -19,7 +19,7 @@ import java.util.List;
  * @Author : wdcftgg
  * @create 2023/6/7 20:08
  */
-public class ItemSpaceTimeIngot extends Item implements IHasModel {
+public class ItemSpaceTimeIngot extends ItemBase implements IHasModel {
     public ItemSpaceTimeIngot()
     {
         setTranslationKey("spacetime_ingot");

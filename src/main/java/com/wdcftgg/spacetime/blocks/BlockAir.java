@@ -27,7 +27,7 @@ import javax.annotation.Nullable;
  * @Author : wdcftgg
  * @create 2023/7/14 23:53
  */
-public class BlockAir extends Block implements IHasModel {
+public class BlockAir extends BlockBase implements IHasModel {
     public BlockAir()
     {
         super(Material.AIR);

@@ -7,7 +7,7 @@ import com.wdcftgg.spacetime.util.NBTHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class BookBase extends Item implements IBook {
+public class BookBase extends ItemBase implements IBook {
 
     private BookData bookData;
 

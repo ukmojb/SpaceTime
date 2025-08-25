@@ -1,5 +1,6 @@
 package com.wdcftgg.spacetime.dimension;
 
+import com.wdcftgg.spacetime.init.RegistryHandler;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
@@ -47,6 +48,12 @@ public class ChunkGeneratorBlackHole implements IChunkGenerator {
         }
 
         Chunk chunk = new Chunk(this.world, chunkprimer, x, z);
+        chunk.generateSkylightMap();
+        byte[] abyte = chunk.getBiomeArray();
+        for (int i1 = 0; i1 < abyte.length; ++i1) {
+            abyte[i1] = (byte) Biome.getIdForBiome(RegistryHandler.NULL);
+        }
+        chunk.generateSkylightMap();
         return chunk;
     }
 

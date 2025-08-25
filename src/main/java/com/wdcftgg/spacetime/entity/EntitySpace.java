@@ -35,6 +35,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -109,6 +111,12 @@ public class EntitySpace extends EntityMob implements IAnimatable {
     public void setCustomNameTag(String p_setCustomNameTag_1_) {
         super.setCustomNameTag(p_setCustomNameTag_1_);
         this.bossInfo.setName(this.getDisplayName());
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean isInRangeToRender3d(double x, double y, double z) {
+        return true;
     }
 
     @Override
@@ -248,8 +256,10 @@ public class EntitySpace extends EntityMob implements IAnimatable {
     @Override
     public boolean processInteract(EntityPlayer player, EnumHand hand)
     {
-//        if (!player.world.isRemote) {
-            if (this.getMode() == "before_reward") {
+        if (!player.world.isRemote) {
+            System.out.println((phases == 0));
+        }
+            if (Objects.equals(this.getMode(), "before_reward")) {
                 this.setMode("reward");
             }
 //        }
@@ -453,15 +463,21 @@ public class EntitySpace extends EntityMob implements IAnimatable {
 
     private <T extends IAnimatable> void phaseListener(CustomInstructionKeyframeEvent<T> event)
     {
-        if (phases == 0) {
+        if (phases == 0 && Objects.equals(mode, "turbulence")) {
             PacketHandler.INSTANCE.sendToServer(new MessageSpacePhase0(this.getEntityId()));
         }
         if(Objects.equals(mode, "weakness")) {
             PacketHandler.INSTANCE.sendToServer(new MessageSpaceWeakness(this.getEntityId()));
         }
         if(Objects.equals(mode, "reward")) {
-            this.setMode("rewarding");
-            PacketHandler.INSTANCE.sendToServer(new MessageSyncModeSpace("rewarding"));
+            if (event.instructions.contains("mode")) {
+                this.setMode("rewarding");
+                PacketHandler.INSTANCE.sendToServer(new MessageSyncModeSpace("rewarding"));
+            }
+            if (event.instructions.contains("reward")) {
+                int rewardNum = Integer.getInteger(event.instructions.replace("reward", "").replace(";", ""));
+                PacketHandler.INSTANCE.sendToServer(new MessageSpaceReward(rewardNum));
+            }
         }
     }
 
@@ -542,15 +558,16 @@ public class EntitySpace extends EntityMob implements IAnimatable {
         template.addBlocksToWorld(world, pos, new PlacementSettings(), 2|4|16);
         SpaceTime.Log("challengefield3 re-saved");
 
-        this.setPosition(60, 80, 0);
+        this.setPosition(60.5, 80, 0.5);
 
         for (EntityPlayerMP playerMP : Tools.getPlayersInDimension(Config.SPACEDDIM)) {
             if (!playerMP.isSpectator() && !playerMP.isCreative()) {
-                playerMP.setPosition(50, 80, 0);
+                playerMP.setPosition(50, 80, 13.5);
             }
         }
 
-        this.getLookHelper().setLookPosition(50, 82, 0, 0, 0);
+        this.rotationYaw = 0;
+        this.rotationPitch = 0;
 
     }
 

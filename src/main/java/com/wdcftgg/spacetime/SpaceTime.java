@@ -83,7 +83,7 @@ public class SpaceTime {
     public void Init(FMLInitializationEvent event) {
 
         GeckoLib.initialize();
-        RegisterTileEntity();
+        RegistryHandler.RegisterTileEntity();
         RegisterWorldGen();
         CraftingLoader.init();
         new GuiElementLoader();
@@ -115,31 +115,6 @@ public class SpaceTime {
     }
 
 
-
-    private static void RegisterTileEntity() {
-//        GameRegistry.registerTileEntity(TileEntityDeBoomOrb.class, new ResourceLocation(MODID, "deboom_orb_basic"));
-
-        GameRegistry.registerTileEntity(TimeCompressorEntity.class, new ResourceLocation(MODID, "CompressorEntity"));
-        GameRegistry.registerTileEntity(SpaceTimeTurbulenceEntity.class, new ResourceLocation(MODID, "TimeTurbulenceEntity"));
-        GameRegistry.registerTileEntity(ReverseBeaconEntity.class, new ResourceLocation(MODID, "ReverseBeaconEntity"));
-
-        GameRegistry.registerTileEntity(HourGlassEntity.class, new ResourceLocation(MODID, "hourglass"));
-        GameRegistry.registerTileEntity(AirHourGlassEntity.class, new ResourceLocation(MODID, "airhourglass"));
-        GameRegistry.registerTileEntity(DeathHourGlassEntity.class, new ResourceLocation(MODID, "deathhourglass"));
-        GameRegistry.registerTileEntity(EarthHourGlassEntity.class, new ResourceLocation(MODID, "earthhourglass"));
-        GameRegistry.registerTileEntity(FireHourGlassEntity.class, new ResourceLocation(MODID, "firehourglass"));
-        GameRegistry.registerTileEntity(LifeHourGlassEntity.class, new ResourceLocation(MODID, "lifehourglass"));
-        GameRegistry.registerTileEntity(LightHourGlassEntity.class, new ResourceLocation(MODID, "lighthourglass"));
-        GameRegistry.registerTileEntity(MoonHourGlassEntity.class, new ResourceLocation(MODID, "moonhourglass"));
-        GameRegistry.registerTileEntity(WaterHourGlassEntity.class, new ResourceLocation(MODID, "waterhourglass"));
-
-        GameRegistry.registerTileEntity(ConcretizationHourGlassEntity.class, new ResourceLocation(MODID, "concretizationhourglass"));
-        GameRegistry.registerTileEntity(TimeAltarCoreEntity.class, new ResourceLocation(MODID, "timealtarcore"));
-        GameRegistry.registerTileEntity(SpaceTimeAirEntity.class, new ResourceLocation(MODID, "spacetimeair"));
-        GameRegistry.registerTileEntity(STExtractorEntity.class, new ResourceLocation(MODID, "spacetime_extractor"));
-        GameRegistry.registerTileEntity(EndGatewayImitateEntity.class, new ResourceLocation(MODID, "endgatewayimitate"));
-        GameRegistry.registerTileEntity(TimePillarEntity.class, new ResourceLocation(MODID, "timepillar"));
-    }
 
     private static void RegisterWorldGen() {
 //        GameRegistry.registerTileEntity(TileEntityDeBoomOrb.class, new ResourceLocation(MODID, "deboom_orb_basic"));

@@ -23,7 +23,7 @@ import java.util.List;
  * @Author : wdcftgg
  * @create 2023/4/30 15:01
  */
-public class ItemTimePolymer extends Item implements ITime, IHasModel {
+public class ItemTimePolymer extends ItemBase implements ITime, IHasModel {
     public ItemTimePolymer()
     {
         setTranslationKey("time_polymer");

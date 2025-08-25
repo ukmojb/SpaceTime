@@ -18,6 +18,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
@@ -162,7 +163,7 @@ public class EntityBlackHole extends EntityLiving {
                     vec.rotateYaw((float) Math.toRadians(15));
                 }
 
-                if (!(e instanceof EntityPlayer)) {
+                if (!(e instanceof EntityPlayer || e instanceof EntityItem)) {
                     double speed;
                     double distance = e.getDistance(this);
                     if (distance * 0.01 > 0.5) {
@@ -183,6 +184,32 @@ public class EntityBlackHole extends EntityLiving {
 
                         e.motionX += newvec.x * speed2;
                         e.motionZ += newvec.z * speed2;
+                    }
+                }
+
+                if (e instanceof EntityItem) {
+                    if (world.getTotalWorldTime() % 20 == 0) System.out.println(((EntityItem) e).getItem().getDisplayName() + "--" + e.posY);
+                    double speed;
+                    double distance = e.getDistance(this);
+                    if (distance * 0.01 > 0.5) {
+                        speed = 0.1D;
+                    } else {
+                        speed = distance * 0.005;
+                    }
+                    System.out.println(vec.y * speed + 0.05);
+                    e.motionX += vec.x * speed * 1;
+                    if (Math.abs(this.posY - e.posY) > size) {
+                        e.motionY += (vec.y * speed + 0.05) * 1;
+                    }
+                    e.motionZ += vec.z * speed * 1;
+
+                    if (Math.abs(this.posY - e.posY) < size * 2) {
+                        Vec3d newvec = new Vec3d(vec.z * -1, 0, vec.z).normalize();
+
+                        double speed2 = 0.4D;
+
+                        e.posX += newvec.x * speed2;
+                        e.posZ += newvec.z * speed2;
                     }
                 }
 
@@ -214,6 +241,9 @@ public class EntityBlackHole extends EntityLiving {
 
 
                 if (dist < size * 1.5) {
+                        if (e instanceof EntityItem) {
+                            System.out.println("viufhidhfeih");
+                        }
                     if (e instanceof EntityBlackHole && e.getUniqueID() != this.getUniqueID()) {
                         EntityBlackHole blackHole = (EntityBlackHole) e;
                         float size0 = e.getDataManager().get(EntityBlackHole.BlackHole_Size);
@@ -264,7 +294,6 @@ public class EntityBlackHole extends EntityLiving {
                 for (int eId : CommonProxy.spacelist) {
                     EntitySpace entitySpace = (EntitySpace) world.getEntityByID(eId);
                     if (entitySpace != null) {
-                        System.out.println("kjhsdiawd");
                         entitySpace.blackHoleDead();
                     }
                 }
@@ -327,6 +356,50 @@ public class EntityBlackHole extends EntityLiving {
     }
 
     @Override
+    protected void collideWithEntity(Entity entityIn) {
+        this.applyEntityCollisionNew(entityIn);
+    }
+
+    public void applyEntityCollisionNew(Entity entityIn)
+    {
+        if (!this.isRidingSameEntity(entityIn))
+        {
+            if (!entityIn.noClip && !this.noClip)
+            {
+                double d0 = entityIn.posX - this.posX;
+                double d1 = entityIn.posZ - this.posZ;
+                double d2 = MathHelper.absMax(d0, d1);
+
+                if (d2 >= 0.009999999776482582D)
+                {
+                    d2 = (double)MathHelper.sqrt(d2);
+                    d0 = d0 / d2;
+                    d1 = d1 / d2;
+                    double d3 = 1.0D / d2;
+
+                    if (d3 > 1.0D)
+                    {
+                        d3 = 1.0D;
+                    }
+
+                    d0 = d0 * d3;
+                    d1 = d1 * d3;
+                    d0 = d0 * 0.05000000074505806D;
+                    d1 = d1 * 0.05000000074505806D;
+                    d0 = d0 * (double)(1.0F - this.entityCollisionReduction);
+                    d1 = d1 * (double)(1.0F - this.entityCollisionReduction);
+
+
+                    if (!entityIn.isBeingRidden())
+                    {
+                        entityIn.addVelocity(d0, 0.0D, d1);
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
@@ -373,7 +446,7 @@ public class EntityBlackHole extends EntityLiving {
     private void addAbsorbNum(Entity entity) {
         if (entity instanceof EntityItem) {
             EntityItem entityItem = (EntityItem) entity;
-            if (entityItem.getItem().getItem().getRegistryName().equals("shulker_box")) {
+            if (entityItem.getItem().getItem().getRegistryName().toString().equals("shulker_box")) {
                 ItemStack shulker_box = entityItem.getItem();
                 absorb_num += getShulkerBoxItemNum(shulker_box);
                 return;

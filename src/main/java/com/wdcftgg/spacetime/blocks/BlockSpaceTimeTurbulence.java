@@ -27,7 +27,7 @@ import javax.annotation.Nullable;
  * @Author : wdcftgg
  * @create 2023/4/29 17:09
  */
-public class BlockSpaceTimeTurbulence extends Block implements IHasModel {
+public class BlockSpaceTimeTurbulence extends BlockBase implements IHasModel {
     public BlockSpaceTimeTurbulence()
     {
         super(Material.AIR);

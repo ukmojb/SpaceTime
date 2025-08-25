@@ -38,7 +38,7 @@ import java.util.*;
  * @Author : wdcftgg
  * @create 2023/6/22 20:09
  */
-public class BlockConcretizationHourGlass extends Block implements ITileEntityProvider, IHasModel {
+public class BlockConcretizationHourGlass extends BlockBase implements ITileEntityProvider, IHasModel {
 
     private static final AxisAlignedBB Collisionbox = new AxisAlignedBB(0, 0, 0, 14/16.0, 5/16.0, 14/16.0);
     private static final AxisAlignedBB AABB = new AxisAlignedBB(0, 0, 0, 1, 0.3, 1);

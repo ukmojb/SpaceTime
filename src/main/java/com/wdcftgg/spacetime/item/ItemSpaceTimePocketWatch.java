@@ -8,15 +8,31 @@ import lumaceon.mods.clockworkphase.item.construct.pocketwatch.ItemPocketWatch;
 import lumaceon.mods.clockworkphase.lib.GUIs;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemSpaceTimePocketWatch extends ItemPocketWatch implements IHasModel {
+    private String translationKey;
 
     @Override
     public void registerModels() {
         SpaceTime.proxy.registerItemRenderer(this, 0, "inventory");
+    }
+
+    @Override
+    public String getTranslationKey(ItemStack stack)
+    {
+        return "item.spacetime." + this.translationKey;
+    }
+
+    @Override
+    public Item setTranslationKey(String key)
+    {
+        this.translationKey = key;
+        return this;
     }
 
     @Override

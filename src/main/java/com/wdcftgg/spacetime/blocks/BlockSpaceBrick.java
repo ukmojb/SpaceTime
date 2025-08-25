@@ -15,7 +15,7 @@ import net.minecraft.item.ItemBlock;
  * @Author : wdcftgg
  * @create 2023/9/23 11:04
  */
-public class BlockSpaceBrick extends Block implements IHasModel {
+public class BlockSpaceBrick extends BlockBase implements IHasModel {
     public BlockSpaceBrick() {
         super(Material.ROCK);
         setTranslationKey("space_brick");

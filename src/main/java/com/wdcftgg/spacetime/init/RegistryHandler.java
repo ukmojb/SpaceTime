@@ -8,6 +8,9 @@ import com.wdcftgg.spacetime.blocks.slab.BlockTimeSlab;
 import com.wdcftgg.spacetime.blocks.stairs.BlockBaseStairs;
 import com.wdcftgg.spacetime.blocks.stairs.BlockSpaceStairs;
 import com.wdcftgg.spacetime.blocks.stairs.BlockTimeStairs;
+import com.wdcftgg.spacetime.blocks.tileEntity.*;
+import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.*;
+import com.wdcftgg.spacetime.blocks.tileEntity.stextractor.STExtractorEntity;
 import com.wdcftgg.spacetime.dimension.BiomeNull;
 import com.wdcftgg.spacetime.entity.ModEntityInit;
 import com.wdcftgg.spacetime.item.STItems;
@@ -26,13 +29,16 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import static com.wdcftgg.spacetime.SpaceTime.MODID;
 
 @EventBusSubscriber
 public class RegistryHandler {
 
-	public static final Biome NULL = new BiomeNull().setRegistryName(SpaceTime.MODID + ":null");
+	public static final Biome NULL = new BiomeNull().setRegistryName(MODID + ":null");
 
 	public static BlockSlabBase SPACE_SLAB = new BlockSpaceSlab(Material.WOOD);
 	public static BlockSlabBase TIME_SLAB = new BlockTimeSlab(Material.WOOD);
@@ -53,9 +59,9 @@ public class RegistryHandler {
 		STItems.ITEMS.add(newItemBlock(TIME_STAIRS));
 
 
-		for (Item item : STItems.ITEMS.toArray(new Item[0])){
-			item.setTranslationKey("spacetime." + item.getTranslationKey().replace("item.", ""));
-		}
+//		for (Item item : STItems.ITEMS.toArray(new Item[0])){
+//			item.setTranslationKey("spacetime." + item.getTranslationKey().replace("item.", ""));
+//		}
 		event.getRegistry().registerAll(STItems.ITEMS.toArray(new Item[0]));
 	}
 	
@@ -66,9 +72,9 @@ public class RegistryHandler {
 		STBlocks.BLOCKS.add(TIME_STAIRS);
 		STBlocks.BLOCKS.add(SPACE_STAIRS);
 
-		for (Block block : STBlocks.BLOCKS.toArray(new Block[0])){
-			block.setTranslationKey("spacetime." + block.getTranslationKey().replace("tile.", ""));
-		}
+//		for (Block block : STBlocks.BLOCKS.toArray(new Block[0])){
+//			block.setTranslationKey("spacetime." + block.getTranslationKey().replace("tile.", ""));
+//		}
 		event.getRegistry().registerAll(STBlocks.BLOCKS.toArray(new Block[0]));
 	}
 
@@ -117,10 +123,10 @@ public class RegistryHandler {
 	@SubscribeEvent
 	public static void onRegisterSoundEvents(RegistryEvent.Register<SoundEvent> event)
 	{
-		ResourceLocation location = new ResourceLocation(SpaceTime.MODID, "swordcore_1");
-		ResourceLocation location1 = new ResourceLocation(SpaceTime.MODID, "swordcore_2");
-		ResourceLocation location2 = new ResourceLocation(SpaceTime.MODID, "swordblocking");
-		ResourceLocation location3 = new ResourceLocation(SpaceTime.MODID, "fallsword");
+		ResourceLocation location = new ResourceLocation(MODID, "swordcore_1");
+		ResourceLocation location1 = new ResourceLocation(MODID, "swordcore_2");
+		ResourceLocation location2 = new ResourceLocation(MODID, "swordblocking");
+		ResourceLocation location3 = new ResourceLocation(MODID, "fallsword");
 
 		ModSounds.SWORDCORE_1 = new SoundEvent(location).setRegistryName(location);
 		ModSounds.SWORDCORE_2 = new SoundEvent(location1).setRegistryName(location1);
@@ -135,6 +141,32 @@ public class RegistryHandler {
 
 	private static Item newItemBlock(Block block){
 		return new ItemBlock(block).setRegistryName(block.getRegistryName()).setTranslationKey(block.getTranslationKey());
+	}
+
+	public static void RegisterTileEntity() {
+//        GameRegistry.registerTileEntity(TileEntityDeBoomOrb.class, new ResourceLocation(MODID, "deboom_orb_basic"));
+
+		GameRegistry.registerTileEntity(TimeCompressorEntity.class, new ResourceLocation(MODID, "CompressorEntity"));
+		GameRegistry.registerTileEntity(SpaceTimeTurbulenceEntity.class, new ResourceLocation(MODID, "TimeTurbulenceEntity"));
+		GameRegistry.registerTileEntity(ReverseBeaconEntity.class, new ResourceLocation(MODID, "ReverseBeaconEntity"));
+
+		GameRegistry.registerTileEntity(HourGlassEntity.class, new ResourceLocation(MODID, "hourglass"));
+		GameRegistry.registerTileEntity(AirHourGlassEntity.class, new ResourceLocation(MODID, "airhourglass"));
+		GameRegistry.registerTileEntity(DeathHourGlassEntity.class, new ResourceLocation(MODID, "deathhourglass"));
+		GameRegistry.registerTileEntity(EarthHourGlassEntity.class, new ResourceLocation(MODID, "earthhourglass"));
+		GameRegistry.registerTileEntity(FireHourGlassEntity.class, new ResourceLocation(MODID, "firehourglass"));
+		GameRegistry.registerTileEntity(LifeHourGlassEntity.class, new ResourceLocation(MODID, "lifehourglass"));
+		GameRegistry.registerTileEntity(LightHourGlassEntity.class, new ResourceLocation(MODID, "lighthourglass"));
+		GameRegistry.registerTileEntity(MoonHourGlassEntity.class, new ResourceLocation(MODID, "moonhourglass"));
+		GameRegistry.registerTileEntity(WaterHourGlassEntity.class, new ResourceLocation(MODID, "waterhourglass"));
+
+		GameRegistry.registerTileEntity(ConcretizationHourGlassEntity.class, new ResourceLocation(MODID, "concretizationhourglass"));
+		GameRegistry.registerTileEntity(TimeAltarCoreEntity.class, new ResourceLocation(MODID, "timealtarcore"));
+		GameRegistry.registerTileEntity(SpaceTimeAirEntity.class, new ResourceLocation(MODID, "spacetimeair"));
+		GameRegistry.registerTileEntity(STExtractorEntity.class, new ResourceLocation(MODID, "spacetime_extractor"));
+		GameRegistry.registerTileEntity(EndGatewayImitateEntity.class, new ResourceLocation(MODID, "endgatewayimitate"));
+		GameRegistry.registerTileEntity(TimePillarEntity.class, new ResourceLocation(MODID, "timepillar"));
+		GameRegistry.registerTileEntity(SpaceRewordEntity.class, new ResourceLocation(MODID, "space_reword"));
 	}
 
 }

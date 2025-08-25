@@ -19,7 +19,7 @@ import java.util.List;
  * @Author : wdcftgg
  * @create 2023/8/8 9:20
  */
-public class ItemMagnifyingGlass extends Item implements IHasModel {
+public class ItemMagnifyingGlass extends ItemBase implements IHasModel {
     public ItemMagnifyingGlass()
     {
         setTranslationKey("magnifying_glass");

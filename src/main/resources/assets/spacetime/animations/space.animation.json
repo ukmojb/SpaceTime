@@ -1132,7 +1132,10 @@
 				}
 			},
 			"timeline": {
-				"1.98": "attack;"
+				"1.0": "reward1;",
+				"1.25": "reward1;",
+				"1.5": "reward1;",
+				"1.98": "mode;"
 			}
 		},
 		"animation.model.rewarding": {

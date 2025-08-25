@@ -27,7 +27,12 @@ public class BlackHoleWorldProvider extends WorldProvider {
         return SpaceTime.BlackHoleDim;
     }
 
-    private static int num = 1;
+    @Override
+    protected void init()
+    {
+        this.hasSkyLight = true;
+        this.biomeProvider = new STBiomeProvider();
+    }
 
     @Override
     public boolean isSurfaceWorld()
@@ -45,6 +50,28 @@ public class BlackHoleWorldProvider extends WorldProvider {
     public boolean isDaytime()
     {
         return false;
+    }
+
+    @Override
+    public void setWorldTime(long time)
+    {
+
+    }
+
+
+
+    @SideOnly(Side.CLIENT)
+    public boolean isSkyColored()
+    {
+        return false;
+    }
+
+
+
+    @Override
+    public long getWorldTime()
+    {
+        return 17843;
     }
 
     @Override
@@ -83,60 +110,9 @@ public class BlackHoleWorldProvider extends WorldProvider {
     }
 
     @Override
-    public void resetRainAndThunder()
-    {
-        WorldInfo worldinfo = world.getWorldInfo();
-
-        worldinfo.setCleanWeatherTime(20000);
-        worldinfo.setRainTime(0);
-        worldinfo.setThunderTime(0);
-        worldinfo.setRaining(false);
-        worldinfo.setThundering(false);
-    }
-
-    @Override
     public IChunkGenerator createChunkGenerator()
     {
         return new ChunkGeneratorBlackHole(world);
-    }
-
-    @Nullable
-    @SideOnly(Side.CLIENT)
-    public net.minecraftforge.client.IRenderHandler getSkyRenderer()
-    {
-        if (Config.RENDERBLACKHOLEMODE == 3) return null;
-        Tessellator tessellator = Tessellator.getInstance();
-        Minecraft mc = Minecraft.getMinecraft();
-        BufferBuilder bufferbuilder = tessellator.getBuffer();
-
-        GlStateManager.pushMatrix();
-        GlStateManager.enableBlend();
-        GlStateManager.disableLighting();
-        GlStateManager.enablePolygonOffset();
-        GL11.glDisable(GL11.GL_CULL_FACE);
-        GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GlStateManager.rotate(-90.0F, 0.0F, 1.0F, 0.0F);
-        GlStateManager.rotate(1.24F * 360.0F, 1.0F, 0.0F, 0.0F);
-        GlStateManager.translate(0, -5, 0);
-        GlStateManager.doPolygonOffset(-1, 0);
-
-        ResourceLocation BlackHole_TEXTURES = new ResourceLocation(SpaceTime.MODID, "textures/environment/blackholedim_" + Config.RENDERBLACKHOLEMODE + ".png");;
-
-        float xz = 100.0F;
-        float y = 80.F;
-        mc.getTextureManager().bindTexture(BlackHole_TEXTURES);
-        bufferbuilder.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-        bufferbuilder.pos((double)(-xz), y, (double)(-xz)).tex(0.0D, 0.0D).endVertex();
-        bufferbuilder.pos((double)xz, y, (double)(-xz)).tex(1.0D, 0.0D).endVertex();
-        bufferbuilder.pos((double)xz, y, (double)xz).tex(1.0D, 1.0D).endVertex();
-        bufferbuilder.pos((double)(-xz), y, (double)xz).tex(0.0D, 1.0D).endVertex();
-        tessellator.draw();
-        GlStateManager.disablePolygonOffset();
-        GlStateManager.disableBlend();
-        GlStateManager.enableLighting();
-        GL11.glEnable(GL11.GL_CULL_FACE);
-        GlStateManager.popMatrix();
-        return null;
     }
 }
 

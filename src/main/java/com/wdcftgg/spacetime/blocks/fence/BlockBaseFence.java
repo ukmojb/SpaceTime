@@ -22,12 +22,26 @@ import net.minecraft.world.IBlockAccess;
  * @create 2023/9/23 15:02
  */
 public class BlockBaseFence extends BlockFence implements IHasModel {
+    private String translationKey;
 
     public static final PropertyBool UP = PropertyBool.create("up");
 
     public BlockBaseFence(Material materialIn, MapColor mapColorIn) {
         super(materialIn, mapColorIn);
         setCreativeTab(ModCreativeTab.SpaceTimeTab);
+    }
+
+    @Override
+    public String getTranslationKey()
+    {
+        return "tile.spacetime." + this.translationKey;
+    }
+
+    @Override
+    public Block setTranslationKey(String key)
+    {
+        this.translationKey = key;
+        return this;
     }
 
     private boolean canFenceConnectTo(IBlockAccess world, BlockPos pos, EnumFacing facing)

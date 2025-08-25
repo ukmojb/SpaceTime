@@ -37,7 +37,7 @@ import java.util.*;
  * @Author : wdcftgg
  * @create 2023/6/23 22:22
  */
-public class BlockTimeAltarCore extends Block implements IHasModel {
+public class BlockTimeAltarCore extends BlockBase implements IHasModel {
 
     boolean canoutput = false;
 
