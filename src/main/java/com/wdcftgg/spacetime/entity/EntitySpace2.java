@@ -1,7 +1,6 @@
 package com.wdcftgg.spacetime.entity;
 
 import com.wdcftgg.spacetime.entity.ai.space.Space2AIAttack;
-import com.wdcftgg.spacetime.entity.ai.space.SpaceAIAttack;
 import com.wdcftgg.spacetime.network.*;
 import com.wdcftgg.spacetime.proxy.CommonProxy;
 import com.wdcftgg.spacetime.util.Tools;

@@ -3,7 +3,6 @@ package com.wdcftgg.spacetime.blocks;
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.tileEntity.SpaceTimeAirEntity;
 import com.wdcftgg.spacetime.util.IHasModel;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;

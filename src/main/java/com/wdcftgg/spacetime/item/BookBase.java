@@ -1,10 +1,8 @@
 package com.wdcftgg.spacetime.item;
 
-import com.wdcftgg.spacetime.gui.book.BookRegistry;
 import com.wdcftgg.spacetime.gui.book.data.BookData;
 import com.wdcftgg.spacetime.util.IBook;
 import com.wdcftgg.spacetime.util.NBTHelper;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class BookBase extends ItemBase implements IBook {

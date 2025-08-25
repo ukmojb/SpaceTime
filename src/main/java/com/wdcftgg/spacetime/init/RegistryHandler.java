@@ -1,6 +1,5 @@
 package com.wdcftgg.spacetime.init;
 
-import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.STBlocks;
 import com.wdcftgg.spacetime.blocks.slab.BlockSlabBase;
 import com.wdcftgg.spacetime.blocks.slab.BlockSpaceSlab;
@@ -22,7 +21,6 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeVoid;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -58,10 +56,6 @@ public class RegistryHandler {
 		STItems.ITEMS.add(newItemBlock(SPACE_STAIRS));
 		STItems.ITEMS.add(newItemBlock(TIME_STAIRS));
 
-
-//		for (Item item : STItems.ITEMS.toArray(new Item[0])){
-//			item.setTranslationKey("spacetime." + item.getTranslationKey().replace("item.", ""));
-//		}
 		event.getRegistry().registerAll(STItems.ITEMS.toArray(new Item[0]));
 	}
 	
@@ -72,9 +66,6 @@ public class RegistryHandler {
 		STBlocks.BLOCKS.add(TIME_STAIRS);
 		STBlocks.BLOCKS.add(SPACE_STAIRS);
 
-//		for (Block block : STBlocks.BLOCKS.toArray(new Block[0])){
-//			block.setTranslationKey("spacetime." + block.getTranslationKey().replace("tile.", ""));
-//		}
 		event.getRegistry().registerAll(STBlocks.BLOCKS.toArray(new Block[0]));
 	}
 
@@ -144,7 +135,6 @@ public class RegistryHandler {
 	}
 
 	public static void RegisterTileEntity() {
-//        GameRegistry.registerTileEntity(TileEntityDeBoomOrb.class, new ResourceLocation(MODID, "deboom_orb_basic"));
 
 		GameRegistry.registerTileEntity(TimeCompressorEntity.class, new ResourceLocation(MODID, "CompressorEntity"));
 		GameRegistry.registerTileEntity(SpaceTimeTurbulenceEntity.class, new ResourceLocation(MODID, "TimeTurbulenceEntity"));

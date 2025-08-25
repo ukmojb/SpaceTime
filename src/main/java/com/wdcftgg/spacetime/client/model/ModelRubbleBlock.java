@@ -1,7 +1,4 @@
-package com.wdcftgg.spacetime.client.model;// Made with Blockbench 4.9.4
-// Exported for Minecraft version 1.7 - 1.12
-// Paste this class into your mod and generate all required imports
-
+package com.wdcftgg.spacetime.client.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBox;

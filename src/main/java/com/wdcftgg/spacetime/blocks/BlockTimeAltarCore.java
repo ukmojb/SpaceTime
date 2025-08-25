@@ -7,7 +7,6 @@ import com.wdcftgg.spacetime.init.ModCreativeTab;
 import com.wdcftgg.spacetime.item.STItems;
 import com.wdcftgg.spacetime.util.IHasModel;
 import lumaceon.mods.clockworkphase.util.TimeSandHelper;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -142,7 +141,6 @@ public class BlockTimeAltarCore extends BlockBase implements IHasModel {
         entityZombie.setAttackTarget(player);
         entityZombie.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(60d);
         entityZombie.setDropChance(EntityEquipmentSlot.OFFHAND, 100);
-//        entityZombie.entityDropItem(itemStack, 1);
         entityZombie.setHeldItem(EnumHand.MAIN_HAND, stack);
         entityZombie.setHeldItem(EnumHand.OFF_HAND, itemStack);
         world.spawnEntity(entityZombie);

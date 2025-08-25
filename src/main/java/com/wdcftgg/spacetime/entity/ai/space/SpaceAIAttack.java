@@ -3,7 +3,6 @@ package com.wdcftgg.spacetime.entity.ai.space;
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.STBlocks;
 import com.wdcftgg.spacetime.config.Config;
-import com.wdcftgg.spacetime.dimension.SpaceWorldProvider;
 import com.wdcftgg.spacetime.entity.EntitySpace;
 import com.wdcftgg.spacetime.entity.EntitySpaceSword;
 import com.wdcftgg.spacetime.network.MessageRemovePotion;

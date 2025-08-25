@@ -5,8 +5,6 @@ import com.wdcftgg.spacetime.gui.book.data.ChapterData;
 import com.wdcftgg.spacetime.gui.book.data.PageData;
 import com.wdcftgg.spacetime.gui.book.data.communication.CommunicationData;
 import com.wdcftgg.spacetime.gui.book.data.communication.CommunicationsData;
-import com.wdcftgg.spacetime.gui.book.element.BookElement;
-import net.minecraft.util.EnumFacing;
 
 import java.util.ArrayList;
 import java.util.List;

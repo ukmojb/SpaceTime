@@ -228,7 +228,6 @@ public class TimeAltarCoreEntity extends TileEntity implements ITickable {
         for(EntityItem item : items) {
             Input.add(item.getItem().getItem());
             for(int i=0;i<TimeAltarRecipesin.size();i++) {
-//            for(Item[] recipes : TimeAltarRecipesin) {
                 ArrayList<Item> list = new ArrayList<Item>(ItemTimeAltarRecipesin.get(i));
                 if (Input.containsAll(list) && Input.size() == 4 && fouritems(items)){
                     return TimeAltarRecipesTimeEnergy.get(i);

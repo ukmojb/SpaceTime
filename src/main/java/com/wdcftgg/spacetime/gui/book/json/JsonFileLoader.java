@@ -1,6 +1,5 @@
 package com.wdcftgg.spacetime.gui.book.json;
 
-import com.google.common.collect.Lists;
 import com.google.gson.*;
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.gui.book.BookHelper;
@@ -10,9 +9,9 @@ import com.wdcftgg.spacetime.gui.book.data.ChapterData;
 import com.wdcftgg.spacetime.gui.book.data.PageData;
 import com.wdcftgg.spacetime.gui.book.element.BookElement;
 import com.wdcftgg.spacetime.gui.book.element.ElementText;
-import com.wdcftgg.spacetime.gui.book.element.data.TextData;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.*;
+import net.minecraft.client.resources.IResource;
+import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;

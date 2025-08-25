@@ -2,13 +2,9 @@ package com.wdcftgg.spacetime.gui.book.element;
 
 
 import com.wdcftgg.spacetime.gui.book.TextDataRenderer;
-import com.wdcftgg.spacetime.gui.book.element.data.TextData;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 
 public class ElementTitle extends ElementText{
     public ElementTitle(String text) {

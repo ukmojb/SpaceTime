@@ -1,14 +1,7 @@
 package com.wdcftgg.spacetime.gui.book.data.communication;
 
-import com.wdcftgg.spacetime.gui.book.STBookGui;
-import com.wdcftgg.spacetime.gui.book.TextDataRenderer;
-import com.wdcftgg.spacetime.gui.book.data.BookData;
-import com.wdcftgg.spacetime.gui.book.data.ChapterData;
 import com.wdcftgg.spacetime.gui.book.data.PageData;
-import com.wdcftgg.spacetime.gui.book.element.ElementTitle;
-import net.minecraft.client.Minecraft;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

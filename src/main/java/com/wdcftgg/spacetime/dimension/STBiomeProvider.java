@@ -1,6 +1,5 @@
 package com.wdcftgg.spacetime.dimension;
 
-import com.wdcftgg.spacetime.init.RegistryHandler;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;

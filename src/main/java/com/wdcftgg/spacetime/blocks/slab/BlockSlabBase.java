@@ -11,7 +11,6 @@ import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.blocks.BlockBase;
 import com.wdcftgg.spacetime.init.ModCreativeTab;
 import com.wdcftgg.spacetime.util.IHasModel;
-import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;

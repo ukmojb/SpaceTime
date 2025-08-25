@@ -1,16 +1,12 @@
 package com.wdcftgg.spacetime;
 
 
-import com.wdcftgg.spacetime.blocks.tileEntity.*;
-import com.wdcftgg.spacetime.blocks.tileEntity.HourGlass.*;
-import com.wdcftgg.spacetime.blocks.tileEntity.stextractor.STExtractorEntity;
 import com.wdcftgg.spacetime.command.CommandSpaceTime;
 import com.wdcftgg.spacetime.config.Config;
 import com.wdcftgg.spacetime.dimension.BlackHoleWorldProvider;
 import com.wdcftgg.spacetime.dimension.SpaceWorldProvider;
 import com.wdcftgg.spacetime.gui.GuiElementLoader;
 import com.wdcftgg.spacetime.gui.book.BookRegistry;
-import com.wdcftgg.spacetime.gui.book.json.JsonFileLoader;
 import com.wdcftgg.spacetime.init.RegistryHandler;
 import com.wdcftgg.spacetime.network.PacketHandler;
 import com.wdcftgg.spacetime.proxy.CommonProxy;
@@ -21,7 +17,6 @@ import com.wdcftgg.spacetime.world.structures.pillar;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.Mod;

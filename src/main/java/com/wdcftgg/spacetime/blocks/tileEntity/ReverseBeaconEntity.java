@@ -128,14 +128,11 @@ public class ReverseBeaconEntity extends
                 IBlockState iblockstate = this.world.getBlockState(blockpos$mutableblockpos.setPos(i, i1, k));
                 float[] afloat;
 
-//                            System.out.println(i + "-" + i1 + "-" + k);
                 if (iblockstate.getBlock() == Blocks.STAINED_GLASS) {
                     afloat = ((EnumDyeColor) iblockstate.getValue(BlockStainedGlass.COLOR)).getColorComponentValues();
                 } else {
                     if (iblockstate.getBlock() != Blocks.STAINED_GLASS_PANE) {
                         if (iblockstate.getBlock() == Blocks.BEDROCK) {
-//                            this.isComplete = false;
-//                            this.beamSegments.clear();
                             break;
                         }
                         float[] customColor = iblockstate.getBlock().getBeaconColorMultiplier(iblockstate, this.world, blockpos$mutableblockpos, getPos());

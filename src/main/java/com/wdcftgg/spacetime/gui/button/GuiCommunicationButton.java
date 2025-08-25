@@ -1,15 +1,11 @@
 package com.wdcftgg.spacetime.gui.button;
 
-import com.wdcftgg.spacetime.gui.book.STBookGui;
 import com.wdcftgg.spacetime.gui.book.data.communication.OptionData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundHandler;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.init.SoundEvents;
-import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

@@ -1,9 +1,7 @@
 package com.wdcftgg.spacetime.proxy;
 
-import com.wdcftgg.spacetime.event.*;
 import com.wdcftgg.spacetime.util.ISidedFunction;
 import net.minecraft.item.Item;
-import net.minecraftforge.common.MinecraftForge;
 
 import java.util.ArrayList;
 import java.util.List;

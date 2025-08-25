@@ -3,12 +3,7 @@ package com.wdcftgg.spacetime.gui.book.element;
 import com.wdcftgg.spacetime.gui.book.TextDataRenderer;
 import com.wdcftgg.spacetime.gui.book.element.data.TextData;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.world.BossInfo;
-import vazkii.patchouli.client.book.gui.GuiBook;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

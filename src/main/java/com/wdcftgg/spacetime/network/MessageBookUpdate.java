@@ -1,16 +1,8 @@
 package com.wdcftgg.spacetime.network;
 
-import com.wdcftgg.spacetime.gui.book.BookHelper;
-import com.wdcftgg.spacetime.gui.book.STBookGui;
-import com.wdcftgg.spacetime.gui.book.data.BookData;
 import com.wdcftgg.spacetime.item.BookBase;
-import com.wdcftgg.spacetime.util.IBook;
-import com.wdcftgg.spacetime.util.SpaceFrozenHelper;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;

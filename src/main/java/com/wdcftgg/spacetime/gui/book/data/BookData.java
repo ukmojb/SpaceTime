@@ -1,6 +1,5 @@
 package com.wdcftgg.spacetime.gui.book.data;
 
-import com.wdcftgg.spacetime.gui.book.element.ElementText;
 import com.wdcftgg.spacetime.gui.book.element.ElementTitle;
 
 import java.util.ArrayList;

@@ -3,7 +3,6 @@ package com.wdcftgg.spacetime.item;
 import com.wdcftgg.spacetime.SpaceTime;
 import com.wdcftgg.spacetime.init.ModCreativeTab;
 import com.wdcftgg.spacetime.util.IHasModel;
-import net.minecraft.item.Item;
 
 /**
  * Created by IntelliJ IDEA.

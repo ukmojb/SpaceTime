@@ -4,12 +4,10 @@ import com.wdcftgg.spacetime.gui.book.BookHelper;
 import com.wdcftgg.spacetime.gui.book.BookRegistry;
 import com.wdcftgg.spacetime.gui.book.TextDataRenderer;
 import com.wdcftgg.spacetime.gui.book.data.communication.CommunicationData;
-import com.wdcftgg.spacetime.gui.book.data.communication.CommunicationsData;
 import com.wdcftgg.spacetime.gui.book.element.data.TextData;
 import net.minecraft.client.gui.FontRenderer;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class ElementCommunication extends SizedBookElement{
